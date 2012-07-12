@@ -314,7 +314,7 @@ public final class WebConstants {
 		public static final String pathToQueryNavigatorShowPrevButton = "//table[@id='" + ID.queryNavigatorPrev + "']/tbody/tr[2]/td[2]/em";
 		
 		public static final String getPathToMetricHoverMenuOption(String menu) {
-			return "//a[text()='" + menu + "']";
+			return "//a[text()='" + menu.replace("_", " ") + "']";
 		}
 		
 		public static String getPathToPuInContextPager(String puOrPuiName) {
@@ -572,23 +572,25 @@ public final class WebConstants {
 
 	}
 	
-	public static final class I18N {
+	public static final class METRIC_CLASS_NAMES {
 		
-		public static final String CPU_METRIC_NAME = I18NContants.get("monitoringOsCpu");
-		public static final String MEMORY_METRIC_NAME = I18NContants.get("monitoringOsMemory");
-		public static final String GC_METRIC_NAME = I18NContants.get("monitoringVMGc");
-
-		public static final String SPACE_WRITE_THROUGHPUT_METRIC_NAME = I18NContants.get("monitoringSpaceWriteThroughput");
-		public static final String SPACE_READ_THROUGHPUT_METRIC_NAME = I18NContants.get("monitoringSpaceReadThroughput");
-		public static final String SPACE_REPLICATION_PER_SEC = I18NContants.get("monitoringSpaceReplBytesPerSecond");
-
-		public static final String WEB_HTTP_THROUGHPUT = I18NContants.get("monitoringWebHttpThroughput");
+		private static final String GS_METRIC_TITLE = "gs-metric-title-";
 		
-		public static final String MIRROR_FAILED_OPERATIONS = I18NContants.get("monitoringMirrorFailedOperationsCount");
-		public static final String MIRROR_WRITE_THROUGHPUT = I18NContants.get("monitoringMirrorWriteThroughput");
-		public static final String MIRROR_UPDATE_THROUGHPUT = I18NContants.get("monitoringMirrorUpdateThroughput");
-		public static final String MIRROR_REMOVE_THROUGHPUT = I18NContants.get("monitoringMirrorRemoveThroughput");
-		public static final String SPACE_TAKE_THROUGHPUT_METRIC_NAME = I18NContants.get("monitoringSpaceTakeThroughput");
+		public static final String CPU_METRIC_NAME = GS_METRIC_TITLE + "CPU";
+		public static final String MEMORY_METRIC_NAME = GS_METRIC_TITLE + "Memory";
+		public static final String GC_METRIC_NAME = GS_METRIC_TITLE + "GC";
+
+		public static final String SPACE_WRITE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE + "Write_per_sec.";
+		public static final String SPACE_READ_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE + "Read_per_sec.";
+		public static final String SPACE_REPLICATION_PER_SEC = GS_METRIC_TITLE + "Replication_(bytes/sec)";
+		public static final String SPACE_TAKE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE + "Take_per_sec.";
+
+		public static final String WEB_HTTP_THROUGHPUT = GS_METRIC_TITLE + "HTTP_throughput";
+		
+		public static final String MIRROR_FAILED_OPERATIONS = GS_METRIC_TITLE + "Failed_operations_count";
+		public static final String MIRROR_WRITE_THROUGHPUT = GS_METRIC_TITLE + "Mirror_Write_per_sec.";
+		public static final String MIRROR_UPDATE_THROUGHPUT = GS_METRIC_TITLE + "Mirror_Update_per_sec.";
+		public static final String MIRROR_REMOVE_THROUGHPUT = GS_METRIC_TITLE + "Mirror_Remove_per_sec.";
 
 		
 		

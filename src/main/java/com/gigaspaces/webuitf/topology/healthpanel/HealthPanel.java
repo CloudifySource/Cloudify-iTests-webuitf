@@ -46,11 +46,9 @@ public class HealthPanel extends TopologySubPanel {
 		
 		name = name.replaceAll(" ", "_");
 		Metric metric = null;
-		String classMetricName = null;
 		WebElement element;
 		try {
-			classMetricName = WebConstants.ClassNames.getMetricClassName(name);
-			element = driver.findElement(By.className(classMetricName));
+			element = driver.findElement(By.className(name));
 			metric = new Metric(element, driver);
 		}
 		catch (WebDriverException e) {
