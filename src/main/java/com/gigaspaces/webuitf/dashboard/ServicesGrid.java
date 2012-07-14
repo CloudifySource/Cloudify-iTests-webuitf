@@ -65,11 +65,12 @@ public class ServicesGrid {
 		if (type.equals(WebConstants.ID.criticalIcon)) return Icon.CRITICAL;
 		if (type.equals(WebConstants.ID.warningIcon)) return Icon.ALERT;
 		if (type.equals(WebConstants.ID.naIcon)) return Icon.NA;
+		if (type.equals(WebConstants.ID.niIcon)) return Icon.NI;
 		return null;
 	}
 	
 	public enum Icon {
-		OK,CRITICAL,ALERT,NA;
+		OK,CRITICAL,ALERT,NA, NI;
 	}
 	
 	public class ApplicationsMenuPanel {

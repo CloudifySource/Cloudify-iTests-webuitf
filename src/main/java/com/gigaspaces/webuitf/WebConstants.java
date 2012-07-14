@@ -81,6 +81,7 @@ public final class WebConstants {
 		public static final String okIcon = "gs-status-icon-ok";
 		public static final String warningIcon = "gs-status-icon-alert";
 		public static final String naIcon = "gs-status-icon-na";
+		public static final String niIcon = "gs-status-icon-not-initialized";
 		
 		public static final String healthGaugePointer = "health-gauge-pointer";
 		public static final String applicationsMenuPanel = "gs-applications-menu-panel";
