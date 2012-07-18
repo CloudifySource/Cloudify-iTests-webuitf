@@ -184,11 +184,12 @@ public class HostsAndServicesGrid {
 			try {
 				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToRowNumber(i))).getText();
 				if (rowText.contains(component)) {
-					count++;
+					LogUtils.log("Found " + component + "[Count=" + count++ + "]");
 				}
 				i++;
 			}
 			catch (NoSuchElementException e) {
+				LogUtils.log("Caught NoSuchElementException while locating element " + e.getMessage());
 				exception = e;
 			}
 			catch (WebDriverException e) {
