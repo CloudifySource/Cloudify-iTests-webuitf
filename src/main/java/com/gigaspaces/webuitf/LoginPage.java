@@ -8,6 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -27,6 +28,7 @@ public class LoginPage {
 	private String jiniGroup;
 	
 	WebElement logginButton;
+	private static int TIMEOUT_IN_SECONDS = 10;
 	
 	/**
 	 * constructs an instance with no login parameters
@@ -64,12 +66,21 @@ public class LoginPage {
 	 * writes the user parameters in the text edits of the ui
 	 */
 	public void inputUsernameAndPassword() {
-		WebElement annon = driver.findElement(By.xpath(WebConstants.Xpath.annonymusCheckbox));
-		annon.click();
-		WebElement usernameEl = driver.findElement(By.id(WebConstants.ID.usernameLogginInput));
+		AjaxUtils helper = new AjaxUtils();
+		helper.setDriver(driver);
+		helper.setSelenium(selenium);
+		
+		WebElement usernameEl = helper.waitForElement(By.id(WebConstants.ID.usernameLogginInput), TIMEOUT_IN_SECONDS );
 		usernameEl.sendKeys(username);
-		WebElement passwordEl = driver.findElement(By.id(WebConstants.ID.passwordLogginInput));
+		WebElement passwordEl = helper.waitForElement(By.id(WebConstants.ID.passwordLogginInput), TIMEOUT_IN_SECONDS);
 		passwordEl.sendKeys(password);
+	}
+	
+	public void inputUsernameAndPassword(String username , String password) {
+		this.username = username;
+		this.password = password;
+		
+		inputUsernameAndPassword();
 	}
 	
 	/**

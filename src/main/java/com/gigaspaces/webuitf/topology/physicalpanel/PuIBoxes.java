@@ -116,7 +116,6 @@ public class PuIBoxes {
 		for (int i = 0 ; i < rects.size() ; i++) {
 			Arrays.sort(array, new Comparator<WebElement>() {
 
-				@Override
 				public int compare(WebElement arg0, WebElement arg1) {
 					double x0 = Double.parseDouble(arg0.getAttribute("x"));
 					double x1 = Double.parseDouble(arg1.getAttribute("x"));

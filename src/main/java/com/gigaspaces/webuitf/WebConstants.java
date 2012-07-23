@@ -36,7 +36,7 @@ public final class WebConstants {
 		public static final String deployMemcachedOption = "deploy_memcached_menu_item";
 		public static final String deployProcessingUnitOption = "deploy_processing_unit_menu_item";
 		public static final String usernameLogginInput = "username-input";
-		public static final String passwordLogginInput = "passowrd-input";
+		public static final String passwordLogginInput = "password-input";
 		public static final String jiniGroupInput = "jini_group-input";
 		public static final String locatorsInput = "locators-input";
 		public static final String puTreeGrid = "pu_tree_grid";
@@ -188,7 +188,6 @@ public final class WebConstants {
 		public static final String clusterSchemaCombo = "//div[@id='cluster_schema']/img";
 		public static final String numberOfBackupsInc = "//div[@id='num_of_backups']/span/img[1]";
 		public static final String isSecuredCheckbox = "//div[@id='secured_check_box']/input";
-		public static final String annonymusCheckbox = "//div[@id='anonymousCB']/input";
 		public static final String loginButton = "//table[@id='login_button']";
 		public static final String discoveryLegend = "//legend/div";
 		public static final String dashBoardButton = "//li[@id='gs-tab-item-dashboard-button']/a[2]/em/span/span";

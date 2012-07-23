@@ -61,7 +61,6 @@ public class EventsPanel {
 		for (int i = 0 ; i < visible.size() ; i++) {
 			Arrays.sort(array, new Comparator<WebUIAdminEvent>() {
 
-				@Override
 				public int compare(WebUIAdminEvent arg0, WebUIAdminEvent arg1) {
 					
 					long mili0 = arg0.getTime();
@@ -83,7 +82,6 @@ public class EventsPanel {
 
 		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
 
-			@Override
 			public boolean getCondition() {
 				List<WebElement> eventIcons = driver.findElements(By.className(WebConstants.ClassNames.timelineEventIcon));
 				return eventIcons.size() >= numberOfEvents;
