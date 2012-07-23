@@ -111,7 +111,7 @@ public class WebUIProcessingUnitInstance {
 		
 	}
 	
-	public void showComparisonCharts() {
+	public boolean showComparisonCharts() {
 
 		double seconds = 0;
 		while (seconds < AjaxUtils.ajaxWaitingTime) {
@@ -121,7 +121,7 @@ public class WebUIProcessingUnitInstance {
 				WebElement chartSelection = instanceElement.findElement(By.className("x-grid3-td-chart_selection"));
 				if (!chartSelection.isSelected()) {
 					chartSelection.click();
-					return;
+					return true;
 				}
 			}
 			catch (StaleElementReferenceException e) {
@@ -142,6 +142,7 @@ public class WebUIProcessingUnitInstance {
 			}
 			seconds += 0.1;
 		}
+		return false;
 	}
 	
 	public void goToLogs() {
