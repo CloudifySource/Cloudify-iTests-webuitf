@@ -579,6 +579,9 @@ public final class WebConstants {
 		public static final String VM_CPU_METRIC_NAME = GS_METRIC_TITLE  + "JVM" + "_" +  "CPU";
 		public static final String VM_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "JVM" + "_" +  "Memory";
 		public static final String VM_GC_METRIC_NAME = GS_METRIC_TITLE  + "JVM" + "_" +  "GC";
+		
+		public static final String OS_CPU_METRIC_NAME = GS_METRIC_TITLE  + "OS" + "_" +  "CPU";
+		public static final String OS_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "OS" + "_" +  "Memory";
 
 		public static final String SPACE_WRITE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "Space" + "_" +  "Write_per_sec.";
 		public static final String SPACE_READ_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "Space" + "_" +  "Read_per_sec.";
