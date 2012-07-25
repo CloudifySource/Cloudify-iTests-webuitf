@@ -238,6 +238,7 @@ public final class WebConstants {
 		public static final String pathToIconInResourcesPanelOfGridStatus = "/div/span";
 		public static final String pathToNumberInResourcesPanelOfGridStatus = "/div[2]/div/table/tbody/tr[1]/td[2]";
 		public static final String pathToNumberInResourceGrid = "/table/tbody/tr/td[3]";
+		public static final String pathToNameInResourceGrid = "/table/tbody/tr/td[4]";
 		public static final String pathToIconInResourceGrid = "/table/tbody/tr/td[1]/div/span";
 		public static final String pathToNumberInModulesGrid = "/table/tbody/tr/td[3]";
 		public static final String pathToIconInModulesGrid = "/table/tbody/tr/td[1]/div/span";

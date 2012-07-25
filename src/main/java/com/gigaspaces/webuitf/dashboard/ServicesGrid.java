@@ -141,32 +141,45 @@ public class ServicesGrid {
 				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToHosts + WebConstants.Xpath.pathToNumberInResourceGrid));	
 			}
 			
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToHosts + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
+			
 		}
 		
 		public class GSAInst {
-			
+
 			public Icon getIcon() {
 				String style = helper.retrieveAttribute(By.xpath(WebConstants.Xpath.pathToGSA + WebConstants.Xpath.pathToIconInResourceGrid), "class",driver);
 				return ServicesGrid.this.getIcon(style);
-					
+
+			}
+
+			public int getCount() {
+				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSA + WebConstants.Xpath.pathToNumberInResourceGrid));
 			}
 			
-			public int getCount() {
-				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSA + WebConstants.Xpath.pathToNumberInResourceGrid));			}
-			
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToGSA + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
+
 		}
 		
 		public class ESMInst {
-			
+
 			public Icon getIcon() {
 				String style = helper.retrieveAttribute(By.xpath(WebConstants.Xpath.pathToESM + WebConstants.Xpath.pathToIconInResourceGrid), "class",driver);
 				return ServicesGrid.this.getIcon(style);
-					
+
 			}
-			
+
 			public int getCount() {
-				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToESM + WebConstants.Xpath.pathToNumberInResourceGrid));			}
-			
+				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToESM + WebConstants.Xpath.pathToNumberInResourceGrid));
+			}
+
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToESM + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
 		}
 		
 		public class GSMInst {
@@ -176,9 +189,14 @@ public class ServicesGrid {
 				return ServicesGrid.this.getIcon(style);
 					
 			}
-			
+
 			public int getCount() {
-				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSM + WebConstants.Xpath.pathToNumberInResourceGrid));			}
+				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSM + WebConstants.Xpath.pathToNumberInResourceGrid));
+			}
+			
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToGSM + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
 		}
 		
 		public class GSCInst {
@@ -190,7 +208,12 @@ public class ServicesGrid {
 			}
 			
 			public int getCount() {
-				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSC + WebConstants.Xpath.pathToNumberInResourceGrid));			}
+				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToGSC + WebConstants.Xpath.pathToNumberInResourceGrid));
+			}
+			
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToGSC + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
 			
 		}
 		
@@ -203,7 +226,12 @@ public class ServicesGrid {
 			}
 			
 			public int getCount() {
-				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToLUS + WebConstants.Xpath.pathToNumberInResourceGrid));			}
+				return Integer.parseInt(selenium.getText(WebConstants.Xpath.pathToLUS + WebConstants.Xpath.pathToNumberInResourceGrid));
+			}
+			
+			public String getName() {
+				return selenium.getText(WebConstants.Xpath.pathToLUS + WebConstants.Xpath.pathToNameInResourceGrid);	
+			}
 		}
 		
 	}
