@@ -576,25 +576,26 @@ public final class WebConstants {
 	public static final class METRIC_CLASS_NAMES {
 		
 		private static final String GS_METRIC_TITLE = "gs-metric-title-";
+		private static final String DELIMETER = "_";
 		
-		public static final String VM_CPU_METRIC_NAME = GS_METRIC_TITLE  + "VM" + "_" +  "CPU";
-		public static final String VM_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "VM" + "_" +  "Memory";
-		public static final String VM_GC_METRIC_NAME = GS_METRIC_TITLE  + "VM" + "_" +  "GC";
+		public static final String VM_CPU_METRIC_NAME = GS_METRIC_TITLE  + "VM" + DELIMETER +  "CPU";
+		public static final String VM_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "VM" + DELIMETER +  "Memory";
+		public static final String VM_GC_METRIC_NAME = GS_METRIC_TITLE  + "VM" + DELIMETER +  "GC";
 		
-		public static final String OS_CPU_METRIC_NAME = GS_METRIC_TITLE  + "OS" + "_" +  "CPU";
-		public static final String OS_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "OS" + "_" +  "Memory";
+		public static final String OS_CPU_METRIC_NAME = GS_METRIC_TITLE  + "OS" + DELIMETER +  "CPU";
+		public static final String OS_MEMORY_METRIC_NAME = GS_METRIC_TITLE  + "OS" + DELIMETER +  "Memory";
 
-		public static final String SPACE_WRITE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "Space" + "_" +  "Write_per_sec.";
-		public static final String SPACE_READ_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "Space" + "_" +  "Read_per_sec.";
-		public static final String SPACE_REPLICATION_PER_SEC = GS_METRIC_TITLE  + "Space" + "_" +  "Replication_(bytes/sec)";
-		public static final String SPACE_TAKE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "Space" + "_" +  "Take_per_sec.";
+		public static final String SPACE_WRITE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "SPACE" + DELIMETER +  "Write_per_sec.";
+		public static final String SPACE_READ_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "SPACE" + DELIMETER +  "Read_per_sec.";
+		public static final String SPACE_REPLICATION_PER_SEC = GS_METRIC_TITLE  + "SPACE" + DELIMETER +  "Replication_(bytes/sec)";
+		public static final String SPACE_TAKE_THROUGHPUT_METRIC_NAME = GS_METRIC_TITLE  + "SPACE" + DELIMETER +  "Take_per_sec.";
 
-		public static final String WEB_HTTP_THROUGHPUT = GS_METRIC_TITLE + "Web_Requests" + "_" + "HTTP_throughput";
+		public static final String WEB_HTTP_THROUGHPUT = GS_METRIC_TITLE + "WEB_REQUESTS" + DELIMETER + "HTTP_throughput";
 		
-		public static final String MIRROR_FAILED_OPERATIONS = GS_METRIC_TITLE + "Mirror" + "_" + "Failed_operations_count";
-		public static final String MIRROR_WRITE_THROUGHPUT = GS_METRIC_TITLE + "Mirror" + "_" + "Mirror_Write_per_sec.";
-		public static final String MIRROR_UPDATE_THROUGHPUT = GS_METRIC_TITLE + "Mirror" + "_" + "Mirror_Update_per_sec.";
-		public static final String MIRROR_REMOVE_THROUGHPUT = GS_METRIC_TITLE + "Mirror" + "_" + "Mirror_Remove_per_sec.";
+		public static final String MIRROR_FAILED_OPERATIONS = GS_METRIC_TITLE + "MIRROR" + DELIMETER + "Failed_operations_count";
+		public static final String MIRROR_WRITE_THROUGHPUT = GS_METRIC_TITLE + "MIRROR" + DELIMETER + "Mirror_Write_per_sec.";
+		public static final String MIRROR_UPDATE_THROUGHPUT = GS_METRIC_TITLE + "MIRROR" + DELIMETER + "Mirror_Update_per_sec.";
+		public static final String MIRROR_REMOVE_THROUGHPUT = GS_METRIC_TITLE + "MIRROR" + DELIMETER + "Mirror_Remove_per_sec.";
 
 		
 		
