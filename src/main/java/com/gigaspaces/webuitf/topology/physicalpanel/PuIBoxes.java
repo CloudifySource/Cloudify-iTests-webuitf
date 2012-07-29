@@ -79,7 +79,10 @@ public class PuIBoxes {
 		}
 
 		for (int i = 0 ; i < rects.size() ; i++) {
-			puBoxes.add(new PuIBox(Integer.parseInt(textsString.get(i)), i + 1, puNames.get(i), colors.get(i), driver));
+			if((textsString.get(i) == null) || (textsString.get(i).length() == 0))
+				puBoxes.add(new PuIBox(0, i + 1, puNames.get(i), colors.get(i), driver));
+			else
+				puBoxes.add(new PuIBox(Integer.parseInt(textsString.get(i)), i + 1, puNames.get(i), colors.get(i), driver));
 		}
 		this.puis = puBoxes;
 
