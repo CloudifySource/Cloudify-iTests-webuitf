@@ -156,12 +156,24 @@ public class HostsAndServicesGrid {
 	
 	public void clickOnHost(String hostname) throws InterruptedException {
 		
+		clickOnHost(hostname, null);			
+	}
+	
+	/**
+	 * if hostname is not found, search for hostAddress.
+	 * hostAddress may be null.
+	 * @param hostname
+	 * @param hostAddress
+	 * @throws InterruptedException
+	 */
+	public void clickOnHost(String hostname, String hostAddress) throws InterruptedException {
+		
 		String realId = null;
 		
 		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
 		for (WebElement el : elements) {
-			String id = el.getAttribute("id");
-			if ((id != null) && (id.contains(hostname))) {
+			String id = helper.retrieveAttribute(el, "id");
+			if ((id != null) && ((id.contains(hostname)) || ((hostAddress != null) && (id.contains(hostAddress))))) {
 				realId = id;
 				break;
 			}
