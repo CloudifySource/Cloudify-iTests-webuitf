@@ -168,12 +168,22 @@ public class HostsAndServicesGrid {
 	 */
 	public void clickOnHost(String hostname, String hostAddress) throws InterruptedException {
 		
-		String realId = null;
-		
+		String hostsTreePrefix = "hosts_tree_grid_host_";
+		String realId = null;	
+//		
+//		try{
+//			realId = hostsTreePrefix + hostname;
+//			driver.findElement(By.id(realId));
+//		}
+//		catch(NoSuchElementException nsee){
+//			realId = hostsTreePrefix + hostAddress;
+//			driver.findElement(By.id(realId));
+//		}
 		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
 		for (WebElement el : elements) {
 			String id = helper.retrieveAttribute(el, "id");
-			if ((id != null) && ((id.contains(hostname)) || ((hostAddress != null) && (id.contains(hostAddress))))) {
+			
+			if ((id != null) && ((id.contains(hostsTreePrefix + hostname)) || ((hostAddress != null) && (id.contains(hostsTreePrefix + hostAddress))))) {
 				realId = id;
 				break;
 			}

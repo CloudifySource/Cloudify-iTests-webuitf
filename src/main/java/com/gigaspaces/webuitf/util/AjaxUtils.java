@@ -224,11 +224,11 @@ public class AjaxUtils {
 			}
 			catch (StaleElementReferenceException e) {
 				try {
-					Thread.sleep(500);
+					Thread.sleep(100);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				}
-				seconds += 0.5;
+				seconds += 0.1;
 			}
 		}
 		throw new ElementNotVisibleException("Could not retrieve attribute from DOM");
