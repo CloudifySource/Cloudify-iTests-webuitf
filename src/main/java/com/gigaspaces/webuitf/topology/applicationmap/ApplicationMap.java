@@ -48,7 +48,10 @@ public class ApplicationMap {
 				List<WebElement> allApps = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElements(By.className("visible"));
 				WebElement app = null;
 				for (WebElement e : allApps) {
-					if (e.getText().equals(applicationName)) app = e;
+					if (e.getText().equals(applicationName)) {
+						app = e;
+						break;
+					}
 				}
 				if ((app != null) && app.isDisplayed()) {
 					app.click();
