@@ -6,9 +6,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openspaces.admin.machine.Machine;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.TopologySubPanel;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
 public class LogsPanel extends TopologySubPanel {
@@ -58,4 +60,41 @@ public class LogsPanel extends TopologySubPanel {
 		return element.getText();
 	}
 
+	/**
+	 * only for cloudify webui
+	 * @param machine
+	 * @return
+	 */
+	public ControllerLogsMachine getControllerLogsMachine(Machine machine){
+		
+		String id;
+		String realId = null;
+		String machineName = null;
+		AjaxUtils helper = new AjaxUtils();
+		WebElement controllerLogs = driver.findElement(By.id(WebConstants.ID.controllerLogs));
+		List<WebElement> elements = controllerLogs.findElements(By.className("x-tree3-node"));
+	
+		for (WebElement el : elements) {
+			id = helper.retrieveAttribute(el, "id");
+			
+			if ((id != null)) {								
+				if(id.contains(machine.getHostName())){
+					machineName = machine.getHostName();
+					realId = id;
+					break;
+				}
+				else if(id.contains(machine.getHostAddress())){
+					machineName = machine.getHostAddress();
+					realId = id;
+					break;
+				}				
+			}
+		}		
+		if (realId != null) {
+			return new ControllerLogsMachine(realId, machineName, selenium, driver);
+		}
+		
+		else return null;
+	}
+	
 }

@@ -1,12 +1,9 @@
 package com.gigaspaces.webuitf.topology.logspanel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openspaces.admin.gsc.GridServiceContainer;
 import org.openspaces.admin.gsm.GridServiceManager;
@@ -14,17 +11,13 @@ import org.openspaces.admin.gsm.GridServiceManager;
 import com.gigaspaces.webuitf.WebConstants;
 import com.thoughtworks.selenium.Selenium;
 
-public class LogsMachine {
+public class LogsMachine extends ControllerLogsMachine{
 	
-	@SuppressWarnings("unused")
-	private String machineName;
-	private String xpath;
 	private String puName;
 	private String id;
-	private Selenium selenium;
-	private WebDriver driver;
 	
 	public LogsMachine(String id, String machineName, String puName, Selenium selenium, WebDriver driver) {
+		super(id,machineName, selenium, driver);
 		this.driver = driver;
 		this.selenium = selenium;
 		this.machineName = machineName;
@@ -47,37 +40,11 @@ public class LogsMachine {
 				break;
 			}
 		}		
-
-		
-		
+	
 		if (realId != null) {
 			return new LogsGridServiceContainer(realId, contianerPId,puName, driver);
 		}
 		else return null;
-		
-	}
-	
-	public List<String> getServices() {
-		
-		Exception exception = null;
-		List<String> services = new ArrayList<String>();
-		int i = 1;
-		while (exception == null) {
-			try {
-				WebElement serviceElement = driver.findElement(By.
-						xpath(xpath + WebConstants.Xpath.getPathToLogsMachineServiceByIndex(i)));
-				String service = serviceElement.getAttribute("id").substring(32);
-				services.add(service);
-				i++;
-			}
-			catch (NoSuchElementException e) {
-				exception = e;
-			}
-			catch (WebDriverException e) {
-				exception = e;
-			}
-		}
-		return services;
 		
 	}
 	

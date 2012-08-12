@@ -143,6 +143,7 @@ public final class WebConstants {
 		
 		public static final String sliderDataTypes = "gs-slider-data-types";
 
+		public static final String controllerLogs = "gs-controllers-logs";
 		
 		public static String getActionToolBoxId(String name) {
 			return "node-tool-ACTIONS-" + name;
