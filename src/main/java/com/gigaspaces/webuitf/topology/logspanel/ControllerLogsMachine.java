@@ -35,7 +35,7 @@ public class ControllerLogsMachine {
 			try {
 				WebElement serviceElement = driver.findElement(By.
 						xpath(xpath + WebConstants.Xpath.getPathToLogsMachineServiceByIndex(i)));
-				String service = serviceElement.getAttribute("id").substring(32);
+				String service = serviceElement.getAttribute("id").substring(34);
 				services.add(service);
 				i++;
 			}
@@ -50,9 +50,8 @@ public class ControllerLogsMachine {
 
 	}
 
-	//TODO check
 	public void selectService(String serviceName) {
-		selenium.click(WebConstants.ID.getLogServiceId(serviceName));
+		selenium.click(WebConstants.ID.getControllerLogServiceId(serviceName));
 	}
 
 	public void collapseOrExpandMachine() {

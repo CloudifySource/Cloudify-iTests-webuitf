@@ -165,6 +165,9 @@ public final class WebConstants {
 		public static String getLogServiceId(String serviceName) {
 			return "gs-services-logs-selection-tree_" + serviceName;
 		}
+		public static String getControllerLogServiceId(String serviceName) {
+			return "gs-controller-logs-selection-tree_" + serviceName;
+		}
 		public static String getPuInstanceId(String name) {
 			return "gs-logical-grid_" + name;
 		}
