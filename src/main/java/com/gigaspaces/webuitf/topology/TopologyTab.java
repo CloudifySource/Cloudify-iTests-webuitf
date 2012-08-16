@@ -15,7 +15,7 @@ public class TopologyTab extends MainNavigation {
 	}
 
 	public ApplicationMap getApplicationMap() {
-		return new ApplicationMap(driver);
+		return new ApplicationMap(driver, selenium);
 	}
 	
 	public TopologySubPanel getTopologySubPanel() {

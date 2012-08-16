@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,18 +10,22 @@ import org.openqa.selenium.WebElement;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
+import com.thoughtworks.selenium.Selenium;
 
 public class ApplicationMap {
 	
 	private WebDriver driver;
+	private AjaxUtils helper = new AjaxUtils();
 
 	public static final String CONN_STATUS_OK = "conn-status-ok";
 	public static final String CONN_STATUS_WARN = "conn-status-warn";
 	public static final String CONN_STATUS_CRITICAL = "conn-status-critical";
 	public static final String CONN_STATUS_EMPTY = "conn-status-empty";
 
-	public ApplicationMap(WebDriver driver) {
+	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
+		this.helper.setDriver(driver);
+		this.helper.setSelenium(selenium);
 	}
 	
 	public enum DumpType {
@@ -43,8 +48,9 @@ public class ApplicationMap {
 		
 		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {			
 			public boolean getCondition() {
-				WebElement arrowDown = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElement(By.className("icon"));
-				arrowDown.click();
+//				WebElement arrowDown = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElement(By.className("icon"));
+//				arrowDown.click();
+				helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.topologyCombobox), By.className("icon"));
 				List<WebElement> allApps = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElements(By.className("visible"));
 				WebElement app = null;
 				for (WebElement e : allApps) {
