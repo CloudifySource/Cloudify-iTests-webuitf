@@ -32,13 +32,12 @@ public class HostsAndServicesGrid {
 	private WebDriver driver;
 	private long gsaPID;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public HostsAndServicesGrid(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
-		helper.setDriver(driver);
-		helper.setSelenium(selenium);
+		this.helper = new AjaxUtils(driver, selenium);
 	}
 	
 	public static HostsAndServicesGrid getInstance(Selenium selenium, WebDriver driver) {

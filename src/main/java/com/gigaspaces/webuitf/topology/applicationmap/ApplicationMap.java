@@ -15,7 +15,8 @@ import com.thoughtworks.selenium.Selenium;
 public class ApplicationMap {
 	
 	private WebDriver driver;
-	private AjaxUtils helper = new AjaxUtils();
+	private Selenium selenium;
+	private AjaxUtils helper;
 
 	public static final String CONN_STATUS_OK = "conn-status-ok";
 	public static final String CONN_STATUS_WARN = "conn-status-warn";
@@ -24,8 +25,8 @@ public class ApplicationMap {
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
-		this.helper.setDriver(driver);
-		this.helper.setSelenium(selenium);
+		this.selenium = selenium;
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public enum DumpType {

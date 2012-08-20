@@ -32,13 +32,13 @@ public class SpaceType {
 	private String storageType;
 	private String priorityGroup;
 
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public SpaceType(String type, WebDriver driver, String id) {
 		this.type = type;
 		this.driver = driver;
 		this.id = id;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 
 	public void setId(String id) {

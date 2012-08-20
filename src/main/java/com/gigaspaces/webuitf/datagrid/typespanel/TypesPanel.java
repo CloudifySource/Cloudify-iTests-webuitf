@@ -16,7 +16,7 @@ public class TypesPanel extends DataGridSubPanel {
 
 	private static final String TYPE_ID_PREFIX = "gs-slider-grid-DATA_TYPES_LIST_";
 	private static final String TYPES_GRID_ID = "gs-slider-grid-DATA_TYPES_LIST";
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	private static final String OBJECT_COUNT_CLASS = "x-grid3-td-data_type_objects_count";
 	private static final String TEMPLATES_COUNT_CLASS = "x-grid3-td-data_type_templates_count";
@@ -28,7 +28,7 @@ public class TypesPanel extends DataGridSubPanel {
 	
 	public TypesPanel(WebDriver driver) {
 		super(driver);
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 
 	public SpaceType getType(String type) {

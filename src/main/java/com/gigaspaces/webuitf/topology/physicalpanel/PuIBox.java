@@ -14,7 +14,7 @@ public class PuIBox {
 	private String puName;
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public PuIBox(int numberOfInstances, int index, String puName, String color, WebDriver driver) {
 		this.index = index;
@@ -22,7 +22,7 @@ public class PuIBox {
 		this.puName = puName;
 		this.color = color;
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 
 	public String getStroke() {

@@ -21,12 +21,12 @@ public class Metric {
 	
 	private WebElement metric;
 	private WebDriver driver;
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public Metric(WebElement metric, WebDriver driver) {
 		this.driver = driver;
 		this.metric = metric;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 
 	public boolean isDisplayed() {

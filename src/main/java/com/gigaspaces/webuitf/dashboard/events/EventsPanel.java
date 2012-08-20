@@ -19,11 +19,11 @@ public class EventsPanel {
 
 	private WebDriver driver;
 	private List<WebUIAdminEvent> visibleEvents;
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public EventsPanel(WebDriver driver) {
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public WebUIAdminEvent getEvent(int index) {

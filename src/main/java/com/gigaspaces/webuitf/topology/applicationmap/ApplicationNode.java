@@ -21,12 +21,12 @@ public class ApplicationNode implements RenderedWebUIElement {
 	private String name;
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public ApplicationNode(String name, WebDriver driver) {
 		this.driver = driver;
 		this.name = getNameFromUI(name);
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public String getName() {

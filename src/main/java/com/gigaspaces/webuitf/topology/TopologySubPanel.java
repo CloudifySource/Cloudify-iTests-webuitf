@@ -18,15 +18,14 @@ public class TopologySubPanel {
 	
 	protected Selenium selenium;
 	protected WebDriver driver;
-	private AjaxUtils helper = new AjaxUtils();
+	protected AjaxUtils helper;
 	
 	public TopologySubPanel() {}
 	
 	public TopologySubPanel(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
-		this.helper.setDriver(driver);
-		this.helper.setSelenium(selenium);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public LogsPanel switchToLogsPanel() {

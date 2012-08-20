@@ -16,12 +16,12 @@ public class SpaceTypeMembersPanel {
 	private static final String MEMBER_ATTRIBUTE_CLASS_PREFIX = "x-grid3-td-data_type_member_";
 	
 	private WebDriver driver;
-
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public SpaceTypeMembersPanel(WebDriver driver) {
 		this.driver = driver;
 		this.helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public SpaceTypeMember getMember(String name) {

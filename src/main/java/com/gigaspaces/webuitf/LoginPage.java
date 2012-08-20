@@ -66,9 +66,7 @@ public class LoginPage {
 	 * writes the user parameters in the text edits of the ui
 	 */
 	public void inputUsernameAndPassword() {
-		AjaxUtils helper = new AjaxUtils();
-		helper.setDriver(driver);
-		helper.setSelenium(selenium);
+		AjaxUtils helper = new AjaxUtils(driver, selenium);
 		
 		WebElement usernameEl = helper.waitForElement(By.id(WebConstants.ID.usernameLogginInput), TIMEOUT_IN_SECONDS );
 		usernameEl.sendKeys(username);

@@ -12,16 +12,23 @@ import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
 import com.gigaspaces.webuitf.datagrid.templatespanel.TemplatesPanel;
 import com.gigaspaces.webuitf.datagrid.transactionspanel.TransactionsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 
 public class DataGridSubPanel {
 	
 	protected WebDriver driver;
+	protected AjaxUtils helper;
 	
 	public DataGridSubPanel(WebDriver driver) {
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver);
 	}
 
 	public ConnectionsPanel switchToConnectionsPanel() {
+		
+		
+		
+		
 		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.connectionsPanelToggle));
 		healthButton.click();
 		try {

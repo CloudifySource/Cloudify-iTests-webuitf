@@ -21,7 +21,7 @@ public class ServicesGrid {
 	private EDSGrid edsGrid;
 	private ApplicationsMenuPanel appPanel;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public InfrastructureServicesGrid getInfrastructureGrid() {
 		return resourceGrid;
@@ -46,13 +46,12 @@ public class ServicesGrid {
 	public ServicesGrid(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver, selenium);
 		this.edsGrid = new EDSGrid();
 		this.highAvGrid = new DataReplicationGrid();
 		this.modulesGrid = new ApplicationServicesGrid();
 		this.resourceGrid = new InfrastructureServicesGrid();
 		this.appPanel = new ApplicationsMenuPanel();
-		helper.setDriver(driver);
-		helper.setSelenium(selenium);
 	}
 
 	public static ServicesGrid getInstance(Selenium selenium, WebDriver driver) {

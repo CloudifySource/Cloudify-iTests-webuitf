@@ -18,11 +18,11 @@ public class ContextPager {
 	
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public ContextPager(WebDriver driver) {
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public void prev(String spaceName) {

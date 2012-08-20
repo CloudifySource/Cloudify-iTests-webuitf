@@ -24,11 +24,12 @@ public class SpaceInstanceContext {
 	private String id;
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public SpaceInstanceContext(String id, WebDriver driver) {
 		this.id = id;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver);
 		this.helper.setDriver(driver);
 		this.puInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_INSTANCES_NAME_CLASS));
 		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));

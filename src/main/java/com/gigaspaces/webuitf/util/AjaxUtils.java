@@ -9,6 +9,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -28,6 +29,39 @@ public class AjaxUtils {
 
 	public static int ajaxWaitingTime = 5;
 
+	/**
+	 * Default initialization: invoke only when using methods that don't require the use of 
+	 * a {@link WebDriver} or a {@link Selenium} instance.
+	 */
+	public AjaxUtils() {
+	}
+	
+	public AjaxUtils(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public AjaxUtils(WebDriver driver, Selenium selenium) {
+		this.driver = driver;
+		this.selenium = selenium;
+	}
+	
+	/**
+	 * Creates an instance with the specified driver instance, and can be 
+	 * used to instantiate a {@link WebDriverBackedSelenium} instance, if no
+	 * selenium instance is available.
+	 * 
+	 * @param driver The used driver.
+	 * @param createWebDriverBackedSelenium {@code true} to create a 
+	 * {@link WebDriverBackedSelenium} instance from the passed driver, 
+	 * {@code false} otherwise. 
+	 */
+	public AjaxUtils(WebDriver driver, boolean createWebDriverBackedSelenium) {
+		this(driver);
+		if (createWebDriverBackedSelenium) {
+			this.selenium = new WebDriverBackedSelenium(driver, driver.getCurrentUrl());
+		}
+	}
+	
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
 	}

@@ -25,12 +25,12 @@ public class HostData {
 	private String name;
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public HostData(String hostName, WebDriver driver) {
 		
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 		try {
 			String id = WebConstants.ID.getHostId(hostName);
 			driver.findElement(By.id(id));

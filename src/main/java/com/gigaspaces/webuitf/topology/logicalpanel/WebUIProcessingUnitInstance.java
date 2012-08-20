@@ -24,7 +24,7 @@ public class WebUIProcessingUnitInstance {
 	private WebDriver driver;
 	private Selenium selenium;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public WebUIProcessingUnitInstance(String name, WebDriver driver, Selenium selenium) {
 		
@@ -35,7 +35,7 @@ public class WebUIProcessingUnitInstance {
 			this.name = name;
 			this.driver = driver;
 			this.selenium = selenium;
-			helper.setDriver(driver);
+			this.helper = new AjaxUtils(driver);
 		}
 		catch (NoSuchElementException e) {
 		}

@@ -25,12 +25,12 @@ public class PuTreeGrid {
 	private Selenium selenium;
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public PuTreeGrid(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 	
 	public static PuTreeGrid getInstance(Selenium selenium, WebDriver driver) {

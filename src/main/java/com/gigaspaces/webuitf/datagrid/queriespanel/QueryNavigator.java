@@ -16,11 +16,11 @@ public class QueryNavigator {
 	
 	private WebDriver driver;
 	
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 	
 	public QueryNavigator(WebDriver driver) {
 		this.driver = driver;
-		helper.setDriver(driver);
+		this.helper = new AjaxUtils(driver);
 	}
 
 	/**

@@ -29,11 +29,12 @@ public class SpaceContext {
 	@SuppressWarnings("unused")
 	private WebDriver driver;
 
-	private AjaxUtils helper = new AjaxUtils();
+	private AjaxUtils helper;
 
 	public SpaceContext(String id, WebDriver driver) {
 		this.id = id;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver);
 		this.helper.setDriver(driver);
 		this.puName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_NAME_CLASS));
 		this.spaceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
