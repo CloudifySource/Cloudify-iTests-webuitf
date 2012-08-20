@@ -1,8 +1,9 @@
 package com.gigaspaces.webuitf.topology;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.dashboard.events.EventsPanel;
@@ -10,23 +11,26 @@ import com.gigaspaces.webuitf.topology.healthpanel.HealthPanel;
 import com.gigaspaces.webuitf.topology.logicalpanel.LogicalPanel;
 import com.gigaspaces.webuitf.topology.logspanel.LogsPanel;
 import com.gigaspaces.webuitf.topology.physicalpanel.PhysicalPanel;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
 public class TopologySubPanel {
 	
 	protected Selenium selenium;
 	protected WebDriver driver;
+	private AjaxUtils helper = new AjaxUtils();
 	
 	public TopologySubPanel() {}
 	
 	public TopologySubPanel(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper.setDriver(driver);
+		this.helper.setSelenium(selenium);
 	}
 	
 	public LogsPanel switchToLogsPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.logsPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.logsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -36,8 +40,7 @@ public class TopologySubPanel {
 	}
 	
 	public HealthPanel switchToHealthPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.healthPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.healthPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -47,8 +50,7 @@ public class TopologySubPanel {
 	}
 	
 	public PhysicalPanel switchToPhysicalPanel() {
-		WebElement physicalButton = driver.findElement(By.id(WebConstants.ID.physicalPanelToggle));
-		physicalButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.physicalPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -58,8 +60,7 @@ public class TopologySubPanel {
 	}
 	
 	public LogicalPanel swtichToLogicalPanel() {
-		WebElement physicalButton = driver.findElement(By.id(WebConstants.ID.logicalPanelToggle));
-		physicalButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.logicalPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -69,8 +70,7 @@ public class TopologySubPanel {
 	}
 	
 	public EventsPanel swtichToEventsPanel() {
-		WebElement physicalButton = driver.findElement(By.id(WebConstants.ID.dashboardeventsPanelToggle));
-		physicalButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.dashboardeventsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

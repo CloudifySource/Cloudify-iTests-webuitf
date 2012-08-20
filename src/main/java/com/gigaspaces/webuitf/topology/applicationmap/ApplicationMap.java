@@ -48,8 +48,6 @@ public class ApplicationMap {
 		
 		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {			
 			public boolean getCondition() {
-//				WebElement arrowDown = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElement(By.className("icon"));
-//				arrowDown.click();
 				helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.topologyCombobox), By.className("icon"));
 				List<WebElement> allApps = driver.findElement(By.id(WebConstants.ID.topologyCombobox)).findElements(By.className("visible"));
 				WebElement app = null;
