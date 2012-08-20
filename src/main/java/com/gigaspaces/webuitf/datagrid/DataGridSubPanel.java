@@ -1,8 +1,9 @@
 package com.gigaspaces.webuitf.datagrid;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.datagrid.connectionspanel.ConnectionsPanel;
@@ -25,12 +26,7 @@ public class DataGridSubPanel {
 	}
 
 	public ConnectionsPanel switchToConnectionsPanel() {
-		
-		
-		
-		
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.connectionsPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.connectionsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -40,8 +36,7 @@ public class DataGridSubPanel {
 	}
 	
 	public InstancesPanel switchToInstancesPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.instancesPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.instancesPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -51,8 +46,7 @@ public class DataGridSubPanel {
 	}
 
 	public QueriesPanel switchToQueriesPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.queriesPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.queriesPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -62,8 +56,7 @@ public class DataGridSubPanel {
 	}
 
 	public StatisticsPanel switchToStatisticsPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.statisticsPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.statisticsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -73,8 +66,7 @@ public class DataGridSubPanel {
 	}
 
 	public TemplatesPanel switchToTemplatesPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.templatesPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.templatesPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -84,8 +76,7 @@ public class DataGridSubPanel {
 	}
 
 	public TransactionsPanel switchToTransactionsPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.transactionsPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.transactionsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -95,8 +86,7 @@ public class DataGridSubPanel {
 	}
 
 	public TypesPanel switchToTypesPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.typesPanelToggle));
-		healthButton.click();
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.typesPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -104,6 +94,5 @@ public class DataGridSubPanel {
 		}
 		return new TypesPanel(driver);
 	}
-
 
 }
