@@ -84,7 +84,7 @@ public class MainNavigation {
 				return null;
 			}
 		}
-		return new DataGridTab(driver);
+		return new DataGridTab(selenium, driver);
 	}	
 	
 }

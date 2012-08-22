@@ -9,12 +9,14 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
+import com.thoughtworks.selenium.Selenium;
 
 public abstract class BaseApplicationContextPanel extends MainNavigation {
 
 	private AjaxUtils helper;
 	
-	public BaseApplicationContextPanel(WebDriver driver) {
+	public BaseApplicationContextPanel(Selenium selenium, WebDriver driver) {
+		super(selenium, driver);
 		this.helper = new AjaxUtils(driver);
 	}
 

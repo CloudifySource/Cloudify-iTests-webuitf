@@ -4,13 +4,14 @@ import org.openqa.selenium.WebDriver;
 
 import com.gigaspaces.webuitf.BaseApplicationContextPanel;
 import com.gigaspaces.webuitf.WebConstants;
+import com.thoughtworks.selenium.Selenium;
 
 public class DataGridTab extends BaseApplicationContextPanel {
 
 	private WebDriver driver;
 	
-	public DataGridTab(WebDriver driver) {
-		super(driver);
+	public DataGridTab(Selenium selenium, WebDriver driver) {
+		super(selenium, driver);
 	}
 	
 	public DataGridSubPanel getSubPanel() {

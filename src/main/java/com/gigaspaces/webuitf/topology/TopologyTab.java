@@ -10,13 +10,8 @@ import com.thoughtworks.selenium.Selenium;
 
 public class TopologyTab extends BaseApplicationContextPanel {
 
-	public TopologyTab(WebDriver driver) {
-		super(driver);
-	}
-	
 	public TopologyTab(Selenium selenium, WebDriver driver) {
-		this(driver);
-		this.selenium = selenium;
+		super(selenium, driver);
 	}
 
 	public ApplicationMap getApplicationMap() {
