@@ -7,8 +7,6 @@ import com.gigaspaces.webuitf.WebConstants;
 import com.thoughtworks.selenium.Selenium;
 
 public class DataGridTab extends BaseApplicationContextPanel {
-
-	private WebDriver driver;
 	
 	public DataGridTab(Selenium selenium, WebDriver driver) {
 		super(selenium, driver);
