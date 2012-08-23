@@ -30,4 +30,11 @@ public class TopologyTab extends BaseApplicationContextPanel {
 		super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);
 	}
 
+	public String getSelectedApplication() {
+		return super.getSelectedApplication(WebConstants.ID.topologyCombobox);
+	}
+	
+	public boolean isMaskedNoContext() {
+		return super.isMaskedNoContext(WebConstants.ID.topologyPanel);
+	}
 }

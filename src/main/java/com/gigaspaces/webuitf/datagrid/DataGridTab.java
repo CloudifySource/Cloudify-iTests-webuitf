@@ -24,4 +24,11 @@ public class DataGridTab extends BaseApplicationContextPanel {
 		super.selectApplication(applicationName, WebConstants.ID.dataGridCombobox);
 	}
 	
+	public String getSelectedApplication() {
+		return super.getSelectedApplication(WebConstants.ID.dataGridCombobox);
+	}
+
+	public boolean isMaskedNoContext() {
+		return super.isMaskedNoContext(WebConstants.ID.dataGridPanel);
+	}
 }

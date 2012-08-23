@@ -25,6 +25,7 @@ public final class WebConstants {
 	
 	public static final class ID {
 		public static final String topologyPanel = "gs-tab-item-topology";
+		public static final String dataGridPanel = "gs-tab-item-console";
 		public static final String logOutButton = "gs-logout-button";
 		public static final String usernameInput = "user_name-input";
 		public static final String passwordInput = "password-input";
@@ -118,6 +119,7 @@ public final class WebConstants {
 		public static final String spaceTransactionsGrid = "gs-space-transactions-grid";
 		public static final String sidePanelSpacesTree = "gs-side-panel-space-tree";
 		public static final String goToLogsItemID = "gs-logical-navigate_to_logs";
+		public static final String alertsGridDumpItemID = "gs-alerts-grid-dump";
 		public static final String restartPuInstanceItem = "gs-logical-restart-pu-instance";
 		public static final String topologyCombobox = "gs-application-combo-TOPOLOGY";
 		public static final String dataGridCombobox = "gs-application-combo-DATA_CONSOLE";
@@ -550,6 +552,8 @@ public final class WebConstants {
 		
 		public static final String contextPagerDataMode = "x-grid3-col-tree_browser_model_data_name";
 		public static final String contextPagerNextButton = "x-grid3-col-tree_browser_model_data_next_button";
+
+		public static final String applicationContextPanel = "gs-window-app-context";
 		
 		public static final String getHostClassName(String name) {
 			return "gs-physical-grid-row-" + name;
