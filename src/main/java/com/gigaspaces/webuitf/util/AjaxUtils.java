@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.util;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
@@ -68,7 +69,16 @@ public class AjaxUtils {
 	public void setSelenium(Selenium selenium) {
 		this.selenium = selenium;
 	}
+	
 
+	/**
+	 * Waits for an element to be available in DOM before retrieving its inner text.
+	 * 
+	 * @param timeout The timeout.
+	 * @param timeUnit The time unit.
+	 * @param bys Element lookup.
+	 * @return The extracted text.
+	 */
 	public String waitForTextToBeExctractable(int timeout, TimeUnit timeUnit, final By ... bys) {
 
 		final StringBuilder sb = new StringBuilder();
@@ -148,13 +158,15 @@ public class AjaxUtils {
 		}
 	}  
 
-	public WebElement waitForElement(By by, int timeout) {
-		Wait<WebDriver> wait = new WebDriverWait(driver, timeout);
+	public WebElement waitForElement(By by, int timeoutInSeconds) {
+		Wait<WebDriver> wait = new WebDriverWait(driver, timeoutInSeconds);
 		return wait.until(visibilityOfElementLocated(by));    
 	}
 
-	public void waitForElement(TimeUnit timeUnit, int timeout,final By...bys) {
+	public WebElement waitForElement(TimeUnit timeUnit, int timeout,final By...bys) {
 
+		final AtomicReference<WebElement> atEl = new AtomicReference<WebElement>();
+		
 		FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
 		fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
 		fluentWait.withTimeout(timeout, timeUnit);
@@ -165,6 +177,7 @@ public class AjaxUtils {
 					for (int i = 1 ; i < bys.length ; i++) {
 						element = element.findElement(bys[i]); 
 					}
+					atEl.set(element);
 					return true;
 				} catch (NoSuchElementException ex) {
 					return false;
@@ -174,6 +187,8 @@ public class AjaxUtils {
 				}
 			}
 		});
+		
+		return atEl.get();
 	}
 
 	public void waitForElementToDisappear(TimeUnit timeUnit, int timeout,final By...bys) {
@@ -266,6 +281,48 @@ public class AjaxUtils {
 			}
 		}
 		throw new ElementNotVisibleException("Could not retrieve attribute from DOM");
+	}
+
+	/**
+	 * Checks the masking state of an element.
+	 * 
+	 * @return {@code true} if the element is masked, {@code false} otherwise.
+	 */
+	public boolean isElementMasked(WebElement el) {
+		String classNameValue = retrieveAttribute(el, "class");
+		return classNameValue.contains("x-masked");
+	}
+
+	/**
+	 * Utilizes {@link #isElementMasked(WebElement)} as well as tests against 
+	 * a specific mask message.
+	 * 
+	 * @return {@code true} if the element is masked and the mask contains
+	 * the passed text as a message, {@code false} otherwise.
+	 */
+	public boolean isElementMaskedWithMessage(String maskMessage, boolean ignoreCase, By... bys) {
+		
+		WebElement el = waitForElement(TimeUnit.SECONDS, 5, bys);
+
+		if (!isElementMasked(el)) {
+			return false;
+		}
+		
+		int length = bys.length;
+		By[] msgBys = new By[length + 1];
+		System.arraycopy(bys, 0, msgBys, 0, length);
+		msgBys[msgBys.length - 1] = By.className("ext-el-mask-msg");
+		
+		String extractedText = waitForTextToBeExctractable(5, TimeUnit.SECONDS, msgBys);
+
+		boolean messageFound;
+		if (ignoreCase) {
+			messageFound = extractedText.equalsIgnoreCase(maskMessage);
+		} else {
+			messageFound = extractedText.equals(maskMessage);
+		}
+		
+		return messageFound;
 	}
 
 }
