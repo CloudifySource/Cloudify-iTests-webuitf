@@ -20,8 +20,8 @@ public class SpaceTypeMembersPanel {
 
 	public SpaceTypeMembersPanel(WebDriver driver) {
 		this.driver = driver;
-		this.helper.setDriver(driver);
 		this.helper = new AjaxUtils(driver);
+		this.helper.setDriver(driver);
 	}
 	
 	public SpaceTypeMember getMember(String name) {
