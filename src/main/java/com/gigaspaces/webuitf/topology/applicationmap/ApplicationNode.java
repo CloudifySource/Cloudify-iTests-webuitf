@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.topology.applicationmap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -271,8 +272,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	}
 	
 	public void select() {
-		WebElement el = driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
-		el.click();
+		helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime, TimeUnit.SECONDS, By.id(WebConstants.ID.nodePath + this.name));
 	}
 	
 	public void clickOnActions() {
