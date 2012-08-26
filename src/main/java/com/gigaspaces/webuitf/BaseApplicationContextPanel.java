@@ -28,10 +28,6 @@ public abstract class BaseApplicationContextPanel extends MainNavigation {
 		return helper.isElementMasked(el);
 	}
 
-	/*
-	 * div.gs-window-app-context.x-masked-relative.x-masked.x-panel.x-component
-	 * div.ext-el-mask-msg No Processing Units are deployed
-	 */
 	protected boolean isMaskedNoContext(final String tabItemId) {
 
 		String maskMessage;
@@ -47,15 +43,11 @@ public abstract class BaseApplicationContextPanel extends MainNavigation {
 				By.className(WebConstants.ClassNames.applicationContextPanel));
 	}
 
-	/**
-	 * stub! empty implementation! do not use!
-	 * 
-	 * @param tabItemId
-	 * @return
-	 */
-	protected boolean isMaskedLoading(final String tabItemId) {
-
-		return false;
+	protected boolean isMaskedLoading(final String tabItemId, String maskMessage) {
+		
+		return helper.isElementMaskedWithMessage(maskMessage, true,
+				By.id(tabItemId),
+				By.className(WebConstants.ClassNames.applicationContextPanel));
 	}
 
 	protected String getSelectedApplication(final String comboBoxId) {

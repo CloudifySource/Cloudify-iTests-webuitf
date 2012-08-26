@@ -37,4 +37,9 @@ public class TopologyTab extends BaseApplicationContextPanel {
 	public boolean isMaskedNoContext() {
 		return super.isMaskedNoContext(WebConstants.ID.topologyPanel);
 	}
+	
+	public boolean isMaskedLoading() {
+		String maskMessage = "Loading application map...";
+		return super.isMaskedLoading(WebConstants.ID.topologyPanel, maskMessage);
+	}
 }

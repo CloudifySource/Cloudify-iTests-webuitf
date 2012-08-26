@@ -31,4 +31,9 @@ public class DataGridTab extends BaseApplicationContextPanel {
 	public boolean isMaskedNoContext() {
 		return super.isMaskedNoContext(WebConstants.ID.dataGridPanel);
 	}
+	
+	public boolean isMaskedLoading() {
+		String maskMessage = "Loading data grid information...";
+		return super.isMaskedLoading(WebConstants.ID.dataGridPanel, maskMessage);
+	}
 }
