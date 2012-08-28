@@ -152,7 +152,7 @@ public class WebUIProcessingUnitInstance {
 			try {
 				String id = WebConstants.ID.getPuInstanceId(name);
 				WebElement hostElement = driver.findElement(By.id(id));
-				WebElement actions = hostElement.findElement(By.className("x-grid3-td-tools")).findElement(By.tagName("button"));
+				WebElement actions = hostElement.findElement(By.className("x-grid3-td-actions")).findElement(By.tagName("button"));
 				actions.click();
 				WebElement goToLogsItem = driver.findElement(By.id(WebConstants.ID.goToLogsItemID));
 				goToLogsItem.click();
@@ -178,7 +178,7 @@ public class WebUIProcessingUnitInstance {
 			try {
 				String id = WebConstants.ID.getPuInstanceId(name);
 				WebElement hostElement = driver.findElement(By.id(id));
-				WebElement actions = hostElement.findElement(By.className("x-grid3-td-tools")).findElement(By.tagName("button"));
+				WebElement actions = hostElement.findElement(By.className("x-grid3-td-actions")).findElement(By.tagName("button"));
 				actions.click();
 				WebElement restartItem = driver.findElement(By.id(WebConstants.ID.restartPuInstanceItem));
 				restartItem.click();

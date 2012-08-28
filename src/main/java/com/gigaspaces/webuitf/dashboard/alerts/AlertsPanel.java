@@ -2,9 +2,11 @@ package com.gigaspaces.webuitf.dashboard.alerts;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openspaces.admin.alert.Alert;
@@ -51,10 +53,13 @@ public class AlertsPanel {
 
 	private Selenium selenium;
 	private WebDriver driver;
+	
+	private AjaxUtils helper;
 
 	public AlertsPanel(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver, selenium);
 	}
 
 	public static AlertsPanel getInstance(Selenium selenium, WebDriver driver) {
@@ -322,6 +327,8 @@ public class AlertsPanel {
 	
 	public class WebUIAlert {
 		
+		private Logger _logger = Logger.getLogger(WebUIAlert.class.getName());
+
 		private AlertSeverity severity;
 		private String name;
 		private String description;
@@ -364,6 +371,64 @@ public class AlertsPanel {
 			selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 		}
 		
+		public boolean generateDump() {
+			boolean succeed = false;
+			int seconds = 0;
+			while (seconds < AjaxUtils.ajaxWaitingTime) {
+				try {
+					WebElement alertElement = driver.findElement(By
+							.xpath(xPath));
+					WebElement actions = alertElement.findElement(
+							By.className("gs-actions-button")).findElement(
+							By.tagName("button"));
+					actions.click();
+					WebElement generateDumpItem = driver.findElement(By
+							.id(WebConstants.ID.alertsGridDumpItem));
+					generateDumpItem.click();
+					break;
+				} catch (StaleElementReferenceException e) {
+					_logger.info("Failed to discover element due to statistics update, retyring...");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+					seconds++;
+				}
+			}
+
+			WebElement dumpWindow = helper.waitForElement(
+					By.id(WebConstants.ID.servicesDumpWindow),
+					AjaxUtils.ajaxWaitingTime);
+			if (dumpWindow != null) {
+				
+				WebElement generateDumpButton = dumpWindow.findElement(By
+						.className(WebConstants.ClassNames.buttonGenerate));
+				generateDumpButton.click();
+				
+				int resultSeconds = 0;
+				while (resultSeconds < AjaxUtils.ajaxWaitingTime) {
+					WebElement progressMessageText = dumpWindow.findElement(By.className("x-progress-text"));
+					String resultMessage = progressMessageText.getText();
+					
+					if (resultMessage.toLowerCase().contains("dump file generated successfully")) {
+						succeed = true;
+						break;
+					} else {
+						_logger.info("Failed to retrieve progress bar text, retyring...");
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+						resultSeconds++;
+					}
+				}
+			}
+			
+			return succeed;
+		}
+
 		@Override
 		public String toString() {
 			return severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;

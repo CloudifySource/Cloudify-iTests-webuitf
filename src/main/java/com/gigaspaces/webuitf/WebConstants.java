@@ -119,7 +119,7 @@ public final class WebConstants {
 		public static final String spaceTransactionsGrid = "gs-space-transactions-grid";
 		public static final String sidePanelSpacesTree = "gs-side-panel-space-tree";
 		public static final String goToLogsItemID = "gs-logical-navigate_to_logs";
-		public static final String alertsGridDumpItemID = "gs-alerts-grid-dump";
+		public static final String alertsGridDumpItem = "gs-alerts-grid-dump";
 		public static final String restartPuInstanceItem = "gs-logical-restart-pu-instance";
 		public static final String topologyCombobox = "gs-application-combo-TOPOLOGY";
 		public static final String dataGridCombobox = "gs-application-combo-DATA_CONSOLE";
@@ -146,6 +146,9 @@ public final class WebConstants {
 		public static final String sliderDataTypes = "gs-slider-data-types";
 
 		public static final String controllerLogs = "gs-controllers-logs";
+
+		public static final String servicesDumpWindow = "gs-services-dump-window";
+
 		
 		public static String getActionToolBoxId(String name) {
 			return "node-tool-ACTIONS-" + name;
@@ -554,6 +557,9 @@ public final class WebConstants {
 		public static final String contextPagerNextButton = "x-grid3-col-tree_browser_model_data_next_button";
 
 		public static final String applicationContextPanel = "gs-window-app-context";
+
+	    public static final String buttonGenerate = "gs-button-generate";
+	    public static final String buttonClose = "gs-button-close";
 		
 		public static final String getHostClassName(String name) {
 			return "gs-physical-grid-row-" + name;
