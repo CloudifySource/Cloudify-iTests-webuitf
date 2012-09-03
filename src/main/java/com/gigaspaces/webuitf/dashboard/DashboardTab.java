@@ -35,6 +35,7 @@ public class DashboardTab extends MainNavigation {
 	}
 	
 	public boolean isXap() {
+		System.out.println("checking if this is xap");
 		driver.findElement(By.id("gs-about-button")).click();
 		return selenium.isTextPresent("XAP Premium");
 	}
