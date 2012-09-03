@@ -270,6 +270,23 @@ public class ApplicationNode implements RenderedWebUIElement {
 			return null;
 		}
 	}
+
+	public boolean isSelected() {
+		boolean selected = false;
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		try {
+			selected = (Boolean)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+					+ name + '"' + "].selected");
+			return selected;
+		}
+		catch (NoSuchElementException e) {
+			return false;
+		}
+		catch (WebDriverException e) {
+			return false;
+		}
+	}
 	
 	public void select() {
 		helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime, TimeUnit.SECONDS, By.id(WebConstants.ID.nodePath + this.name));
