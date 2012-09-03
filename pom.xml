@@ -16,6 +16,15 @@
 		</repository>
 	</repositories>
 
+	<distributionManagement>
+		<repository>
+			<id>GigaSpaces Repository</id>
+			<name>GigaSpaces Repository-snapshot</name>
+			<url>http://mvn-srv:8081/artifactory/libs-snapshot-local</url>
+			<uniqueVersion>true</uniqueVersion>
+		</repository>
+	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
