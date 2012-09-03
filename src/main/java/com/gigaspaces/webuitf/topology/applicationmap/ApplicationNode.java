@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -289,7 +290,27 @@ public class ApplicationNode implements RenderedWebUIElement {
 	}
 	
 	public void select() {
-		helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime, TimeUnit.SECONDS, By.id(WebConstants.ID.nodePath + this.name));
+		boolean selected = false;
+		long end = System.currentTimeMillis() + 10 * 1000;
+		
+		while (System.currentTimeMillis() < end) {
+			helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime,
+					TimeUnit.SECONDS,
+					By.id(WebConstants.ID.nodePath + this.name));
+			selected = isSelected();
+			if (selected) {
+				break;
+			} else {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+				}
+			}
+		}
+		if (!selected) {
+			throw new TimeoutException(
+					"Application node could not be selected, operation timed out");
+		}
 	}
 	
 	public void clickOnActions() {
