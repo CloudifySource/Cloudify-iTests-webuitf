@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.dashboard.alerts.AlertsPanel;
+import com.gigaspaces.webuitf.dashboard.events.DashboardEventsGrid;
 import com.gigaspaces.webuitf.dashboard.events.EventsPanel;
 import com.thoughtworks.selenium.Selenium;
 
@@ -28,6 +29,17 @@ public class DashboardSubPanel {
 			e.printStackTrace();
 		}
 		return new EventsPanel(driver);
+	}
+	
+	public DashboardEventsGrid switchToEventsGrid() {
+		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.dashboardeventsGridToggle));
+		healthButton.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new DashboardEventsGrid(driver);
 	}
 
 

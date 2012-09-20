@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.dashboard.events;
+package com.gigaspaces.webuitf.events;
 
 public class WebUIAdminEvent {
 	
@@ -22,12 +22,15 @@ public class WebUIAdminEvent {
 		
 		FAILED,
 		
-		IN_PROGRESS,		
+		IN_PROGRESS,
+		
 	}
 	
 	private String title;
+	private String message = null;
 	private String description;
 	private long time;
+	private String status = null;
 	
 	public WebUIAdminEvent(String title, String description, long time) {
 		this.description = description;
@@ -35,6 +38,16 @@ public class WebUIAdminEvent {
 		this.title = title;
 	}
 	
+	public WebUIAdminEvent(String title, String message, String description,
+			long time, String status) {
+
+		this.title = title;
+		this.message = message;
+		this.description = description;
+		this.time = time;
+		this.status = status;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -59,12 +72,26 @@ public class WebUIAdminEvent {
 		this.time = time;
 	}
 	
-	public EventStatus getStatus() {
-		return null;
+	public String getStatus() {
+		return status;
 	}
 	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	@Override
 	public String toString() {
-		return this.title + " | " + this.description + " | " + this.time;
+		if(message == null && status == null)
+			return this.title + " | " + this.description + " | " + this.time;
+		return this.title + " | " + this.message + " | " + this.description + " | " + this.time + " | " + this.status;
 	}
 }

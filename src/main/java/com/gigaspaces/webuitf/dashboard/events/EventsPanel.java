@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.events.WebUIAdminEvent;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.LogUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;

@@ -130,7 +130,12 @@ public final class WebConstants {
 				
 		public static final String morePopup = "gs-popup-grid-instances";
 		public static final String dashboardeventsPanelToggle = "gs-tab-item-dashboard-events-toggler-button";
+		public static final String dashboardeventsGridToggle = "gs-tab-item-dashboard-events-grid-toggler-button";
 		public static final String dashboardAlertsPanelToggle = "gs-tab-item-alerts-toggler-button";
+		public static final String dashboardEventsGrid = "dahsboard-events-grid";
+		public static final String topologyEventsGrid = "topology-events-grid";
+		public static final String topologyEventsPanelToggle = "gs-tab-item-topology-events-toggler-button";
+		public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
 		
 		public static final String metricPopupHeader = "gs-balance-dialog-panel-north";
 		public static final String metricPopupLow = "gs-balance-dialog-panel-center";
@@ -149,6 +154,19 @@ public final class WebConstants {
 
 		public static final String servicesDumpWindow = "gs-services-dump-window";
 
+		public static final String dashboardLastMinuteEventsButton = "dashboard-events-last-minute-time-button";
+		public static final String dashboardLastHourEventsButton = "dashboard-events-last-hour-button";
+		public static final String dashboardLastDayEventsButton = "dashboard-events-last-day-button";
+		public static final String dashboardAllEventsButton = "dashboard-events-all-button";
+		public static final String dashboardEventsFilter = "dashboard-events-filter";
+		public static final String dashboardEventsFilterInput = "dashboard-events-filter-input";
+		
+		public static final String topologyLastMinuteEventsButton = "topology-events-last-minute-time-button";
+		public static final String topologyLastHourEventsButton = "topology-events-last-hour-button";
+		public static final String topologyLastDayEventsButton = "topology-events-last-day-button";
+		public static final String topologyAllEventsButton = "topology-events-all-button";
+		public static final String topologyEventsFilter = "topology-events-filter";
+		public static final String topologyEventsFilterInput = "topology-events-filter-input";
 		
 		public static String getActionToolBoxId(String name) {
 			return "node-tool-ACTIONS-" + name;
@@ -323,6 +341,8 @@ public final class WebConstants {
 		public static final String pathToQueryNavigatorNextButton = "//table[@id='" + ID.queryNavigatorNext + "']/tbody/tr[2]/td[2]";
 		public static final String pathToQueryNavigatorShowPrevButton = "//table[@id='" + ID.queryNavigatorPrev + "']/tbody/tr[2]/td[2]/em";
 		
+		public static final String pathToEventText = "div/span";
+		
 		public static final String getPathToMetricHoverMenuOption(String menu) {
 			return "//a[text()='" + menu.replace("_", " ") + "']";
 		}
@@ -337,6 +357,14 @@ public final class WebConstants {
 		
 		public static final String getPathToMetricExtremeHighCasesRow(int rowIndex) {
 			return "//div[@id='" + ID.metricPopupHigh + "']/div[2]/div/div/div/div/div/div[2]/div[" + rowIndex + "]/div/table/tbody/tr";
+		}
+		
+		public static final String getPathToEventInDashboardEventsGrid(int index) {
+			return "//div[@id='" + ID.dashboardEventsGrid + "']/div/div/div[2]/div/div[" + index + "]";
+		}
+		
+		public static String getPathToEventInTopologyEventsGrid(int index) {
+			return "//div[@id='" + ID.topologyEventsGrid + "']/div/div/div[2]/div/div[" + index + "]";
 		}
 		
 		public static final String getPathToInst(int i) {
@@ -495,6 +523,7 @@ public final class WebConstants {
 		public static String getPathToLogsContianerPuInstanceByIndex(int i) {
 			return "/div[2]/div[" + i + "]";
 		}
+
 	}
 	
 	public static final class DOM {
@@ -547,6 +576,13 @@ public final class WebConstants {
 		public static final String timelineEventTime = "timeline-event-bubble-time";
 		public static final String timelineEventTimeStamp = "";
 		public static final String timelineEventStatus = "";
+		
+		public static final String EventsGridEventTitle = "x-grid3-td-component_name";
+		public static final String EventsGridEventMessage = "x-grid3-td-message";
+		public static final String EventsGridEventDescription = "x-grid3-td-description";
+		public static final String EventsGridEventTime = "x-grid3-td-date";
+		public static final String EventsGridEventStatus = "x-grid3-td-status";
+		public static final String EventsGridClearFilter = "x-form-clear-trigger";
 		
 		public static final String win32OS = "gs-os-icon-Win32";
 		public static final String eventPopupCloseButton = "simileAjax-bubble-close";

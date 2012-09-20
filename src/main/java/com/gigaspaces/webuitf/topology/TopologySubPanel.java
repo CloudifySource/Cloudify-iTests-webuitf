@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.dashboard.events.EventsPanel;
+import com.gigaspaces.webuitf.topology.events.TopologyEventsGrid;
 import com.gigaspaces.webuitf.topology.healthpanel.HealthPanel;
 import com.gigaspaces.webuitf.topology.logicalpanel.LogicalPanel;
 import com.gigaspaces.webuitf.topology.logspanel.LogsPanel;
@@ -58,7 +59,7 @@ public class TopologySubPanel {
 		return new PhysicalPanel(selenium, driver);
 	}
 	
-	public LogicalPanel swtichToLogicalPanel() {
+	public LogicalPanel switchToLogicalPanel() {
 		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.logicalPanelToggle));
 		try {
 			Thread.sleep(2000);
@@ -68,13 +69,23 @@ public class TopologySubPanel {
 		return new LogicalPanel(selenium, driver);
 	}
 	
-	public EventsPanel swtichToEventsPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.dashboardeventsPanelToggle));
+	public EventsPanel switchToEventsPanel() {
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.topologyEventsPanelToggle));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		return new EventsPanel(driver);
+	}
+	
+	public TopologyEventsGrid switchToEventsGrid() {
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.topologyEventsGridToggle));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new TopologyEventsGrid(driver);
 	}
 }
