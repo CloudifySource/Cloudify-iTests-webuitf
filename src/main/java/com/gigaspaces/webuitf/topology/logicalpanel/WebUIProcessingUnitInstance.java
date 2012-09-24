@@ -118,7 +118,7 @@ public class WebUIProcessingUnitInstance {
 			try {
 				String id = WebConstants.ID.getPuInstanceId(name);
 				WebElement instanceElement = driver.findElement(By.id(id));
-				WebElement chartSelection = instanceElement.findElement(By.className("x-grid3-td-chart_selection"));
+				WebElement chartSelection = instanceElement.findElement(By.className("x-grid3-cc-chart_selection"));
 				if (!chartSelection.isSelected()) {
 					chartSelection.click();
 					return true;
