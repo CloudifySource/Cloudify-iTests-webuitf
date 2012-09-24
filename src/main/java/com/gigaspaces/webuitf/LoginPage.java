@@ -25,7 +25,6 @@ public class LoginPage {
 	
 	private String username;
 	private String password;
-	private String jiniGroup;
 	
 	WebElement logginButton;
 	private static int TIMEOUT_IN_SECONDS = 10;
@@ -40,15 +39,6 @@ public class LoginPage {
 		this.driver = driver;
 	}
 	
-	/**
-	 * constructs an instance with a specific lookup group
-	 */
-	public LoginPage(Selenium selenium, WebDriver driver, String lookupGroups) {
-		this.driver = driver;
-		this.selenium = selenium;
-		this.jiniGroup = lookupGroups;
-	}
-
 	/**
 	 * constructs an instance for a certain user
 	 * @param selenium
