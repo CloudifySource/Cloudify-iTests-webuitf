@@ -1,7 +1,0 @@
-<suite name="suite">
-	<test name="Clouds Test">
-		<packages>
-			<package name="test.cli.cloudify.cloud" />
-		</packages>
-	</test>
-</suite>

@@ -1,8 +1,0 @@
-<suite name="suite">
-	<test name="Clouds Test">
-		<classes>
-    		<class name="test.cli.cloudify.cloud.MyTestA" />
-    		<class name="test.cli.cloudify.cloud.MyTestB" />
-	    </classes>
-	</test>
-</suite>
