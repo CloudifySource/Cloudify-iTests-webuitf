@@ -1,0 +1,1403 @@
+<html>
+<head>
+<title>TestNG:  test.cli.cloudify</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>test.cli.cloudify</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>0/13/21</td>
+</tr><tr>
+<td>Started on:</td><td>Mon Jan 02 14:26:57 IST 2012</td>
+</tr>
+<tr><td>Total time:</td><td>450 seconds (450279 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.beforeClass()'><b>beforeClass</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.installApplication(CustomCommandsOnMultipleInstancesApplicationTest.java:234)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.beforeClass(CustomCommandsOnMultipleInstancesApplicationTest.java:33)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div><a href='#' onClick='toggleBox("stack-trace26294097", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace26294097'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.installApplication(CustomCommandsOnMultipleInstancesApplicationTest.java:234)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.beforeClass(CustomCommandsOnMultipleInstancesApplicationTest.java:33)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.beforeClass()'><b>beforeClass</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.installService(CustomCommandsOnMultipleInstancesTest.java:227)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.beforeClass(CustomCommandsOnMultipleInstancesTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div><a href='#' onClick='toggleBox("stack-trace16265191", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace16265191'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.installService(CustomCommandsOnMultipleInstancesTest.java:227)
+	at test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.beforeClass(CustomCommandsOnMultipleInstancesTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:175)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:107)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.AdminApiControllerTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.AdminApiControllerTest</td>
+<td><div><pre>java.lang.AssertionError: 
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:267)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:259)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:61)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:51)
+	at test.AbstractTest.beforeTest(AbstractTest.java:30)
+	at test.cli.cloudify.AbstractCommandTest.beforeTest(AbstractCommandTest.java:37)
+	at test.cli.cloudify.AdminApiControllerTest.beforeTest(AdminApiControllerTest.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div><a href='#' onClick='toggleBox("stack-trace13694366", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace13694366'><pre>java.lang.AssertionError: 
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:267)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:259)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:61)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:51)
+	at test.AbstractTest.beforeTest(AbstractTest.java:30)
+	at test.cli.cloudify.AbstractCommandTest.beforeTest(AbstractCommandTest.java:37)
+	at test.cli.cloudify.AdminApiControllerTest.beforeTest(AdminApiControllerTest.java:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div></td>
+<td>0</td>
+<td>test.cli.cloudify.AdminApiControllerTest@1995d80</td></tr>
+<tr>
+<td title='test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest</td>
+<td><div><pre>java.lang.AssertionError: 
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:267)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:259)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:61)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:51)
+	at test.AbstractTest.beforeTest(AbstractTest.java:30)
+	at test.cli.cloudify.AbstractCommandTest.beforeTest(AbstractCommandTest.java:37)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div><a href='#' onClick='toggleBox("stack-trace26362458", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace26362458'><pre>java.lang.AssertionError: 
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:267)
+	at org.testng.AssertJUnit.assertNotNull(AssertJUnit.java:259)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:61)
+	at framework.utils.SetupUtils.assertCleanSetup(SetupUtils.java:51)
+	at test.AbstractTest.beforeTest(AbstractTest.java:30)
+	at test.cli.cloudify.AbstractCommandTest.beforeTest(AbstractCommandTest.java:37)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div></td>
+<td>0</td>
+<td>test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest@ce5b1c</td></tr>
+<tr>
+<td title='test.cli.cloudify.BootstrapCloudEc2Test.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.BootstrapCloudEc2Test</td>
+<td><div><pre>java.lang.AssertionError: bootstrap-cloud failed.
+	at org.testng.Assert.fail(Assert.java:89)
+	at test.cli.cloudify.AbstractCloudEc2Test.beforeTest(AbstractCloudEc2Test.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div><a href='#' onClick='toggleBox("stack-trace14518777", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace14518777'><pre>java.lang.AssertionError: bootstrap-cloud failed.
+	at org.testng.Assert.fail(Assert.java:89)
+	at test.cli.cloudify.AbstractCloudEc2Test.beforeTest(AbstractCloudEc2Test.java:56)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:543)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:212)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:631)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:883)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1208)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:127)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:758)
+	at org.testng.TestRunner.run(TestRunner.java:613)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:334)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:329)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:291)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:240)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:53)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:87)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1142)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1067)
+	at org.testng.TestNG.run(TestNG.java:979)
+	at org.testng.remote.RemoteTestNG.run(RemoteTestNG.java:109)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:202)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:173)
+</pre></div></td>
+<td>0</td>
+<td>test.cli.cloudify.BootstrapCloudEc2Test@a3d4cf</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED CONFIGURATIONS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test.cli.cloudify.ConfigSlurperTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.ConfigSlurperTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConfigSlurperTest@1630ab9</td></tr>
+<tr>
+<td title='test.cli.cloudify.TestCLIRestExceptionHandling.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.TestCLIRestExceptionHandling</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.TestCLIRestExceptionHandling@1e8a1f6</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.ConnectTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.ConnectTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConnectTest@17ee8b8</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.beforeTest()'><b>beforeTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+<tr>
+<td title='test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest@ce5b1c</td></tr>
+<tr>
+<td title='test.cli.cloudify.BootstrapCloudEc2Test.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.BootstrapCloudEc2Test</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.BootstrapCloudEc2Test@a3d4cf</td></tr>
+<tr>
+<td title='test.cli.cloudify.ConfigSlurperTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.ConfigSlurperTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConfigSlurperTest@1630ab9</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.TestCLIRestExceptionHandling.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.TestCLIRestExceptionHandling</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.TestCLIRestExceptionHandling@1e8a1f6</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.ConnectTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.ConnectTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConnectTest@17ee8b8</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.afterTest()'><b>afterTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.afterClass()'><b>afterClass</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.afterClass()'><b>afterClass</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testDataGridRecipeInstall()'><b>testDataGridRecipeInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testDataGridRecipeInstall(InstallAndUninstallServiceTest.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace15725893", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace15725893'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testDataGridRecipeInstall(InstallAndUninstallServiceTest.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest.testDetailsAndMonitorsMap()'><b>testDetailsAndMonitorsMap</b><br>Test class: test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest.installService(LifecycleDetailsMonitorMapClosureTest.java:56)
+	at test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest.testDetailsAndMonitorsMap(LifecycleDetailsMonitorMapClosureTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace4133412", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace4133412'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest.installService(LifecycleDetailsMonitorMapClosureTest.java:56)
+	at test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest.testDetailsAndMonitorsMap(LifecycleDetailsMonitorMapClosureTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.LifecycleDetailsMonitorMapClosureTest@1ab28fe</td></tr>
+<tr>
+<td title='test.cli.cloudify.GroovyRuntimeExceptionInCliTest.testGroovyRuntimeExceptionHandling()'><b>testGroovyRuntimeExceptionHandling</b><br>Test class: test.cli.cloudify.GroovyRuntimeExceptionInCliTest</td>
+<td><div><pre>java.lang.AssertionError: Runtime exception was not printed by the CLI.
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at framework.utils.AssertUtils._assertTrue(AssertUtils.java:139)
+	at framework.utils.AssertUtils.assertTrue(AssertUtils.java:132)
+	at test.AbstractTest.assertTrue(AbstractTest.java:119)
+	at test.cli.cloudify.GroovyRuntimeExceptionInCliTest.testGroovyRuntimeExceptionHandling(GroovyRuntimeExceptionInCliTest.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace24075031", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace24075031'><pre>java.lang.AssertionError: Runtime exception was not printed by the CLI.
+	at org.testng.AssertJUnit.fail(AssertJUnit.java:59)
+	at org.testng.AssertJUnit.assertTrue(AssertJUnit.java:24)
+	at framework.utils.AssertUtils._assertTrue(AssertUtils.java:139)
+	at framework.utils.AssertUtils.assertTrue(AssertUtils.java:132)
+	at test.AbstractTest.assertTrue(AbstractTest.java:119)
+	at test.cli.cloudify.GroovyRuntimeExceptionInCliTest.testGroovyRuntimeExceptionHandling(GroovyRuntimeExceptionInCliTest.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.GroovyRuntimeExceptionInCliTest@10bc49d</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallApplicationTest.testInstallAndUninstall()'><b>testInstallAndUninstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallApplicationTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.InstallAndUninstallApplicationTest.doTest(InstallAndUninstallApplicationTest.java:31)
+	at test.cli.cloudify.InstallAndUninstallApplicationTest.testInstallAndUninstall(InstallAndUninstallApplicationTest.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace25443492", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace25443492'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.InstallAndUninstallApplicationTest.doTest(InstallAndUninstallApplicationTest.java:31)
+	at test.cli.cloudify.InstallAndUninstallApplicationTest.testInstallAndUninstall(InstallAndUninstallApplicationTest.java:23)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallApplicationTest@1bfc93a</td></tr>
+<tr>
+<td title='test.cli.cloudify.USMKitchenSinkTest.testKitchenSink()'><b>testKitchenSink</b><br>Test class: test.cli.cloudify.USMKitchenSinkTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.USMKitchenSinkTest.installService(USMKitchenSinkTest.java:535)
+	at test.cli.cloudify.USMKitchenSinkTest.testKitchenSink(USMKitchenSinkTest.java:73)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace4974776", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace4974776'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.AbstractLocalCloudTest.runCommand(AbstractLocalCloudTest.java:212)
+	at test.cli.cloudify.USMKitchenSinkTest.installService(USMKitchenSinkTest.java:535)
+	at test.cli.cloudify.USMKitchenSinkTest.testKitchenSink(USMKitchenSinkTest.java:73)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.USMKitchenSinkTest@341960</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testMirrorRecipeInstall()'><b>testMirrorRecipeInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testMirrorRecipeInstall(InstallAndUninstallServiceTest.java:67)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace11600335", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace11600335'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testMirrorRecipeInstall(InstallAndUninstallServiceTest.java:67)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.PetClinicApplicationTest.testPetClinincApplication()'><b>testPetClinincApplication</b><br>Test class: test.cli.cloudify.PetClinicApplicationTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.PetClinicApplicationTest.testPetClinincApplication(PetClinicApplicationTest.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace21985739", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace21985739'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.PetClinicApplicationTest.testPetClinincApplication(PetClinicApplicationTest.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>126</td>
+<td>test.cli.cloudify.PetClinicApplicationTest@14a8cd1</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testServletInstall()'><b>testServletInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testServletInstall(InstallAndUninstallServiceTest.java:42)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace24598445", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace24598445'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testServletInstall(InstallAndUninstallServiceTest.java:42)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testServletRecipeInstall()'><b>testServletRecipeInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testServletRecipeInstall(InstallAndUninstallServiceTest.java:52)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace12126830", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace12126830'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testServletRecipeInstall(InstallAndUninstallServiceTest.java:52)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testStatefulRecipeInstall()'><b>testStatefulRecipeInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testStatefulRecipeInstall(InstallAndUninstallServiceTest.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace7846644", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace7846644'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testStatefulRecipeInstall(InstallAndUninstallServiceTest.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.InstallAndUninstallServiceTest.testUSMInstall()'><b>testUSMInstall</b><br>Test class: test.cli.cloudify.InstallAndUninstallServiceTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testUSMInstall(InstallAndUninstallServiceTest.java:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace32685187", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace32685187'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testRestApiInstall(InstallAndUninstallServiceTest.java:73)
+	at test.cli.cloudify.InstallAndUninstallServiceTest.testUSMInstall(InstallAndUninstallServiceTest.java:47)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InstallAndUninstallServiceTest@e0b6f5</td></tr>
+<tr>
+<td title='test.cli.cloudify.InternalUSMPuServiceDownTest.tomcatServiceDownAndCorruptedTest()'><b>tomcatServiceDownAndCorruptedTest</b><br>Test class: test.cli.cloudify.InternalUSMPuServiceDownTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InternalUSMPuServiceDownTest.tomcatServiceDownAndCorruptedTest(InternalUSMPuServiceDownTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace26839239", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace26839239'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.InternalUSMPuServiceDownTest.tomcatServiceDownAndCorruptedTest(InternalUSMPuServiceDownTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>1</td>
+<td>test.cli.cloudify.InternalUSMPuServiceDownTest@c4aad3</td></tr>
+<tr>
+<td title='test.cli.cloudify.RepetitiveActualServiceFailoverTest.tomcatServiceDownAndCorruptedTest()'><b>tomcatServiceDownAndCorruptedTest</b><br>Test class: test.cli.cloudify.RepetitiveActualServiceFailoverTest</td>
+<td><div><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.RepetitiveActualServiceFailoverTest.tomcatServiceDownAndCorruptedTest(RepetitiveActualServiceFailoverTest.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div><a href='#' onClick='toggleBox("stack-trace33179775", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace33179775'><pre>java.lang.AssertionError: In RunCommand: Process did not complete successfully
+	at org.testng.Assert.fail(Assert.java:89)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:97)
+	at framework.utils.AssertUtils.AssertFail(AssertUtils.java:89)
+	at test.AbstractTest.AssertFail(AbstractTest.java:103)
+	at test.cli.cloudify.CommandTestUtils.handleCliOutput(CommandTestUtils.java:111)
+	at test.cli.cloudify.CommandTestUtils.runCommand(CommandTestUtils.java:51)
+	at test.cli.cloudify.CommandTestUtils.runCommandAndWait(CommandTestUtils.java:123)
+	at test.cli.cloudify.RepetitiveActualServiceFailoverTest.tomcatServiceDownAndCorruptedTest(RepetitiveActualServiceFailoverTest.java:66)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:80)
+	at org.testng.internal.InvokeMethodRunnable.runOne(InvokeMethodRunnable.java:46)
+	at org.testng.internal.InvokeMethodRunnable.run(InvokeMethodRunnable.java:37)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+</pre></div></td>
+<td>2</td>
+<td>test.cli.cloudify.RepetitiveActualServiceFailoverTest@6e293a</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-skipped'>
+<tr><td colspan='4' align='center'><b>SKIPPED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest.badUsmServiceDownTest()'><b>badUsmServiceDownTest</b><br>Test class: test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.BadUSMServiceDownAfterUninstallApplicationTest@ce5b1c</td></tr>
+<tr>
+<td title='test.cli.cloudify.BootstrapCloudEc2Test.bootstrapEc2CloudTest()'><b>bootstrapEc2CloudTest</b><br>Test class: test.cli.cloudify.BootstrapCloudEc2Test</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.BootstrapCloudEc2Test@a3d4cf</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.httpStartDetectionTest()'><b>httpStartDetectionTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+<tr>
+<td title='test.cli.cloudify.ConfigSlurperTest.test()'><b>test</b><br>Test class: test.cli.cloudify.ConfigSlurperTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConfigSlurperTest@1630ab9</td></tr>
+<tr>
+<td title='test.cli.cloudify.TestCLIRestExceptionHandling.testBadConnection()'><b>testBadConnection</b><br>Test class: test.cli.cloudify.TestCLIRestExceptionHandling</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.TestCLIRestExceptionHandling@1e8a1f6</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.testBadInstallApplication()'><b>testBadInstallApplication</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.FailedToInstallServiceApplicationTest.testBadInstallService()'><b>testBadInstallService</b><br>Test class: test.cli.cloudify.FailedToInstallServiceApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.FailedToInstallServiceApplicationTest@1e152c5</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.testContextCommand()'><b>testContextCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.testContextCommand()'><b>testContextCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.AdminApiControllerTest.testController()'><b>testController</b><br>Test class: test.cli.cloudify.AdminApiControllerTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.AdminApiControllerTest@1995d80</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.testExceptionCommand()'><b>testExceptionCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.testParamsCommand()'><b>testParamsCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.testParamsCommand()'><b>testParamsCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.testPrintCommand()'><b>testPrintCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.testPrintCommandOnApp()'><b>testPrintCommandOnApp</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.ConnectTest.testRestConnect()'><b>testRestConnect</b><br>Test class: test.cli.cloudify.ConnectTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.ConnectTest@17ee8b8</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest.testRunScriptCommand()'><b>testRunScriptCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@54a328</td></tr>
+<tr>
+<td title='test.cli.cloudify.CustomCommandsOnMultipleInstancesTest.testRunScriptCommand()'><b>testRunScriptCommand</b><br>Test class: test.cli.cloudify.CustomCommandsOnMultipleInstancesTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.CustomCommandsOnMultipleInstancesTest@1551f60</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.testUninstallApplication()'><b>testUninstallApplication</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.UninstallWithDelayTest.testUninstallService()'><b>testUninstallService</b><br>Test class: test.cli.cloudify.UninstallWithDelayTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.UninstallWithDelayTest@105738</td></tr>
+<tr>
+<td title='test.cli.cloudify.HttpStartDetectionTest.urlLivenessDetectorTest()'><b>urlLivenessDetectorTest</b><br>Test class: test.cli.cloudify.HttpStartDetectionTest</td>
+<td></td>
+<td>0</td>
+<td>test.cli.cloudify.HttpStartDetectionTest@1c9b9ca</td></tr>
+</table><p>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="5" passed="5">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="293478" started-at="2012-07-26T18:30:54Z" finished-at="2012-07-26T18:35:47Z">
+    <groups>
+      <group name="1">
+        <method signature="CustomCommandsOnMultipleInstancesApplicationTest.testContextCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testContextCommand" class="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest"/>
+        <method signature="CustomCommandsOnMultipleInstancesApplicationTest.testExceptionCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testExceptionCommand" class="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest"/>
+        <method signature="CustomCommandsOnMultipleInstancesApplicationTest.testParamsCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testParamsCommand" class="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest"/>
+        <method signature="CustomCommandsOnMultipleInstancesApplicationTest.testPrintCommandOnApp()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testPrintCommandOnApp" class="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest"/>
+        <method signature="CustomCommandsOnMultipleInstancesApplicationTest.testRunScriptCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testRunScriptCommand" class="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest"/>
+      </group> <!-- 1 -->
+    </groups>
+    <test name="Default test" duration-ms="293478" started-at="2012-07-26T18:30:54Z" finished-at="2012-07-26T18:35:47Z">
+      <class name="test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest">
+        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeSuite" is-config="true" duration-ms="75775" started-at="2012-07-26T18:29:38Z" finished-at="2012-07-26T18:30:54Z">
+        </test-method> <!-- beforeSuite -->
+        <test-method status="PASS" signature="beforeClass()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeClass" is-config="true" duration-ms="210961" started-at="2012-07-26T18:30:54Z" finished-at="2012-07-26T18:34:25Z">
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeTest" is-config="true" duration-ms="44" started-at="2012-07-26T18:34:25Z" finished-at="2012-07-26T18:34:25Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="testContextCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testContextCommand" duration-ms="3565" started-at="2012-07-26T18:34:25Z" finished-at="2012-07-26T18:34:28Z">
+        </test-method> <!-- testContextCommand -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterTest" is-config="true" duration-ms="326" started-at="2012-07-26T18:34:28Z" finished-at="2012-07-26T18:34:29Z">
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeTest" is-config="true" duration-ms="0" started-at="2012-07-26T18:34:29Z" finished-at="2012-07-26T18:34:29Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="testExceptionCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testExceptionCommand" duration-ms="3625" started-at="2012-07-26T18:34:29Z" finished-at="2012-07-26T18:34:32Z">
+        </test-method> <!-- testExceptionCommand -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterTest" is-config="true" duration-ms="82" started-at="2012-07-26T18:34:32Z" finished-at="2012-07-26T18:34:32Z">
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeTest" is-config="true" duration-ms="29" started-at="2012-07-26T18:34:32Z" finished-at="2012-07-26T18:34:32Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="testParamsCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testParamsCommand" duration-ms="3428" started-at="2012-07-26T18:34:32Z" finished-at="2012-07-26T18:34:36Z">
+        </test-method> <!-- testParamsCommand -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterTest" is-config="true" duration-ms="84" started-at="2012-07-26T18:34:36Z" finished-at="2012-07-26T18:34:36Z">
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="testPrintCommandOnApp()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testPrintCommandOnApp" duration-ms="3446" started-at="2012-07-26T18:34:36Z" finished-at="2012-07-26T18:34:39Z">
+        </test-method> <!-- testPrintCommandOnApp -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeTest" is-config="true" duration-ms="0" started-at="2012-07-26T18:34:36Z" finished-at="2012-07-26T18:34:36Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterTest" is-config="true" duration-ms="70" started-at="2012-07-26T18:34:39Z" finished-at="2012-07-26T18:34:39Z">
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="beforeTest" is-config="true" duration-ms="27" started-at="2012-07-26T18:34:39Z" finished-at="2012-07-26T18:34:39Z">
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="testRunScriptCommand()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="testRunScriptCommand" duration-ms="8006" started-at="2012-07-26T18:34:39Z" finished-at="2012-07-26T18:34:47Z">
+        </test-method> <!-- testRunScriptCommand -->
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterTest" is-config="true" duration-ms="83" started-at="2012-07-26T18:34:47Z" finished-at="2012-07-26T18:34:48Z">
+        </test-method> <!-- afterTest -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterClass" is-config="true" duration-ms="59676" started-at="2012-07-26T18:34:48Z" finished-at="2012-07-26T18:35:47Z">
+        </test-method> <!-- afterClass -->
+        <test-method status="PASS" signature="afterSuite()[pri:0, instance:test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest@700a4488]" name="afterSuite" is-config="true" duration-ms="17313" started-at="2012-07-26T18:35:47Z" finished-at="2012-07-26T18:36:05Z">
+        </test-method> <!-- afterSuite -->
+      </class> <!-- test.cli.cloudify.CustomCommandsOnMultipleInstancesApplicationTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

@@ -1,0 +1,226 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x038e1350, pid=11404, tid=7052
+#
+# JRE version: 6.0_29-b11
+# Java VM: Java HotSpot(TM) Client VM (20.4-b02 mixed mode, sharing windows-x86 )
+# Problematic frame:
+# C  0x038e1350
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x002b5000):  JavaThread "main" [_thread_in_native, id=7052, stack(0x009c0000,0x00a10000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0x038e1350
+
+Registers:
+EAX=0x038e1350, EBX=0x32a85950, ECX=0x002b5128, EDX=0x32a86088
+ESP=0x00a0f94c, EBP=0x00a0f984, ESI=0x32a85950, EDI=0x002b5000
+EIP=0x038e1350, EFLAGS=0x00010283
+
+Top of Stack: (sp=0x00a0f94c)
+0x00a0f94c:   00b29fc7 002b5128 00a0f98c fffffff6
+0x00a0f95c:   00000003 00000000 00a0f964 00000000
+0x00a0f96c:   00a0f994 32a86088 00000000 32a85950
+0x00a0f97c:   00000000 00a0f994 00a0f9b8 00b22f03
+0x00a0f98c:   32a85fe8 00b282e9 fffffff6 00a0f998
+0x00a0f99c:   32a8b1d3 00a0f9c8 32a8b5a8 00000000
+0x00a0f9ac:   32a8b210 00a0f994 00a0f9c8 00a0f9ec
+0x00a0f9bc:   00b22e21 00000000 00000000 ffffffff 
+
+Instructions: (pc=0x038e1350)
+0x038e1330:   
+[error occurred during error reporting (printing registers, top of stack, instructions near pc), id 0xc0000005]
+
+Register to memory mapping:
+
+EAX=0x038e1350 is an unknown value
+EBX=0x32a85950 is an oop
+{method} 
+ - klass: {other class}
+ECX=0x002b5128 is an unknown value
+EDX=0x32a86088 is an oop
+{constant pool cache} 
+ - klass: {other class}
+ESP=0x00a0f94c is pointing into the stack for thread: 0x002b5000
+EBP=0x00a0f984 is pointing into the stack for thread: 0x002b5000
+ESI=0x32a85950 is an oop
+{method} 
+ - klass: {other class}
+EDI=0x002b5000 is a thread
+
+
+Stack: [0x009c0000,0x00a10000],  sp=0x00a0f94c,  free space=318k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  0x038e1350
+j  org.fusesource.jansi.internal.WindowsSupport.setConsoleMode(I)V+3
+j  jline.WindowsTerminal.setConsoleMode(I)V+1
+j  jline.WindowsTerminal.restore()V+5
+j  jline.TerminalSupport$RestoreHook.start()V+4
+j  java.lang.ApplicationShutdownHooks.runHooks()V+54
+j  java.lang.ApplicationShutdownHooks$1.run()V+0
+j  java.lang.Shutdown.runHooks()V+23
+j  java.lang.Shutdown.sequence()V+26
+j  java.lang.Shutdown.exit(I)V+96
+j  java.lang.Runtime.exit(I)V+14
+j  java.lang.System.exit(I)V+4
+j  org.cloudifysource.shell.CloseCallback.run()V+72
+j  org.apache.karaf.shell.console.jline.Console.run()V+760
+j  org.apache.karaf.shell.console.Main.run(Lorg/apache/felix/gogo/runtime/CommandProcessorImpl;[Ljava/lang/String;Ljava/io/InputStream;Ljava/io/PrintStream;Ljava/io/PrintStream;)V+410
+j  org.apache.karaf.shell.console.Main.run([Ljava/lang/String;)V+181
+j  org.cloudifysource.shell.GigaShellMain.main([Ljava/lang/String;)V+262
+v  ~StubRoutines::call_stub
+V  [jvm.dll+0xfac3b]
+V  [jvm.dll+0x18c391]
+V  [jvm.dll+0xfacbd]
+V  [jvm.dll+0x95776]
+V  [jvm.dll+0x9d5b3]
+C  [java.exe+0x2155]
+C  [java.exe+0x85b4]
+C  [kernel32.dll+0xb729]  GetModuleFileNameA+0x1ba
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.fusesource.jansi.internal.Kernel32.GetStdHandle(I)J+0
+j  org.fusesource.jansi.internal.WindowsSupport.setConsoleMode(I)V+3
+j  jline.WindowsTerminal.setConsoleMode(I)V+1
+j  jline.WindowsTerminal.restore()V+5
+j  jline.TerminalSupport$RestoreHook.start()V+4
+j  java.lang.ApplicationShutdownHooks.runHooks()V+54
+j  java.lang.ApplicationShutdownHooks$1.run()V+0
+j  java.lang.Shutdown.runHooks()V+23
+j  java.lang.Shutdown.sequence()V+26
+j  java.lang.Shutdown.exit(I)V+96
+j  java.lang.Runtime.exit(I)V+14
+j  java.lang.System.exit(I)V+4
+j  org.cloudifysource.shell.CloseCallback.run()V+72
+j  org.apache.karaf.shell.console.jline.Console.run()V+760
+j  org.apache.karaf.shell.console.Main.run(Lorg/apache/felix/gogo/runtime/CommandProcessorImpl;[Ljava/lang/String;Ljava/io/InputStream;Ljava/io/PrintStream;Ljava/io/PrintStream;)V+410
+j  org.apache.karaf.shell.console.Main.run([Ljava/lang/String;)V+181
+j  org.cloudifysource.shell.GigaShellMain.main([Ljava/lang/String;)V+262
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00a90800 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=6868, stack(0x02fb0000,0x03000000)]
+  0x00a8d000 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=6648, stack(0x02f60000,0x02fb0000)]
+  0x00a8b800 JavaThread "Attach Listener" daemon [_thread_blocked, id=2380, stack(0x02f10000,0x02f60000)]
+  0x00a8a400 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=12280, stack(0x02ec0000,0x02f10000)]
+  0x00a84000 JavaThread "Finalizer" daemon [_thread_blocked, id=9920, stack(0x02e70000,0x02ec0000)]
+  0x00a7f400 JavaThread "Reference Handler" daemon [_thread_blocked, id=4404, stack(0x02e20000,0x02e70000)]
+=>0x002b5000 JavaThread "main" [_thread_in_native, id=7052, stack(0x009c0000,0x00a10000)]
+
+Other Threads:
+  0x00a43400 VMThread [stack: 0x02dd0000,0x02e20000] [id=10412]
+  0x00aa2800 WatcherThread [stack: 0x03000000,0x03050000] [id=4428]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 4928K, used 1168K [0x13590000, 0x13ae0000, 0x1dc30000)
+  eden space 4416K,  14% used [0x13590000, 0x13634280, 0x139e0000)
+  from space 512K, 100% used [0x13a60000, 0x13ae0000, 0x13ae0000)
+  to   space 512K,   0% used [0x139e0000, 0x139e0000, 0x13a60000)
+ tenured generation   total 10944K, used 3877K [0x1dc30000, 0x1e6e0000, 0x32990000)
+   the space 10944K,  35% used [0x1dc30000, 0x1dff94f8, 0x1dff9600, 0x1e6e0000)
+ compacting perm gen  total 12288K, used 7225K [0x32990000, 0x33590000, 0x36990000)
+   the space 12288K,  58% used [0x32990000, 0x3309e6c8, 0x3309e800, 0x33590000)
+    ro space 10240K,  54% used [0x36990000, 0x36f0daf0, 0x36f0dc00, 0x37390000)
+    rw space 12288K,  55% used [0x37390000, 0x37a31ce8, 0x37a31e00, 0x37f90000)
+
+Code Cache  [0x00b20000, 0x00cf8000, 0x02b20000)
+ total_blobs=781 nmethods=392 adapters=325 free_code_cache=31639360 largest_free_block=128
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	D:\Java\jdk1.6.0_29\bin\java.exe
+0x7c900000 - 0x7c9b2000 	C:\WINDOWS\system32\ntdll.dll
+0x7c800000 - 0x7c8f6000 	C:\WINDOWS\system32\kernel32.dll
+0x77dd0000 - 0x77e6b000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x77e70000 - 0x77f03000 	C:\WINDOWS\system32\RPCRT4.dll
+0x77fe0000 - 0x77ff1000 	C:\WINDOWS\system32\Secur32.dll
+0x7c340000 - 0x7c396000 	D:\Java\jdk1.6.0_29\jre\bin\msvcr71.dll
+0x6d8a0000 - 0x6db4f000 	D:\Java\jdk1.6.0_29\jre\bin\client\jvm.dll
+0x7e410000 - 0x7e4a1000 	C:\WINDOWS\system32\USER32.dll
+0x77f10000 - 0x77f59000 	C:\WINDOWS\system32\GDI32.dll
+0x76b40000 - 0x76b6d000 	C:\WINDOWS\system32\WINMM.dll
+0x76390000 - 0x763ad000 	C:\WINDOWS\system32\IMM32.DLL
+0x629c0000 - 0x629c9000 	C:\WINDOWS\system32\LPK.DLL
+0x74d90000 - 0x74dfb000 	C:\WINDOWS\system32\USP10.dll
+0x6d850000 - 0x6d85c000 	D:\Java\jdk1.6.0_29\jre\bin\verify.dll
+0x6d3d0000 - 0x6d3ef000 	D:\Java\jdk1.6.0_29\jre\bin\java.dll
+0x6d890000 - 0x6d89f000 	D:\Java\jdk1.6.0_29\jre\bin\zip.dll
+0x6d6b0000 - 0x6d6c3000 	D:\Java\jdk1.6.0_29\jre\bin\net.dll
+0x71ab0000 - 0x71ac7000 	C:\WINDOWS\system32\WS2_32.dll
+0x77c10000 - 0x77c68000 	C:\WINDOWS\system32\msvcrt.dll
+0x71aa0000 - 0x71aa8000 	C:\WINDOWS\system32\WS2HELP.dll
+0x71a50000 - 0x71a8f000 	C:\WINDOWS\System32\mswsock.dll
+0x76f20000 - 0x76f47000 	C:\WINDOWS\system32\DNSAPI.dll
+0x76d60000 - 0x76d79000 	C:\WINDOWS\system32\iphlpapi.dll
+0x76d40000 - 0x76d58000 	C:\WINDOWS\system32\MPRAPI.dll
+0x77cc0000 - 0x77cf2000 	C:\WINDOWS\system32\ACTIVEDS.dll
+0x76e10000 - 0x76e35000 	C:\WINDOWS\system32\adsldpc.dll
+0x5b860000 - 0x5b8b5000 	C:\WINDOWS\system32\NETAPI32.dll
+0x76f60000 - 0x76f8c000 	C:\WINDOWS\system32\WLDAP32.dll
+0x76b20000 - 0x76b31000 	C:\WINDOWS\system32\ATL.DLL
+0x774e0000 - 0x7761e000 	C:\WINDOWS\system32\ole32.dll
+0x77120000 - 0x771ab000 	C:\WINDOWS\system32\OLEAUT32.dll
+0x76e80000 - 0x76e8e000 	C:\WINDOWS\system32\rtutils.dll
+0x71bf0000 - 0x71c03000 	C:\WINDOWS\system32\SAMLIB.dll
+0x77920000 - 0x77a13000 	C:\WINDOWS\system32\SETUPAPI.dll
+0x76fb0000 - 0x76fb8000 	C:\WINDOWS\System32\winrnr.dll
+0x76fc0000 - 0x76fc6000 	C:\WINDOWS\system32\rasadhlp.dll
+0x6d600000 - 0x6d609000 	D:\Java\jdk1.6.0_29\jre\bin\management.dll
+0x10000000 - 0x1004b000 	D:\GigaSpaces\gigaspaces-cloudify-2.0.0-ga\lib\platform\sigar\sigar-x86-winnt.dll
+0x74000000 - 0x74056000 	C:\WINDOWS\system32\pdh.dll
+0x763b0000 - 0x763f9000 	C:\WINDOWS\system32\comdlg32.dll
+0x773d0000 - 0x774d3000 	C:\WINDOWS\WinSxS\x86_Microsoft.Windows.Common-Controls_6595b64144ccf1df_6.0.2600.6028_x-ww_61e65202\COMCTL32.dll
+0x77f60000 - 0x77fd6000 	C:\WINDOWS\system32\SHLWAPI.dll
+0x7c9c0000 - 0x7d1d7000 	C:\WINDOWS\system32\SHELL32.dll
+0x77a80000 - 0x77b15000 	C:\WINDOWS\system32\CRYPT32.dll
+0x77b20000 - 0x77b32000 	C:\WINDOWS\system32\MSASN1.dll
+0x74320000 - 0x7435d000 	C:\WINDOWS\system32\ODBC32.dll
+0x711a0000 - 0x711a6000 	C:\WINDOWS\system32\odbcbcp.dll
+0x77c00000 - 0x77c08000 	C:\WINDOWS\system32\VERSION.dll
+0x03460000 - 0x03477000 	C:\WINDOWS\system32\odbcint.dll
+0x68000000 - 0x68036000 	C:\WINDOWS\system32\rsaenh.dll
+0x769c0000 - 0x76a74000 	C:\WINDOWS\system32\USERENV.dll
+0x6d6d0000 - 0x6d6d9000 	D:\Java\jdk1.6.0_29\jre\bin\nio.dll
+0x77b40000 - 0x77b62000 	C:\WINDOWS\system32\Apphelp.dll
+0x76bf0000 - 0x76bfb000 	C:\WINDOWS\system32\PSAPI.DLL
+
+VM Arguments:
+jvm_args: -Djava.util.logging.config.file=D:\GigaSpaces\gigaspaces-cloudify-2.0.0-ga\tools\cli\..\../config/gs_logging.properties -Dsun.rmi.dgc.client.gcInterval=36000000 -Dsun.rmi.dgc.server.gcInterval=36000000 -Djava.rmi.server.hostname=NOAK-PC -Djava.rmi.server.RMIClassLoaderSpi=default -Djava.rmi.server.logCalls=false -Dcom.gs.jini_lus.locators= -Dcom.gs.jini_lus.groups=Noak_BillBuddy -Xmx500m -Dcom.gigaspaces.logger.RollingFileHandler.debug-level=WARNING 
+java_command: org.cloudifysource.shell.GigaShellMain test-recipe D:/GigaSpaces/gigaspaces-cloudify-2.0.0-ga/lib/required/../../recipes/hsqldb 180 hsqldb-service.groovy
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=D:\Java\jdk1.6.0_29
+PATH=C:/Program Files/Java/jre6/bin/client;C:/Program Files/Java/jre6/bin;C:/Program Files/Java/jre6/lib/i386;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;D:\Java\jdk1.6.0_29\bin;D:\apache-ant-1.8.1\bin;D:\eclipse JEE\eclipse;C:\Program Files\TortoiseSVN\bin;D:\Maven\apache-maven-3.0.2\bin;C:\Program Files\WinSCP\;D:\eclipse JEE\eclipse;
+USERNAME=noak
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 10, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows XP Build 2600 Service Pack 3
+
+CPU:total 2 (2 cores per cpu, 1 threads per core) family 6 model 15 stepping 10, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 3143572k(819612k free), swap 7692328k(3566896k free)
+
+vm_info: Java HotSpot(TM) Client VM (20.4-b02) for windows-x86 JRE (1.6.0_29-b11), built on Oct  3 2011 01:01:08 by "java_re" with MS VC++ 7.1 (VS2003)
+
+time: Sun Feb 05 11:52:32 2012
+elapsed time: 202 seconds
+

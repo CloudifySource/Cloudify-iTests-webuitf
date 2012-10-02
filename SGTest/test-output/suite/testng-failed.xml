@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [suite]">
+  <test name="Clouds Test(failed)" preserve-order="true">
+    <classes>
+      <class name="test.cli.cloudify.cloud.MyTestA">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="afterMethod"/>
+          <include name="afterClass"/>
+        </methods>
+      </class> <!-- test.cli.cloudify.cloud.MyTestA -->
+      <class name="test.cli.cloudify.cloud.MyTestB">
+        <methods>
+          <include name="testMethod"/>
+        </methods>
+      </class> <!-- test.cli.cloudify.cloud.MyTestB -->
+    </classes>
+  </test> <!-- Clouds Test(failed) -->
+</suite> <!-- Failed suite [suite] -->
