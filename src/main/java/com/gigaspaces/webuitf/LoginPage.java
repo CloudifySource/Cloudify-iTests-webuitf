@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.SharedContextConstants;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -79,7 +80,7 @@ public class LoginPage {
 	public MainNavigation login() throws InterruptedException {
 		selenium.click(WebConstants.Xpath.loginButton);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("return this.GigaSpaces.Util.Flags.isUnderTest=true");
+		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
 		return new MainNavigation(selenium, driver);
 	}
 	

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.SharedContextConstants;
 
 public class QueryNavigator {
 	
@@ -46,7 +47,7 @@ public class QueryNavigator {
 	 */
 	public void runQuery(String sqlQuery) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("return this.GigaSpaces.Util.Objects.codeMirror.setValue(\"" + sqlQuery + "\")");
+		js.executeScript("return this." + SharedContextConstants.NS_CODE_MIRROR_QUERIES + ".setValue(\"" + sqlQuery + "\")");
 		driver.findElement(By.id(WebConstants.ID.queryNavigatorRun)).click();
 	}
 	
@@ -66,7 +67,7 @@ public class QueryNavigator {
 	public String getDisplayedQuery() {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String text = (String)js.executeScript("return this.GigaSpaces.Util.Objects.codeMirror.getValue()");
+		String text = (String)js.executeScript("return this." + SharedContextConstants.NS_CODE_MIRROR_QUERIES + ".getValue()");
 		return text;
 	}
 	

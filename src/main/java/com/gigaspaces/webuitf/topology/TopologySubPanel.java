@@ -12,6 +12,7 @@ import com.gigaspaces.webuitf.topology.healthpanel.HealthPanel;
 import com.gigaspaces.webuitf.topology.logicalpanel.LogicalPanel;
 import com.gigaspaces.webuitf.topology.logspanel.LogsPanel;
 import com.gigaspaces.webuitf.topology.physicalpanel.PhysicalPanel;
+import com.gigaspaces.webuitf.topology.recipes.RecipesPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
@@ -87,5 +88,15 @@ public class TopologySubPanel {
 			e.printStackTrace();
 		}
 		return new TopologyEventsGrid(driver);
+	}
+	
+	public RecipesPanel switchToRecipes() {
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.topologyRecipesToggle));
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return new RecipesPanel(selenium, driver);
 	}
 }

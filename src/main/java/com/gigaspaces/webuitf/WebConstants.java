@@ -71,6 +71,12 @@ public final class WebConstants {
 		public static final String moduleNoSqlDb         = "modules-status-grid_null_noSqlDb";
 		
 		public static final String logsPanel = "gs-tab-item-logs";
+		
+		// recipes panel
+		public static final String recipesPanel = "gs-tab-item-topology-recipes";
+		public static final String recipesSelectionTree = "gs-recipes-selection-tree";
+		public static final String recipesSelectionTreeFolderNodePrefix = WebConstants.ID.recipesSelectionTree + "_folder_";
+		public static final String recipesSelectionTreeFileNodePrefix = WebConstants.ID.recipesSelectionTree + "_file_";
 
 		public static final String habytesPerSecond = "high-avail-grid_null_sendBytesPerSec";
 		public static final String hapacketsPerSecond = "high-avail-grid_null_sendPacketsPerSec";
@@ -136,6 +142,7 @@ public final class WebConstants {
 		public static final String topologyEventsGrid = "topology-events-grid";
 		public static final String topologyEventsPanelToggle = "gs-tab-item-topology-events-toggler-button";
 		public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
+		public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
 		
 		public static final String metricPopupHeader = "gs-balance-dialog-panel-north";
 		public static final String metricPopupLow = "gs-balance-dialog-panel-center";
