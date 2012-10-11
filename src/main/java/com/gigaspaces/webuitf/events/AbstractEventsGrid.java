@@ -91,6 +91,11 @@ public abstract class AbstractEventsGrid {
 		}
 	}
 	
+	public WebUIAdminEvent getChronologicalEvent(int index){
+		int totalEvents = getVisibleEvents().size();
+		return (getEvent(totalEvents - index + 1));
+	}
+	
 	public abstract void switchToLastMinuteEvents();
 	
 	public abstract void switchToLastHourEvents();
