@@ -16,8 +16,6 @@ public class HealthPanel extends TopologySubPanel {
 
 	public HealthPanel(Selenium selenium, WebDriver driver) {
 		super(selenium, driver);
-		this.driver = driver;
-		this.selenium = selenium;
 	}
 	
 	public Metric getMetric(int index) {
@@ -61,4 +59,9 @@ public class HealthPanel extends TopologySubPanel {
 		return metric;
 	}
 	
+/*	public boolean isMasked() {
+		WebElement el = driver.findElement(By.id(WebConstants.ID.healthPanel));
+		return helper.isElementMasked(el);
+	}
+*/	
 }
