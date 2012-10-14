@@ -48,7 +48,7 @@ public class RecipesSelectionPanel {
 			if (id != null
 					&& id.startsWith(idPrefix)
 					&& id.contains(puName)
-					&& (fileName == null || id.contains(fileName))) { // TODO test
+					&& (fileName == null || id.contains(fileName))) {
 				returnedId = id;
 				break;
 			}
