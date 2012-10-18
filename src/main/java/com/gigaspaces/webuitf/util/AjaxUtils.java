@@ -74,10 +74,13 @@ public class AjaxUtils {
 	/**
 	 * Waits for an element to be available in DOM before retrieving its inner text.
 	 * 
-	 * @param timeout The timeout.
-	 * @param timeUnit The time unit.
-	 * @param bys Element lookup.
-	 * @return The extracted text.
+	 * @param timeout 	The timeout.
+	 * @param timeUnit 	The time unit.
+	 * @param bys 		Element lookup.
+	 * @return 			The extracted text. If the element was found and text was extracted, the returned
+	 * 					string value will contain the extracted text, otherwise (element not exist, or 
+	 * 					a stale reference returned by the driver) this method will fail silently 
+	 * 					and simply return an empty string.
 	 */
 	public String waitForTextToBeExctractable(int timeout, TimeUnit timeUnit, final By ... bys) {
 
@@ -96,12 +99,10 @@ public class AjaxUtils {
 					sb.append(element.getText());
 					return true;
 				} catch (NoSuchElementException ex) {
-					ex.printStackTrace();
-					return false;
+					return true;
 				}
 				catch (StaleElementReferenceException ex) {
-					ex.printStackTrace();
-					return false;
+					return true;
 				}
 			}
 		});
