@@ -96,9 +96,11 @@ public class AjaxUtils {
 					sb.append(element.getText());
 					return true;
 				} catch (NoSuchElementException ex) {
+					ex.printStackTrace();
 					return false;
 				}
 				catch (StaleElementReferenceException ex) {
+					ex.printStackTrace();
 					return false;
 				}
 			}
