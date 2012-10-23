@@ -350,6 +350,8 @@ public final class WebConstants {
 		
 		public static final String pathToEventText = "div/span";
 		
+		public static final String relativePathToSpaceModeImage = "img";
+		
 		public static final String getPathToMetricHoverMenuOption(String menu) {
 			return "//a[text()='" + menu.replace("_", " ") + "']";
 		}
@@ -603,6 +605,9 @@ public final class WebConstants {
 
 	    public static final String buttonGenerate = "gs-button-generate";
 	    public static final String buttonClose = "gs-button-close";
+	    	    
+	    public static final String dataGridSpaceMode = "x-grid3-col-space_mode_icon";
+	    public static final String topologySpaceMode = "x-grid3-col-icon";
 		
 		public static final String getHostClassName(String name) {
 			return "gs-physical-grid-row-" + name;

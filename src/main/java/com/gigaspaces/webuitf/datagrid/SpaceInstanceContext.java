@@ -7,7 +7,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 
+import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.LogUtils;
 
@@ -92,6 +94,20 @@ public class SpaceInstanceContext {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean isPrimary(){
+		
+		WebElement spaceModeElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id(id) , 
+				By.className(WebConstants.ClassNames.dataGridSpaceMode), By.xpath(WebConstants.Xpath.relativePathToSpaceModeImage));
+		
+		String spaceMode = helper.retrieveAttribute(spaceModeElement, "qtip");
+		
+		if(spaceMode.equalsIgnoreCase("primary"))
+			return true;
+		
+		return false;
+		
 	}
 
 }

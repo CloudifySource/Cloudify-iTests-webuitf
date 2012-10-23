@@ -111,6 +111,19 @@ public class WebUIProcessingUnitInstance {
 		
 	}
 	
+	public boolean isPrimary(){
+		
+		String id = WebConstants.ID.getPuInstanceId(name);
+		WebElement spaceModeElement = helper.waitForElement(TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime, By.id(id) , 
+				By.className(WebConstants.ClassNames.topologySpaceMode), By.xpath(WebConstants.Xpath.relativePathToSpaceModeImage));
+		
+		String spaceMode = helper.retrieveAttribute(spaceModeElement, "qtip");
+		
+		if(spaceMode.equalsIgnoreCase("primary"))
+			return true;
+		return false;		
+	}
+	
 	public boolean showComparisonCharts() {
 
 		double seconds = 0;
