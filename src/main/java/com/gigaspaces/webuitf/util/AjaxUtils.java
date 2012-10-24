@@ -15,8 +15,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Predicate;
 import com.thoughtworks.selenium.Selenium;
@@ -161,9 +159,9 @@ public class AjaxUtils {
 		}
 	}  
 
-	public WebElement waitForElement(By by, int timeoutInSeconds) {
-		Wait<WebDriver> wait = new WebDriverWait(driver, timeoutInSeconds);
-		return wait.until(visibilityOfElementLocated(by));    
+	public WebElement waitForElement(final By by, int timeoutInSeconds) {
+		By[] bys = {by};
+		return waitForElement(TimeUnit.SECONDS, timeoutInSeconds, bys);
 	}
 
 	public WebElement waitForElement(TimeUnit timeUnit, int timeout,final By...bys) {
