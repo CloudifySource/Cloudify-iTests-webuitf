@@ -26,7 +26,6 @@ public class SpaceContext {
 	private String puName;
 	private String id;
 
-	@SuppressWarnings("unused")
 	private WebDriver driver;
 
 	private AjaxUtils helper;
