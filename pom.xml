@@ -18,8 +18,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>GigaSpaces Repository</id>
-			<name>GigaSpaces Repository-snapshot</name>
+			<id>GigaSpaces-Repository</id>
+			<name>GigaSpaces-Repository-snapshot</name>
 			<url>http://mvn-srv:8081/artifactory/libs-snapshot-local</url>
 			<uniqueVersion>true</uniqueVersion>
 		</repository>
@@ -41,9 +41,8 @@
 	</dependencies>
 
 	<build>
-
+		<finalName>webuitf</finalName>
 		<plugins>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -63,10 +62,10 @@
 					</execution>
 				</executions>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -76,11 +75,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
 		</plugins>
-
-		<finalName>webuitf</finalName>
 	</build>
 
 </project>
