@@ -6,16 +6,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.healthpanel.MetricPopup;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.LogUtils;
-import com.thoughtworks.selenium.Selenium;
 
 public class Metric {
 	
@@ -74,21 +73,22 @@ public class Metric {
 		final String name = metricType.getName();
 		final String type = metricType.getType();
 		final String dis = metricType.getDistrib();
-		Selenium selenium = new WebDriverBackedSelenium(driver, "http://localhost:8099");
 		
 		LogUtils.log("Clicking on metric button");
 		WebElement element = metric.findElement(By.tagName("button"));
 		element.click();
 		
-		helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(type)), timeout);
-		selenium.mouseMove(WebConstants.Xpath.getPathToMetricHoverMenuOption(type));
-		if (dis != null) {
-			helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(dis)), timeout);
-			selenium.mouseMove(WebConstants.Xpath.getPathToMetricHoverMenuOption(dis));
-		}
-		helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(name)), timeout);
-		selenium.click(WebConstants.Xpath.getPathToMetricHoverMenuOption(name));
+		Actions builder = new Actions(driver);
+		WebElement webElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(type)), timeout);
+		builder.moveToElement(webElement).build().perform();
 		
+		if (dis != null) {
+			webElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(dis)), timeout);
+			builder.moveToElement(webElement).build().perform();
+		}
+		
+		webElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(name)), timeout);
+		builder.moveToElement(webElement).build().perform();		
 	}
 	
 	public Double getBalance() {
