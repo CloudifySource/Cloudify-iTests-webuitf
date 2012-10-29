@@ -27,7 +27,7 @@ public class ProcessingUnitDeployWindow extends AbstractDeployWindow {
 	public void sumbitDeploySpecs() {
 		selenium.click(WebConstants.Xpath.deoployFromListRadioButton);
 		selenium.click(WebConstants.Xpath.existingPuCombo);
-		selenium.mouseDown(WebConstants.Xpath.getPathToComboSelection(puName));
+		selenium.click(WebConstants.Xpath.getPathToComboSelection(puName));
 		super.sumbitDeploySpecs();
 	}
 	
