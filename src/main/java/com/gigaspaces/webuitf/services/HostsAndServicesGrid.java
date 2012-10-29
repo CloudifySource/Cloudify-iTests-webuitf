@@ -197,7 +197,7 @@ public class HostsAndServicesGrid {
 			try {
 				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToRowNumber(i))).getText();
 				if (rowText.contains(component)) {
-					LogUtils.log("Found " + component + "[Count=" + count++ + "]");
+					LogUtils.log("Found " + component + "[Count=" + ++count + "]");
 				}
 				i++;
 			}
