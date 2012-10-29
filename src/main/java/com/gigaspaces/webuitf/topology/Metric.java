@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.topology;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -87,8 +88,9 @@ public class Metric {
 			builder.moveToElement(webElement).build().perform();
 		}
 		
-		webElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(name)), timeout);
-		builder.moveToElement(webElement).build().perform();		
+		By by = By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(name));
+		By[] bys = {by};
+		helper.clickWhenPossible(timeout, TimeUnit.SECONDS, bys);		
 	}
 	
 	public Double getBalance() {
