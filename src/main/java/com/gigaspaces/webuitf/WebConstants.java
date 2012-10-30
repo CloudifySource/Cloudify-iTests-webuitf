@@ -348,7 +348,7 @@ public final class WebConstants {
 		public static final String pathToQueryNavigatorNextButton = "//table[@id='" + ID.queryNavigatorNext + "']/tbody/tr[2]/td[2]";
 		public static final String pathToQueryNavigatorShowPrevButton = "//table[@id='" + ID.queryNavigatorPrev + "']/tbody/tr[2]/td[2]/em";
 		
-		public static final String pathToEventText = "div/span";
+		public static final String pathToEventText = "div/span/span";
 		
 		public static final String relativePathToSpaceModeImage = "img";
 		
