@@ -15,7 +15,7 @@ import org.openspaces.admin.alert.AlertStatus;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import com.thoughtworks.selenium.Selenium;
 
@@ -165,7 +165,7 @@ public class AlertsPanel {
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
 				if (webUIAlert.getStatus().equals(status)) {
-					LogUtils.log("found alert : " + webUIAlert);
+					WebuiLogUtils.log("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
 					selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 				}
@@ -200,7 +200,7 @@ public class AlertsPanel {
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
 				if (webUIAlert.getName().equals(type)) {
-					LogUtils.log("found alert : " + webUIAlert);
+					WebuiLogUtils.log("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
 					selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 				}
@@ -235,7 +235,7 @@ public class AlertsPanel {
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
 				if (!webUIAlert.getName().equals(type)) {
-					LogUtils.log("found alert : " + webUIAlert);
+					WebuiLogUtils.log("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
 					selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 				}
@@ -271,7 +271,7 @@ public class AlertsPanel {
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
 				if (!webUIAlert.getName().equals(type)) {
-					LogUtils.log("found alert : " + webUIAlert);
+					WebuiLogUtils.log("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
 				}
 				Thread.sleep(1000);
@@ -300,7 +300,7 @@ public class AlertsPanel {
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
 				if (webUIAlert.getName().equals(type)) {
-					LogUtils.log("found alert : " + webUIAlert);
+					WebuiLogUtils.log("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
 				}
 				Thread.sleep(1000);

@@ -13,7 +13,7 @@ import org.openspaces.admin.gsc.GridServiceContainer;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -197,16 +197,16 @@ public class HostsAndServicesGrid {
 			try {
 				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToRowNumber(i))).getText();
 				if (rowText.contains(component)) {
-					LogUtils.log("Found " + component + "[Count=" + ++count + "]");
+					WebuiLogUtils.log("Found " + component + "[Count=" + ++count + "]");
 				}
 				i++;
 			}
 			catch (NoSuchElementException e) {
-				LogUtils.log("Caught NoSuchElementException while locating element " + e.getMessage());
+				WebuiLogUtils.log("Caught NoSuchElementException while locating element " + e.getMessage());
 				exception = e;
 			}
 			catch (WebDriverException e) {
-				LogUtils.log("caught an exception while locating element ");
+				WebuiLogUtils.log("caught an exception while locating element ");
 			}
 		}
 		return count;

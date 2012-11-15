@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.events.WebUIAdminEvent;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 
 public class EventsPanel {
@@ -127,10 +127,10 @@ public class EventsPanel {
 		else {
 			events = visibleEvents;
 		}
-		LogUtils.log("Here are all the visible events sorted by time");
+		WebuiLogUtils.log("Here are all the visible events sorted by time");
 		
 		for (WebUIAdminEvent event : events) {
-			LogUtils.log(event.toString());
+			WebuiLogUtils.log(event.toString());
 		}
 	}
 }

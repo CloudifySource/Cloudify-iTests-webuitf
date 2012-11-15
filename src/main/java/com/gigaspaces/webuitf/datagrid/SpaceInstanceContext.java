@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class SpaceInstanceContext {
 	
@@ -59,15 +59,15 @@ public class SpaceInstanceContext {
 		double seconds = 0;
 		while (seconds < timeRangeInSeconds) {	
 			try {
-				LogUtils.log("attempting to click the element");
+				WebuiLogUtils.log("attempting to click the element");
 				numberOfClickAttempts++;
 				driver.findElement(By.id(id)).findElement(By.className(MEMORY_CLASS)).click();
-				LogUtils.log("click was succesfull");
+				WebuiLogUtils.log("click was succesfull");
 				numberOfSuccesfullClicks++;
 			}
 			catch (NoSuchElementException e) {
 				try {
-					LogUtils.log("caugh exception due to row update");
+					WebuiLogUtils.log("caugh exception due to row update");
 					Thread.sleep(pollingIntervalInMillis);
 				} catch (InterruptedException e1) {
 				}
@@ -81,9 +81,9 @@ public class SpaceInstanceContext {
 			seconds += pollingIntervalInMillis / 1000.0;
 			
 		}
-		LogUtils.log("Number of click attempts : " + numberOfClickAttempts);
-		LogUtils.log("Number of succesfull clicks : " + numberOfSuccesfullClicks);
-		LogUtils.log("Number of failed clicks due to row updates : " + numberOfUpdates);
+		WebuiLogUtils.log("Number of click attempts : " + numberOfClickAttempts);
+		WebuiLogUtils.log("Number of succesfull clicks : " + numberOfSuccesfullClicks);
+		WebuiLogUtils.log("Number of failed clicks due to row updates : " + numberOfUpdates);
 		return numberOfUpdates;
 		
 	}

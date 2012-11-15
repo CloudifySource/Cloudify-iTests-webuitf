@@ -13,7 +13,7 @@ import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.dashboard.ServicesGrid.Icon;
 import com.gigaspaces.webuitf.topology.physicalpanel.PhysicalPanel.OS;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 /**
  * represents a single row in the physical panel hosts table
@@ -63,7 +63,7 @@ public class HostData {
 				return null;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -95,7 +95,7 @@ public class HostData {
 				else return 0;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -126,7 +126,7 @@ public class HostData {
 				else return OS.LINUX;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -174,7 +174,7 @@ public class HostData {
 				else return 0;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -201,7 +201,7 @@ public class HostData {
 				else return 0;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -234,7 +234,7 @@ public class HostData {
 			}
 
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {

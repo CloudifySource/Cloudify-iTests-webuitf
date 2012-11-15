@@ -15,7 +15,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.healthpanel.MetricPopup;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class Metric {
 	
@@ -75,7 +75,7 @@ public class Metric {
 		final String type = metricType.getType();
 		final String dis = metricType.getDistrib();
 		
-		LogUtils.log("Clicking on metric button");
+		WebuiLogUtils.log("Clicking on metric button");
 		WebElement element = metric.findElement(By.tagName("button"));
 		element.click();
 		
@@ -117,7 +117,7 @@ public class Metric {
 				return count;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e1) {
@@ -136,12 +136,12 @@ public class Metric {
 		String title = null;
 		String averageValue = null;
 		try {
-			LogUtils.log("waiting for popup to appear");
+			WebuiLogUtils.log("waiting for popup to appear");
 			title = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupTitle), 10).getText();
 			averageValue = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupAverageValue), 3).getText();
 		}
 		catch (WebDriverException e) {
-			LogUtils.log("timeout waiting for pop to appear");
+			WebuiLogUtils.log("timeout waiting for pop to appear");
 			return null;
 		}
 		String temp = averageValue.split(" ")[2];

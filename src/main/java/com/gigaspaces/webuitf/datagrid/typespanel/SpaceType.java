@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class SpaceType {
 
@@ -116,7 +116,7 @@ public class SpaceType {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -141,7 +141,7 @@ public class SpaceType {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				LogUtils.log("Failed to discover element due to statistics update, retyring...");
+				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {

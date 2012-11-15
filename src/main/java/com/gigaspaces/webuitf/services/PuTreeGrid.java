@@ -11,7 +11,7 @@ import org.openspaces.admin.pu.DeploymentStatus;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.LogUtils;
+import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.thoughtworks.selenium.Selenium;
 import com.thoughtworks.selenium.SeleniumException;
 
@@ -97,7 +97,7 @@ public class PuTreeGrid {
 					else return DeploymentStatus.SCHEDULED;
 				}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -115,7 +115,7 @@ public class PuTreeGrid {
 					return selenium.getText(xpath + WebConstants.Xpath.pathToPuType);
 				}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -134,7 +134,7 @@ public class PuTreeGrid {
 					return Integer.parseInt(selenium.getText(xpath + WebConstants.Xpath.pathToPuActualInstances));
 				}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -152,7 +152,7 @@ public class PuTreeGrid {
 					return Integer.parseInt(selenium.getText(xpath + WebConstants.Xpath.pathToPuPlannedInstances));
 				}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -170,7 +170,7 @@ public class PuTreeGrid {
 				try {
 					return selenium.getText(xpath + WebConstants.Xpath.pathToPuName);				}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -192,14 +192,14 @@ public class PuTreeGrid {
 			int seconds = 0;
 			while (seconds < AjaxUtils.ajaxWaitingTime) {
 				try {
-					LogUtils.log("Trying to click pu options button");
+					WebuiLogUtils.log("Trying to click pu options button");
 					driver.findElement(By.xpath(this.xpath + WebConstants.Xpath.pathToPuOptionsButton)).click();
-					LogUtils.log("clicked pu options button");
+					WebuiLogUtils.log("clicked pu options button");
 					break;
 				}
 				catch (StaleElementReferenceException e) {
 					if (selenium.isElementPresent("id=" + WebConstants.ID.undeployPuButton)) break;
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -240,7 +240,7 @@ public class PuTreeGrid {
 					break;
 					}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
@@ -304,7 +304,7 @@ public class PuTreeGrid {
 					break;
 					}
 				catch (StaleElementReferenceException e) {
-					LogUtils.log("Failed to discover element due to statistics update, retyring...");
+					WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e1) {
