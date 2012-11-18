@@ -300,10 +300,12 @@ public class ServicesGrid {
 			
 			public int getCount() {
 				String xpath = WebConstants.Xpath.pathToWebModule + WebConstants.Xpath.pathToNumberInModulesGrid;
-				if (selenium.isElementPresent(xpath)) {
-					return Integer.parseInt(selenium.getText(xpath));
-				}
-				return 0;
+				String webModuleNum = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(xpath));	
+				
+				if((webModuleNum == null) || (webModuleNum.length() == 0)){
+					return 0;
+				}				
+				return Integer.parseInt(webModuleNum);
 			}
 			
 			
