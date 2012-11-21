@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gsVersion>9.5.0-SNAPSHOT</gsVersion>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>org.openspaces</id>
@@ -20,14 +20,12 @@
 		</repository>
 	</repositories>
 
-	<distributionManagement>
-		<repository>
-			<id>GigaSpaces-Repository</id>
-			<name>GigaSpaces-Repository-snapshot</name>
-			<url>http://mvn-srv:8081/artifactory/libs-snapshot-local</url>
-			<uniqueVersion>true</uniqueVersion>
-		</repository>
-	</distributionManagement>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>org.openspaces</id>
+			<url>http://maven-repository.openspaces.org</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -77,6 +75,16 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.cloudifysource</groupId>
+				<artifactId>s3client-maven-plugin</artifactId>
+				<version>1.2</version>
+				<configuration>
+					<user>${user}</user>
+					<key>${key}</key>
+					<container>${container}</container>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
