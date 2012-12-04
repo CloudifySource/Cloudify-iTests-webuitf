@@ -1,5 +1,8 @@
 package com.gigaspaces.webuitf;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
@@ -7,18 +10,23 @@ import com.gigaspaces.webuitf.dashboard.DashboardTab;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
 import com.gigaspaces.webuitf.services.ServicesTab;
 import com.gigaspaces.webuitf.topology.TopologyTab;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
 public class MainNavigation {
 	
 	protected Selenium selenium;
 	protected WebDriver driver;
+	protected AjaxUtils helper;
+	
+	private static int TIMEOUT_IN_SECONDS = 40;
 	
 	public MainNavigation() {}
 	
 	public MainNavigation(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver, selenium);
 	}
 	
 	public LoginPage logout() throws InterruptedException {
@@ -29,7 +37,8 @@ public class MainNavigation {
 	}
 	
 	public ServicesTab switchToServices() {
-		selenium.click(WebConstants.Xpath.servicesButton);
+		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
+				By.xpath(WebConstants.Xpath.servicesButton));
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -42,7 +51,8 @@ public class MainNavigation {
 	}
 	
 	public DashboardTab switchToDashboard() {
-		selenium.click(WebConstants.Xpath.dashBoardButton);
+		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
+				By.xpath(WebConstants.Xpath.dashBoardButton));
 		try {
 			Thread.sleep(2000);
 			} 
@@ -56,7 +66,8 @@ public class MainNavigation {
 	}
 	
 	public TopologyTab switchToTopology() {
-		selenium.click(WebConstants.Xpath.topologyButton);
+		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
+				By.xpath(WebConstants.Xpath.topologyButton));		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -73,7 +84,8 @@ public class MainNavigation {
 	}
 	
 	public DataGridTab switchToDataGrid( boolean wait ) {
-		selenium.click(WebConstants.Xpath.consoleButton);
+		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
+				By.xpath(WebConstants.Xpath.consoleButton));
 		if( wait ){
 			try {
 				Thread.sleep(2000);

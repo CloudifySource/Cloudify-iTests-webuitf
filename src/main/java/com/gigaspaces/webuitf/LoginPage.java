@@ -1,10 +1,10 @@
 package com.gigaspaces.webuitf;
 
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -27,8 +27,10 @@ public class LoginPage {
 	private String username;
 	private String password;
 	
+	private AjaxUtils helper;
+	
 	WebElement logginButton;
-	private static int TIMEOUT_IN_SECONDS = 10;
+	private static int TIMEOUT_IN_SECONDS = 40;
 	
 	/**
 	 * constructs an instance with no login parameters
@@ -38,6 +40,7 @@ public class LoginPage {
 	public LoginPage(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver, selenium);
 	}
 	
 	/**
@@ -78,44 +81,12 @@ public class LoginPage {
 	 * @throws InterruptedException 
 	 */
 	public MainNavigation login() throws InterruptedException {
-		selenium.click(WebConstants.Xpath.loginButton);
+		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
+				By.xpath(WebConstants.Xpath.loginButton));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
+				
 		return new MainNavigation(selenium, driver);
 	}
 	
-	public void assertLoginPerformed() throws InterruptedException {
-		int attempts = 0;
-		while (attempts < 10) {
-			int seconds = 0;
-			while (seconds <= 5) {
-				try {
-					if (seconds != 5) {
-						driver.findElement(By.xpath(WebConstants.Xpath.dashBoardButton));
-						Thread.sleep(1000);
-						seconds++;
-					}
-					else {
-						return;
-					}
-				}
-				catch (NoSuchElementException e) {
-					_logger.info("Unable to login, retrying...Attempt number " + (seconds + 1));
-					if (selenium.isElementPresent(WebConstants.Xpath.loginButton)) {
-						login();
-						break;
-					}
-					else {
-						throw new IllegalStateException("Unable to login to page because login page wasnt found");
-					}
-
-
-				}
-			}
-			attempts++;
-		}
-    	if (attempts == 10) {
-    		throw new IllegalStateException("Test Failed because it was login because login is not stable");
-    	}
-	}
 }
