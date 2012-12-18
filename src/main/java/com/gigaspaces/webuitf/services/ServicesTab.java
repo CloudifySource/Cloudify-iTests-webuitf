@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.gigaspaces.webuitf.MainNavigation;
 import com.gigaspaces.webuitf.ProcessingUnitDeployWindow;
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -22,6 +23,7 @@ public class ServicesTab extends MainNavigation {
 	public ServicesTab(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
+		this.helper = new AjaxUtils(driver, selenium);
 	}
 
 	/**
