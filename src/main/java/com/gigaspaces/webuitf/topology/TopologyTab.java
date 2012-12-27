@@ -1,5 +1,6 @@
 package com.gigaspaces.webuitf.topology;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 import com.gigaspaces.webuitf.BaseApplicationContextPanel;
@@ -28,6 +29,17 @@ public class TopologyTab extends BaseApplicationContextPanel {
 	
 	public void selectApplication(String applicationName) {
 		super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);
+	}
+	
+	public boolean doesApplicationExist(String applicationName) {
+		
+		try{
+			super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);			
+		} 
+		catch(TimeoutException toe){
+			return false;
+		}
+		return true;
 	}
 
 	public String getSelectedApplication() {
