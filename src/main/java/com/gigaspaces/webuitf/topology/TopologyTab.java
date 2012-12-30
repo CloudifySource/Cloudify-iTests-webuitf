@@ -31,7 +31,7 @@ public class TopologyTab extends BaseApplicationContextPanel {
 		super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);
 	}
 	
-	public boolean doesApplicationExist(String applicationName) {
+	public boolean containsApplication(String applicationName) {
 		
 		try{
 			super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);			
