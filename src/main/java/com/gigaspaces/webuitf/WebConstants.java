@@ -466,7 +466,11 @@ public final class WebConstants {
 		}	
 		
 		public static String getPathToApplicationInPanel(int index) {
-			return "//div[@id='" + ID.applicationsMenuPanel  +  "']/div/div/div/div/div[2]/div/div[" + index + "]";
+			return "//div[@id='" + ID.applicationsMenuPanel  +  "']/table[" + index + "]";
+		}
+		
+		public static String getPathToApplicationSelectionButton(int appIndex) {
+			return getPathToApplicationInPanel(appIndex) + "/tbody/tr[2]/td[2]/em/button";
 		}
 		
 		public static String getPathToApplicationSelectionButton(String appName) {

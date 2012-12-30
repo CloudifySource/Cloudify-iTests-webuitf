@@ -1,9 +1,13 @@
 package com.gigaspaces.webuitf.dashboard;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
@@ -100,6 +104,32 @@ public class ServicesGrid {
 			selenium.click(WebConstants.Xpath.getPathToApplicationSelectionButton("All Apps"));
 			
 		}
+		
+		public String getApplication(final int index){
+
+			WebElement app = helper.waitForElement(TimeUnit.MILLISECONDS, AjaxUtils.ajaxWaitingTime, By.xpath(WebConstants.Xpath.getPathToApplicationSelectionButton(index)));
+		
+			return app.getText();
+		}
+		
+		public List<String> getAllApplications() {
+			
+			List<String> apps = new LinkedList<String>();
+			
+			for(int i = 2;; i++){
+				
+				try{
+					apps.add(getApplication(i));
+				}
+				catch(TimeoutException e){
+					break;
+				}
+			}
+			
+			return apps;
+		}
+
+			
 	}
 	
 	public class InfrastructureServicesGrid {
