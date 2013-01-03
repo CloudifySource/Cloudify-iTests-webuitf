@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.topology.physicalpanel;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
@@ -10,13 +11,13 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class MorePopUp {
 	
 	private String hostName;
 	private WebDriver driver;
 	private WebElement morePopup;
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public MorePopUp(String name, WebDriver driver) {
 		this.driver = driver;
@@ -34,7 +35,7 @@ public class MorePopUp {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -44,7 +45,7 @@ public class MorePopUp {
 				seconds++;
 			}
 			catch (ElementNotVisibleException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {

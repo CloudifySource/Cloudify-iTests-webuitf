@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.datagrid;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,7 +12,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class SpaceInstanceContext {
 	
@@ -27,7 +27,8 @@ public class SpaceInstanceContext {
 	private WebDriver driver;
 	
 	private AjaxUtils helper;
-	
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
+
 	public SpaceInstanceContext(String id, WebDriver driver) {
 		this.id = id;
 		this.driver = driver;
@@ -59,15 +60,15 @@ public class SpaceInstanceContext {
 		double seconds = 0;
 		while (seconds < timeRangeInSeconds) {	
 			try {
-				WebuiLogUtils.log("attempting to click the element");
+				logger.info("attempting to click the element");
 				numberOfClickAttempts++;
 				driver.findElement(By.id(id)).findElement(By.className(MEMORY_CLASS)).click();
-				WebuiLogUtils.log("click was succesfull");
+				logger.info("click was succesfull");
 				numberOfSuccesfullClicks++;
 			}
 			catch (NoSuchElementException e) {
 				try {
-					WebuiLogUtils.log("caugh exception due to row update");
+					logger.severe("caugh exception due to row update");
 					Thread.sleep(pollingIntervalInMillis);
 				} catch (InterruptedException e1) {
 				}
@@ -81,9 +82,9 @@ public class SpaceInstanceContext {
 			seconds += pollingIntervalInMillis / 1000.0;
 			
 		}
-		WebuiLogUtils.log("Number of click attempts : " + numberOfClickAttempts);
-		WebuiLogUtils.log("Number of succesfull clicks : " + numberOfSuccesfullClicks);
-		WebuiLogUtils.log("Number of failed clicks due to row updates : " + numberOfUpdates);
+		logger.info("Number of click attempts : " + numberOfClickAttempts);
+		logger.info("Number of succesfull clicks : " + numberOfSuccesfullClicks);
+		logger.info("Number of failed clicks due to row updates : " + numberOfUpdates);
 		return numberOfUpdates;
 		
 	}

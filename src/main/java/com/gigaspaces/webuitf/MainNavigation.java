@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -19,6 +20,8 @@ public class MainNavigation {
 	protected WebDriver driver;
 	protected AjaxUtils helper;
 	
+	protected Logger logger = Logger.getLogger(MainNavigation.class.getName());
+
 	private static int TIMEOUT_IN_SECONDS = 40;
 	
 	public MainNavigation() {}

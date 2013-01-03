@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.services;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -13,7 +14,6 @@ import org.openspaces.admin.gsc.GridServiceContainer;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.thoughtworks.selenium.Selenium;
 
 /**
@@ -33,6 +33,7 @@ public class HostsAndServicesGrid {
 	private long gsaPID;
 	
 	private AjaxUtils helper;
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public HostsAndServicesGrid(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
@@ -197,16 +198,16 @@ public class HostsAndServicesGrid {
 			try {
 				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToRowNumber(i))).getText();
 				if (rowText.contains(component)) {
-					WebuiLogUtils.log("Found " + component + "[Count=" + ++count + "]");
+					logger.info("Found " + component + "[Count=" + ++count + "]");
 				}
 				i++;
 			}
 			catch (NoSuchElementException e) {
-				WebuiLogUtils.log("Caught NoSuchElementException while locating element " + e.getMessage());
+				logger.severe("Caught NoSuchElementException while locating element " + e.getMessage());
 				exception = e;
 			}
 			catch (WebDriverException e) {
-				WebuiLogUtils.log("caught an exception while locating element ");
+				logger.severe("caught an exception while locating element ");
 			}
 		}
 		return count;

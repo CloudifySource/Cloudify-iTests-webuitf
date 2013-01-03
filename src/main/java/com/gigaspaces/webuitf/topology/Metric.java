@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.topology;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -15,13 +16,13 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.healthpanel.MetricPopup;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class Metric {
 	
 	private WebElement metric;
 	private WebDriver driver;
 	private AjaxUtils helper;
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public Metric(WebElement metric, WebDriver driver) {
 		this.driver = driver;
@@ -75,7 +76,7 @@ public class Metric {
 		final String type = metricType.getType();
 		final String dis = metricType.getDistrib();
 		
-		WebuiLogUtils.log("Clicking on metric button");
+		logger.info("Clicking on metric button");
 		WebElement element = metric.findElement(By.tagName("button"));
 		element.click();
 		
@@ -117,7 +118,7 @@ public class Metric {
 				return count;
 			}
 			catch (StaleElementReferenceException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e1) {
@@ -136,12 +137,12 @@ public class Metric {
 		String title = null;
 		String averageValue = null;
 		try {
-			WebuiLogUtils.log("waiting for popup to appear");
+			logger.info("waiting for popup to appear");
 			title = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupTitle), 10).getText();
 			averageValue = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupAverageValue), 3).getText();
 		}
 		catch (WebDriverException e) {
-			WebuiLogUtils.log("timeout waiting for pop to appear");
+			logger.severe("timeout waiting for pop to appear");
 			return null;
 		}
 		String temp = averageValue.split(" ")[2];

@@ -19,7 +19,7 @@ import com.thoughtworks.selenium.Selenium;
  */
 public class LoginPage {
 	
-	private Logger _logger = Logger.getLogger(LoginPage.class.getName());
+	private Logger logger = Logger.getLogger(LoginPage.class.getName());
 	
 	private Selenium selenium;
 	private WebDriver driver;
@@ -81,8 +81,11 @@ public class LoginPage {
 	 * @throws InterruptedException 
 	 */
 	public MainNavigation login() throws InterruptedException {
+				
 		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.loginButton));
+				By.xpath(WebConstants.Xpath.loginButton));	
+		logger.info("clicked log button");
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
 				

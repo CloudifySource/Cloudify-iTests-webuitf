@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.events;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 
 public abstract class AbstractEventsGrid {
@@ -17,7 +17,8 @@ public abstract class AbstractEventsGrid {
 	private WebDriver driver;
 	protected AjaxUtils helper;
 	protected static final int WAIT_TIMEOUT_IN_SECONDS = 1;
-	
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
+
 	public AbstractEventsGrid(WebDriver driver) {
 		this.driver = driver;
 		this.helper = new AjaxUtils(driver);
@@ -84,10 +85,10 @@ public abstract class AbstractEventsGrid {
 
 		List<WebUIAdminEvent> events = getVisibleEvents();
 		
-		WebuiLogUtils.log("Here are all the visible events sorted by time");
+		logger.info("Here are all the visible events sorted by time");
 
 		for (WebUIAdminEvent event : events) {
-			WebuiLogUtils.log(event.toString());
+			logger.info(event.toString());
 		}
 	}
 	

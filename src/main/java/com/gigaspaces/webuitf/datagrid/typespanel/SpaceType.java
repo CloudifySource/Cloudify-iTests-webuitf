@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.datagrid.typespanel;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -10,7 +11,6 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class SpaceType {
 
@@ -18,6 +18,7 @@ public class SpaceType {
 	private static final String TOOLS_BOX_CLASS = "x-grid3-td-data_type_tools";
 	private static final String CLEAR_ID = "clear_data_type";
 	private static final String QUERY_ID = "query_data_type";
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	private WebDriver driver;
 
@@ -116,7 +117,7 @@ public class SpaceType {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -141,7 +142,7 @@ public class SpaceType {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {

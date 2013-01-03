@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -13,11 +14,11 @@ import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 
 public class PuIBoxes {
 
 	private List<PuIBox> puis;
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public PuIBoxes(String name, WebDriver driver) {
 		List<PuIBox> puBoxes = new ArrayList<PuIBox>();
@@ -65,7 +66,7 @@ public class PuIBoxes {
 				break;
 			}
 			catch (StaleElementReferenceException e) {
-				WebuiLogUtils.log("Failed to discover element due to statistics update, retyring...");
+				logger.severe("Failed to discover element due to statistics update, retyring...");
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e1) {

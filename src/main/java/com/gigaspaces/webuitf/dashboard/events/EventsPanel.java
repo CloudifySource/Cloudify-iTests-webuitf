@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.events.WebUIAdminEvent;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.WebuiLogUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 
 public class EventsPanel {
@@ -21,7 +21,8 @@ public class EventsPanel {
 	private WebDriver driver;
 	private List<WebUIAdminEvent> visibleEvents;
 	private AjaxUtils helper;
-	
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
+
 	public EventsPanel(WebDriver driver) {
 		this.driver = driver;
 		this.helper = new AjaxUtils(driver);
@@ -127,10 +128,10 @@ public class EventsPanel {
 		else {
 			events = visibleEvents;
 		}
-		WebuiLogUtils.log("Here are all the visible events sorted by time");
+		logger.info("Here are all the visible events sorted by time");
 		
 		for (WebUIAdminEvent event : events) {
-			WebuiLogUtils.log(event.toString());
+			logger.info(event.toString());
 		}
 	}
 }
