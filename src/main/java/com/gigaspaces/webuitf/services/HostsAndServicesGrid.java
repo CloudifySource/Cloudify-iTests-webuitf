@@ -181,7 +181,7 @@ public class HostsAndServicesGrid {
 			}
 		}		
 		
-		helper.clickWhenPossible(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+		helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
 	}
 	
 	/**
