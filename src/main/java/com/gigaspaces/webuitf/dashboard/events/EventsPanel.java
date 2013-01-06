@@ -36,6 +36,7 @@ public class EventsPanel {
 		for (WebElement icon : eventIcons) {
 			try {
 				icon.click();
+				logger.info("clicked on event number " + index);
 				WebElement bubble = helper.waitForElement(By.className(WebConstants.ClassNames.timelineEventContainer), 1);
 				String title = bubble.findElement(By.className(WebConstants.ClassNames.timelineEventTitle)).getText();
 				String description = bubble.findElement(By.className(WebConstants.ClassNames.timelineEventBody)).getText();
@@ -45,6 +46,7 @@ public class EventsPanel {
 				close.click();
 			}
 			catch (WebDriverException e) {
+				logger.info("caught an exception while getting event number " + index);
 				long time = Long.valueOf(icon.getAttribute("timestamp"));
 				events.add(new WebUIAdminEvent(null, null, time)); // dummy event just for the sake of sorting
 			}
