@@ -349,7 +349,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		isActionMenuVisible();
 		WebElement el = driver.findElement(By.xpath(WebConstants.Xpath.pathToUndeployNode));
 		el.click();
-		el = driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert));
+		el = helper.waitForElement(TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime, By.xpath(WebConstants.Xpath.acceptAlert));
 		el.click();
 		isActionMenuNotVisible();
 	}
