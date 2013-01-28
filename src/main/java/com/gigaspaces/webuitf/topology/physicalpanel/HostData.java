@@ -34,7 +34,7 @@ public class HostData {
 		this.helper = new AjaxUtils(driver);
 		try {
 			String id = WebConstants.ID.getHostId(hostName);
-			driver.findElement(By.id(id));
+			helper.waitForElement(By.id(id), AjaxUtils.ajaxWaitingTime);
 			this.name = hostName;
 		}
 		catch (NoSuchElementException e) {
@@ -131,7 +131,6 @@ public class HostData {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				seconds++;
