@@ -36,7 +36,7 @@ public class EventsPanel {
 		for (WebElement icon : eventIcons) {
 			try {
 				icon.click();
-				logger.info("clicked on event number " + index);
+				logger.info("clicked on event");
 				WebElement bubble = helper.waitForElement(By.className(WebConstants.ClassNames.timelineEventContainer), 1);
 				String title = bubble.findElement(By.className(WebConstants.ClassNames.timelineEventTitle)).getText();
 				String description = bubble.findElement(By.className(WebConstants.ClassNames.timelineEventBody)).getText();

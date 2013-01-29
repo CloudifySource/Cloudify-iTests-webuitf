@@ -84,7 +84,7 @@ public class LoginPage {
 				
 		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
 				By.xpath(WebConstants.Xpath.loginButton));	
-		logger.info("clicked log button");
+		logger.info("clicked login button");
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
