@@ -17,6 +17,7 @@ import org.openspaces.admin.pu.DeploymentStatus;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.RenderedWebUIElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.SharedContextConstants;
 
 public class ApplicationNode implements RenderedWebUIElement {
 	
@@ -42,12 +43,12 @@ public class ApplicationNode implements RenderedWebUIElement {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		try {
-			Long length = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges.length");
+			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
-				String sourceNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
+				String sourceNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
 				if (sourceNodeName.equals(name)) {
-					String targetNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
-					String status = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
+					String targetNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
+					String status = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
 					connectors.add(new Connector(new ApplicationNode(sourceNodeName, driver), new ApplicationNode(targetNodeName,driver), status));
 				}
 			}
@@ -68,12 +69,12 @@ public class ApplicationNode implements RenderedWebUIElement {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		try {
-			Long length = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges.length");
+			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
-				String sourceNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
-				String targetNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
+				String sourceNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
+				String targetNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
 				if (targetNodeName.equals(name)) {
-					String status = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
+					String status = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
 					connectors.add(new Connector(new ApplicationNode(sourceNodeName,driver), new ApplicationNode(targetNodeName,driver), status));
 				}
 			}
@@ -94,11 +95,11 @@ public class ApplicationNode implements RenderedWebUIElement {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		try {
-			Long length = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges.length");
+			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
-				String sourceNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
-				String targetNodeName = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
-				String status = (String) js.executeScript("return this.dGraphAppMap.nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
+				String sourceNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].source.id");
+				String targetNodeName = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].target.id");
+				String status = (String) js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges[" + i + "].style.status");
 				connectors.add(new Connector(new ApplicationNode(sourceNodeName,driver), new ApplicationNode(targetNodeName,driver), status));	
 			}
 			return connectors;
@@ -118,7 +119,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			comps = (List<String>)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			comps = (List<String>)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].components");
 			return comps;
 		}
@@ -137,7 +138,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			xPosition = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			xPosition = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].layoutPosX");
 			return xPosition;
 		}
@@ -155,7 +156,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			xPosition = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			xPosition = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].layoutPosY");
 			return xPosition;
 		}
@@ -171,7 +172,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			String color = (String)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			String color = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].nodeColor");
 			return color;
 		}
@@ -187,7 +188,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			String type = (String)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			String type = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].nodeType");
 			return type;
 		}
@@ -203,7 +204,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			String type = (String)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			String type = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].puType");
 			return type;
 		}
@@ -221,7 +222,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			stat = (String)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			stat = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].status");
 		}
 		catch (NoSuchElementException e) {
@@ -242,7 +243,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			actualInstances = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			actualInstances = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].plannedInstances");
 			return actualInstances;
 		}
@@ -260,7 +261,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			actualInstances = (Long)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			actualInstances = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].actualInstances");
 			return actualInstances;
 		}
@@ -277,7 +278,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			selected = (Boolean)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			selected = (Boolean)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].selected");
 			return selected;
 		}
@@ -372,7 +373,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		try {
-			String label = (String)js.executeScript("return this.dGraphAppMap.nodes[" + '"' 
+			String label = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
 					+ name + '"' + "].id");
 			return label;
 		}
