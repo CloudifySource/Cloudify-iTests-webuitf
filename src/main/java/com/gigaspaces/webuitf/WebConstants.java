@@ -92,7 +92,8 @@ public final class WebConstants {
 		
 		public static final String healthGaugePointer = "health-gauge-pointer";
 		public static final String applicationsMenuPanel = "gs-applications-menu-panel";
-		public static final String applicationMap = "graph-canvas";
+		public static final String graphApplicationMap = "gs-graph-application-map";
+	    public static final String graphGatewaysTopology = "gs-graph-gateways-topology";
 		public static final String nodeStatusOk = "node-status-ok";
 		public static final String statusGrid = "gs-window-grid-status";
 		public static final String nodeStatusWarning = "node-status-warn";
@@ -284,7 +285,7 @@ public final class WebConstants {
 		public static final String pathToStatusColumnInAlertsGrid = "//div[1]/div/div[3]/div[2]/div[1]/div/div/div[1]/div[1]/div[1]/div[1]/div/div/table/tbody/tr/td[1]/div/span";
 		public static final String pathToApplicationNameInPanel = "/table/tbody/tr/td[1]/div/span";
 		public static final String pathToApplicationInstancesInPanel = "/table/tbody/tr/td[2]/div/span";
-		public static final String pathToApplicationMap = "//div[@id='" + ID.applicationMap + "']/svg";
+		public static final String pathToApplicationMap = "//div[@id='" + ID.graphApplicationMap + "']/svg";
 		public static final String pathToPuTreeGrid = "//div[@id='" + ID.puTreeGrid + "']";
 		public static final String pathToPuName = "/table/tbody/tr/td[1]";
 		public static final String pathToPuType = "/table/tbody/tr/td[3]";

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 
@@ -41,7 +42,7 @@ public class ApplicationMap {
 	}
 	
 	public void deselectAllNodes() {
-		WebElement graphCanvas = driver.findElement(By.id("graph-canvas"));
+		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMap));
 		graphCanvas.click();
 	}
 
