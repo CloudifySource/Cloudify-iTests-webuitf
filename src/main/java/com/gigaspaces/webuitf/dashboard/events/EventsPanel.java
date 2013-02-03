@@ -127,11 +127,12 @@ public class EventsPanel {
 		List<WebUIAdminEvent> events = null;
 		if (visibleEvents == null) {
 			events = getVisibleEvents();
+			logger.info("Here are all the visible events (not necessarily sorted)");
 		}
 		else {
 			events = visibleEvents;
+			logger.info("Here are all the visible events sorted by time");
 		}
-		logger.info("Here are all the visible events sorted by time");
 		
 		for (WebUIAdminEvent event : events) {
 			logger.info(event.toString());
