@@ -46,7 +46,7 @@ public class EventsPanel {
 				close.click();
 			}
 			catch (WebDriverException e) {
-				logger.info("caught an exception while getting event number " + index);
+				logger.info("caught an exception while getting event number " + index + ". the exception is: " + e.getStackTrace());
 				long time = Long.valueOf(icon.getAttribute("timestamp"));
 				events.add(new WebUIAdminEvent(null, null, time)); // dummy event just for the sake of sorting
 			}
@@ -121,8 +121,9 @@ public class EventsPanel {
 		return result;
 	}
 
-	public void printAllEvents() {
+	public String printAllEvents() {
 		
+		StringBuilder sb = new StringBuilder();
 		List<WebUIAdminEvent> events = null;
 		if (visibleEvents == null) {
 			events = getVisibleEvents();
@@ -134,6 +135,9 @@ public class EventsPanel {
 		
 		for (WebUIAdminEvent event : events) {
 			logger.info(event.toString());
+			sb.append(event.toString() + "\n");
 		}
+		
+		return sb.toString();
 	}
 }

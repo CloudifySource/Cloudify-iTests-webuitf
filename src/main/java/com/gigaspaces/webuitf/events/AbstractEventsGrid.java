@@ -81,15 +81,21 @@ public abstract class AbstractEventsGrid {
 		return visibleEvents;
 	}
 
-	public void printAllEvents() {
+	public String printAllEvents() {
 
+		StringBuilder sb = new StringBuilder();
 		List<WebUIAdminEvent> events = getVisibleEvents();
 		
 		logger.info("Here are all the visible events sorted by time");
 
 		for (WebUIAdminEvent event : events) {
+			
 			logger.info(event.toString());
+			sb.append(event.toString() + "\n");
 		}
+		
+		return sb.toString();
+
 	}
 	
 	public WebUIAdminEvent getChronologicalEvent(int index){
