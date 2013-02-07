@@ -70,7 +70,7 @@ public class ContextPager {
 	public SpaceInstanceContext getSpaceInstanceContext(String spaceInstanceUid) {
 		String id = SPACE_INSTANCES_CONTEXT_PREFIX_ID + spaceInstanceUid.replace(" ", "_");
 		try {
-			helper.waitForElement(TimeUnit.SECONDS, 10, By.id(id));
+			helper.waitForElement(TimeUnit.SECONDS, 15, By.id(id));
 		}
 		catch (TimeoutException e) {
 			_logger.info("caugh a timeout exception while waiting for element. returning null");

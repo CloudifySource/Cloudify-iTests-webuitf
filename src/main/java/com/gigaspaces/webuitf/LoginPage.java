@@ -59,20 +59,33 @@ public class LoginPage {
 	/**
 	 * writes the user parameters in the text edits of the ui
 	 */
-	public void inputUsernameAndPassword() {
+	public LoginPage inputUsernameAndPassword() {
 		AjaxUtils helper = new AjaxUtils(driver, selenium);
 		
 		WebElement usernameEl = helper.waitForElement(By.id(WebConstants.ID.usernameLogginInput), TIMEOUT_IN_SECONDS );
 		usernameEl.sendKeys(username);
 		WebElement passwordEl = helper.waitForElement(By.id(WebConstants.ID.passwordLogginInput), TIMEOUT_IN_SECONDS);
 		passwordEl.sendKeys(password);
+		
+		return this;
 	}
 	
-	public void inputUsernameAndPassword(String username , String password) {
+	public LoginPage inputUsernameAndPassword(String username , String password) {
 		this.username = username;
 		this.password = password;
 		
 		inputUsernameAndPassword();
+		
+		return this;
+	}
+	
+	public LoginPage inputLookupGroup(String lookupGroup) {
+		
+		WebElement lookupGroupInput = helper.waitForElement(By.id(WebConstants.ID.jiniGroupInput), TIMEOUT_IN_SECONDS );
+		lookupGroupInput.clear();
+		lookupGroupInput.sendKeys(lookupGroup);
+		
+		return this;
 	}
 	
 	/**
