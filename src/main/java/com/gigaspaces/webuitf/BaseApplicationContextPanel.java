@@ -14,7 +14,7 @@ import com.thoughtworks.selenium.Selenium;
 
 public abstract class BaseApplicationContextPanel extends MainNavigation {
 
-	private AjaxUtils helper;
+	protected AjaxUtils helper;
 
 	public BaseApplicationContextPanel(Selenium selenium, WebDriver driver) {
 		super(selenium, driver);

@@ -1,14 +1,11 @@
 package com.gigaspaces.webuitf.datagrid.transactionspanel;
 
-import org.openqa.selenium.WebDriver;
-
 import com.gigaspaces.webuitf.datagrid.DataGridSubPanel;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 
 public class TransactionsPanel extends DataGridSubPanel {
 
-	public TransactionsPanel(WebDriver driver) {
-		super(driver);
-		// TODO Auto-generated constructor stub
+	public TransactionsPanel(AjaxUtils helper) {
+		super(helper);
 	}
-
 }

@@ -109,14 +109,21 @@ public final class WebConstants {
 		public static final String logicalPanelToggle = "gs-tab-item-logical-toggler-button";
 
 		/* DataGridTab sub panel toggles */
-		public static final String connectionsPanelToggle = "gs-tab-item-toggler-button";
-		public static final String instancesPanelToggle = "gs-tab-item-toggler-button";
-		public static final String queriesPanelToggle = "gs-tab-item-queries";
-		public static final String statisticsPanelToggle = "gs-tab-item-toggler-button";
-		public static final String templatesPanelToggle = "gs-tab-item-toggler-button";
-		public static final String transactionsPanelToggle = "gs-tab-item-toggler-button";
+//		public static final String connectionsPanelToggle = "gs-tab-item-toggler-button";
+//		public static final String instancesPanelToggle = "gs-tab-item-toggler-button";
+		public static final String queriesPanelToggle = "gs-tab-item-queries-toggler-button";
+		public static final String statisticsPanelToggle = "gs-tab-item-statistics-toggler-button";
+//		public static final String templatesPanelToggle = "gs-tab-item-toggler-button";
+//		public static final String transactionsPanelToggle = "gs-tab-item-toggler-button";
 		public static final String typesPanelToggle = "gs-tab-item-types-toggler-button";
-
+		public static final String gatewaysPanelToggle = "gs-tab-item-gateways-toggler-button";
+		public static final String localViewsPanelToggle = "gs-tab-item-local-views-toggler-button";
+		public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
+		public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
+		
+		public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
+		public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";
+		public static final String gatewaysGraphicalTogglerButton = "gs-tab-item-graphical-toggler-button"; 		
 		
 		public static final String healthPanel = "gs-sub-panel-health";
 		public static final String physicalPanel = "gs-tab-item-physical";
@@ -538,6 +545,10 @@ public final class WebConstants {
 			return "/div[2]/div[" + i + "]";
 		}
 
+		
+		public static final String getPathToGatewaysInboundByIndex(int index) {
+			return "/div[1]/div[1]/div[2]/div[" + index + "]";
+		}		
 	}
 	
 	public static final class DOM {
@@ -573,6 +584,11 @@ public final class WebConstants {
 					");";
 		}
 		
+	}
+	
+	public static final class Attributes{
+		
+		public final static String UNFORMATTED_VALUE_ATTRIBUTE = "unformatted-value";		
 	}
 	
 	public static final class ClassNames {

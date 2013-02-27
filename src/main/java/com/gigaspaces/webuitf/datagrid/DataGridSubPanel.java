@@ -1,98 +1,67 @@
 package com.gigaspaces.webuitf.datagrid;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.datagrid.connectionspanel.ConnectionsPanel;
-import com.gigaspaces.webuitf.datagrid.instancespanel.InstancesPanel;
+import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
+import com.gigaspaces.webuitf.datagrid.locacaches.LocalCachesPanel;
+import com.gigaspaces.webuitf.datagrid.localviews.LocalViewsContextPager;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
-import com.gigaspaces.webuitf.datagrid.templatespanel.TemplatesPanel;
-import com.gigaspaces.webuitf.datagrid.transactionspanel.TransactionsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 
 public class DataGridSubPanel {
 	
-	protected WebDriver driver;
-	protected AjaxUtils helper;
+//	protected WebDriver driver;
+	private Logger _logger = Logger.getLogger( this.getClass().getName() );
+	protected final AjaxUtils helper;
 	
-	public DataGridSubPanel(WebDriver driver) {
-		this.driver = driver;
-		this.helper = new AjaxUtils(driver);
-	}
-
-	public ConnectionsPanel switchToConnectionsPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.connectionsPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new ConnectionsPanel(driver);
-	}
-	
-	public InstancesPanel switchToInstancesPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.instancesPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new InstancesPanel(driver);
+	public DataGridSubPanel(AjaxUtils helper) {
+//		this.driver = driver;
+		this.helper = helper;
 	}
 
 	public QueriesPanel switchToQueriesPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.queriesPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new QueriesPanel(driver);
+		clickWhenPossible( WebConstants.ID.queriesPanelToggle );
+		return new QueriesPanel(helper);
 	}
 
 	public StatisticsPanel switchToStatisticsPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.statisticsPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new StatisticsPanel(driver);
-	}
-
-	public TemplatesPanel switchToTemplatesPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.templatesPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new TemplatesPanel(driver);
-	}
-
-	public TransactionsPanel switchToTransactionsPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.transactionsPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new TransactionsPanel(driver);
+		clickWhenPossible( WebConstants.ID.statisticsPanelToggle );
+		return new StatisticsPanel(helper);
 	}
 
 	public TypesPanel switchToTypesPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.typesPanelToggle));
+		clickWhenPossible( WebConstants.ID.typesPanelToggle );
+		return new TypesPanel(helper);
+	}
+
+	public GatewaysPanel switchToGateways() {
+		clickWhenPossible( WebConstants.ID.gatewaysPanelToggle );
+		return new GatewaysPanel( helper );		
+	}
+	
+	public LocalViewsContextPager switchToLocalViews() {
+		clickWhenPossible( WebConstants.ID.localViewsPanelToggle );
+		return new LocalViewsContextPager( helper );		
+	}	
+	
+	private void clickWhenPossible( String id ){
+		helper.clickWhenPossible( 5, TimeUnit.SECONDS, By.id( id ) );
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new TypesPanel(driver);
+			_logger.log( Level.SEVERE, e.toString(), e );
+		}		
 	}
 
+	public LocalCachesPanel switchToLocalCaches() {
+		clickWhenPossible( WebConstants.ID.localCachesPanelToggle );
+		return new LocalCachesPanel( helper );
+	}
 }

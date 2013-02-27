@@ -13,7 +13,7 @@ public class DataGridTab extends BaseApplicationContextPanel {
 	}
 	
 	public DataGridSubPanel getSubPanel() {
-		return new DataGridSubPanel(driver);
+		return new DataGridSubPanel( helper );
 	}
 	
 	public ContextPager getContextPager() {

@@ -36,7 +36,7 @@ public class AjaxUtils {
 	}
 	
 	public AjaxUtils(WebDriver driver) {
-		this.driver = driver;
+		this( driver, null );
 	}
 
 	public AjaxUtils(WebDriver driver, Selenium selenium) {
@@ -64,6 +64,11 @@ public class AjaxUtils {
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
 	}
+	
+	public WebDriver getDriver(){
+		return driver;
+	}	
+	
 	public void setSelenium(Selenium selenium) {
 		this.selenium = selenium;
 	}
