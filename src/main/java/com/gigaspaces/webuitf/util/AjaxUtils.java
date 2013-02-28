@@ -1,5 +1,7 @@
 package com.gigaspaces.webuitf.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
@@ -196,6 +198,54 @@ public class AjaxUtils {
 		
 		return atEl.get();
 	}
+	
+	/**
+	 * list of elements serached by last by element
+	 * @param timeUnit
+	 * @param timeout
+	 * @param bys
+	 * @return
+	 */
+	public List<WebElement> waitForElements( TimeUnit timeUnit, int timeout, final By...bys ) {
+
+		final AtomicReference<List<WebElement>> atEl = new AtomicReference<List<WebElement>>();
+		
+		FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
+		fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
+		fluentWait.withTimeout(timeout, timeUnit);
+		fluentWait.until(new Predicate<By>() {
+			public boolean apply(By by) {
+				try {
+					WebElement element = driver.findElement(bys[0]);
+					List<WebElement> elementsTemp = new ArrayList<WebElement>();
+					List<WebElement> elementsResult = new ArrayList<WebElement>();
+					for (int i = 1 ; i < bys.length ; i++) {
+						if( bys.length > 1 && i == bys.length - 2 ){
+							List<WebElement> elements = element.findElements( bys[i] );
+							elementsTemp.addAll( elements );
+						}
+						else if( i == bys.length - 1 ){
+							for( WebElement el : elementsTemp ){
+								elementsResult.addAll( el.findElements( bys[i] ) );
+							}
+						}
+						else{
+							element = element.findElement(bys[i]);
+						}
+					}
+					atEl.set( elementsResult );
+					return true;
+				} catch (NoSuchElementException ex) {
+					return false;
+				}
+				catch (StaleElementReferenceException ex) {
+					return false;
+				}
+			}
+		});
+		
+		return atEl.get();
+	}	
 
 	public void waitForElementToDisappear(TimeUnit timeUnit, int timeout,final By...bys) {
 

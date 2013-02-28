@@ -123,7 +123,11 @@ public final class WebConstants {
 		
 		public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
 		public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";
-		public static final String gatewaysGraphicalTogglerButton = "gs-tab-item-graphical-toggler-button"; 		
+		public static final String gatewaysGraphicalTogglerButton = "gs-tab-item-graphical-toggler-button";
+		
+		public static final String asyncPollingEventContainersTogglerButton = "gs-tab-item-asyncpolling-event-containers-toggler-button";
+		public static final String pollingEventContainersTogglerbutton = "gs-tab-item-polling-event-containers-toggler-button";
+		public static final String notifyEventContainersTogglerbutton = "gs-tab-item-notify-event-containers-toggler-button";		
 		
 		public static final String healthPanel = "gs-sub-panel-health";
 		public static final String physicalPanel = "gs-tab-item-physical";

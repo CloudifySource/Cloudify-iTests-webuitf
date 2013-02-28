@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.openqa.selenium.By;
 
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.datagrid.eventcontainers.EventContainersTabPanel;
 import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
 import com.gigaspaces.webuitf.datagrid.locacaches.LocalCachesPanel;
 import com.gigaspaces.webuitf.datagrid.localviews.LocalViewsContextPager;
@@ -49,6 +50,11 @@ public class DataGridSubPanel {
 	public LocalViewsContextPager switchToLocalViews() {
 		clickWhenPossible( WebConstants.ID.localViewsPanelToggle );
 		return new LocalViewsContextPager( helper );		
+	}
+	
+	public EventContainersTabPanel switchToEventContainers() {
+		clickWhenPossible( WebConstants.ID.eventContainersPanelToggle );
+		return new EventContainersTabPanel( helper );		
 	}	
 	
 	private void clickWhenPossible( String id ){
