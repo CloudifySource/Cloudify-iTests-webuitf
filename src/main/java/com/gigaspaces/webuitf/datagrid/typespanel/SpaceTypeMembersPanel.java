@@ -46,7 +46,7 @@ public class SpaceTypeMembersPanel {
 		// removed - dangerous: clicks every anchor element in the page!
 //		driver.findElement(By.className("gwt-Anchor")).click();
 		
-		By cssSelector = By.cssSelector(".gs-a-btn[data-value=\"" + type + "\"]");
+		By cssSelector = By.cssSelector( ".gwt-Anchor[data-value=\"" + type + "\"]" );
 		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.sliderDataTypes), cssSelector);
 	}
 
