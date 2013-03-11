@@ -70,10 +70,15 @@ public abstract class AbstractEventsGrid {
 
 	public List<WebUIAdminEvent> getVisibleEvents() {
 		
-		List<WebElement> visibleEventsElements = driver.findElements(By.className(WebConstants.ClassNames.EventsGridEventTitle));
+		List<WebElement> visibleEventsElements = 
+				driver.findElements(By.className(WebConstants.ClassNames.EventsGridEventTitle));
 		List<WebUIAdminEvent> visibleEvents = new ArrayList<WebUIAdminEvent>();
 		
 		int numOfEvents = visibleEventsElements.size() - 1; // subtracting the irrelevant "component-name" headline
+		
+		logger.info( ">>> visibleEventsElements size:" + visibleEventsElements.size() + 
+					 ", numOfEvents:" + numOfEvents );
+		
 		for(int i = 1; i <= numOfEvents; i++){
 			visibleEvents.add(getEvent(i));
 		}
