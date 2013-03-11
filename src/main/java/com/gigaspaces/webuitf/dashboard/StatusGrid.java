@@ -10,8 +10,10 @@ import com.thoughtworks.selenium.Selenium;
 
 public class StatusGrid {
 
+	WebDriver driver;	
+	
 	Selenium selenium;
-	WebDriver driver;
+
 	HealthGauge gauge;
 	CPUCores cpuCores;
 	Memory memory;
