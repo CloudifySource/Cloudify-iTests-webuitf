@@ -123,8 +123,10 @@ public class AjaxUtils {
 		fluentWait.until(new Predicate<By>() {
 			public boolean apply(By by) {
 				try {
+					_logger.info("Before find first element [" + bys[0] + "]" );
 					WebElement element = driver.findElement(bys[0]);
 					for (int i = 1 ; i < bys.length ; i++) {
+						_logger.info( "Before find element [" + bys[i] + "]" );
 						element = element.findElement(bys[i]); 
 					}
 					element.click();
