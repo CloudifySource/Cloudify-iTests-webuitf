@@ -42,7 +42,36 @@ abstract public class AbstractChannelsGridPanel {
 		return getChannelsInfo( true );
 	}
 	
-	
+/* JS fo the case if we will experience problems with non existing web elements 
+(function a(){
+var prefix = "x-grid3-td-";
+var result = []
+$.each($("table.x-grid3-row-table:last tr"), function( index, item) {
+	var entry = {};	
+	$.each( $(item).find("td"), function(td_index, td_item) {
+		var indexOfPrefix = $(td_item).attr("class").indexOf(prefix);
+		if ( indexOfPrefix > 0 ) {
+			var field_key = $(td_item).attr("class").substring(indexOfPrefix + prefix.length).split(" ")[0];
+			if ( field_key == "channel_state_icon"){
+				entry[field_key] = $(td_item).find("img").attr("qtip");
+			}
+			else if ( field_key != "slider_model_next_button" ){
+				var $span = $(td_item).find("span");
+				if ( $span.attr("unformatted-value") ){
+					entry[field_key] = $span.attr("unformatted-value");
+				}else{
+					entry[field_key] = $span.text();
+				}
+			}
+		}
+	})
+	if ( !$.isEmptyObject( entry) ){
+		result.push(entry);
+	}
+});
+return result;
+}());
+*/
 	public ChannelsPropertiesRow[] getChannelsInfo( boolean waitForInitialization ) {
 
 		List<ChannelsPropertiesRow> list = new ArrayList<ChannelsPropertiesRow>();
