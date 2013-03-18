@@ -34,7 +34,6 @@ public class ChannelsPropertiesRow {
 	private static final String TARGET_VERSION_PROPERTY = "target_version";
 	private static final String CHANNEL_STATE_ICON_PROPERTY = "channel_state_icon";
 	
-	
 	public static final String TARGET_HOST_NAME_COLUMN_CLASS = COLUMN_CLASS_PREFIX + TARGET_HOST_NAME_PROPERTY;
 	public static final String SOURCE_NAME_COLUMN_CLASS = COLUMN_CLASS_PREFIX + SOURCE_NAME_PROPERTY;
 	public static final String TARGET_MEMBER_NAME_COLUMN_CLASS = COLUMN_CLASS_PREFIX + TARGET_MEMBER_NAME_PROPERTY;
@@ -99,8 +98,9 @@ public class ChannelsPropertiesRow {
 	
 	@Override
 	public String toString() {
-		return "ChannelPropertiesRow [targetMemberName=" + _targetMemberName
-				+ ", targetHostName=" + _targetHostName + 
+		return "ChannelPropertiesRow [" +
+				" targetMemberName=" + _targetMemberName +
+				", targetHostName=" + _targetHostName + 
 				", targetVersion=" + _targetVersion + 
 				", targetPid=" + _targetPid +
 				", channelState=" + _channelState + 
