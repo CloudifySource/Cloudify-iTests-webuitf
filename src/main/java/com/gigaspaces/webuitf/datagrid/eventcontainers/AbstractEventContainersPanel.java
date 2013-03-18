@@ -99,7 +99,6 @@ abstract public class AbstractEventContainersPanel implements EventContainersCon
 	}
 
 	private String getStatusTagValue( int rowIndex ) {
-
 		return getTagValue( _statusElements, rowIndex );
 	}
 

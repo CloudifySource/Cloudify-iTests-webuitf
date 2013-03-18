@@ -89,7 +89,7 @@ public class ChannelsPropertiesRow {
 		return _sendPacketsPerSec;
 	}
 
-	public long getSedoLogRetainedSize() {
+	public long getRedoLogRetainedSize() {
 		return _redoLogRetainedSize;
 	}
 

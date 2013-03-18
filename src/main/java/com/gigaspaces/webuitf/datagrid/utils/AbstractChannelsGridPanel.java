@@ -25,6 +25,9 @@ abstract public class AbstractChannelsGridPanel {
 	protected final String _id;
 	private final boolean _retriveNonAggregatedProperties;
 	
+	private final String DIV_PREFIX = "div.";
+	private final String SPAN = "span";
+	
 	private Logger _logger = Logger.getLogger( this.getClass().getName() );
 
 	public AbstractChannelsGridPanel( AjaxUtils helper, WebElement element, String id, boolean retriveNonAggregatedProperties ) {
@@ -34,30 +37,41 @@ abstract public class AbstractChannelsGridPanel {
 		this._retriveNonAggregatedProperties = retriveNonAggregatedProperties;
 	}
 
+	
 	public ChannelsPropertiesRow[] getChannelsInfo() {
+		return getChannelsInfo( true );
+	}
+	
+	
+	public ChannelsPropertiesRow[] getChannelsInfo( boolean waitForInitialization ) {
 
 		List<ChannelsPropertiesRow> list = new ArrayList<ChannelsPropertiesRow>();
-
+		
 		Exception exception = null;
 		try {
-			//wait to panel will be initialized
-			Thread.sleep( 3000 );
+			if( waitForInitialization ){
+				//wait to panel will be initialized
+				Thread.sleep( 3000 );
+			}
 
 			List<WebElement> sourceNameElements = null;
 			if( _retriveNonAggregatedProperties ){
-				sourceNameElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.SOURCE_NAME_COLUMN_CLASS ) );
+				sourceNameElements = _element.findElements( By.cssSelector( 
+						DIV_PREFIX + ChannelsPropertiesRow.SOURCE_NAME_COLUMN_CLASS + " " + SPAN ) );
 			}			
-			List<WebElement> targetHostNameElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.TARGET_HOST_NAME_COLUMN_CLASS ) );
-			List<WebElement> targetMemberNameElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.TARGET_MEMBER_NAME_COLUMN_CLASS ) );
-			List<WebElement> targetPidElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.TARGET_PID_COLUMN_CLASS ) );
-			List<WebElement> targetVersionElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.TARGET_VERSION_COLUMN_CLASS ) );			
-			List<WebElement> channelStateElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.CHANNEL_STATE_ICON_COLUMN_CLASS ) );
+			List<WebElement> targetHostNameElements = _element.findElements( By.cssSelector( 
+					DIV_PREFIX + ChannelsPropertiesRow.TARGET_HOST_NAME_COLUMN_CLASS + " " + SPAN ) );
+
+			List<WebElement> targetMemberNameElements = _element.findElements( By.cssSelector( 
+					DIV_PREFIX + ChannelsPropertiesRow.TARGET_MEMBER_NAME_COLUMN_CLASS + " " + SPAN ) );
+
+			List<WebElement> targetPidElements = _element.findElements( By.cssSelector( 
+					DIV_PREFIX + ChannelsPropertiesRow.TARGET_PID_COLUMN_CLASS + " " + SPAN ) );
+			
+			List<WebElement> targetVersionElements = _element.findElements( By.cssSelector( 
+					DIV_PREFIX + ChannelsPropertiesRow.TARGET_VERSION_COLUMN_CLASS + " " + SPAN ) );
+			
+			List<WebElement> channelStateElements = _element.findElements( By.className( ChannelsPropertiesRow.CHANNEL_STATE_ICON_COLUMN_CLASS ) );
 
 			List<WebElement> sendBytesPerSecElements = 
 					_element.findElements( By.className( ChannelsPropertiesRow.SEND_BYTES_PER_SEC_COLUMN_CLASS) );
@@ -73,14 +87,21 @@ abstract public class AbstractChannelsGridPanel {
 
 				_logger.info( "> index=" + rowIndex );
 
-				String targetHostName = getTagValue( targetHostNameElements, rowIndex );
-				String targetMemberName = getTagValue( targetMemberNameElements, rowIndex );
-				String targetPidStr = getTagValue( targetPidElements, rowIndex );
-				String targetVersion = getTagValue( targetVersionElements, rowIndex );
-				String channelState = getImgQtipValue( channelStateElements, rowIndex );
+//				String targetHostName = getTagValue( targetHostNameElements, rowIndex );
+//				String targetMemberName = getTagValue( targetMemberNameElements, rowIndex );
+//				String targetPidStr = getTagValue( targetPidElements, rowIndex );
+//				String targetVersion = getTagValue( targetVersionElements, rowIndex );
+//				String sourceName = getTagValue( sourceNameElements, rowIndex );
 				
-				String sourceName = getTagValue( sourceNameElements, rowIndex );				
-
+				String targetHostName = targetHostNameElements.get( rowIndex ).getText();
+				String targetMemberName = targetMemberNameElements.get( rowIndex ).getText();
+				String targetPidStr = targetPidElements.get( rowIndex ).getText();;
+				String targetVersion = targetVersionElements.get( rowIndex ).getText();
+				String sourceName = sourceNameElements == null ? 
+									null : sourceNameElements.get( rowIndex ).getText();
+				
+				String channelState = getImgQtipValue( channelStateElements, rowIndex );
+								
 				String sendBytesPersSecStr = getTagValue( sendBytesPerSecElements, rowIndex, 
 						WebConstants.Attributes.UNFORMATTED_VALUE_ATTRIBUTE );
 				String sendPacketsPersSecStr = getTagValue( sendPacketsPerSecElements, rowIndex, 
@@ -127,9 +148,9 @@ abstract public class AbstractChannelsGridPanel {
 						e.printStackTrace();
 					}
 				}
-				if( sendPacketsPersSecStr.length() > 0 ){
+				if( redoLogRetainedSizeStr.length() > 0 ){
 					try{					
-						redoLogRetainedSize = Long.parseLong( sendPacketsPersSecStr );
+						redoLogRetainedSize = Long.parseLong( redoLogRetainedSizeStr );
 					}
 					catch( NumberFormatException e ){
 						e.printStackTrace();
@@ -139,7 +160,6 @@ abstract public class AbstractChannelsGridPanel {
 				_logger.info( ">targetPid=" + targetPid );
 				_logger.info( "> targetVersion=" + targetVersion);
 				_logger.info( "> channelStateName=" + channelState );
-				_logger.info( "> sendBytesPerSec=" + sendBytesPerSec );
 				_logger.info( "> sendBytesPerSec=" + sendBytesPerSec );
 				_logger.info( "> sendPacketsPerSec=" + sendPacketsPerSec );
 				_logger.info( "> redoLogRetainedSize=" + redoLogRetainedSize );
