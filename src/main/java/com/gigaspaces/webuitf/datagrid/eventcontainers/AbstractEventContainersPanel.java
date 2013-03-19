@@ -43,14 +43,16 @@ abstract public class AbstractEventContainersPanel implements EventContainersCon
 		_gridId = gridId;
 	}
 	
-	public AbstractEventContainerPropertiesRow[] getEventContainersInfo() {
+	public AbstractEventContainerPropertiesRow[] getEventContainersInfo( boolean waitForInitialization ) {
 
 		List<AbstractEventContainerPropertiesRow> list = new ArrayList<AbstractEventContainerPropertiesRow>();
 
 		Exception exception = null;
 		try {
-			//wait to panel will be initialized
-			Thread.sleep( 3000 );
+			if( waitForInitialization ){
+				//wait to panel will be initialized
+				Thread.sleep( 3000 );
+			}
 
 			//!!!!!!!!important to invoke it before loop
 			searchCommonColumnsElements();

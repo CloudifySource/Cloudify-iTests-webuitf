@@ -11,11 +11,11 @@ import com.gigaspaces.webuitf.datagrid.eventcontainers.AbstractEventContainerPro
 public class AsyncPollingEventContainerPropertiesRow extends AbstractEventContainerPropertiesRow {
 
 	private final int _concurrentConsumers;
-	private final int _receiveTimeout;
+	private final long _receiveTimeout;
 	
 	public AsyncPollingEventContainerPropertiesRow( int rowIndex, String id,
 			String status, boolean isTransactional, long failedEvents,
-			long processedEvents, int concurrentConsumers, int receiveTimeout ) {
+			long processedEvents, int concurrentConsumers, long receiveTimeout ) {
 		super( rowIndex, id, status, isTransactional, failedEvents, processedEvents );
 		
 		this._concurrentConsumers = concurrentConsumers;
@@ -26,7 +26,7 @@ public class AsyncPollingEventContainerPropertiesRow extends AbstractEventContai
 		return _concurrentConsumers;
 	}
 
-	public int getReceiveTimeout() {
+	public long getReceiveTimeout() {
 		return _receiveTimeout;
 	}
 	
