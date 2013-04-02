@@ -23,10 +23,10 @@ public class AggregatedLocalViewChannelsPropertiesRow extends ChannelsProperties
 	public AggregatedLocalViewChannelsPropertiesRow( AjaxUtils helper, String sourceName, String targetMemberName, 
 			String targetHostName, String targetVersion, 
 			long targetPid, String channelState, long sendPacketsPerSec, long redoLogRetainedSize,
-			long sendBytesPerSec ){
+			long sendBytesPerSec, int templatesNum ){
 		
 		super( sourceName, targetMemberName, targetHostName, targetVersion, targetPid, channelState, 
-				sendPacketsPerSec, redoLogRetainedSize, sendBytesPerSec );
+				sendPacketsPerSec, redoLogRetainedSize, sendBytesPerSec, templatesNum );
 		_helper = helper;
 	}
 	

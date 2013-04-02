@@ -21,12 +21,13 @@ public class AggregatedLocalViewChannelsContext extends AbstractChannelsGridPane
 	@Override
 	protected ChannelsPropertiesRow createChannelRow( int index, String sourceName, 
 			String targetHostName, String targetMemberName, long targetPid, String targetVersion, 
-			String channelState, long sendBytesPerSec, 
-			long sendPacketsPerSec, long redoLogRetainedSize ) {
+			String channelState, long sendBytesPerSec, long sendPacketsPerSec, 
+			long redoLogRetainedSize, int templatesNum ) {
 
-		AggregatedLocalViewChannelsPropertiesRow channelRow = new AggregatedLocalViewChannelsPropertiesRow( _helper, 
-				sourceName, targetMemberName, targetHostName, targetVersion, targetPid, channelState, 
-				sendPacketsPerSec, redoLogRetainedSize, sendBytesPerSec );
+		AggregatedLocalViewChannelsPropertiesRow channelRow = 
+				new AggregatedLocalViewChannelsPropertiesRow( _helper, sourceName, targetMemberName, 
+						targetHostName, targetVersion, targetPid, channelState, sendPacketsPerSec, 
+						redoLogRetainedSize, sendBytesPerSec, templatesNum );
 		return channelRow;
 	}	
 }
