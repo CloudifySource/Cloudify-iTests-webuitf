@@ -93,6 +93,7 @@ public final class WebConstants {
 		public static final String healthGaugePointer = "health-gauge-pointer";
 		public static final String applicationsMenuPanel = "gs-applications-menu-panel";
 		public static final String graphApplicationMap = "gs-graph-application-map";
+		public static final String graphApplicationMapClearSelection = "gs-graph-application-map-clear-capturer";
 	    public static final String graphGatewaysTopology = "gs-graph-gateways-topology";
 		public static final String nodeStatusOk = "node-status-ok";
 		public static final String statusGrid = "gs-window-grid-status";
