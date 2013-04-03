@@ -15,10 +15,12 @@ public class ChannelsPropertiesRow {
 	private final String _targetVersion;
 	private final long _targetPid;
 	private final String _channelState;
+	private final int  _templatesNum;
 	
 	private long _sendPacketsPerSec;
 	private long _redoLogRetainedSize;
 	private long _sendBytesPerSec;
+	
 	
 	public static final String COLUMN_CLASS_PREFIX = "x-grid3-col-";
 //	public static final String COLUMN_CLASS_PREFIX = "x-grid3-td-";
@@ -33,6 +35,7 @@ public class ChannelsPropertiesRow {
 	private static final String TARGET_PID_PROPERTY = "target_pid";
 	private static final String TARGET_VERSION_PROPERTY = "target_version";
 	private static final String CHANNEL_STATE_ICON_PROPERTY = "channel_state_icon";
+	private static final String TEMPLATES_NUMBER = "templates_number";
 	
 	public static final String TARGET_HOST_NAME_COLUMN_CLASS = COLUMN_CLASS_PREFIX + TARGET_HOST_NAME_PROPERTY;
 	public static final String SOURCE_NAME_COLUMN_CLASS = COLUMN_CLASS_PREFIX + SOURCE_NAME_PROPERTY;
@@ -44,10 +47,11 @@ public class ChannelsPropertiesRow {
 	public static final String SEND_BYTES_PER_SEC_COLUMN_CLASS = COLUMN_CLASS_PREFIX + SEND_BYTES_PER_SEC_PROPERTY;
 	public static final String SEND_PACKETS_PER_SEC_COLUMN_CLASS = COLUMN_CLASS_PREFIX + SEND_PACKETS_PER_SEC_PROPERTY;
 	public static final String REDOLOG_RETAINED_SIZE_COLUMN_CLASS = COLUMN_CLASS_PREFIX + REDOLOG_RETAINED_SIZE_PROPERTY;	
+	public static final String TEMPLATES_NUMBER_COLUMN_CLASS = COLUMN_CLASS_PREFIX + TEMPLATES_NUMBER;
 	
 	public ChannelsPropertiesRow( String sourceName, String targetMemberName, String targetHostName, 
 			String targetVersion, long targetPid, String channelState, long sendPacketsPerSec, 
-			long redoLogRetainedSize, long sendBytesPerSec ) {
+			long redoLogRetainedSize, long sendBytesPerSec, int templatesNum ) {
 
 		this._sourceName = sourceName;
 		this._targetMemberName = targetMemberName;
@@ -58,6 +62,7 @@ public class ChannelsPropertiesRow {
 		this._sendPacketsPerSec = sendPacketsPerSec;
 		this._redoLogRetainedSize = redoLogRetainedSize;
 		this._sendBytesPerSec = sendBytesPerSec;
+		this._templatesNum = templatesNum;
 	}
 
 	public String getSourceName() {
@@ -95,6 +100,10 @@ public class ChannelsPropertiesRow {
 	public long getSendBytesPerSec() {
 		return _sendBytesPerSec;
 	}
+
+	public int getTemplatesNum() {
+		return _templatesNum;
+	}	
 	
 	@Override
 	public String toString() {
@@ -105,7 +114,8 @@ public class ChannelsPropertiesRow {
 				", targetPid=" + _targetPid +
 				", channelState=" + _channelState + 
 				", sendPacketsPerSec=" + _sendPacketsPerSec + 
-				", redoLogRetainedSize=" + _redoLogRetainedSize + 
-				", sendBytesPerSec=" + _sendBytesPerSec + "]";
-	}	
+				", redoLogRetainedSize=" + _redoLogRetainedSize +
+				", sendBytesPerSec=" + _sendBytesPerSec + 
+				", templatesNum=" + _templatesNum + "]";
+	}
 }

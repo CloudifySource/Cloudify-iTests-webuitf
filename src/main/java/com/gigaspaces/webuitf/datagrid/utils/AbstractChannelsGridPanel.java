@@ -27,6 +27,7 @@ abstract public class AbstractChannelsGridPanel {
 	
 	private final String DIV_PREFIX = "div.";
 	private final String SPAN = "span";
+	private final String A = "a";
 	
 	private Logger _logger = Logger.getLogger( this.getClass().getName() );
 
@@ -37,9 +38,8 @@ abstract public class AbstractChannelsGridPanel {
 		this._retriveNonAggregatedProperties = retriveNonAggregatedProperties;
 	}
 
-	
 	public ChannelsPropertiesRow[] getChannelsInfo() {
-		return getChannelsInfo( true );
+		return getChannelsInfo( true, false );
 	}
 	
 /* JS fo the case if we will experience problems with non existing web elements 
@@ -72,7 +72,7 @@ $.each($("table.x-grid3-row-table:last tr"), function( index, item) {
 return result;
 }());
 */
-	public ChannelsPropertiesRow[] getChannelsInfo( boolean waitForInitialization ) {
+	public ChannelsPropertiesRow[] getChannelsInfo( boolean waitForInitialization, boolean includeTemplates ) {
 
 		List<ChannelsPropertiesRow> list = new ArrayList<ChannelsPropertiesRow>();
 		
@@ -107,7 +107,13 @@ return result;
 			List<WebElement> sendPacketsPerSecElements = 
 					_element.findElements( By.className( ChannelsPropertiesRow.SEND_PACKETS_PER_SEC_COLUMN_CLASS ) );
 			List<WebElement> redoLogRetainedSizeElements = 
-					_element.findElements( By.className( ChannelsPropertiesRow.REDOLOG_RETAINED_SIZE_COLUMN_CLASS ) );			
+					_element.findElements( By.className( ChannelsPropertiesRow.REDOLOG_RETAINED_SIZE_COLUMN_CLASS ) );
+			
+			List<WebElement> templatesElements = null;
+			if( includeTemplates ){
+				templatesElements = _element.findElements( By.cssSelector( 
+						DIV_PREFIX + ChannelsPropertiesRow.TEMPLATES_NUMBER_COLUMN_CLASS + " " + A ) );
+			}
 			
 			int listSize = targetHostNameElements.size();
 			_logger.info( "> listSize=" + listSize );
@@ -128,6 +134,8 @@ return result;
 				String targetVersion = targetVersionElements.get( rowIndex ).getText();
 				String sourceName = sourceNameElements == null ? 
 									null : sourceNameElements.get( rowIndex ).getText();
+				String templatesNumStr = templatesElements == null ? 
+								null : templatesElements.get( rowIndex ).getText();
 				
 				String channelState = getImgQtipValue( channelStateElements, rowIndex );
 								
@@ -137,6 +145,11 @@ return result;
 						WebConstants.Attributes.UNFORMATTED_VALUE_ATTRIBUTE );
 				String redoLogRetainedSizeStr = getTagValue( redoLogRetainedSizeElements, rowIndex, 
 						WebConstants.Attributes.UNFORMATTED_VALUE_ATTRIBUTE );
+				
+//				
+//				String sendBytesPersSecStr = sendBytesPerSecElements.get( rowIndex ).getText();
+//				String sendPacketsPersSecStr = sendPacketsPerSecElements.get( rowIndex ).getText();
+//				String redoLogRetainedSizeStr = redoLogRetainedSizeElements.get( rowIndex ).getText();				
 				
 				_logger.info( ">sendBytesPersSecStr=" + sendBytesPersSecStr );
 				_logger.info( ">sendPacketsPersSecStr=" + sendPacketsPersSecStr );
@@ -185,6 +198,11 @@ return result;
 						e.printStackTrace();
 					}
 				}
+				
+				int templatesNum = -1;
+				if( templatesNumStr != null ){
+					templatesNum = Integer.parseInt( templatesNumStr );
+				}
 
 				_logger.info( ">targetPid=" + targetPid );
 				_logger.info( "> targetVersion=" + targetVersion);
@@ -192,10 +210,11 @@ return result;
 				_logger.info( "> sendBytesPerSec=" + sendBytesPerSec );
 				_logger.info( "> sendPacketsPerSec=" + sendPacketsPerSec );
 				_logger.info( "> redoLogRetainedSize=" + redoLogRetainedSize );
+				_logger.info( "> templatesNum=" + templatesNum );
 				
 				ChannelsPropertiesRow channelRow = createChannelRow( rowIndex, sourceName, 
 						targetHostName, targetMemberName, targetPid, targetVersion, channelState, 
-						sendBytesPerSec, sendPacketsPerSec, redoLogRetainedSize );
+						sendBytesPerSec, sendPacketsPerSec, redoLogRetainedSize, templatesNum );
 
 				list.add( channelRow );
 			}
@@ -212,11 +231,11 @@ return result;
 	protected ChannelsPropertiesRow createChannelRow( int index, String sourceName, 
 				String targetHostName, String targetMemberName, long targetPid, String targetVersion, 
 				String channelState, long sendBytesPerSec, 
-				long sendPacketsPerSec, long redoLogRetainedSize ) {
+				long sendPacketsPerSec, long redoLogRetainedSize, int templatesNum ) {
 		
 		ChannelsPropertiesRow channelRow = new ChannelsPropertiesRow( sourceName, targetMemberName, 
 				targetHostName, targetVersion, targetPid, channelState, sendPacketsPerSec,
-				redoLogRetainedSize, sendBytesPerSec );
+				redoLogRetainedSize, sendBytesPerSec, templatesNum );
 		return channelRow;
 	}
 

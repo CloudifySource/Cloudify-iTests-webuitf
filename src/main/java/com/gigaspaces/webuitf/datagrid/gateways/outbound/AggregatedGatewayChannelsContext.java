@@ -22,8 +22,8 @@ public class AggregatedGatewayChannelsContext extends AbstractChannelsGridPanel 
 	@Override
 	protected ChannelsPropertiesRow createChannelRow( int index, String sourceName, 
 			String targetHostName, String targetMemberName, long targetPid, String targetVersion, 
-			String channelState, long sendBytesPerSec, 
-			long sendPacketsPerSec, long redoLogRetainedSize ) {
+			String channelState, long sendBytesPerSec, long sendPacketsPerSec, 
+			long redoLogRetainedSize, int templatesNum ) {
 
 		AggregatedGatewayChannelsPropertiesRow channelRow = new AggregatedGatewayChannelsPropertiesRow( _helper, 
 				sourceName, targetMemberName, targetHostName, targetVersion, targetPid, channelState, 
