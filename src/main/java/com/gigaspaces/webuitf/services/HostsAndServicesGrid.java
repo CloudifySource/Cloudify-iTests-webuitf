@@ -104,10 +104,12 @@ public class HostsAndServicesGrid {
 	public void terminateGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 		clickOnHost(hostName);
 		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
+        String componentName;
 		int gscDivIndex = 2;
 		while (true) {
-			if (helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
-				.contains(gscPid)) break;
+            componentName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)));
+            logger.info("found component: " + componentName);
+            if (componentName.contains(gscPid)) break;
 			else gscDivIndex++;
 		}
 
