@@ -71,7 +71,7 @@ public class HostsAndServicesGrid {
         logger.info("searching gsaPID '" + gsaPID + "'");
 
         for (int i = 0 ; i < elements.size() ; i++) {
-            String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + i + "]/table/tbody/tr/td/div/div";
+            String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + (i+1) + "]/table/tbody/tr/td/div/div";
             String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
             logger.info("found id '" + id + "'");
 			if ((id != null) && (id.contains(Long.toString(gsaPID)))) {
