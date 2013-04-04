@@ -390,7 +390,7 @@ public final class WebConstants {
 		}
 		
 		public static final String getPathToInst(int i) {
-			return "//div/div/div[2]/div/div[" + i + "]";
+			return "//div[@id='" + ID.morePopup + "']/div/div[1]/div[2]/div/div[" + i + "]";
 		}
 		
 		public static final String getPathToMenuSelection(String st) {
