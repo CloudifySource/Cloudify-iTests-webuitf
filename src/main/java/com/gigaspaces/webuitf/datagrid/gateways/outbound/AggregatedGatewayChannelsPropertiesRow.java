@@ -28,7 +28,7 @@ public class AggregatedGatewayChannelsPropertiesRow extends ChannelsPropertiesRo
 			long sendBytesPerSec ){
 		
 		super( sourceName, targetMemberName, targetHostName, targetVersion, targetPid, channelState, 
-				sendPacketsPerSec, redoLogRetainedSize, sendBytesPerSec );
+				sendPacketsPerSec, redoLogRetainedSize, sendBytesPerSec, -1 );
 		_helper = helper;
 	}
 	

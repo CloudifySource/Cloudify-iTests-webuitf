@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import com.gigaspaces.internal.cluster.node.impl.ReplicationLogUtils;
+import com.sun.jini.logging.LogUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -66,9 +68,12 @@ public class HostsAndServicesGrid {
 		clickOnHost(hostname);
 		String realId = null;
 		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
-		for (int i = 1 ; i <= elements.size() ; i++) {
-			String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + i + "]/table/tbody/tr/td/div/div";
-			String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
+        logger.info("searching gsaPID '" + gsaPID + "'");
+
+        for (int i = 0 ; i < elements.size() ; i++) {
+            String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + i + "]/table/tbody/tr/td/div/div";
+            String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
+            logger.info("found id '" + id + "'");
 			if ((id != null) && (id.contains(Long.toString(gsaPID)))) {
 				realId = id;
 				break;
@@ -99,10 +104,12 @@ public class HostsAndServicesGrid {
 	public void terminateGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 		clickOnHost(hostName);
 		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
+        String componentName;
 		int gscDivIndex = 2;
 		while (true) {
-			if (helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
-				.contains(gscPid)) break;
+            componentName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)));
+            logger.info("found component: " + componentName);
+            if (componentName.contains(gscPid)) break;
 			else gscDivIndex++;
 		}
 
