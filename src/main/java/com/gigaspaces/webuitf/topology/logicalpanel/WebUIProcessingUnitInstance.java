@@ -29,14 +29,15 @@ public class WebUIProcessingUnitInstance {
 	public WebUIProcessingUnitInstance(String name, WebDriver driver, Selenium selenium) {
 		
 		try {
-			String id = WebConstants.ID.getPuInstanceId(name);
-			@SuppressWarnings("unused")
-			WebElement hostElement = driver.findElement(By.id(id));
 			this.name = name;
-			this.driver = driver;
-			this.selenium = selenium;
-			this.helper = new AjaxUtils(driver);
-		}
+            this.driver = driver;
+            this.selenium = selenium;
+            this.helper = new AjaxUtils(driver);
+
+            String id = WebConstants.ID.getPuInstanceId(name);
+            @SuppressWarnings("unused")
+            WebElement hostElement = helper.waitForElement(By.id(id), AjaxUtils.ajaxWaitingTime*10);
+        }
 		catch (NoSuchElementException e) {
 		}
 		catch (WebDriverException e) {
