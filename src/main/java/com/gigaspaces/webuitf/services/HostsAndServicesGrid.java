@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import com.gigaspaces.internal.cluster.node.impl.ReplicationLogUtils;
-import com.sun.jini.logging.LogUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
