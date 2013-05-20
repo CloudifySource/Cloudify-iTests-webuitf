@@ -42,7 +42,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>webuitf</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
