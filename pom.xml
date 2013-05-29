@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gsVersion>9.5.0-SNAPSHOT</gsVersion>
+		<gsVersion>9.6.0-SNAPSHOT</gsVersion>
 	</properties>
 
 	<repositories>
@@ -42,7 +42,6 @@
 	</dependencies>
 
 	<build>
-		<finalName>webuitf</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

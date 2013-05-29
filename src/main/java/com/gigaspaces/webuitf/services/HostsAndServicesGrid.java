@@ -65,18 +65,31 @@ public class HostsAndServicesGrid {
 	public void startGridServiceComponent(String hostname, int component) throws InterruptedException {
 		clickOnHost(hostname);
 		String realId = null;
-		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        final int repeats = 3;
+        int repetition = 0;
         logger.info("searching gsaPID '" + gsaPID + "'");
 
-        for (int i = 0 ; i < elements.size() ; i++) {
-            String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + i + "]/table/tbody/tr/td/div/div";
-            String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
-            logger.info("found id '" + id + "'");
-			if ((id != null) && (id.contains(Long.toString(gsaPID)))) {
-				realId = id;
-				break;
-			}
-		}		
+        while(repetition < repeats && realId == null){
+
+            logger.info("attempt number " + (repetition + 1));
+            List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+
+            for (int i = 0 ; i < elements.size() ; i++) {
+                String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + (i+1) + "]/table/tbody/tr/td/div/div";
+                String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
+                logger.info("found id '" + id + "'");
+                if ((id != null) && (id.contains(Long.toString(gsaPID)))) {
+                    realId = id;
+                    break;
+                }
+            }
+
+            repetition++;
+        }
+
+        if(realId == null){
+            throw new AssertionError("could not find gsa element");
+        }
 
 		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToGsaOption(realId)));
 		switch (component)  {
@@ -102,10 +115,12 @@ public class HostsAndServicesGrid {
 	public void terminateGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 		clickOnHost(hostName);
 		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
+        String componentName;
 		int gscDivIndex = 2;
 		while (true) {
-			if (helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
-				.contains(gscPid)) break;
+            componentName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)));
+            logger.info("found component: " + componentName);
+            if (componentName.contains(gscPid)) break;
 			else gscDivIndex++;
 		}
 
