@@ -75,21 +75,10 @@ public class ServicesTab extends MainNavigation {
 	}
 	
 	/**
-	 * retrieve the processing unit tree grid from the Topology tab
-	 * @return the PuTreeGrid singelton
-	 */
-	public PuTreeGrid getPuTreeGrid() {
-		return PuTreeGrid.getInstance(selenium, driver);
-	}
-	
-	/**
 	 * retrieve the Host and Services grid from the Topology tab
 	 * @return the Host and Services singelton
 	 */
 	public HostsAndServicesGrid getHostAndServicesGrid() {
 		return HostsAndServicesGrid.getInstance(selenium, driver);
 	}
-	
-	
-
 }
