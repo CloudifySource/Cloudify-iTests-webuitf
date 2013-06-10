@@ -348,10 +348,11 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public void undeploy() {
 		clickOnActions();
 		isActionMenuVisible();
+		
 		helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.pathToUndeployNode) );
-		By xpath = By.xpath(WebConstants.Xpath.acceptAlert);
-		WebElement el = helper.waitForElement( TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime*10, xpath );
-		el.click();
+		
+		helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.acceptAlert) );
+		
 		isActionMenuNotVisible();
 	}
 	
