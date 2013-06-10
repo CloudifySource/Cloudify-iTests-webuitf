@@ -124,13 +124,20 @@ public class AjaxUtils {
 			public boolean apply(By by) {
 				try {
 					_logger.info("Before find first element [" + bys[0] + "]" );
-					WebElement element = driver.findElement(bys[0]);
+					WebElement element = waitForElement( bys[0], 10 );
+					_logger.info( "After find first element " + element );
 					for (int i = 1 ; i < bys.length ; i++) {
 						_logger.info( "Before find element [" + bys[i] + "]" );
 						element = element.findElement(bys[i]); 
 					}
-					element.click();
-					return true;
+					
+					_logger.info( "After for element=" + element );
+					
+					if( element != null ){
+						element.click();
+						return true;
+					}
+					return false;
 				} catch (NoSuchElementException ex) {
 					_logger.info("caught a NoSuchElementException while trying to click on element");
 					_logger.info("trying again");
