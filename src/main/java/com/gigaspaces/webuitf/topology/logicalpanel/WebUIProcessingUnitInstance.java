@@ -120,7 +120,7 @@ public class WebUIProcessingUnitInstance {
 		
 		String spaceMode = helper.retrieveAttribute(spaceModeElement, "qtip");
 		
-		if(spaceMode.equalsIgnoreCase("primary"))
+		if(spaceMode != null && spaceMode.equalsIgnoreCase("primary"))
 			return true;
 		return false;		
 	}
