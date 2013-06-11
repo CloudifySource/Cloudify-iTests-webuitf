@@ -434,7 +434,7 @@ public class AlertsPanel {
 
 		@Override
 		public String toString() {
-			return "WebUIAlert: " + severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
+			return "WebUIAlert: " + status + " | " + severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
 			
 		}
 		
