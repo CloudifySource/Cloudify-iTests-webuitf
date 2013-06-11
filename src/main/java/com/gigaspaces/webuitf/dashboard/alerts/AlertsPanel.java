@@ -104,6 +104,7 @@ public class AlertsPanel {
 					}
 				}
 				if (!found) {
+					logger.info( "Return false 1" );
 					return false;
 				}
 			}
@@ -119,6 +120,7 @@ public class AlertsPanel {
 						}
 					}
 					if (!found) {
+						logger.info( "Return false 2" );
 						return false;
 					}
 					alertGroupIDS.add(alert.getGroupUid());
@@ -132,6 +134,7 @@ public class AlertsPanel {
 				if (alerts.get(j).getStatus().equals(AlertStatus.RESOLVED)) {
 					boolean status = alerts.get(j + 1).getStatus().equals(AlertStatus.RAISED);
 					if (!status) {
+						logger.info( "Return false 3" );
 						return false;
 					}
 					boolean location = alerts.get(j + 1).getLocation().equals(alerts.get(j).getLocation());
@@ -431,7 +434,7 @@ public class AlertsPanel {
 
 		@Override
 		public String toString() {
-			return severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
+			return "WebUIAlert:" + severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
 			
 		}
 		
