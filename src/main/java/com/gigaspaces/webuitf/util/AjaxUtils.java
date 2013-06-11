@@ -134,6 +134,8 @@ public class AjaxUtils {
 					_logger.info( "After for element=" + element );
 					
 					if( element != null ){
+						_logger.info( "is selected=" + element.isSelected() + ", isDisplayed=" + 
+									element.isDisplayed() + ", isEnabled=" + element.isEnabled() );
 						element.click();
 						return true;
 					}
