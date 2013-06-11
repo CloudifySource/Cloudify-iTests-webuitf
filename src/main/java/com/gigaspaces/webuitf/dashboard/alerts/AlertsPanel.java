@@ -113,8 +113,11 @@ public class AlertsPanel {
 			if (alert.getStatus().equals(AlertStatus.RAISED)) {
 				if (!alertGroupIDS.contains(alert.getGroupUid())) {
 					boolean found = false;
+					logger.info( "---Before for, alerts size:" + alerts.size() );
 					for (WebUIAlert webuiAlert : alerts) {
+						logger.info( "---Before if, webuiAlert:" + webuiAlert + ", alert=" + alert );
 						if (webuiAlert.equals(alert)) {
+							logger.info( "---Within if, webuiAlert:" + webuiAlert + ", alert=" + alert );							
 							found = true;
 							break;
 						}
