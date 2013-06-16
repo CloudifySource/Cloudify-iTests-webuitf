@@ -174,7 +174,7 @@ return result;
 						e.printStackTrace();
 					}
 				}
-				if( sendBytesPersSecStr.length() > 0 ){
+				if( sendBytesPersSecStr != null && sendBytesPersSecStr.length() > 0 ){
 					try{
 						sendBytesPerSec = Long.parseLong( sendBytesPersSecStr );
 					}
@@ -182,7 +182,7 @@ return result;
 						e.printStackTrace();
 					}
 				}
-				if( sendPacketsPersSecStr.length() > 0 ){
+				if( sendPacketsPersSecStr != null && sendPacketsPersSecStr.length() > 0 ){
 					try{					
 						sendPacketsPerSec= Long.parseLong( sendPacketsPersSecStr );
 					}
@@ -190,7 +190,7 @@ return result;
 						e.printStackTrace();
 					}
 				}
-				if( redoLogRetainedSizeStr.length() > 0 ){
+				if( redoLogRetainedSizeStr != null && redoLogRetainedSizeStr.length() > 0 ){
 					try{					
 						redoLogRetainedSize = Long.parseLong( redoLogRetainedSizeStr );
 					}

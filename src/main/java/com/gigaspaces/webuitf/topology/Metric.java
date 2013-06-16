@@ -88,10 +88,15 @@ public class Metric {
 			webElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(dis)), timeout);
 			builder.moveToElement(webElement).build().perform();
 		}
-		
-		By by = By.xpath(WebConstants.Xpath.getPathToMetricHoverMenuOption(name));
+		logger.info("Before get Path for [" + name + "]");
+		String pathToMetricHoverMenuOption = WebConstants.Xpath.getPathToMetricHoverMenuOption(name);
+		logger.info("After get Path for [" + name + "], pathToMetricHoverMenuOption=" + pathToMetricHoverMenuOption );
+		By by = By.xpath( pathToMetricHoverMenuOption );
+		logger.info("by:" + by );
 		By[] bys = {by};
-		helper.clickWhenPossible(timeout, TimeUnit.SECONDS, bys);		
+		logger.info("before call to clickwhenPossible()" );
+		helper.clickWhenPossible(timeout, TimeUnit.SECONDS, bys);
+		logger.info("after call to clickwhenPossible()" );
 	}
 	
 	public Double getBalance() {

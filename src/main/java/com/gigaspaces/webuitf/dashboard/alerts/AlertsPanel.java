@@ -72,8 +72,12 @@ public class AlertsPanel {
 			public boolean getCondition() {
 				int i = 0;
 				List<WebUIAlert> webuiAlerts = getParentAlertsByType(alertType);
+				logger.info( "Before loop, compar. status=" + status );
 				for (WebUIAlert alert : webuiAlerts) {
-					if (alert.getStatus().equals(status)){
+					logger.info( "Within for loop, alert=" + alert );
+					AlertStatus st = alert.getStatus();
+					logger.info( "Within for loop, status=" + st );
+					if( st != null && st.equals( status ) ){
 						i++;
 					}
 				}
@@ -104,6 +108,7 @@ public class AlertsPanel {
 					}
 				}
 				if (!found) {
+					logger.info( "Return false 1" );
 					return false;
 				}
 			}
@@ -112,13 +117,17 @@ public class AlertsPanel {
 			if (alert.getStatus().equals(AlertStatus.RAISED)) {
 				if (!alertGroupIDS.contains(alert.getGroupUid())) {
 					boolean found = false;
+					logger.info( "---Before for, alerts size:" + alerts.size() );
 					for (WebUIAlert webuiAlert : alerts) {
+						logger.info( "---Before if, webuiAlert:" + webuiAlert + ", alert=" + alert );
 						if (webuiAlert.equals(alert)) {
+							logger.info( "---Within if, webuiAlert:" + webuiAlert + ", alert=" + alert );							
 							found = true;
 							break;
 						}
 					}
 					if (!found) {
+						logger.info( "Return false 2" );
 						return false;
 					}
 					alertGroupIDS.add(alert.getGroupUid());
@@ -132,6 +141,7 @@ public class AlertsPanel {
 				if (alerts.get(j).getStatus().equals(AlertStatus.RESOLVED)) {
 					boolean status = alerts.get(j + 1).getStatus().equals(AlertStatus.RAISED);
 					if (!status) {
+						logger.info( "Return false 3" );
 						return false;
 					}
 					boolean location = alerts.get(j + 1).getLocation().equals(alerts.get(j).getLocation());
@@ -431,7 +441,7 @@ public class AlertsPanel {
 
 		@Override
 		public String toString() {
-			return severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
+			return "WebUIAlert: " + status + " | " + severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
 			
 		}
 		

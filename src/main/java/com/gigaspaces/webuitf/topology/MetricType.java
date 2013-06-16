@@ -24,4 +24,9 @@ public class MetricType {
 		return distrib;
 	}
 
+	@Override
+	public String toString() {
+		return "MetricType [type=" + type + ", name=" + name + ", distrib="
+				+ distrib + "]";
+	}
 }

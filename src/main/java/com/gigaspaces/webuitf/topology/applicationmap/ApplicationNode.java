@@ -348,10 +348,16 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public void undeploy() {
 		clickOnActions();
 		isActionMenuVisible();
-		WebElement el = driver.findElement(By.xpath(WebConstants.Xpath.pathToUndeployNode));
-		el.click();
-		el = helper.waitForElement(TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime*3, By.xpath(WebConstants.Xpath.acceptAlert));
-		el.click();
+		
+		try {
+			Thread.sleep(5*1000);
+		} catch (InterruptedException e1) {
+		}
+
+		helper.clickWhenPossible( 20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.pathToUndeployNode) );
+		
+		helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.acceptAlert) );
+		
 		isActionMenuNotVisible();
 	}
 	

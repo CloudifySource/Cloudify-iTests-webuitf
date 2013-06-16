@@ -14,6 +14,8 @@ import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import com.thoughtworks.selenium.Selenium;
 
+import java.util.logging.Logger;
+
 public class ServicesGrid {
 	
 	private Selenium selenium;
@@ -26,6 +28,8 @@ public class ServicesGrid {
 	private ApplicationsMenuPanel appPanel;
 	
 	private AjaxUtils helper;
+	
+	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public InfrastructureServicesGrid getInfrastructureGrid() {
 		return resourceGrid;
@@ -342,8 +346,16 @@ public class ServicesGrid {
 			public double getRequestsPerSecond() {
 				String xpath = WebConstants.Xpath.pathToWebModule + RELATIVE_PATH_TO_OPS;
 				String ops = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(xpath));
-				return Double.valueOf(ops.split(" ")[0].substring(1));
+				logger.info("getRequestsPerSecond(), ops : " + ops);
+				String str = ops.split(" ")[0];
+				logger.info("getRequestsPerSecond(), str : " + str);
+				if( str.length() > 2 ){
+					String subString = str.substring(1);
+					logger.info("getRequestsPerSecond(), sbString : " + subString);
+					return Double.valueOf( subString );
+				}
 				
+				return 0;
 			}			
 		}
 		
