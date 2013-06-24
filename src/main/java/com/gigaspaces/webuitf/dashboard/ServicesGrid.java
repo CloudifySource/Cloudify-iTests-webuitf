@@ -382,8 +382,13 @@ public class ServicesGrid {
 			public double getOperationsPerSecond() {
 				String xpath = WebConstants.Xpath.pathToStatefullModule + RELATIVE_PATH_TO_OPS;
 				String ops = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(xpath));
-				return Double.valueOf(ops.split(" ")[0].substring(1));
+				String[] array = ops.split(" ");
+				if( array.length > 0 ){
+					String str = array[ 0 ];
+					return Double.valueOf( str.substring( 1 ) );
+				}
 				
+				return -1;
 			}
 		}
 		
