@@ -54,7 +54,7 @@ public class AlertsPanel {
 	private WebDriver driver;
 	
 	private AjaxUtils helper;
-	protected Logger logger = Logger.getLogger(this.getClass().getName());
+    static public Logger logger = Logger.getLogger( AlertsPanel.class.getName() );
 
 	public AlertsPanel(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
@@ -93,7 +93,7 @@ public class AlertsPanel {
 	 * @param alerts - the alerts retrieved from the webui
 	 * @param adminAlerts - the alerts triggered by the test
 	 */
-	public boolean areAlertsConsistent(List<WebUIAlert> alerts, List<Alert> adminAlerts) {
+	static public boolean areAlertsConsistent(List<WebUIAlert> alerts, List<Alert> adminAlerts) {
 		List<String> alertGroupIDS = new ArrayList<String>();
 		
 		for (Alert alert : adminAlerts) {
