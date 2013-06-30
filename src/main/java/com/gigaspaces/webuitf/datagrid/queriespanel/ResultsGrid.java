@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +21,8 @@ public class ResultsGrid {
 	private static final String RESULTS_GRID_ID = "gs-query-results-grid";
 	private static final String PATH_TO_RESULTS_PROPS = "//div[@id='" + RESULTS_GRID_ID + "']/div/div/div[1]";
 	private static final String PATH_TO_RESULTS = "//div[@id='" + RESULTS_GRID_ID + "']/div/div/div[2]/div";
+	
+	private Logger logger = Logger.getLogger(this.getClass().getName());
 	
 	private WebDriver driver;
 	
@@ -58,6 +62,7 @@ public class ResultsGrid {
 			return results;
 		}
 		catch (WebDriverException e) {
+			logger.log( Level.SEVERE, e.toString(), e );
 			return null;
 		}
 		
