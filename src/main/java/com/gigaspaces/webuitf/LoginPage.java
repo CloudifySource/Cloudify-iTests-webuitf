@@ -95,14 +95,18 @@ public class LoginPage {
 	 */
 	public MainNavigation login() throws InterruptedException {
 				
-		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.loginButton));	
+		return login( TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
+	}
+	
+	
+	public MainNavigation login( int timeout, TimeUnit timeUnit ) throws InterruptedException {
+		
+		helper.clickWhenPossible(timeout, timeUnit,By.xpath(WebConstants.Xpath.loginButton));	
 		logger.info("clicked login button");
 		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
 				
 		return new MainNavigation(selenium, driver);
-	}
-	
+	}	
 }
