@@ -1,5 +1,7 @@
 package com.gigaspaces.webuitf.datagrid.eventcontainers;
 
+import com.gigaspaces.webuitf.WebConstants;
+
 /**
  * 
  * @author evgenyf
@@ -12,7 +14,7 @@ public interface EventContainersConstants {
     String POLLING_EVENT_CONTAINERS_GRID = "gs-polling-event-containers-grid";
     String NOTIFY_EVENT_CONTAINERS_GRID = "gs-notify-event-containers-grid";
 	
-	String COLUMN_CLASS_PREFIX = "x-grid3-col-";
+	String COLUMN_CLASS_PREFIX = WebConstants.COLUMN_CLASS_PREFIX;
 	
 	
 	

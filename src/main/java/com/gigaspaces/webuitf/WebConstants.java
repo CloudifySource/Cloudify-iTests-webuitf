@@ -23,6 +23,8 @@ public final class WebConstants {
 	public static final String CHROME = "Chrome";
 	public static final String FIREFOX = "Firefox";
 	
+	public static final String COLUMN_CLASS_PREFIX = "x-grid3-col-";
+	
 	public static final class ID {
 		public static final String topologyPanel = "gs-tab-item-topology";
 		public static final String dataGridPanel = "gs-tab-item-console";
@@ -121,6 +123,7 @@ public final class WebConstants {
 		public static final String localViewsPanelToggle = "gs-tab-item-local-views-toggler-button";
 		public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
 		public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
+		public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
 		
 		public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
 		public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";

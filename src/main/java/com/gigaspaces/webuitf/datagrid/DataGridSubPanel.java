@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.datagrid.eventcontainers.EventContainersTabPanel;
 import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
+import com.gigaspaces.webuitf.datagrid.inboundactivity.InboundActivityPanel;
 import com.gigaspaces.webuitf.datagrid.locacaches.LocalCachesPanel;
 import com.gigaspaces.webuitf.datagrid.localviews.LocalViewsContextPager;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
@@ -70,4 +71,9 @@ public class DataGridSubPanel {
 		clickWhenPossible( WebConstants.ID.localCachesPanelToggle );
 		return new LocalCachesPanel( helper );
 	}
+	
+	public InboundActivityPanel switchToInboundActivity() {
+		clickWhenPossible( WebConstants.ID.inboundActivityPanelToggle );
+		return new InboundActivityPanel( helper );
+	}	
 }

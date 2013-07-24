@@ -21,6 +21,7 @@ public class SpaceContext {
 	private static final String NEXT_BUTTON_CLASS = "x-grid3-td-slider_model_next_button";
 	private static final String ACTUAL_INSTANCES_CLASS = "x-grid3-td-actual_instances";
 	private static final String SPACE_INSTANCES_GRID = "gs-slider-grid-SPACE_INSTANCES";
+	private static final String REMOTE_ACTIVITY_PROBE_BUTTON_CLASS = "x-grid3-td-remote_activity";
 
 	private String spaceName;
 	private String puName;
@@ -99,5 +100,11 @@ public class SpaceContext {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setRemoteActivityProbe(boolean b) {
+
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(id),
+				By.className(REMOTE_ACTIVITY_PROBE_BUTTON_CLASS), By.tagName("button"));
 	}
 }
