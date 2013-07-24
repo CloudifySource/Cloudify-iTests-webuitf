@@ -21,6 +21,7 @@ public class InboundActivityPanel implements InboundActivityConstants{
 	
 	private final AjaxUtils _helper;
 	private WebElement _gridElement;
+	private static final String QTIP_ATTRIBUTE = "qtip";
 	
 	private Logger _logger = Logger.getLogger( this.getClass().getName() );
 
@@ -55,44 +56,89 @@ public class InboundActivityPanel implements InboundActivityConstants{
 			String spaceInstanceName = getTagValue( spaceInstanceNameColumnElements, rowIndex );
 			String pidStr = getTagValue( pidColumnElements, rowIndex );
 			String hostIp = getTagValue( hostIpColumnElements, rowIndex );
-			String receivedTrafficStr = getTagValue( receivedTrafficColumnElements, rowIndex );
-			String generatedTrafficStr = getTagValue( generatedTrafficColumnElements, rowIndex );			
-			String totalTrafficStr = getTagValue( totalTrafficColumnElements, rowIndex );
+			
+			WebElement receivedTrafficElement = getSpanCellElement( receivedTrafficColumnElements, rowIndex );
+			WebElement generatedTrafficElement = getSpanCellElement( generatedTrafficColumnElements, rowIndex );
+			WebElement totalTrafficElement = getSpanCellElement( totalTrafficColumnElements, rowIndex );
+			
+			String receivedTrafficMBStr = getTagValue( receivedTrafficElement );
+			String generatedTrafficMBStr = getTagValue( generatedTrafficElement );			
+			String totalTrafficMBStr = getTagValue( totalTrafficElement );
+			
+			String receivedTrafficQtip = getQtipAttributeValue( receivedTrafficElement );
+			String generatedTrafficQtip = getQtipAttributeValue( generatedTrafficElement );			
+			String totalTrafficQtip = getQtipAttributeValue( totalTrafficElement );			
 
 			_logger.info( ">rowIndex=" + rowIndex );
 			_logger.info( "spaceInstanceName=" + spaceInstanceName );
 			_logger.info( "pidStr=" + pidStr );
 			_logger.info( "hostIp=" + hostIp );
-			_logger.info( "receivedTrafficStr=" + receivedTrafficStr );
-			_logger.info( "generatedTrafficStr=" + generatedTrafficStr );
-			_logger.info( "totalTrafficStr=" + totalTrafficStr + "\n\n" );
+			_logger.info( "receivedTrafficQtip=" + receivedTrafficQtip );
+			_logger.info( "generatedTrafficQtip=" + generatedTrafficQtip );
+			_logger.info( "totalTrafficQtip=" + totalTrafficQtip );
+			_logger.info( "receivedTrafficMBStr=" + receivedTrafficMBStr );
+			_logger.info( "generatedTrafficMBStr=" + generatedTrafficMBStr );
+			_logger.info( "totalTrafficMBStr=" + totalTrafficMBStr + "\n\n" );
 			
 			long pid = Long.parseLong( pidStr );
-			double receivedTraffic = Double.parseDouble( receivedTrafficStr );
-			double generatedTraffic = Double.parseDouble( generatedTrafficStr );			
-			double totalTraffic = Double.parseDouble( totalTrafficStr );			
+			double receivedTrafficMB = Double.parseDouble( receivedTrafficMBStr );
+			double generatedTrafficMB = Double.parseDouble( generatedTrafficMBStr );			
+			double totalTrafficMB = Double.parseDouble( totalTrafficMBStr );
+			
+			double receivedTraffic = extractValueFromQtip( receivedTrafficQtip );
+			double generatedTraffic = extractValueFromQtip( generatedTrafficQtip );			
+			double totalTraffic = extractValueFromQtip( totalTrafficQtip );			
 			
 			InboundActivityRow inboundActivityRow = new InboundActivityRow( spaceInstanceName, 
-					spaceMode, pid, hostIp, receivedTraffic, generatedTraffic, totalTraffic );
+					spaceMode, pid, hostIp, receivedTraffic, generatedTraffic, totalTraffic,
+					receivedTrafficMB, generatedTrafficMB, totalTrafficMB );
 			list.add( inboundActivityRow );
 		}
 
 		return list.toArray( new InboundActivityRow[ list.size() ] );
-	}	
+	}
+	
+	private static double extractValueFromQtip( String qtipStr ){
+		return Double.parseDouble( qtipStr.substring( 0, qtipStr.indexOf( " " ) ).trim() );
+	}
 	
 	private String getTagValue( List<WebElement> elementsList, int index ){
-		String value = null;
+		
+		return getTagValue( getSpanCellElement(elementsList, index) );
+	}
+	
+	private static String getTagValue( WebElement spanCellElement ){
+		
+		return spanCellElement == null ? null : spanCellElement.getText();
+	}
+	
+	private static String getQtipAttributeValue( WebElement spanCellElement ){
+		
+		return getAttributeValue( spanCellElement, QTIP_ATTRIBUTE );
+	}	
+	
+	private static String getAttributeValue( WebElement spanCellElement, String attrName ){
+		
+		return spanCellElement == null ? null : spanCellElement.getAttribute( attrName );
+	}	
+	
+	private WebElement getSpanCellElement( List<WebElement> elementsList, int index ){
+
+		return getElement( elementsList, index, "span" );		
+	}
+	
+	private WebElement getElement( List<WebElement> elementsList, int index, String tagName ){
+		WebElement spanCellElement = null;
 		if( elementsList != null && elementsList.size() > index ){
 			try{
 				WebElement webElement = elementsList.get( index );
-				WebElement spanCellElement = webElement.findElement( By.tagName( "span" ) );
-				value = spanCellElement.getText();
+				spanCellElement = webElement.findElement( By.tagName( tagName ) );
 			}
 			catch( Exception e ){
 				_logger.log( Level.SEVERE, e.toString(), e );
 			}
 		}
 
-		return value;		
+		return spanCellElement;		
 	}
 }

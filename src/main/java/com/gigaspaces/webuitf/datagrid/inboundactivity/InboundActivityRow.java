@@ -12,12 +12,18 @@ public class InboundActivityRow {
 	private final String 	_spaceMode; 
 	private final long 		_pid;
 	private final String 	_hostIp;
+	
 	private final double 	_receivedTraffic;
 	private final double 	_generatedTraffic; 
 	private final double 	_totalTraffic;
 	
+	private final double 	_receivedTrafficMB;
+	private final double 	_generatedTrafficMB; 
+	private final double 	_totalTrafficMB;
+	
 	public InboundActivityRow( String spaceInstanceName, String spaceMode, long pid, String hostIp, 
-							double receivedTraffic, double generatedTraffic, double totalTraffic ){
+							double receivedTraffic, double generatedTraffic, double totalTraffic,
+							double receivedTrafficMB, double generatedTrafficMB, double totalTrafficMB ){
 
 		_spaceInstanceName = spaceInstanceName; 
 		_spaceMode = spaceMode; 
@@ -26,6 +32,9 @@ public class InboundActivityRow {
 		_receivedTraffic = receivedTraffic;
 		_generatedTraffic = generatedTraffic; 
 		_totalTraffic = totalTraffic;		
+		_receivedTrafficMB = receivedTrafficMB;
+		_generatedTrafficMB = generatedTrafficMB; 
+		_totalTrafficMB = totalTrafficMB;		
 	}
 
 	public String getSpaceInstanceName() {
@@ -55,6 +64,18 @@ public class InboundActivityRow {
 	public double getTotalTraffic() {
 		return _totalTraffic;
 	}
+	
+	public double getReceivedTrafficMB() {
+		return _receivedTrafficMB;
+	}
+
+	public double getGeneratedTrafficMB() {
+		return _generatedTrafficMB;
+	}
+
+	public double getTotalTrafficMB() {
+		return _totalTrafficMB;
+	}	
 
 	@Override
 	public String toString() {
