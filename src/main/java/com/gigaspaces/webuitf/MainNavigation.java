@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.dashboard.DashboardTab;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
@@ -100,6 +101,31 @@ public class MainNavigation {
 			}
 		}
 		return new DataGridTab(selenium, driver);
+	}
+
+	public String getLookupLocators() {
+		
+		WebElement lookupLocatorsElement = null; 
+		try{
+			lookupLocatorsElement = helper.waitForElement( 
+						By.className( WebConstants.ClassNames.lookupLocators ), 10 );
+		}
+		catch( Exception e ){
+		}
+		
+		return lookupLocatorsElement == null ? null : lookupLocatorsElement.getText();
+	}
+
+	public String getLookupGroups() {
+		
+		WebElement lookupGroupsElement = null;
+		try{
+			lookupGroupsElement = helper.waitForElement( 
+						By.className( WebConstants.ClassNames.lookupGroups ), 10 );
+		}
+		catch( Exception e ){
+		}
+		
+		return lookupGroupsElement == null ? null : lookupGroupsElement.getText();
 	}	
-	
 }

@@ -637,6 +637,9 @@ public final class WebConstants {
 	    	    
 	    public static final String dataGridSpaceMode = "x-grid3-col-space_mode_icon";
 	    public static final String topologySpaceMode = "x-grid3-col-icon";
+	    
+	    public static final String lookupGroups = "gs-groups-label";
+	    public static final String lookupLocators = "gs-locators-label";
 		
 		public static final String getHostClassName(String name) {
 			return "gs-physical-grid-row-" + name;

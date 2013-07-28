@@ -88,6 +88,15 @@ public class LoginPage {
 		return this;
 	}
 	
+	public void inputLookupLocator( String lookupLocators ) {
+
+		WebElement lookupLocatorsInput = helper.waitForElement(By.id(WebConstants.ID.locatorsInput), TIMEOUT_IN_SECONDS );
+		lookupLocatorsInput.clear();
+		lookupLocatorsInput.sendKeys(lookupLocators);		
+		
+	}	
+	
+	
 	/**
 	 * logs in to the system
 	 * @return
@@ -108,5 +117,5 @@ public class LoginPage {
 		js.executeScript("return this." + SharedContextConstants.NS_IS_UNDER_TEST + "=true");
 				
 		return new MainNavigation(selenium, driver);
-	}	
+	}
 }
