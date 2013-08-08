@@ -38,5 +38,20 @@ public class LocalViewsContextPager implements LocalViewsConstants {
 		}
 		
 		return context;
+	}
+	
+	public LocalViewChannelsBySourceContext getLocalViewChannelsContext() {
+		String id = LOCAL_VIEW_CHANNELS_GRID_ID;
+		LocalViewChannelsBySourceContext context;
+		try {
+			WebElement element = _helper.waitForElement(TimeUnit.SECONDS, 3, By.id(id));
+			context = new LocalViewChannelsBySourceContext( _helper, element, id );
+		}
+		catch (TimeoutException e) {
+			_logger.info("caugh a timeout exception while waiting for element. returning null");
+			return null;
+		}
+		
+		return context;
 	}	
 }
