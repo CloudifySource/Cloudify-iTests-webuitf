@@ -26,7 +26,7 @@ public class ApplicationMap {
 	}
 	
 	public enum DumpType {
-		JVM_THREAD,NETWORK,LOG,PU,JVM_HEAP,
+		JVM_THREAD,NETWORK,LOG,PU,JVM_HEAP;
 	}
 	
 	public enum ServiceTypes {
