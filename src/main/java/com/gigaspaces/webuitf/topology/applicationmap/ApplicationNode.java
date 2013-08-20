@@ -156,7 +156,7 @@ public class ApplicationNode implements RenderedWebUIElement {
         return JsScripts.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
-	public boolean isSelected() {
+	public Boolean isSelected() {
         return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
 	}
 	

@@ -1,5 +1,6 @@
 package com.gigaspaces.webuitf.util;
 
+import org.apache.commons.lang.ClassUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -19,13 +20,13 @@ public class JsScripts {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         try {
-            T val = (T) js.executeScript(
+            return (T) js.executeScript(
                     "return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes['" + nodeName + "']['" + propName + "']");
+
 /*
-            T val = (String)js.executeScript(
+            return (T) js.executeScript(
                     "return window.GsUtils.findBy(" + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".data.nodes, 'id', " + name + ").id");
 */
-            return val;
         } catch (NoSuchElementException e) {
             return null;
         } catch (WebDriverException e) {
