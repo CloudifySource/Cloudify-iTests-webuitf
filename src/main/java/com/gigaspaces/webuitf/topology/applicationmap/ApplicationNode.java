@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import com.gigaspaces.webuitf.util.JsScripts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -114,180 +115,49 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	@SuppressWarnings("unchecked")
 	public List<String> getComponents() {
-		
-		List<String> comps = new ArrayList<String>();
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			comps = (List<String>)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].components");
-			return comps;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
-		
-	}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "components");
+    }
 
 	public Long getxPosition() {
-		
-		Long xPosition = null;
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			xPosition = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].layoutPosX");
-			return xPosition;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "layoutPosX");
 	}
 	
 	public Long getyPosition() {
-		
-		Long xPosition = null;
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			xPosition = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].layoutPosY");
-			return xPosition;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "layoutPosY");
 	}
 
 	public String getNodeColor() {
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			String color = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].nodeColor");
-			return color;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "nodeColor");
 	}
 	
 	public String getNodeType() {
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			String type = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].nodeType");
-			return type;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "nodeType");
 	}
 	
 	public String getPuType() {
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			String type = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].puType");
-			return type;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "puType");
 	}
 
 	public DeploymentStatus getStatus() {
 
-		String stat;
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			stat = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].status");
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
-		if (stat.equals(WebConstants.ID.nodeStatusOk)) return DeploymentStatus.INTACT;
-		if (stat.equals(WebConstants.ID.nodeStatusWarning)) return DeploymentStatus.COMPROMISED;
-		if (stat.equals(WebConstants.ID.nodeStatusBroken)) return DeploymentStatus.BROKEN;
-		else return DeploymentStatus.SCHEDULED;
-	}
+		String status = JsScripts.getApplicationMapNodeProp(driver, name, "status");
+
+        if (WebConstants.ID.nodeStatusOk.equals(status)) return DeploymentStatus.INTACT;
+        if (WebConstants.ID.nodeStatusWarning.equals(status)) return DeploymentStatus.COMPROMISED;
+        if (WebConstants.ID.nodeStatusBroken.equals(status)) return DeploymentStatus.BROKEN;
+        else return DeploymentStatus.SCHEDULED;
+    }
 
 	public Long getPlannedInstances() {
-
-		Long actualInstances = null;
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			actualInstances = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].plannedInstances");
-			return actualInstances;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "plannedInstances");
 	}
 
 	public Long getActualInstances() {
-
-		Long actualInstances = null;
-
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			actualInstances = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].actualInstances");
-			return actualInstances;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
 	public boolean isSelected() {
-		boolean selected = false;
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			selected = (Boolean)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].selected");
-			return selected;
-		}
-		catch (NoSuchElementException e) {
-			return false;
-		}
-		catch (WebDriverException e) {
-			return false;
-		}
+        return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
 	}
 	
 	public void select() {
@@ -370,24 +240,8 @@ public class ApplicationNode implements RenderedWebUIElement {
 		RemoteWebElement node = (RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
 		return node.isDisplayed();
 	}
-	
-	public void restart() {
-		//TODO implement
-	}
-	
-	private String getNameFromUI(String name) {
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		try {
-			String label = (String)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' 
-					+ name + '"' + "].id");
-			return label;
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
-		catch (WebDriverException e) {
-			return null;
-		}
+	private String getNameFromUI(String name) {
+        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
 	}
 }
