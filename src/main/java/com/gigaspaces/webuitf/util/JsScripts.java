@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 
 /**
+ * Utility to execute native JS scripts.
+ *
  * User: eliranm
  * Date: 8/20/13
  * Time: 1:20 PM
