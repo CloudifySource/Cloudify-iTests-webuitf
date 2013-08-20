@@ -1,6 +1,5 @@
 package com.gigaspaces.webuitf.util;
 
-import org.apache.commons.lang.ClassUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -16,12 +15,22 @@ public class JsScripts {
     private JsScripts() {
     }
 
-    public static <T> T getApplicationMapNodeProp(WebDriver driver, String nodeName, String propName) {
+    /**
+     * Gets a property value from a node in the application map graph. Note: this method may only be used to return
+     * wrapper types, not primitives.
+     *
+     * @param driver   A web driver to be used as the JavaScript executor.
+     * @param nodeId   The node id in the application map.
+     * @param propName The node's property name.
+     * @param <T>      A return type from the executor, will be inferred automatically.
+     * @return The value of the node's property.
+     */
+    public static <T> T getApplicationMapNodeProp(WebDriver driver, String nodeId, String propName) {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         try {
             return (T) js.executeScript(
-                    "return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes['" + nodeName + "']['" + propName + "']");
+                    "return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes['" + nodeId + "']['" + propName + "']");
 
 /*
             return (T) js.executeScript(
