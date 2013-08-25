@@ -127,11 +127,11 @@ public class ApplicationNode implements RenderedWebUIElement {
 	}
 
 	public String getNodeColor() {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "nodeColor");
+        return JsScripts.getApplicationMapNodeProp(driver, name, "color");
 	}
 	
 	public String getNodeType() {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "nodeType");
+        return JsScripts.getApplicationMapNodeProp(driver, name, "type");
 	}
 	
 	public String getPuType() {
