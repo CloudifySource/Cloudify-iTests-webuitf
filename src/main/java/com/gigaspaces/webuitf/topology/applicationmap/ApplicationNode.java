@@ -117,6 +117,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<String> getComponents() {
         return JsScripts.getApplicationMapNodeProp(driver, name, "components");
     }
+	
 
 	public Long getxPosition() {
         return JsScripts.getApplicationMapNodeProp(driver, name, "layoutPosX");
@@ -156,8 +157,26 @@ public class ApplicationNode implements RenderedWebUIElement {
         return JsScripts.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
-	public Boolean isSelected() {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
+	public boolean isSelected( WebElement puElement ) {
+        
+		//return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
+
+		//check strokeWidth for detecting selection
+		WebElement rectElement = puElement.findElement( By.className( "puRect" ) );
+		String styleAttribute = rectElement.getAttribute( "style" );
+		final String STROKE_WIDTH_ATTR = "stroke-width:";
+		int strokeWidthIndex = styleAttribute.indexOf( STROKE_WIDTH_ATTR );
+		float strokeWidth = -1;
+		if( strokeWidthIndex > 0 ){
+			int strokeWidthEndIndex = styleAttribute.indexOf( "px;", strokeWidthIndex );
+			if( strokeWidthEndIndex < 0 ){
+				strokeWidthEndIndex = styleAttribute.indexOf( ";", strokeWidthIndex );
+			}
+			String strokeWidthStr = styleAttribute.substring( strokeWidthIndex + STROKE_WIDTH_ATTR.length(), strokeWidthEndIndex );
+			strokeWidth = Float.parseFloat( strokeWidthStr.trim() );
+		}
+		
+		return strokeWidth > 2;		
 	}
 	
 	public void select() {
@@ -165,10 +184,34 @@ public class ApplicationNode implements RenderedWebUIElement {
 		long end = System.currentTimeMillis() + 10 * 1000;
 		
 		while (System.currentTimeMillis() < end) {
-			helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime,
-					TimeUnit.SECONDS,
-					By.id(WebConstants.ID.nodePath + this.name));
-			selected = isSelected();
+			
+//			List<WebElement> puNodeElements = helper.waitForElements(
+//					TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime, By.className( "nodetype-pu" ) );
+			
+			List<WebElement> puNodeElements = 
+					helper.getDriver().findElements( By.className( "nodetype-pu" ) );
+			
+			WebElement requiredPuNodeElement = null;
+			for( WebElement puNodeElement : puNodeElements ){
+				WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
+				String puName = puNameElement.getText();
+				if( puName.equals( name ) ){
+					requiredPuNodeElement = puNodeElement; 
+					break;
+				}
+			}
+			
+			if( requiredPuNodeElement != null ){
+				requiredPuNodeElement.click();
+			}
+			else{
+				throw new IllegalStateException( "Processing Unit [" + name + "] was not found in Application Map" );
+			}
+			
+//			helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime,
+//					TimeUnit.SECONDS, By.className( "nodetype-pu" ) );
+
+			selected = isSelected( requiredPuNodeElement );
 			if (selected) {
 				break;
 			} else {

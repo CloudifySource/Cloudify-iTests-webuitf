@@ -31,10 +31,6 @@ public class JsScripts {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         try {
-/*
-            return (T) js.executeScript(
-                    "return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes['" + nodeId + "']['" + propName + "']");
-*/
 
             return (T) js.executeScript(
                     "return window.GsUtils.findBy(" + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".data.nodes, 'id', '" + nodeId + "')['" + propName + "']");
