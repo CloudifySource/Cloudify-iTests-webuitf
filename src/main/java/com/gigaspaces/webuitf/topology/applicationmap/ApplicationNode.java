@@ -142,6 +142,8 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 		String status = JsScripts.getApplicationMapNodeProp(driver, name, "status");
 
+		System.out.println( "Retrieved by method getApplicationMapNodeProp() status is [" + status + "]" );
+		
         if (WebConstants.ID.nodeStatusOk.equals(status)) return DeploymentStatus.INTACT;
         if (WebConstants.ID.nodeStatusWarning.equals(status)) return DeploymentStatus.COMPROMISED;
         if (WebConstants.ID.nodeStatusBroken.equals(status)) return DeploymentStatus.BROKEN;
