@@ -12,7 +12,7 @@ import com.thoughtworks.selenium.Selenium;
 
 public class HealthPanel extends TopologySubPanel {
 
-	private static final int WAIT_TIMEOUT_IN_MS = 5000;
+	private static final int WAIT_TIMEOUT_IN_SECONDS = 5;
 
 	public HealthPanel(Selenium selenium, WebDriver driver) {
 		super(selenium, driver);
@@ -49,7 +49,7 @@ public class HealthPanel extends TopologySubPanel {
 		Metric metric = null;
 		WebElement element;
 		try {
-			element = helper.waitForElement(By.className(name), WAIT_TIMEOUT_IN_MS );
+			element = helper.waitForElement(By.className(name), WAIT_TIMEOUT_IN_SECONDS );
 			metric = new Metric(element, driver);
 		}
 		catch (WebDriverException e) {
