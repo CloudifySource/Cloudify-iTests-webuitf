@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.gigaspaces.webuitf.util.JsScripts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,12 +11,12 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openspaces.admin.pu.DeploymentStatus;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.RenderedWebUIElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.JsScripts;
 import com.gigaspaces.webuitf.util.SharedContextConstants;
 
 public class ApplicationNode implements RenderedWebUIElement {
@@ -188,18 +187,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 //			List<WebElement> puNodeElements = helper.waitForElements(
 //					TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime, By.className( "nodetype-pu" ) );
 			
-			List<WebElement> puNodeElements = 
-					helper.getDriver().findElements( By.className( "nodetype-pu" ) );
-			
-			WebElement requiredPuNodeElement = null;
-			for( WebElement puNodeElement : puNodeElements ){
-				WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
-				String puName = puNameElement.getText();
-				if( puName.equals( name ) ){
-					requiredPuNodeElement = puNodeElement; 
-					break;
-				}
-			}
+			WebElement requiredPuNodeElement = retrievePuNode( name );
 			
 			if( requiredPuNodeElement != null ){
 				requiredPuNodeElement.click();
@@ -227,6 +215,24 @@ public class ApplicationNode implements RenderedWebUIElement {
 		}
 	}
 	
+	private WebElement retrievePuNode( String reqPuName ) {
+
+		List<WebElement> puNodeElements = 
+				helper.getDriver().findElements( By.className( "nodetype-pu" ) );
+		
+		WebElement requiredPuNodeElement = null;
+		for( WebElement puNodeElement : puNodeElements ){
+			WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
+			String puName = puNameElement.getText();
+			if( puName.equals( reqPuName ) ){
+				requiredPuNodeElement = puNodeElement; 
+				break;
+			}
+		}		
+		
+		return requiredPuNodeElement;
+	}
+
 	public void clickOnActions() {
 		WebElement actionsButton = driver.findElement(By.id(WebConstants.ID.getActionToolBoxId(this.name)));
 		actionsButton.click();
@@ -280,8 +286,10 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	public boolean isDisplayed() {
 		
-		RemoteWebElement node = (RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
-		return node.isDisplayed();
+//		RemoteWebElement node = 
+//				(RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
+		WebElement node = retrievePuNode(name);
+		return ( node == null ) ? false : node.isDisplayed();
 	}
 
 	private String getNameFromUI(String name) {
