@@ -42,7 +42,7 @@ public class ApplicationMap {
 	}
 	
 	public void deselectAllNodes() {
-		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMapClearSelection));
+		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMap));
 		graphCanvas.click();
 	}
 
