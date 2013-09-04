@@ -158,8 +158,10 @@ public class ApplicationNode implements RenderedWebUIElement {
         return JsScripts.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
-	public boolean isSelected( WebElement puElement ) {
-        
+	private boolean isSelected( WebElement puElement ) {
+		if( puElement == null ){
+			throw new IllegalStateException( "WebElement cannot be null" );
+		}
 		//return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
 
 		//check strokeWidth for detecting selection
@@ -178,6 +180,11 @@ public class ApplicationNode implements RenderedWebUIElement {
 		}
 		
 		return strokeWidth > 2;		
+	}
+	
+	public boolean isSelected(){
+		WebElement requiredPuNodeElement = retrievePuNode( name );
+		return isSelected( requiredPuNodeElement );
 	}
 	
 	public void select() {
