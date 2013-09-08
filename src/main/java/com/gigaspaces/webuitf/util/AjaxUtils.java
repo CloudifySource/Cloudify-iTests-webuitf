@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
@@ -119,6 +120,7 @@ public class AjaxUtils {
 
 		FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
 		fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
+		fluentWait.withMessage( "Could not click on " + Arrays.toString( bys ) );
 		fluentWait.withTimeout(timeout, timeUnit);
 		fluentWait.until(new Predicate<By>() {
 			public boolean apply(By by) {
