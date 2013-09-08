@@ -9,6 +9,7 @@ import org.openqa.selenium.TimeoutException;
 
 import com.gigaspaces.webuitf.datagrid.DataGridSubPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 
 public class TypesPanel extends DataGridSubPanel {
 
@@ -30,13 +31,40 @@ public class TypesPanel extends DataGridSubPanel {
 
 	public SpaceType getType(String type) {
 
-		String id = TYPE_ID_PREFIX + type;
+		final String id = TYPE_ID_PREFIX + type;
 		helper.waitForElement(By.id(id), WAIT_TIMEOUT_IN_MS);
 
 		SpaceType spaceType = new SpaceType(type, helper.getDriver(), id);
 		spaceType.setId(id);
-		int instancesCount = Integer.parseInt(helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS)));
-		int templatesCount = Integer.parseInt(helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS)));
+
+		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+			public boolean getCondition() {
+				String instancesCountStr = helper.waitForTextToBeExctractable(
+						4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS));
+				return instancesCountStr.length() > 0;
+			}
+		};
+		AjaxUtils.repetitiveAssertTrue("Object count must be displayed", condition, 5 );
+
+		
+		condition = new RepetitiveConditionProvider() {
+			public boolean getCondition() {
+				String instancesCountStr = helper.waitForTextToBeExctractable(
+						4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS));
+				return instancesCountStr.length() > 0;
+			}
+		};
+		AjaxUtils.repetitiveAssertTrue("Templates count must be displayed", condition, 5 );
+		
+		
+		String instancesCountStr = helper.waitForTextToBeExctractable(
+				4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS));
+		String templatesCountStr = helper.waitForTextToBeExctractable(
+				4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS));
+		
+		int instancesCount = Integer.parseInt( instancesCountStr );
+		int templatesCount = Integer.parseInt( templatesCountStr );		
+		
 		String storageType = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(STORAGE_TYPE_CLASS));
 		String priorityGroup = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(PRIORATY_GROUP_CLASS));
 		String spaceKey = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(SPACE_KEY_CLASS));
