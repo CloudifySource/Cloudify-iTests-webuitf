@@ -41,7 +41,12 @@ public class TypesPanel extends DataGridSubPanel {
 			public boolean getCondition() {
 				String instancesCountStr = helper.waitForTextToBeExctractable(
 						4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS));
-				return instancesCountStr.length() > 0;
+				if( !instancesCountStr.isEmpty() ){
+					Integer.parseInt( instancesCountStr );
+					return true;
+				}
+				
+				return false;
 			}
 		};
 		AjaxUtils.repetitiveAssertTrue("Object count must be displayed", condition, 5 );
@@ -49,9 +54,14 @@ public class TypesPanel extends DataGridSubPanel {
 		
 		condition = new RepetitiveConditionProvider() {
 			public boolean getCondition() {
-				String instancesCountStr = helper.waitForTextToBeExctractable(
+				String templatesCountStr = helper.waitForTextToBeExctractable(
 						4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS));
-				return instancesCountStr.length() > 0;
+				if( !templatesCountStr.isEmpty() ){
+					Integer.parseInt( templatesCountStr );
+					return true;
+				}
+				
+				return false;
 			}
 		};
 		AjaxUtils.repetitiveAssertTrue("Templates count must be displayed", condition, 5 );
