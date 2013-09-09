@@ -133,15 +133,11 @@ public class AjaxUtils {
 						element = element.findElement(bys[i]); 
 					}
 					
-					_logger.info( "After for element=" + element + ", tag name=" + 
-									element.getTagName() + ", text=" + element.getText() + 
-									", element=" + element.getAttribute( "style" ) );
-					
+					_logger.info( "After for element and before if, element=" + element );
 					if( element != null ){
-						_logger.info( "is selected=" + element.isSelected() + ", isDisplayed=" + 
-									element.isDisplayed() + ", isEnabled=" + element.isEnabled() );
+						_logger.info( "Before click" );
 						element.click();
-						_logger.info( "is selected2=" + element.isSelected() );						
+						_logger.info( "After click" );						
 						return true;
 					}
 					return false;
