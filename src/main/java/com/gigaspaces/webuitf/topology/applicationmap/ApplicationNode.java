@@ -36,9 +36,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<Connector> getTargets() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
@@ -62,9 +60,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<Connector> getTargeted() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
@@ -88,9 +84,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<Connector> getConnectors() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
