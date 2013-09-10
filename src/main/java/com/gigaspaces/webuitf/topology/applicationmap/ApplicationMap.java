@@ -86,4 +86,18 @@ public class ApplicationMap {
 		}
 		return null;
 	}
+
+	public Collection<String> getConnectorSources( String targetName ) {
+		List<WebElement> pathElements = driver.findElements( 
+				By.tagName( PATH_TAG ).
+				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + targetName + "]") );
+
+		List<String> sourcesName = new ArrayList<String>();
+		for( WebElement pathLement : pathElements ){
+			String source = pathLement.getAttribute( DATA_SOURCE_ATTR );
+			sourcesName.add( source );
+		}
+		
+		return sourcesName;
+	}
 }
