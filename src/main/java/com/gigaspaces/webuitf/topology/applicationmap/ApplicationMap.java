@@ -1,5 +1,8 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
+
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,6 +21,8 @@ public class ApplicationMap {
 	public static final String CONN_STATUS_WARN = "conn-status-warn";
 	public static final String CONN_STATUS_CRITICAL = "conn-status-critical";
 	public static final String CONN_STATUS_EMPTY = "conn-status-empty";
+	
+	private final String PATH_TAG = "path";
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
@@ -44,6 +49,16 @@ public class ApplicationMap {
 	public void deselectAllNodes() {
 		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMap));
 		graphCanvas.click();
+	}
+	
+	public boolean hasConnector( String sourceName, String targetName ){
+		WebElement result = null;
+		List<WebElement> pathElements = driver.findElements( 
+				By.tagName( PATH_TAG ).
+				cssSelector( PATH_TAG + "[data-source=" + sourceName+ "]").
+				cssSelector( PATH_TAG + "[data-target=" + targetName + "]") );
+		
+		return !pathElements.isEmpty();
 	}
 
 	public ApplicationNode getApplicationNode(String name) {
