@@ -1,6 +1,8 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -22,7 +24,9 @@ public class ApplicationMap {
 	public static final String CONN_STATUS_CRITICAL = "conn-status-critical";
 	public static final String CONN_STATUS_EMPTY = "conn-status-empty";
 	
-	private final String PATH_TAG = "path";
+	private static final String PATH_TAG = "path";
+	private static final String DATA_SOURCE_ATTR = "data-source";
+	private static final String DATA_TARGET_ATTR = "data-target";
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
@@ -52,14 +56,28 @@ public class ApplicationMap {
 	}
 	
 	public boolean hasConnector( String sourceName, String targetName ){
-		WebElement result = null;
+		
 		List<WebElement> pathElements = driver.findElements( 
 				By.tagName( PATH_TAG ).
-				cssSelector( PATH_TAG + "[data-source=" + sourceName+ "]").
-				cssSelector( PATH_TAG + "[data-target=" + targetName + "]") );
+				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + sourceName+ "]").
+				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + targetName + "]") );
 		
 		return !pathElements.isEmpty();
 	}
+	
+	public Collection<String> getConnectorTargets( String sourceName ){
+		List<WebElement> pathElements = driver.findElements( 
+				By.tagName( PATH_TAG ).
+				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + sourceName+ "]") );
+
+		List<String> targetsName = new ArrayList<String>();
+		for( WebElement pathLement : pathElements ){
+			String target = pathLement.getAttribute( DATA_TARGET_ATTR );
+			targetsName.add( target );
+		}
+		
+		return targetsName;
+	}	
 
 	public ApplicationNode getApplicationNode(String name) {
 		ApplicationNode appNode = new ApplicationNode(name, driver);
