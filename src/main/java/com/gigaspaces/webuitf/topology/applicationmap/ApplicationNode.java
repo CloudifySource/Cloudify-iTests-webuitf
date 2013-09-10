@@ -1,12 +1,9 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -17,7 +14,6 @@ import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.RenderedWebUIElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.gigaspaces.webuitf.util.JsScripts;
-import com.gigaspaces.webuitf.util.SharedContextConstants;
 
 public class ApplicationNode implements RenderedWebUIElement {
 	
@@ -36,6 +32,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		return name;
 	}
 	
+	/*
 	public List<Connector> getTargets() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
@@ -110,7 +107,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		catch (WebDriverException e) {
 			return null;
 		}
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public List<String> getComponents() {
