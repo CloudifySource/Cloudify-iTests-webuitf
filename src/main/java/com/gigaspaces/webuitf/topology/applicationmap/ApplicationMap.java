@@ -16,13 +16,13 @@ import com.thoughtworks.selenium.Selenium;
 public class ApplicationMap {
 	
 	private WebDriver driver;
-	private Selenium selenium;
+//	private Selenium selenium;
 	private AjaxUtils helper;
 
-	public static final String CONN_STATUS_OK = "conn-status-ok";
-	public static final String CONN_STATUS_WARN = "conn-status-warn";
-	public static final String CONN_STATUS_CRITICAL = "conn-status-critical";
-	public static final String CONN_STATUS_EMPTY = "conn-status-empty";
+	public static final String CONN_STATUS_OK = "ok";
+	public static final String CONN_STATUS_WARN = "warn";
+	public static final String CONN_STATUS_CRITICAL = "critical";
+	public static final String CONN_STATUS_EMPTY = "empty";
 	
 	private static final String PATH_TAG = "path";
 	private static final String DATA_SOURCE_ATTR = "data-source";
@@ -30,7 +30,7 @@ public class ApplicationMap {
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
-		this.selenium = selenium;
+//		this.selenium = selenium;
 		this.helper = new AjaxUtils(driver);
 	}
 	
@@ -71,14 +71,37 @@ public class ApplicationMap {
 				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + sourceName+ "]") );
 
 		List<String> targetsName = new ArrayList<String>();
-		for( WebElement pathLement : pathElements ){
-			String target = pathLement.getAttribute( DATA_TARGET_ATTR );
+		for( WebElement pathElement : pathElements ){
+			String target = pathElement.getAttribute( DATA_TARGET_ATTR );
 			targetsName.add( target );
 		}
 		
 		return targetsName;
 	}	
 
+	public Collection<Connector> getConnectors( String nodeName ){
+		List<WebElement> targetElements = driver.findElements( 
+				By.cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + nodeName+ "]" ) );
+		
+		List<WebElement> sourceElements = driver.findElements( 
+				By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + nodeName+ "]" ) );		
+
+		List<WebElement> allElements = new ArrayList<WebElement>(targetElements);
+		allElements.addAll(sourceElements);
+		
+		List<Connector> connectors = new ArrayList<Connector>();
+		for( WebElement pathElement : allElements ){
+			String target = pathElement.getAttribute( DATA_TARGET_ATTR );
+			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
+			WebElement parentElement = pathElement.findElement(By.xpath("..") );
+			WebElement img = parentElement.findElement( By.tagName( "img" ).className( "status" ) );
+			String status = img.getAttribute( "conn-status" );
+			connectors.add( new Connector( source, target, status ) );
+		}
+		
+		return connectors;
+	}	
+	
 	public ApplicationNode getApplicationNode(String name) {
 		ApplicationNode appNode = new ApplicationNode(name, driver);
 		if (appNode.getName() != null) {
@@ -93,8 +116,8 @@ public class ApplicationMap {
 				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + targetName + "]") );
 
 		List<String> sourcesName = new ArrayList<String>();
-		for( WebElement pathLement : pathElements ){
-			String source = pathLement.getAttribute( DATA_SOURCE_ATTR );
+		for( WebElement pathElement : pathElements ){
+			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
 			sourcesName.add( source );
 		}
 		
