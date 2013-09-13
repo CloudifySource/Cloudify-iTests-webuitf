@@ -25,6 +25,9 @@ public class TypesPanel extends DataGridSubPanel {
 	private static final String SPACE_ROUTING_KEY_CLASS = "x-grid3-td-data_type_space_routing_key";
 	private static final String INDEXED_FIELDS_CLASS = "x-grid3-td-data_type_indexed_fields";
 	
+	private int instancesCount;
+	private int templatesCount;		
+
 	public TypesPanel(  AjaxUtils helper ) {
 		super(helper);
 	}
@@ -41,40 +44,21 @@ public class TypesPanel extends DataGridSubPanel {
 			public boolean getCondition() {
 				String instancesCountStr = helper.waitForTextToBeExctractable(
 						4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS));
-				if( !instancesCountStr.isEmpty() ){
-					Integer.parseInt( instancesCountStr );
-					return true;
-				}
-				
-				return false;
-			}
-		};
-		AjaxUtils.repetitiveAssertTrue("Object count must be displayed", condition, 5 );
 
-		
-		condition = new RepetitiveConditionProvider() {
-			public boolean getCondition() {
 				String templatesCountStr = helper.waitForTextToBeExctractable(
 						4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS));
-				if( !templatesCountStr.isEmpty() ){
-					Integer.parseInt( templatesCountStr );
+
+				if( !instancesCountStr.isEmpty() && !templatesCountStr.isEmpty() ){
+					instancesCount = Integer.parseInt( instancesCountStr );
+					templatesCount = Integer.parseInt( templatesCountStr );
 					return true;
 				}
 				
 				return false;
 			}
 		};
-		AjaxUtils.repetitiveAssertTrue("Templates count must be displayed", condition, 5 );
-		
-		
-		String instancesCountStr = helper.waitForTextToBeExctractable(
-				4, TimeUnit.SECONDS, By.id(id),By.className(OBJECT_COUNT_CLASS));
-		String templatesCountStr = helper.waitForTextToBeExctractable(
-				4, TimeUnit.SECONDS, By.id(id),By.className(TEMPLATES_COUNT_CLASS));
-		
-		int instancesCount = Integer.parseInt( instancesCountStr );
-		int templatesCount = Integer.parseInt( templatesCountStr );		
-		
+		AjaxUtils.repetitiveAssertTrue("Objects and templates count must be displayed", condition, 5 );
+
 		String storageType = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(STORAGE_TYPE_CLASS));
 		String priorityGroup = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(PRIORATY_GROUP_CLASS));
 		String spaceKey = helper.waitForTextToBeExctractable(4, TimeUnit.SECONDS, By.id(id),By.className(SPACE_KEY_CLASS));
