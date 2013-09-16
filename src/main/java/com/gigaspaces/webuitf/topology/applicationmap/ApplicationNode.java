@@ -18,15 +18,19 @@ import com.gigaspaces.webuitf.util.JsScripts;
 public class ApplicationNode implements RenderedWebUIElement {
 	
 	private String name;
+//	private String simpleName;
 	private WebDriver driver;
-	
+//	
 	private AjaxUtils helper;
+	private WebElement element;
 	
-	public ApplicationNode(String name, WebDriver driver) {
+	public ApplicationNode(WebElement element, String name,  WebDriver driver) {
 		this.driver = driver;
-		this.name = getNameFromUI(name);
+		this.name = name;
+		this.element = element;
 		this.helper = new AjaxUtils(driver);
 	}
+	
 	
 	public String getName() {
 		return name;
@@ -292,7 +296,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 		return ( node == null ) ? false : node.isDisplayed();
 	}
 
-	private String getNameFromUI(String name) {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
-	}
+//	private String getNameFromUI(String name) {
+//        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
+//	}
 }

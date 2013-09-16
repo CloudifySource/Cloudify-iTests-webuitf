@@ -4,6 +4,7 @@ package com.gigaspaces.webuitf.topology.applicationmap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,8 +26,14 @@ public class ApplicationMap {
 	public static final String CONN_STATUS_EMPTY = "empty";
 	
 	private static final String PATH_TAG = "path";
+	private static final String TEXT_TAG = "text";	
 	private static final String DATA_SOURCE_ATTR = "data-source";
 	private static final String DATA_TARGET_ATTR = "data-target";
+	
+	private static final String TYPE_INDICATION_COMPONENTS_ATTR = "type-indication-components";
+	private static final String PU_NAME_ATTR = "pu-name";
+	
+	private static final String PU_NAME_TEXT_CLASS = "puNameText";
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
@@ -38,7 +45,7 @@ public class ApplicationMap {
 		JVM_THREAD,NETWORK,LOG,PU,JVM_HEAP;
 	}
 	
-	public enum ServiceTypes {
+/*	public enum ServiceTypes {
 		UNDEFINED,
 		LOAD_BALANCER,
 		WEB_SERVER,
@@ -48,7 +55,7 @@ public class ApplicationMap {
 		MESSAGE_BUS,
 		DATABASE,
 		NOSQL_DB;
-	}
+	}*/
 	
 	public void deselectAllNodes() {
 		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMap));
@@ -64,6 +71,7 @@ public class ApplicationMap {
 		
 		return !pathElements.isEmpty();
 	}
+	
 	
 	public Collection<String> getConnectorTargets( String sourceName ){
 		List<WebElement> pathElements = driver.findElements( 
@@ -101,8 +109,52 @@ public class ApplicationMap {
 		
 		return connectors;
 	}	
+
+	public ApplicationNode getApplicationNode( String name ){
+		List<WebElement> elements = driver.findElements( 
+				By.tagName( TEXT_TAG ).
+				className( PU_NAME_TEXT_CLASS ) );
+		WebElement resultElement  = null;
+		if( elements != null ){
+			for( WebElement element : elements ){
+				if( element.getText()!= null && element.getText().equals( name ) ){
+					resultElement = element;
+					break;
+				}
+			}
+		}
+		
+		return resultElement == null ? null : new ApplicationNode( resultElement, name, driver );
+	}
 	
-	public ApplicationNode getApplicationNode(String name) {
+	public String getApplicationNodeStatus( String name ){
+		List<WebElement> elements = driver.findElements( 
+				By.tagName( "g" ).
+				className( "nodetype-pu" ) );
+		
+		WebElement puElement  = null;
+		if( elements != null ){
+			for( WebElement element : elements ){
+				String puName = element.getAttribute( PU_NAME_ATTR );
+				if( puName != null && puName.equals( name ) ){
+					puElement = element;
+					break;
+				}
+			}
+		}
+		
+		if( puElement != null ){
+			WebElement statusElement = puElement.findElement( By.className( "status" ) );
+			if( statusElement != null ){
+				return statusElement.getAttribute( "node-status" );
+			}
+		}
+		
+		return null;
+	}	
+	
+/*	public ApplicationNode getApplicationNode( String name ) {
+		
 		ApplicationNode appNode = new ApplicationNode(name, driver);
 		if (appNode.getName() != null) {
 			return appNode;
@@ -110,6 +162,14 @@ public class ApplicationMap {
 		return null;
 	}
 
+	public ApplicationNode getApplicationNode(String name, String simpleName ) {
+		ApplicationNode appNode = new ApplicationNode(name, simpleName, driver);
+		if (appNode.getName() != null) {
+			return appNode;
+		}
+		return null;
+	}*/
+	
 	public Collection<String> getConnectorSources( String targetName ) {
 		List<WebElement> pathElements = driver.findElements( 
 				By.tagName( PATH_TAG ).
@@ -122,5 +182,28 @@ public class ApplicationMap {
 		}
 		
 		return sourcesName;
+	}
+
+	public List<String> getTypeIndicationComponents(String puName ) {
+		WebElement element = driver.findElement( 
+				By.cssSelector( "g[" + PU_NAME_ATTR + "=" + puName + "]" ).
+				className( "components" ) );
+
+		List<String> resultList = new ArrayList<String>();
+		if( element != null ){
+			String attribute = element.getAttribute( TYPE_INDICATION_COMPONENTS_ATTR );
+			if( attribute != null && !attribute.trim().isEmpty() ){
+				if( !attribute.contains( "," ) ){
+					resultList.add( attribute );
+				}
+				else{
+					StringTokenizer strTokenizer = new StringTokenizer( attribute, "," );
+					while( strTokenizer.hasMoreTokens() ){
+						resultList.add( strTokenizer.nextToken() );
+					}
+				}
+			}
+		}
+		return resultList;
 	}
 }
