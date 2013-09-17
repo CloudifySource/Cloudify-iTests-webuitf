@@ -25,13 +25,17 @@ public class ApplicationMap {
 	public static final String CONN_STATUS_CRITICAL = "critical";
 	public static final String CONN_STATUS_EMPTY = "empty";
 	
-	private static final String PATH_TAG = "path";
-	private static final String TEXT_TAG = "text";	
-	private static final String DATA_SOURCE_ATTR = "data-source";
-	private static final String DATA_TARGET_ATTR = "data-target";
+	public static final String PATH_TAG = "path";
+	public static final String TEXT_TAG = "text";
+	public static final String G_TAG = "g";
+	public static final String DATA_SOURCE_ATTR = "data-source";
+	public static final String DATA_TARGET_ATTR = "data-target";
+	public static final String NODE_TYPE_PU_CLASS = "nodetype-pu";
+	public static final String STATUS_CLASS = "status";
+	public static final String NODE_STATUS_ATTR = "node-status";
 	
-	private static final String TYPE_INDICATION_COMPONENTS_ATTR = "type-indication-components";
-	private static final String PU_NAME_ATTR = "pu-name";
+	public static final String TYPE_INDICATION_COMPONENTS_ATTR = "type-indication-components";
+	public static final String PU_NAME_ATTR = "pu-name";
 	
 	private static final String PU_NAME_TEXT_CLASS = "puNameText";
 
@@ -102,7 +106,7 @@ public class ApplicationMap {
 			String target = pathElement.getAttribute( DATA_TARGET_ATTR );
 			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
 			WebElement parentElement = pathElement.findElement(By.xpath("..") );
-			WebElement img = parentElement.findElement( By.tagName( "img" ).className( "status" ) );
+			WebElement img = parentElement.findElement( By.tagName( "img" ).className( STATUS_CLASS ) );
 			String status = img.getAttribute( "conn-status" );
 			connectors.add( new Connector( source, target, status ) );
 		}
@@ -129,8 +133,8 @@ public class ApplicationMap {
 	
 	public String getApplicationNodeStatus( String name ){
 		List<WebElement> elements = driver.findElements( 
-				By.tagName( "g" ).
-				className( "nodetype-pu" ) );
+				By.tagName( G_TAG ).
+				className( NODE_TYPE_PU_CLASS ) );
 		
 		WebElement puElement  = null;
 		if( elements != null ){
@@ -144,9 +148,9 @@ public class ApplicationMap {
 		}
 		
 		if( puElement != null ){
-			WebElement statusElement = puElement.findElement( By.className( "status" ) );
+			WebElement statusElement = puElement.findElement( By.className( STATUS_CLASS ) );
 			if( statusElement != null ){
-				return statusElement.getAttribute( "node-status" );
+				return statusElement.getAttribute( NODE_STATUS_ATTR );
 			}
 		}
 		

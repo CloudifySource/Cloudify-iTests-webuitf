@@ -135,14 +135,40 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	public DeploymentStatus getStatus() {
 
-		String status = JsScripts.getApplicationMapNodeProp(driver, name, "status");
-
-		System.out.println( "Retrieved by method getApplicationMapNodeProp() status is [" + status + "]" );
+		String status = "";
+		List<WebElement> elements = driver.findElements( 
+				By.tagName( ApplicationMap.G_TAG ).
+				className( ApplicationMap.NODE_TYPE_PU_CLASS ) );
 		
-        if (WebConstants.ID.nodeStatusOk.equals(status)) return DeploymentStatus.INTACT;
-        if (WebConstants.ID.nodeStatusWarning.equals(status)) return DeploymentStatus.COMPROMISED;
-        if (WebConstants.ID.nodeStatusBroken.equals(status)) return DeploymentStatus.BROKEN;
-        else return DeploymentStatus.SCHEDULED;
+		WebElement puElement  = null;
+		if( elements != null ){
+			for( WebElement element : elements ){
+				String puName = element.getAttribute( ApplicationMap.PU_NAME_ATTR );
+				if( puName != null && puName.equals( name ) ){
+					puElement = element;
+					break;
+				}
+			}
+		}
+		
+		if( puElement != null ){
+			WebElement statusElement = puElement.findElement( By.className( ApplicationMap.STATUS_CLASS ) );
+			if( statusElement != null ){
+				status = statusElement.getAttribute( ApplicationMap.NODE_STATUS_ATTR );
+			}
+		}
+		
+        if (WebConstants.ID.nodeStatusOk.equals(status)){
+        	return DeploymentStatus.INTACT;
+        }
+        if (WebConstants.ID.nodeStatusWarning.equals(status)){
+        	return DeploymentStatus.COMPROMISED;
+        }
+        if (WebConstants.ID.nodeStatusBroken.equals(status)){
+        	return DeploymentStatus.BROKEN;
+        }
+        
+        return DeploymentStatus.SCHEDULED;		
     }
 
 	public Long getPlannedInstances() {
