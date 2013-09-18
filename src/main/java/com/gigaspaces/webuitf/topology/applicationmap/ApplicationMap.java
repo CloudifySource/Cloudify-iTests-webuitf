@@ -70,8 +70,8 @@ public class ApplicationMap {
 		
 		List<WebElement> pathElements = driver.findElements( 
 				By.tagName( PATH_TAG ).
-				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + sourceName+ "]").
-				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + targetName + "]") );
+				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + sourceName+ "\"]").
+				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=\"" + targetName + "\"]") );
 		
 		return !pathElements.isEmpty();
 	}
@@ -80,7 +80,7 @@ public class ApplicationMap {
 	public Collection<String> getConnectorTargets( String sourceName ){
 		List<WebElement> pathElements = driver.findElements( 
 				By.tagName( PATH_TAG ).
-				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + sourceName+ "]") );
+				cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + sourceName+ "\"]") );
 
 		List<String> targetsName = new ArrayList<String>();
 		for( WebElement pathElement : pathElements ){
@@ -89,14 +89,28 @@ public class ApplicationMap {
 		}
 		
 		return targetsName;
+	}
+	
+	public Collection<String> getConnectorSources( String targetName ) {
+		List<WebElement> pathElements = driver.findElements( 
+				By.tagName( PATH_TAG ).
+				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=\"" + targetName + "\"]") );
+
+		List<String> sourcesName = new ArrayList<String>();
+		for( WebElement pathElement : pathElements ){
+			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
+			sourcesName.add( source );
+		}
+		
+		return sourcesName;
 	}	
 
 	public Collection<Connector> getConnectors( String nodeName ){
 		List<WebElement> targetElements = driver.findElements( 
-				By.cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + nodeName+ "]" ) );
+				By.cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=\"" + nodeName+ "\"]" ) );
 		
 		List<WebElement> sourceElements = driver.findElements( 
-				By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=" + nodeName+ "]" ) );		
+				By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + nodeName+ "\"]" ) );		
 
 		List<WebElement> allElements = new ArrayList<WebElement>(targetElements);
 		allElements.addAll(sourceElements);
@@ -174,23 +188,9 @@ public class ApplicationMap {
 		return null;
 	}*/
 	
-	public Collection<String> getConnectorSources( String targetName ) {
-		List<WebElement> pathElements = driver.findElements( 
-				By.tagName( PATH_TAG ).
-				cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=" + targetName + "]") );
-
-		List<String> sourcesName = new ArrayList<String>();
-		for( WebElement pathElement : pathElements ){
-			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
-			sourcesName.add( source );
-		}
-		
-		return sourcesName;
-	}
-
 	public List<String> getTypeIndicationComponents(String puName ) {
 		WebElement element = driver.findElement( 
-				By.cssSelector( "g[" + PU_NAME_ATTR + "=" + puName + "]" ).
+				By.cssSelector( "g[" + PU_NAME_ATTR + "=\"" + puName + "\"]" ).
 				className( "components" ) );
 
 		List<String> resultList = new ArrayList<String>();
