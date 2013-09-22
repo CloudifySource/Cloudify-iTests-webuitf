@@ -63,7 +63,8 @@ public class AlertsPanel {
 	}
 
 	public static AlertsPanel getInstance(Selenium selenium, WebDriver driver) {
-		return new AlertsPanel(selenium, driver);
+		
+		return new AlertsPanel( selenium, driver );
 	}
 	
 	public void waitForAlerts(final AlertStatus status, final String alertType, final int numberOfResolved){
