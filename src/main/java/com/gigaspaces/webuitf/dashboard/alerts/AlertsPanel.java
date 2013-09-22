@@ -96,6 +96,9 @@ public class AlertsPanel {
 	static public boolean areAlertsConsistent(List<WebUIAlert> alerts, List<Alert> adminAlerts) {
 		List<String> alertGroupIDS = new ArrayList<String>();
 		
+		logger.info( "---Before for, admin alerts size:" + adminAlerts.size() );
+		logger.info( "---Before for, admin alerts:" + adminAlerts.toArray( new Alert[ adminAlerts.size() ] ) );
+		
 		for (Alert alert : adminAlerts) {
 			/* if a resolved alert appears in the admin alerts, it must have a corresponding resolved alert
 			   from the webui */
@@ -117,7 +120,7 @@ public class AlertsPanel {
 			if (alert.getStatus().equals(AlertStatus.RAISED)) {
 				if (!alertGroupIDS.contains(alert.getGroupUid())) {
 					boolean found = false;
-					logger.info( "---Before for, alerts size:" + alerts.size() );
+					logger.info( "---Before for, WEB alerts size:" + alerts.size() );
 					for (WebUIAlert webuiAlert : alerts) {
 						logger.info( "---Before if, webuiAlert:" + webuiAlert + ", alert=" + alert );
 						if (webuiAlert.equals(alert)) {
