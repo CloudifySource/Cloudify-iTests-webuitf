@@ -10,55 +10,54 @@ import com.gigaspaces.webuitf.events.WebUIAdminEvent;
 
 public class DashboardEventsGrid extends AbstractEventsGrid{
 
-	private static final int WAIT_TIMEOUT_IN_SECONDS = 1;
-	
 	public DashboardEventsGrid(WebDriver driver) {
 		super(driver);
 	}
 	
+	@Override
 	public WebUIAdminEvent getEvent(int index) {
 		
 		WebElement eventElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToEventInDashboardEventsGrid(index)), WAIT_TIMEOUT_IN_SECONDS);		
 		return prepareEvent(eventElement);
 	}
 	
+	@Override
 	public void switchToLastMinuteEvents(){
 		
-		WebElement element = helper.waitForElement(By.id(WebConstants.ID.dashboardLastMinuteEventsButton), WAIT_TIMEOUT_IN_SECONDS);
-		element.click();
+		switchToTab( WebConstants.ID.dashboardLastMinuteEventsButton );
 	}
 	
+	@Override
 	public void switchToLastHourEvents(){
 		
-		WebElement element = helper.waitForElement(By.id(WebConstants.ID.dashboardLastHourEventsButton), WAIT_TIMEOUT_IN_SECONDS);
-		element.click();
+		switchToTab( WebConstants.ID.dashboardLastHourEventsButton );		
 	}
 	
+	@Override
 	public void switchToLastDayeEvents(){
 		
-		WebElement element = helper.waitForElement(By.id(WebConstants.ID.dashboardLastDayEventsButton), WAIT_TIMEOUT_IN_SECONDS);
-		element.click();
+		switchToTab( WebConstants.ID.dashboardLastDayEventsButton );
 	}
 	
+	@Override
 	public void switchToAllEvents(){
 		
-		WebElement element = helper.waitForElement(By.id(WebConstants.ID.dashboardAllEventsButton), WAIT_TIMEOUT_IN_SECONDS);
-		element.click();
+		switchToTab( WebConstants.ID.dashboardAllEventsButton );
 	}
 	
+	@Override
 	public void enterTextInEventsFilter(String text) throws InterruptedException{
 		
 		WebElement filterInputElement = helper.waitForElement(By.id(WebConstants.ID.dashboardEventsFilterInput), WAIT_TIMEOUT_IN_SECONDS);
 		filterInputElement.sendKeys(text);
 		Thread.sleep(1000);
 	}
-	
+
+	@Override
 	public void clearTextInEventsFilter(){
 		
 		WebElement eventsFilter = helper.waitForElement(By.id(WebConstants.ID.dashboardEventsFilter), WAIT_TIMEOUT_IN_SECONDS);
 		WebElement eventsFilterClearButton = eventsFilter.findElement(By.className(WebConstants.ClassNames.EventsGridClearFilter));
 		eventsFilterClearButton.click();
 	}
-	
-	
 }

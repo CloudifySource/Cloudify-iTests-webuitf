@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.events;
+AbstractEventsGrid.javapackage com.gigaspaces.webuitf.events;
 
 import java.util.ArrayList;
 import java.util.List;
