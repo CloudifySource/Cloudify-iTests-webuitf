@@ -57,7 +57,7 @@ public class ContextPager {
 	public SpaceContext getSpaceContext(String puName) {
 		String id = SPACES_CONTEXT_PREFIX_ID + puName.replace(" ", "_");
 		try {
-			helper.waitForElement(TimeUnit.SECONDS, 10, By.id(id));
+			helper.waitForElement(TimeUnit.SECONDS, 15, By.id(id));
 		}
 		catch (TimeoutException e) {
 			_logger.info("caugh a timeout exception while waiting for element. returning null");
