@@ -49,7 +49,7 @@ public class SpaceContext {
 
 	public void select() {
 		for (int i = 0 ; i < 3 ; i++) {
-			helper.clickWhenPossible(15, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
+			helper.clickWhenPossible(20, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
 		}
 	}
 	
