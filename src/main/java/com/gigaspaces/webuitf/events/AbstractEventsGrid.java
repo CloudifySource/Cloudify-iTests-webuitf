@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.events;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
@@ -16,7 +17,7 @@ public abstract class AbstractEventsGrid {
 
 	private WebDriver driver;
 	protected AjaxUtils helper;
-	protected static final int WAIT_TIMEOUT_IN_SECONDS = 1;
+	protected static final int WAIT_TIMEOUT_IN_SECONDS = 7;
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public AbstractEventsGrid(WebDriver driver) {
@@ -102,6 +103,11 @@ public abstract class AbstractEventsGrid {
 		return sb.toString();
 
 	}
+	
+	protected void switchToTab( String buttonId ){
+		
+		helper.clickWhenPossible( WAIT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS, By.id( buttonId ) );
+	}	
 	
 	public WebUIAdminEvent getChronologicalEvent(int index){
 		int totalEvents = getVisibleEvents().size();
