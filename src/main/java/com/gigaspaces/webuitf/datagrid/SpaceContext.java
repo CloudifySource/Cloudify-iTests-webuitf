@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 
 public class SpaceContext {
-	
+
 	private Logger _logger = Logger.getLogger(SpaceContext.class.getName());
 
 	private static final String PU_NAME_CLASS = "x-grid3-td-pu_name";
@@ -36,9 +36,12 @@ public class SpaceContext {
 		this.driver = driver;
 		this.helper = new AjaxUtils(driver);
 		this.helper.setDriver(driver);
-		this.puName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_NAME_CLASS));
-		this.spaceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
+		this.puName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS,
+				By.id(id), By.className(PU_NAME_CLASS));
+		this.spaceName = helper.waitForTextToBeExctractable(5,
+				TimeUnit.SECONDS, By.id(id), By.className(SPACE_NAME_CLASS));
 	}
+
 	public String getSpaceName() {
 		return spaceName;
 	}
@@ -48,12 +51,14 @@ public class SpaceContext {
 	}
 
 	public void select() {
-		_logger.info( "Before Select [" + id + "]" );
-		helper.clickWhenPossible(20, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
+		_logger.info("Before Select [" + id + "]");
+		helper.clickWhenPossible(20, TimeUnit.SECONDS, By.id(id),
+				By.className(SPACE_NAME_CLASS));
 	}
-	
+
 	public int getActualInstances() {
-		String inst = helper.waitForTextToBeExctractable(10, TimeUnit.SECONDS, By.id(id), By.className(ACTUAL_INSTANCES_CLASS));
+		String inst = helper.waitForTextToBeExctractable(10, TimeUnit.SECONDS,
+				By.id(id), By.className(ACTUAL_INSTANCES_CLASS));
 		return Integer.valueOf(inst);
 	}
 
@@ -61,7 +66,8 @@ public class SpaceContext {
 	 * TODO: optimize / fix to include stricter base case
 	 */
 	public SpaceInstanceContext next() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(id),By.className(NEXT_BUTTON_CLASS), By.tagName("a"));
+		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(id),
+				By.className(NEXT_BUTTON_CLASS), By.tagName("a"));
 		// wait for animation
 		try {
 			Thread.sleep(3000);
@@ -69,19 +75,20 @@ public class SpaceContext {
 			while (seconds < 5) {
 				try {
 
-					List<WebElement> elements = driver.findElement(By.id(SPACE_INSTANCES_GRID)).findElements(By.className("x-grid3-row"));
+					List<WebElement> elements = driver.findElement(
+							By.id(SPACE_INSTANCES_GRID)).findElements(
+							By.className("x-grid3-row"));
 					for (WebElement el : elements) {
 						String className = el.getAttribute("class");
 						if (className.contains("selected")) {
-							return new SpaceInstanceContext(el.getAttribute("id"), driver);
+							return new SpaceInstanceContext(
+									el.getAttribute("id"), driver);
 						}
 					}
-				}
-				catch (StaleElementReferenceException e) {
+				} catch (StaleElementReferenceException e) {
 					_logger.info("caught an exception while retrieving attribute ");
 					seconds += 0.5;
-				}
-				catch (WebDriverException e) {
+				} catch (WebDriverException e) {
 					_logger.info("caught an exception while retrieving attribute ");
 					seconds += 0.5;
 				}
@@ -100,10 +107,11 @@ public class SpaceContext {
 		}
 		return false;
 	}
-	
+
 	public void setRemoteActivityProbe(boolean b) {
 
 		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(id),
-				By.className(REMOTE_ACTIVITY_PROBE_BUTTON_CLASS), By.tagName("button"));
+				By.className(REMOTE_ACTIVITY_PROBE_BUTTON_CLASS),
+				By.tagName("button"));
 	}
 }
