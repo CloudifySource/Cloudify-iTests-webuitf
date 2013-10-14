@@ -60,7 +60,7 @@ public class DataGridSubPanel {
 	}	
 	
 	private void clickWhenPossible( String id ){
-		helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.id( id ) );
+		helper.clickWhenPossible( 20, TimeUnit.SECONDS, By.id( id ) );
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {

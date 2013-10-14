@@ -48,9 +48,8 @@ public class SpaceContext {
 	}
 
 	public void select() {
-		for (int i = 0 ; i < 3 ; i++) {
-			helper.clickWhenPossible(20, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
-		}
+		_logger.info( "Before Select [" + id + "]" );
+		helper.clickWhenPossible(20, TimeUnit.SECONDS, By.id(id),By.className(SPACE_NAME_CLASS));
 	}
 	
 	public int getActualInstances() {
