@@ -421,9 +421,11 @@ public class AlertsPanel {
 				generateDumpButton.click();
 				
 				int resultSeconds = 0;
-				while (resultSeconds < AjaxUtils.ajaxWaitingTime) {
+				while (resultSeconds/10 < AjaxUtils.ajaxWaitingTime) {
 					WebElement progressMessageText = dumpWindow.findElement(By.className("x-progress-text"));
 					String resultMessage = progressMessageText.getText();
+					
+					_logger.info("resultMessage=" + resultMessage);
 					
 					if (resultMessage.toLowerCase().contains("dump file generated successfully")) {
 						succeed = true;
@@ -431,7 +433,7 @@ public class AlertsPanel {
 					} else {
 						_logger.info("Failed to retrieve progress bar text, retyring...");
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(100);
 						} catch (InterruptedException e1) {
 							e1.printStackTrace();
 						}
