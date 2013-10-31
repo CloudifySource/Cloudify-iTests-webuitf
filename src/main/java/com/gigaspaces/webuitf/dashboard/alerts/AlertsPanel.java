@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.dashboard.alerts;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -98,7 +99,7 @@ public class AlertsPanel {
 		List<String> alertGroupIDS = new ArrayList<String>();
 		
 		logger.info( "---Before for, admin alerts size:" + adminAlerts.size() );
-		logger.info( "---Before for, admin alerts:" + adminAlerts.toArray( new Alert[ adminAlerts.size() ] ) );
+		logger.info( "---Before for, admin alerts:" + Arrays.toString( adminAlerts.toArray( new Alert[ adminAlerts.size() ] ) ) );
 		
 		for (Alert alert : adminAlerts) {
 			/* if a resolved alert appears in the admin alerts, it must have a corresponding resolved alert
@@ -142,10 +143,12 @@ public class AlertsPanel {
 		/* here we check that every resolved alert is associated with at least one raised alert */
 		if (alerts.size() != 0) {
 			for (int j = 0 ; j < alerts.size() ; j++) {
-				if (alerts.get(j).getStatus().equals(AlertStatus.RESOLVED)) {
-					boolean status = alerts.get(j + 1).getStatus().equals(AlertStatus.RAISED);
+				WebUIAlert alert = alerts.get(j);
+				if (alert.getStatus().equals(AlertStatus.RESOLVED)) {
+					WebUIAlert comparedAlert = alerts.get(j + 1);
+					boolean status = comparedAlert.getStatus().equals(AlertStatus.RAISED);
 					if (!status) {
-						logger.info( "Return false 3" );
+						logger.info( "Return false 3, j=" + j + ", checked alert=" + alert + ", comparedAlert=" + comparedAlert );
 						return false;
 					}
 					boolean location = alerts.get(j + 1).getLocation().equals(alerts.get(j).getLocation());
