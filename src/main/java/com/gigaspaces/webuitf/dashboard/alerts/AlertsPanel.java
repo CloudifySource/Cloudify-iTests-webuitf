@@ -221,10 +221,11 @@ public class AlertsPanel {
 					alerts.add(webUIAlert);
 					selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 				}
-				Thread.sleep(1000);
+//				Thread.sleep(1000);				
 				i++;
 			}
 			catch (Exception e) {
+				logger.info("exception: " + e);
 				exception = e;
 			}
 		}
