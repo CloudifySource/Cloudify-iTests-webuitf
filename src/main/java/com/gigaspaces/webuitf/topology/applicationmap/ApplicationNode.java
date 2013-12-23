@@ -1,48 +1,46 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.gigaspaces.webuitf.util.JsScripts;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openspaces.admin.pu.DeploymentStatus;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.RenderedWebUIElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.SharedContextConstants;
+import com.gigaspaces.webuitf.util.JsScripts;
 
 public class ApplicationNode implements RenderedWebUIElement {
 	
 	private String name;
+//	private String simpleName;
 	private WebDriver driver;
-	
+//	
 	private AjaxUtils helper;
+	private WebElement element;
 	
-	public ApplicationNode(String name, WebDriver driver) {
+	public ApplicationNode(WebElement element, String name,  WebDriver driver) {
 		this.driver = driver;
-		this.name = getNameFromUI(name);
+		this.name = name;
+		this.element = element;
 		this.helper = new AjaxUtils(driver);
 	}
+	
 	
 	public String getName() {
 		return name;
 	}
 	
+	/*
 	public List<Connector> getTargets() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
@@ -66,9 +64,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<Connector> getTargeted() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
@@ -92,9 +88,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 	public List<Connector> getConnectors() {
 		
 		List<Connector> connectors = new ArrayList<Connector>();
-		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
 		try {
 			Long length = (Long)js.executeScript("return this." + SharedContextConstants.NS_GRAPH_APPLICATION_MAP + ".nodes[" + '"' + name + '"' + "].edges.length");
 			for (int i = 0 ; i < length ; i++) {
@@ -111,12 +105,13 @@ public class ApplicationNode implements RenderedWebUIElement {
 		catch (WebDriverException e) {
 			return null;
 		}
-	}
+	}*/
 
 	@SuppressWarnings("unchecked")
 	public List<String> getComponents() {
         return JsScripts.getApplicationMapNodeProp(driver, name, "components");
     }
+	
 
 	public Long getxPosition() {
         return JsScripts.getApplicationMapNodeProp(driver, name, "layoutPosX");
@@ -140,12 +135,40 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	public DeploymentStatus getStatus() {
 
-		String status = JsScripts.getApplicationMapNodeProp(driver, name, "status");
-
-        if (WebConstants.ID.nodeStatusOk.equals(status)) return DeploymentStatus.INTACT;
-        if (WebConstants.ID.nodeStatusWarning.equals(status)) return DeploymentStatus.COMPROMISED;
-        if (WebConstants.ID.nodeStatusBroken.equals(status)) return DeploymentStatus.BROKEN;
-        else return DeploymentStatus.SCHEDULED;
+		String status = "";
+		List<WebElement> elements = driver.findElements( 
+				By.tagName( ApplicationMap.G_TAG ).
+				className( ApplicationMap.NODE_TYPE_PU_CLASS ) );
+		
+		WebElement puElement  = null;
+		if( elements != null ){
+			for( WebElement element : elements ){
+				String puName = element.getAttribute( ApplicationMap.PU_NAME_ATTR );
+				if( puName != null && puName.equals( name ) ){
+					puElement = element;
+					break;
+				}
+			}
+		}
+		
+		if( puElement != null ){
+			WebElement statusElement = puElement.findElement( By.className( ApplicationMap.STATUS_CLASS ) );
+			if( statusElement != null ){
+				status = statusElement.getAttribute( ApplicationMap.NODE_STATUS_ATTR );
+			}
+		}
+		
+        if (WebConstants.ID.nodeStatusOk.equals(status)){
+        	return DeploymentStatus.INTACT;
+        }
+        if (WebConstants.ID.nodeStatusWarning.equals(status)){
+        	return DeploymentStatus.COMPROMISED;
+        }
+        if (WebConstants.ID.nodeStatusBroken.equals(status)){
+        	return DeploymentStatus.BROKEN;
+        }
+        
+        return DeploymentStatus.SCHEDULED;		
     }
 
 	public Long getPlannedInstances() {
@@ -156,8 +179,33 @@ public class ApplicationNode implements RenderedWebUIElement {
         return JsScripts.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
-	public Boolean isSelected() {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
+	private boolean isSelected( WebElement puElement ) {
+		if( puElement == null ){
+			throw new IllegalStateException( "WebElement cannot be null" );
+		}
+		//return JsScripts.getApplicationMapNodeProp(driver, name, "selected");
+
+		//check strokeWidth for detecting selection
+		WebElement rectElement = puElement.findElement( By.className( "puRect" ) );
+		String styleAttribute = rectElement.getAttribute( "style" );
+		final String STROKE_WIDTH_ATTR = "stroke-width:";
+		int strokeWidthIndex = styleAttribute.indexOf( STROKE_WIDTH_ATTR );
+		float strokeWidth = -1;
+		if( strokeWidthIndex > 0 ){
+			int strokeWidthEndIndex = styleAttribute.indexOf( "px;", strokeWidthIndex );
+			if( strokeWidthEndIndex < 0 ){
+				strokeWidthEndIndex = styleAttribute.indexOf( ";", strokeWidthIndex );
+			}
+			String strokeWidthStr = styleAttribute.substring( strokeWidthIndex + STROKE_WIDTH_ATTR.length(), strokeWidthEndIndex );
+			strokeWidth = Float.parseFloat( strokeWidthStr.trim() );
+		}
+		
+		return strokeWidth > 2;		
+	}
+	
+	public boolean isSelected(){
+		WebElement requiredPuNodeElement = retrievePuNode( name );
+		return isSelected( requiredPuNodeElement );
 	}
 	
 	public void select() {
@@ -165,10 +213,23 @@ public class ApplicationNode implements RenderedWebUIElement {
 		long end = System.currentTimeMillis() + 10 * 1000;
 		
 		while (System.currentTimeMillis() < end) {
-			helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime,
-					TimeUnit.SECONDS,
-					By.id(WebConstants.ID.nodePath + this.name));
-			selected = isSelected();
+			
+//			List<WebElement> puNodeElements = helper.waitForElements(
+//					TimeUnit.SECONDS, AjaxUtils.ajaxWaitingTime, By.className( "nodetype-pu" ) );
+			
+			WebElement requiredPuNodeElement = retrievePuNode( name );
+			
+			if( requiredPuNodeElement != null ){
+				requiredPuNodeElement.click();
+			}
+			else{
+				throw new IllegalStateException( "Processing Unit [" + name + "] was not found in Application Map" );
+			}
+			
+//			helper.clickWhenPossible(AjaxUtils.ajaxWaitingTime,
+//					TimeUnit.SECONDS, By.className( "nodetype-pu" ) );
+
+			selected = isSelected( requiredPuNodeElement );
 			if (selected) {
 				break;
 			} else {
@@ -184,6 +245,24 @@ public class ApplicationNode implements RenderedWebUIElement {
 		}
 	}
 	
+	private WebElement retrievePuNode( String reqPuName ) {
+
+		List<WebElement> puNodeElements = 
+				helper.getDriver().findElements( By.className( "nodetype-pu" ) );
+		
+		WebElement requiredPuNodeElement = null;
+		for( WebElement puNodeElement : puNodeElements ){
+			WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
+			String puName = puNameElement.getText();
+			if( puName.equals( reqPuName ) ){
+				requiredPuNodeElement = puNodeElement; 
+				break;
+			}
+		}		
+		
+		return requiredPuNodeElement;
+	}
+
 	public void clickOnActions() {
 		WebElement actionsButton = driver.findElement(By.id(WebConstants.ID.getActionToolBoxId(this.name)));
 		actionsButton.click();
@@ -237,11 +316,13 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	public boolean isDisplayed() {
 		
-		RemoteWebElement node = (RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
-		return node.isDisplayed();
+//		RemoteWebElement node = 
+//				(RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
+		WebElement node = retrievePuNode(name);
+		return ( node == null ) ? false : node.isDisplayed();
 	}
 
-	private String getNameFromUI(String name) {
-        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
-	}
+//	private String getNameFromUI(String name) {
+//        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
+//	}
 }

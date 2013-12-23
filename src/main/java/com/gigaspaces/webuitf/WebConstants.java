@@ -95,12 +95,23 @@ public final class WebConstants {
 		public static final String healthGaugePointer = "health-gauge-pointer";
 		public static final String applicationsMenuPanel = "gs-applications-menu-panel";
 		public static final String graphApplicationMap = "gs-graph-application-map";
-		public static final String graphApplicationMapClearSelection = "gs-graph-application-map-clear-capturer";
+//		public static final String graphApplicationMapClearSelection = "gs-graph-application-map-clear-capturer";
 	    public static final String graphGatewaysTopology = "gs-graph-gateways-topology";
-		public static final String nodeStatusOk = "node-status-ok";
+		
 		public static final String statusGrid = "gs-window-grid-status";
-		public static final String nodeStatusWarning = "node-status-warn";
-		public static final String nodeStatusBroken = "node-status-critical";
+		
+		public static final String nodeStatusOk = "ok";
+		public static final String nodeStatusWarning = "warn";
+		public static final String nodeStatusBroken = "critical";
+		public static final String nodeStatusWorking = "working";
+		/*
+            'ok': 'status-ok.png',
+            'warn': 'status-alert.png',
+            'critical': 'status-critical.png',
+            'empty': 'status-empty.png',
+            'working': 'spinner.gif'
+		 */
+		
 		public static final String nodePath = "node-shape-path-";
 		public static final String detailsPanel = "gs-side-panel-details";
 		public static final String serviceDetails = "gs-tab-item-service-details";
@@ -124,6 +135,7 @@ public final class WebConstants {
 		public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
 		public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
 		public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
+		public static final String notificationsActivityPanelToggle = "gs-tab-item-notifications-activity-toggler-button";
 		
 		public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
 		public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";

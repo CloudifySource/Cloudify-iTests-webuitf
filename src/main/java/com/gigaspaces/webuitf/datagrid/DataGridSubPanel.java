@@ -12,6 +12,7 @@ import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
 import com.gigaspaces.webuitf.datagrid.inboundactivity.InboundActivityPanel;
 import com.gigaspaces.webuitf.datagrid.locacaches.LocalCachesPanel;
 import com.gigaspaces.webuitf.datagrid.localviews.LocalViewsContextPager;
+import com.gigaspaces.webuitf.datagrid.notificationsactivity.NotificationsActivityPanel;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
@@ -59,7 +60,7 @@ public class DataGridSubPanel {
 	}	
 	
 	private void clickWhenPossible( String id ){
-		helper.clickWhenPossible( 5, TimeUnit.SECONDS, By.id( id ) );
+		helper.clickWhenPossible( 20, TimeUnit.SECONDS, By.id( id ) );
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -75,5 +76,10 @@ public class DataGridSubPanel {
 	public InboundActivityPanel switchToInboundActivity() {
 		clickWhenPossible( WebConstants.ID.inboundActivityPanelToggle );
 		return new InboundActivityPanel( helper );
+	}
+	
+	public NotificationsActivityPanel switchToNotificationsActivity() {
+		clickWhenPossible( WebConstants.ID.notificationsActivityPanelToggle );
+		return new NotificationsActivityPanel( helper );
 	}	
 }

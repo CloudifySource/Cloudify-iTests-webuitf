@@ -1,6 +1,7 @@
 package com.gigaspaces.webuitf.dashboard.alerts;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -63,7 +64,8 @@ public class AlertsPanel {
 	}
 
 	public static AlertsPanel getInstance(Selenium selenium, WebDriver driver) {
-		return new AlertsPanel(selenium, driver);
+		
+		return new AlertsPanel( selenium, driver );
 	}
 	
 	public void waitForAlerts(final AlertStatus status, final String alertType, final int numberOfResolved){
@@ -96,6 +98,9 @@ public class AlertsPanel {
 	static public boolean areAlertsConsistent(List<WebUIAlert> alerts, List<Alert> adminAlerts) {
 		List<String> alertGroupIDS = new ArrayList<String>();
 		
+		logger.info( "---Before for, admin alerts size:" + adminAlerts.size() );
+		logger.info( "---Before for, admin alerts:" + Arrays.toString( adminAlerts.toArray( new Alert[ adminAlerts.size() ] ) ) );
+		
 		for (Alert alert : adminAlerts) {
 			/* if a resolved alert appears in the admin alerts, it must have a corresponding resolved alert
 			   from the webui */
@@ -117,7 +122,7 @@ public class AlertsPanel {
 			if (alert.getStatus().equals(AlertStatus.RAISED)) {
 				if (!alertGroupIDS.contains(alert.getGroupUid())) {
 					boolean found = false;
-					logger.info( "---Before for, alerts size:" + alerts.size() );
+					logger.info( "---Before for, WEB alerts size:" + alerts.size() );
 					for (WebUIAlert webuiAlert : alerts) {
 						logger.info( "---Before if, webuiAlert:" + webuiAlert + ", alert=" + alert );
 						if (webuiAlert.equals(alert)) {
@@ -138,10 +143,12 @@ public class AlertsPanel {
 		/* here we check that every resolved alert is associated with at least one raised alert */
 		if (alerts.size() != 0) {
 			for (int j = 0 ; j < alerts.size() ; j++) {
-				if (alerts.get(j).getStatus().equals(AlertStatus.RESOLVED)) {
-					boolean status = alerts.get(j + 1).getStatus().equals(AlertStatus.RAISED);
+				WebUIAlert alert = alerts.get(j);
+				if (alert.getStatus().equals(AlertStatus.RESOLVED)) {
+					WebUIAlert comparedAlert = alerts.get(j + 1);
+					boolean status = comparedAlert.getStatus().equals(AlertStatus.RAISED);
 					if (!status) {
-						logger.info( "Return false 3" );
+						logger.info( "Return false 3, j=" + j + ", checked alert=" + alert + ", comparedAlert=" + comparedAlert );
 						return false;
 					}
 					boolean location = alerts.get(j + 1).getLocation().equals(alerts.get(j).getLocation());
@@ -214,10 +221,11 @@ public class AlertsPanel {
 					alerts.add(webUIAlert);
 					selenium.click(xPath + WebConstants.Xpath.pathToAlertExpansionButton);
 				}
-				Thread.sleep(1000);
+//				Thread.sleep(1000);				
 				i++;
 			}
 			catch (Exception e) {
+				logger.info("exception: " + e);
 				exception = e;
 			}
 		}
@@ -417,9 +425,11 @@ public class AlertsPanel {
 				generateDumpButton.click();
 				
 				int resultSeconds = 0;
-				while (resultSeconds < AjaxUtils.ajaxWaitingTime) {
+				while (resultSeconds/10 < AjaxUtils.ajaxWaitingTime) {
 					WebElement progressMessageText = dumpWindow.findElement(By.className("x-progress-text"));
 					String resultMessage = progressMessageText.getText();
+					
+					_logger.info("resultMessage=" + resultMessage);
 					
 					if (resultMessage.toLowerCase().contains("dump file generated successfully")) {
 						succeed = true;
@@ -427,7 +437,7 @@ public class AlertsPanel {
 					} else {
 						_logger.info("Failed to retrieve progress bar text, retyring...");
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(100);
 						} catch (InterruptedException e1) {
 							e1.printStackTrace();
 						}

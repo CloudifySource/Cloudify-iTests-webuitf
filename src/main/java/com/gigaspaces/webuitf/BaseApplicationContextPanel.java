@@ -68,7 +68,7 @@ public abstract class BaseApplicationContextPanel extends MainNavigation {
 
 		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
 			public boolean getCondition() {
-				helper.clickWhenPossible(5, TimeUnit.SECONDS,
+				helper.clickWhenPossible(7, TimeUnit.SECONDS,
 						By.id(comboBoxId), By.className("icon"));
 				List<WebElement> allApps = driver
 						.findElement(By.id(comboBoxId)).findElements(
@@ -91,7 +91,7 @@ public abstract class BaseApplicationContextPanel extends MainNavigation {
 
 		AjaxUtils.repetitiveAssertTrue(
 				"Application is not present in the applications combo box.",
-				condition, 10000);
+				condition, 10*1000 );
 	}
 
 }
