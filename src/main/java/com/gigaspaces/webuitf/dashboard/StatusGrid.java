@@ -17,11 +17,16 @@ public class StatusGrid {
 	HealthGauge gauge;
 	CPUCores cpuCores;
 	Memory memory;
+	
+	private static final String CURRENT_PREFIX = "Current:";
+
+	private final WebElement statusGridElement;
 
 	public StatusGrid(Selenium selenium, WebDriver driver) {
 		this.selenium = selenium;
 		this.driver = driver;
 		this.gauge = new HealthGauge();
+		statusGridElement = driver.findElement( By.id( WebConstants.ID.statusGrid ) );
 	}
 
 	public static StatusGrid getInstance(Selenium selenium, WebDriver driver) {
@@ -40,7 +45,7 @@ public class StatusGrid {
 		return new Memory();
 	}
 	
-	private Icon getIcon(String type) {
+	private static Icon getIcon(String type) {
 		if (type.equals(WebConstants.ID.okIcon)) return Icon.OK;
 		if (type.equals(WebConstants.ID.criticalIcon)) return Icon.CRITICAL;
 		if (type.equals(WebConstants.ID.warningIcon)) return Icon.ALERT;
@@ -50,6 +55,23 @@ public class StatusGrid {
 	
 	public String getGridHealth() {
 		return selenium.getText(WebConstants.Xpath.pathToGridHealthInGridStatus);
+	}
+	
+	static double getCountValue( WebElement element ){
+		
+		String perc = element.getText();
+		if( perc.indexOf( CURRENT_PREFIX ) >= 0 ){
+			perc = perc.substring( CURRENT_PREFIX.length() ).trim();
+		}
+		int i = 0;
+		while (perc.charAt(i++) != '%');
+		return Double.parseDouble(perc.substring(0, i - 1));
+	}
+	
+	static Icon getStatusIcon( WebElement statePanel ){
+		WebElement icon = statePanel.findElement( By.className( WebConstants.ClassNames.statePanelHeader ) );
+		String style = icon.getAttribute("class");
+		return StatusGrid.getIcon(style);
 	}
 	
 	public class HealthGauge {
@@ -67,36 +89,27 @@ public class StatusGrid {
 	public class CPUCores {
 		
 		public Icon getIcon() {
-			WebElement icon = driver.findElement(By.xpath(WebConstants.Xpath.pathToCpuCoresInGridStatus + WebConstants.Xpath.pathToIconInResourcesPanelOfGridStatus));
-			String style = icon.getAttribute("class");
-			return StatusGrid.this.getIcon(style);
+			WebElement stateMemoryPanel = statusGridElement.findElement( By.id( WebConstants.ID.stateCpuPanel ) );
+			return getStatusIcon( stateMemoryPanel );			
 		}
 		
 		public Double getCount() {
-			String perc = selenium.getText(WebConstants.Xpath.pathToCpuCoresInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
-			int i = 0;
-			while (perc.charAt(i++) != '%');
-			return Double.parseDouble(perc.substring(0, i - 1));	
+			WebElement usedCpuElement = statusGridElement.findElement( By.id( WebConstants.ID.stateCpuUsageValue ) );
+			return getCountValue( usedCpuElement );
 		}
-		
 	}
 	
 	public class Memory {
 		
 		public Icon getIcon() {
-			WebElement icon = driver.findElement(By.xpath(WebConstants.Xpath.pathToMemoryInGridStatus + WebConstants.Xpath.pathToIconInResourcesPanelOfGridStatus));
-			String style = icon.getAttribute("class");
-			return StatusGrid.this.getIcon(style);
+			WebElement stateMemoryPanel = statusGridElement.findElement( By.id( WebConstants.ID.stateMemoryPanel ) );
+			return getStatusIcon( stateMemoryPanel );
 		}
 		
 		public Double getCount() {
-			String perc = selenium.getText(WebConstants.Xpath.pathToMemoryInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
-			int i = 0;
-			while (perc.charAt(i++) != '%');
-			return Double.parseDouble(perc.substring(0, i - 1));	
+			WebElement usedMemoryElement = 
+					statusGridElement.findElement( By.id( WebConstants.ID.stateMemoryUsageValue ) );
+			return getCountValue( usedMemoryElement );
 		}
-		
 	}
-	
-	
 }
