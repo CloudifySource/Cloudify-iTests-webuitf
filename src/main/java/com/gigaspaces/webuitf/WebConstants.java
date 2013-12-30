@@ -100,10 +100,18 @@ public final class WebConstants {
 		
 		public static final String statusGrid = "gs-window-grid-status";
 		
+		public static final String stateMemoryPanel = "gs-state-memory-panel";
+		public static final String stateCpuPanel = "gs-state-cpu-panel";
+		
+	    public static final String stateMemoryUsageValue = "gs-state-panel-usage-memory";
+	    public static final String stateCpuUsageValue = "gs-state-panel-usage-cpu";
+	    
 		public static final String nodeStatusOk = "ok";
 		public static final String nodeStatusWarning = "warn";
 		public static final String nodeStatusBroken = "critical";
 		public static final String nodeStatusWorking = "working";
+
+	    
 		/*
             'ok': 'status-ok.png',
             'warn': 'status-alert.png',
@@ -294,10 +302,12 @@ public final class WebConstants {
 		public static final String pathToEDSPacketsPerSecond = "//div[@id='" + ID.edsPacketsPerSecond + "']";
 		public static final String pathToEDSBytesPerSecond = "//div[@id='" + ID.edsBytesPerSecond + "']";
 		public static final String pathToEDSOpPerSecond = "//div[@id='" + ID.edsOpPerSecond + "']";
-		public static final String pathToCpuCoresInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[1]";
 		public static final String pathToGridHealthInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div/div[2]/div/div[2]/span";
-		public static final String pathToMemoryInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[3]";
-		public static final String pathToIconInResourcesPanelOfGridStatus = "/div/span";
+		
+//		public static final String pathToCpuCoresInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[1]";
+//		public static final String pathToMemoryInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[3]";
+//		public static final String pathToIconInResourcesPanelOfGridStatus = "/div/span";
+		
 		public static final String pathToNumberInResourcesPanelOfGridStatus = "/div[2]/div/table/tbody/tr[1]/td[2]";
 		public static final String pathToNumberInResourceGrid = "/table/tbody/tr/td[3]";
 		public static final String pathToNameInResourceGrid = "/table/tbody/tr/td[4]";
@@ -618,6 +628,8 @@ public final class WebConstants {
 		public static final String selectedItemInLogsTree = "x-ftree2-selected";
 		public static final String barLineChartContainer = "highcharts-container";
 		public static final String balanceGauge = "gs-balance-gauge";
+		
+		public static final String statePanelHeader = "gs-state-panel-header";		
 		
 		public static final String timelineEventContainer = "simileAjax-bubble-contentContainer";
 		public static final String timelineEventIcon = "timeline-event-icon";
