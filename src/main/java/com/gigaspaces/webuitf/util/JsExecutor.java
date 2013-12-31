@@ -12,9 +12,9 @@ import org.openqa.selenium.WebDriverException;
  * Date: 8/20/13
  * Time: 1:20 PM
  */
-public class JsScripts {
+public class JsExecutor {
 
-    private JsScripts() {
+    private JsExecutor() {
     }
 
     /**
