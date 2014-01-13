@@ -40,9 +40,9 @@ public class AsyncPollingEventContainersPanel extends AbstractEventContainersPan
 	@Override
 	protected void searchEventSpecificColumnsElements() {
 		_concurrentConsumersEventsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( CONCURRENT_CONSUMERS_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );
+				By.cssSelector( "#" + _gridId + " ." + CONCURRENT_CONSUMERS_COLUMN_CLASS + " " + SPAN_TAG ) );
 		_receiveTimeoutElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( RECEIVE_TIMEOUT_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );		
+				By.cssSelector( "#" + _gridId + " ." + RECEIVE_TIMEOUT_COLUMN_CLASS + " " + SPAN_TAG ) );		
 	}
 	
 	private int getConcurrentConsumersTagValue( int index ){

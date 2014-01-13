@@ -50,17 +50,17 @@ public class PollingEventContainersPanel extends AbstractEventContainersPanel im
 	protected void searchEventSpecificColumnsElements() {
 
 		_maxConcurrentConsumersElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( MAX_CONCURRENT_CONSUMERS_COLUMN_CLASS ), 
-				By.tagName( SPAN_TAG ) );		
+				By.cssSelector( "#" + _gridId + " ." + MAX_CONCURRENT_CONSUMERS_COLUMN_CLASS + 
+				" " + SPAN_TAG ) );		
 		_receiveTimeoutElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( RECEIVE_TIMEOUT_COLUMN_CLASS ), 
-				By.tagName( SPAN_TAG ) );
+				By.cssSelector( "#" + _gridId + " ." + RECEIVE_TIMEOUT_COLUMN_CLASS + 
+				" " + SPAN_TAG ) );
 		_receiveOperationsHandlerElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( RECEIVE_OPERATION_HANDLER_COLUMN_CLASS ), 
-				By.tagName( SPAN_TAG ) );
+				By.cssSelector( "#" + _gridId + " ." + RECEIVE_OPERATION_HANDLER_COLUMN_CLASS + 
+				" " + SPAN_TAG ) );
 		_passArrayAsIsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( IS_PASS_ARRAY_AS_IS_COLUMN_CLASS ), 
-				By.tagName( DIV_TAG ) );		
+				By.cssSelector( "#" + _gridId + " ." + IS_PASS_ARRAY_AS_IS_COLUMN_CLASS + 
+				" " + DIV_TAG ) );		
 	}
 	
 	private int getMaxConcurrentConsumersTagValue( int rowIndex ){

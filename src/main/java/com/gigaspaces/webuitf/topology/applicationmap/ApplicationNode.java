@@ -226,6 +226,7 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	private WebElement retrievePuNode( String reqPuName ) {
 
+/*
         WebElement requiredPuNodeElement = null;
 
         long end = System.currentTimeMillis() + 10 * 1000;
@@ -249,6 +250,27 @@ public class ApplicationNode implements RenderedWebUIElement {
                 } catch (InterruptedException e1) {
                 }
             } else {
+                break;
+            }
+        }
+
+        return requiredPuNodeElement;
+*/
+
+        WebElement requiredPuNodeElement = null;
+
+        List<WebElement> byClassNameElementsNEW = helper.waitForElements(TimeUnit.SECONDS, 10, By.cssSelector("#" + WebConstants.ID.graphApplicationMap + " svg .nodetype-pu"));
+
+        WebElement applicationMapCanvas = helper.waitForElement(By.cssSelector("#" + WebConstants.ID.graphApplicationMap + " svg"), 2);
+        byClassNameElementsNEW = applicationMapCanvas.findElements(By.cssSelector(".nodetype-pu"));
+
+        List<WebElement> puNodeElements = byClassNameElementsNEW;
+
+        for( WebElement puNodeElement : puNodeElements ){
+            WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
+            String puName = puNameElement.getText();
+            if( puName.equals( reqPuName ) ){
+                requiredPuNodeElement = puNodeElement;
                 break;
             }
         }

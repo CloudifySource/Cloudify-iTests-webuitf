@@ -62,11 +62,19 @@ public class ApplicationMap {
 	}*/
 	
 	public void deselectAllNodes() {
-		WebElement graphCanvas = driver.findElement(By.id(WebConstants.ID.graphApplicationMap));
-		graphCanvas.click();
-	}
-	
-	public boolean hasConnector( String sourceName, String targetName ){
+        WebElement graphCanvas = retrieveGraphCanvas();
+        graphCanvas.click();
+    }
+
+    private WebElement retrieveGraphCanvas() {
+        // we avoid using By.id, as it will fetch a synthetic element, and subsequent actions
+        // (e.g. element.click) will fail with a javascript exception.
+        // see the reported issue here: https://code.google.com/p/chromedriver/issues/detail?id=427
+        return helper.waitForElement(By.cssSelector("#" + WebConstants.ID.graphApplicationMap + " svg"), 2);
+    }
+
+
+    public boolean hasConnector( String sourceName, String targetName ){
 		
 		List<WebElement> pathElements = driver.findElements( 
 				By.tagName( PATH_TAG ).
