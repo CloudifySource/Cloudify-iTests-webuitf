@@ -17,7 +17,6 @@ import com.thoughtworks.selenium.Selenium;
 public class ApplicationMap {
 	
 	private WebDriver driver;
-//	private Selenium selenium;
 	private AjaxUtils helper;
 
 	public static final String CONN_STATUS_OK = "ok";
@@ -37,11 +36,9 @@ public class ApplicationMap {
 	public static final String TYPE_INDICATION_COMPONENTS_ATTR = "type-indication-components";
 	public static final String PU_NAME_ATTR = "pu-name";
 	
-	private static final String PU_NAME_TEXT_CLASS = "puNameText";
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
-//		this.selenium = selenium;
 		this.helper = new AjaxUtils(driver);
 	}
 	
@@ -137,13 +134,16 @@ public class ApplicationMap {
 	}	
 
 	public ApplicationNode getApplicationNode( String name ){
+		
 		List<WebElement> elements = driver.findElements( 
-				By.tagName( TEXT_TAG ).
-				className( PU_NAME_TEXT_CLASS ) );
-		WebElement resultElement  = null;
+				By.tagName( G_TAG ).
+				className( NODE_TYPE_PU_CLASS ) );
+		
+  		WebElement resultElement  = null;
 		if( elements != null ){
 			for( WebElement element : elements ){
-				if( element.getText()!= null && element.getText().equals( name ) ){
+				String puNameAttr = element.getAttribute( PU_NAME_ATTR );
+				if( name.equals( puNameAttr )){
 					resultElement = element;
 					break;
 				}

@@ -3,9 +3,7 @@ package com.gigaspaces.webuitf.topology.applicationmap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import com.gigaspaces.webuitf.util.JsExecutor;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -14,13 +12,13 @@ import org.openspaces.admin.pu.DeploymentStatus;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.RenderedWebUIElement;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.JsExecutor;
 
 public class ApplicationNode implements RenderedWebUIElement {
 
 	private String name;
-//	private String simpleName;
 	private WebDriver driver;
-//
+
 	private AjaxUtils helper;
 	private WebElement element;
 
@@ -179,7 +177,7 @@ public class ApplicationNode implements RenderedWebUIElement {
         return JsExecutor.getApplicationMapNodeProp(driver, name, "actualInstances");
 	}
 
-	private boolean isSelected( WebElement puElement ) {
+	private static boolean isSelected( WebElement puElement ) {
 		if( puElement == null ){
 			throw new IllegalStateException( "WebElement cannot be null" );
 		}
@@ -204,13 +202,12 @@ public class ApplicationNode implements RenderedWebUIElement {
 	}
 
 	public boolean isSelected(){
-		WebElement requiredPuNodeElement = retrievePuNode( name );
-		return isSelected( requiredPuNodeElement );
+		return isSelected( element );
 	}
 
     public void select() {
 
-        WebElement requiredPuNodeElement = retrievePuNode( name );
+        WebElement requiredPuNodeElement = element;//retrievePuNode( name );
 
         if ( requiredPuNodeElement == null ) {
             throw new IllegalStateException( "Processing Unit [" + name + "] was not found in Application Map" );
@@ -222,60 +219,6 @@ public class ApplicationNode implements RenderedWebUIElement {
         }
 
         requiredPuNodeElement.click();
-	}
-
-	private WebElement retrievePuNode( String reqPuName ) {
-
-/*
-        WebElement requiredPuNodeElement = null;
-
-        long end = System.currentTimeMillis() + 10 * 1000;
-        while (System.currentTimeMillis() < end) {
-
-            List<WebElement> puNodeElements =
-                    helper.getDriver().findElements( By.className( "nodetype-pu" ) );
-
-            for( WebElement puNodeElement : puNodeElements ){
-                WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
-                String puName = puNameElement.getText();
-                if( puName.equals( reqPuName ) ){
-                    requiredPuNodeElement = puNodeElement;
-                    break;
-                }
-            }
-
-            if (requiredPuNodeElement == null) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                }
-            } else {
-                break;
-            }
-        }
-
-        return requiredPuNodeElement;
-*/
-
-        WebElement requiredPuNodeElement = null;
-
-        List<WebElement> byClassNameElementsNEW = helper.waitForElements(TimeUnit.SECONDS, 10, By.cssSelector("#" + WebConstants.ID.graphApplicationMap + " svg .nodetype-pu"));
-
-        WebElement applicationMapCanvas = helper.waitForElement(By.cssSelector("#" + WebConstants.ID.graphApplicationMap + " svg"), 2);
-        byClassNameElementsNEW = applicationMapCanvas.findElements(By.cssSelector(".nodetype-pu"));
-
-        List<WebElement> puNodeElements = byClassNameElementsNEW;
-
-        for( WebElement puNodeElement : puNodeElements ){
-            WebElement puNameElement = puNodeElement.findElement( By.className( "puNameText" ) );
-            String puName = puNameElement.getText();
-            if( puName.equals( reqPuName ) ){
-                requiredPuNodeElement = puNodeElement;
-                break;
-            }
-        }
-
-		return requiredPuNodeElement;
 	}
 
 	public void clickOnActions() {
@@ -331,13 +274,6 @@ public class ApplicationNode implements RenderedWebUIElement {
 
 	public boolean isDisplayed() {
 		
-//		RemoteWebElement node = 
-//				(RemoteWebElement) driver.findElement(By.id(WebConstants.ID.nodePath + this.name));
-		WebElement node = retrievePuNode(name);
-		return ( node == null ) ? false : node.isDisplayed();
+		return ( element == null ) ? false : element.isDisplayed();
 	}
-
-//	private String getNameFromUI(String name) {
-//        return JsScripts.getApplicationMapNodeProp(driver, name, "id");
-//	}
 }

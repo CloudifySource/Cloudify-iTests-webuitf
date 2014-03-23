@@ -302,7 +302,7 @@ public final class WebConstants {
 		public static final String pathToEDSPacketsPerSecond = "//div[@id='" + ID.edsPacketsPerSecond + "']";
 		public static final String pathToEDSBytesPerSecond = "//div[@id='" + ID.edsBytesPerSecond + "']";
 		public static final String pathToEDSOpPerSecond = "//div[@id='" + ID.edsOpPerSecond + "']";
-		public static final String pathToGridHealthInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div/div[2]/div/div[2]/span";
+		public static final String pathToGridHealthInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div/div[2]/div/div[2]/div/span";
 		
 //		public static final String pathToCpuCoresInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[1]";
 //		public static final String pathToMemoryInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[3]";
