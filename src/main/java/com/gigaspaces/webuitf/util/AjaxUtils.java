@@ -28,7 +28,7 @@ public class AjaxUtils {
     private WebDriver driver;
     private Selenium selenium;
 
-    public static int ajaxWaitingTime = 5;
+    public static int ajaxWaitingTime = 7;
 
     /**
      * Default initialization: invoke only when using methods that don't require the use of
