@@ -74,7 +74,7 @@ public class AlertsPanel {
 			public boolean getCondition() {
 				int i = 0;
 				List<WebUIAlert> webuiAlerts = getParentAlertsByType(alertType);
-				logger.info( "Before loop, compar. status=" + status );
+				logger.info( "Before loop, compar. status=" + status + ", webuiAlerts size=" + webuiAlerts.size() );
 				for (WebUIAlert alert : webuiAlerts) {
 					logger.info( "Within for loop, alert=" + alert );
 					AlertStatus st = alert.getStatus();
@@ -87,7 +87,7 @@ public class AlertsPanel {
 				return false;
 			}
 		};
-		AjaxUtils.repetitiveAssertTrue("Could not find " + numberOfResolved + " alerts of type " + alertType + " in status " + status, condition, 120 * 1000);
+		AjaxUtils.repetitiveAssertTrue("Could not find " + numberOfResolved + " alerts of type " + alertType + " in status " + status, condition, 150 * 1000);
 	}
 	
 	/**
