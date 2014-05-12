@@ -73,7 +73,10 @@ public class StatusGrid {
 		}
 		
 		public Double getCount() {
-			String perc = selenium.getText(WebConstants.Xpath.pathToCpuCoresInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
+            WebElement cpuPanel = driver.findElement( By.id( "gs-state-panel-usage-cpu" ));
+            WebElement cpuValElement = cpuPanel.findElement( By.tagName("b") );
+            String perc = cpuValElement.getText();
+			//String perc = selenium.getText(WebConstants.Xpath.pathToCpuCoresInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
 			int i = 0;
 			while (perc.charAt(i++) != '%');
 			return Double.parseDouble(perc.substring(0, i - 1));	
@@ -90,7 +93,10 @@ public class StatusGrid {
 		}
 		
 		public Double getCount() {
-			String perc = selenium.getText(WebConstants.Xpath.pathToMemoryInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
+            WebElement memoryPanel = driver.findElement( By.id( "gs-state-panel-usage-memory" ));
+            WebElement memoryValElement = memoryPanel.findElement( By.tagName("b") );
+            String perc = memoryValElement.getText();
+			//String perc = selenium.getText(WebConstants.Xpath.pathToMemoryInGridStatus + WebConstants.Xpath.pathToNumberInResourcesPanelOfGridStatus);
 			int i = 0;
 			while (perc.charAt(i++) != '%');
 			return Double.parseDouble(perc.substring(0, i - 1));	
