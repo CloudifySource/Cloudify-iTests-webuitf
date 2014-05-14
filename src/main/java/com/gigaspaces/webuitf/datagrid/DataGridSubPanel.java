@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationPanel;
 import org.openqa.selenium.By;
 
 import com.gigaspaces.webuitf.WebConstants;
@@ -81,5 +82,10 @@ public class DataGridSubPanel {
 	public NotificationsActivityPanel switchToNotificationsActivity() {
 		clickWhenPossible( WebConstants.ID.notificationsActivityPanelToggle );
 		return new NotificationsActivityPanel( helper );
-	}	
+	}
+
+    public ConfigurationPanel switchToConfiguration() {
+        clickWhenPossible( WebConstants.ID.configurationPanelToggle );
+        return new ConfigurationPanel( helper );
+    }
 }
