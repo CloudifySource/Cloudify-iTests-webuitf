@@ -7,18 +7,16 @@
  *******************************************************************************/
 package com.gigaspaces.webuitf.datagrid.configuration.grids;
 
-import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationConstants;
+import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationGrid;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 /**
  * @author Evgeny
  * @since 10.0
  */
-public class GeneralConfigurationGrid  implements ConfigurationConstants{
+public class GeneralConfigurationGrid extends ConfigurationGrid{
 
     private final String spaceSchemaName;
     private final boolean spaceSecured;
@@ -26,15 +24,17 @@ public class GeneralConfigurationGrid  implements ConfigurationConstants{
     private final boolean spaceClustered;
     private final String clusterSchemaName;
 
+    private static final String ID = "gs-config-general-space";
+
     public GeneralConfigurationGrid( AjaxUtils helper ){
 
-        WebElement thisGridElement = helper.waitForElement(By.id("gs-config-general-space"), TIMEOUT);
+        super(helper,ID);
 
-        WebElement spaceSchemaWebElement = thisGridElement.findElement( By.id("gs-config-general-space_spaceSchema") );
-        WebElement spaceSecuredWebElement = thisGridElement.findElement( By.id("gs-config-general-space_secured") );
-        WebElement spacePersistentWebElement = thisGridElement.findElement( By.id("gs-config-general-space_persistent") );
-        WebElement spaceClusteredWebElement = thisGridElement.findElement( By.id("gs-config-general-space_clustered") );
-        WebElement clusterSchemaWebElement = thisGridElement.findElement( By.id("gs-config-general-space_clusterSchema") );
+        WebElement spaceSchemaWebElement = thisGridElement.findElement( By.id(ID + "_spaceSchema") );
+        WebElement spaceSecuredWebElement = thisGridElement.findElement( By.id(ID + "_secured") );
+        WebElement spacePersistentWebElement = thisGridElement.findElement( By.id(ID + "_persistent") );
+        WebElement spaceClusteredWebElement = thisGridElement.findElement( By.id(ID + "_clustered") );
+        WebElement clusterSchemaWebElement = thisGridElement.findElement( By.id(ID + "_clusterSchema") );
 
         spaceSchemaName = getValue( spaceSchemaWebElement );
         clusterSchemaName = getValue( clusterSchemaWebElement );
@@ -45,13 +45,6 @@ public class GeneralConfigurationGrid  implements ConfigurationConstants{
         spaceSecured = spaceSecuredVal.toLowerCase().equals( YES );
         spaceClustered = spaceClusteredVal.toLowerCase().equals( YES );
         spacePersistent = spacePersistentVal.toLowerCase().equals( YES );
-    }
-
-    private String getValue( WebElement webElement ){
-
-        WebElement valueColumnElement = webElement.findElement( By.className( "x-grid3-col-configValueCol" ) );
-        WebElement spanElement = valueColumnElement.findElement(By.tagName("span"));
-        return spanElement.getText();
     }
 
     public String getSpaceSchemaName() {

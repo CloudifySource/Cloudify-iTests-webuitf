@@ -7,18 +7,45 @@
  *******************************************************************************/
 package com.gigaspaces.webuitf.datagrid.configuration.grids;
 
+import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationGrid;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * @author Evgeny
  * @since 10.0
  */
-public class NetworkAndEnvironmentConfigurationGrid {
+public class NetworkAndEnvironmentConfigurationGrid extends ConfigurationGrid{
 
-    private final AjaxUtils helper;
+    private final static String ID = "gs-config-network-and-environment";
+
+    private final String homeDirectory;
+    private final String hostName;
+    private final int rmiRegistryPort;
 
     public NetworkAndEnvironmentConfigurationGrid( AjaxUtils helper ){
-        this.helper = helper;
+        super( helper, ID );
+
+        WebElement homeDirectoryWebElement = thisGridElement.findElement(By.id(ID + "_homeDirectory"));
+        WebElement hostNameWebElement = thisGridElement.findElement(By.id(ID + "_hostName"));
+        WebElement rmiRegistryPortWebElement = thisGridElement.findElement(By.id(ID + "_rmiRegistryPort"));
+
+        homeDirectory = getValue(homeDirectoryWebElement);
+        hostName = getValue(hostNameWebElement);
+        String rmiRegistryPortStr = getValue(rmiRegistryPortWebElement);
+        rmiRegistryPort = Integer.parseInt( rmiRegistryPortStr );
     }
 
+    public String getHomeDirectory() {
+        return homeDirectory;
+    }
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public int getRmiRegistryPort() {
+        return rmiRegistryPort;
+    }
 }
