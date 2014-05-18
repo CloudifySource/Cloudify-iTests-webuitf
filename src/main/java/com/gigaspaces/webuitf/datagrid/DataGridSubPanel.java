@@ -1,13 +1,7 @@
 package com.gigaspaces.webuitf.datagrid;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationPanel;
-import org.openqa.selenium.By;
-
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationPanel;
 import com.gigaspaces.webuitf.datagrid.eventcontainers.EventContainersTabPanel;
 import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
 import com.gigaspaces.webuitf.datagrid.inboundactivity.InboundActivityPanel;
@@ -18,6 +12,11 @@ import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DataGridSubPanel {
 	
@@ -84,8 +83,8 @@ public class DataGridSubPanel {
 		return new NotificationsActivityPanel( helper );
 	}
 
-    public ConfigurationPanel switchToConfiguration() {
+    public ConfigurationPanel switchToConfiguration( boolean loadBlobStoreConfiguration ) {
         clickWhenPossible( WebConstants.ID.configurationPanelToggle );
-        return new ConfigurationPanel( helper );
+        return new ConfigurationPanel( helper, loadBlobStoreConfiguration );
     }
 }

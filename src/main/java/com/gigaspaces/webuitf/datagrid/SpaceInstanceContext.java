@@ -1,8 +1,7 @@
 package com.gigaspaces.webuitf.datagrid;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -10,8 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.util.AjaxUtils;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class SpaceInstanceContext {
 	
@@ -22,11 +21,13 @@ public class SpaceInstanceContext {
 	
 	private String spaceInstanceName;
 	private String puInstanceName;
+    private String uuid;
 	
 	private String id;
 	private WebDriver driver;
 	
 	private AjaxUtils helper;
+    private final static String CLASS_PREFIX = "gs-slider-grid-SPACE_INSTANCES_";
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public SpaceInstanceContext(String id, WebDriver driver) {
@@ -36,7 +37,13 @@ public class SpaceInstanceContext {
 		this.helper.setDriver(driver);
 		this.puInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_INSTANCES_NAME_CLASS));
 		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));
-	}
+        WebElement instancesGridElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-slider-grid-SPACE_INSTANCES"));
+        WebElement selectedRow = instancesGridElement.findElement(By.className("x-grid3-row-selected"));
+        String spaceInstanceElementId = selectedRow.getAttribute("id");
+        if( spaceInstanceElementId.startsWith(CLASS_PREFIX) ){
+            uuid = spaceInstanceElementId.substring( CLASS_PREFIX.length() );
+        }
+    }
 	public String getSpaceInstanceName() {
 		return spaceInstanceName;
 	}
@@ -45,8 +52,11 @@ public class SpaceInstanceContext {
 		return puInstanceName;
 	}
 
-	
-	public void select() {
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void select() {
 		for (int i = 0 ; i < 3 ; i++) {
 			helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));
 		}

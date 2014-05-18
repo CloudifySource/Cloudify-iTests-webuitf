@@ -11,20 +11,23 @@ import com.gigaspaces.webuitf.util.AjaxUtils;
  */
 public class ConfigurationPanel {
 
-    private final BlobStoreConfigurationGrid blobStoreConfigurationGrid;
+    private BlobStoreConfigurationGrid blobStoreConfigurationGrid;
     private final GeneralConfigurationGrid generalConfigurationGrid;
     private final MemoryManagementConfigurationGrid memoryManagementConfigurationGrid;
     private final NetworkAndEnvironmentConfigurationGrid networkAndEnvironmentConfigurationGrid;
 
     private final AjaxUtils helper;
 
-    public ConfigurationPanel(AjaxUtils helper) {
+    public ConfigurationPanel(AjaxUtils helper, boolean loadBlobStoreGrid ) {
 
         this.helper = helper;
-        blobStoreConfigurationGrid = new BlobStoreConfigurationGrid(helper);
+
         generalConfigurationGrid = new GeneralConfigurationGrid(helper);
         memoryManagementConfigurationGrid = new MemoryManagementConfigurationGrid(helper);
         networkAndEnvironmentConfigurationGrid = new NetworkAndEnvironmentConfigurationGrid(helper);
+        if( loadBlobStoreGrid ) {
+            blobStoreConfigurationGrid = new BlobStoreConfigurationGrid(helper);
+        }
     }
 
     public BlobStoreConfigurationGrid getBlobStoreConfigurationGrid() {
