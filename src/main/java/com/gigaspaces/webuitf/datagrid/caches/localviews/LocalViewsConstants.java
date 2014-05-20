@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.datagrid.localviews;
+package com.gigaspaces.webuitf.datagrid.caches.localviews;
 
 /**
  * 

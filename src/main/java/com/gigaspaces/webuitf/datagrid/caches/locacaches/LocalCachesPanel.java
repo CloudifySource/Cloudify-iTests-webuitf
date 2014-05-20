@@ -1,15 +1,14 @@
-package com.gigaspaces.webuitf.datagrid.locacaches;
+package com.gigaspaces.webuitf.datagrid.caches.locacaches;
+
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.gigaspaces.webuitf.util.AjaxUtils;
 
 /**
  * 

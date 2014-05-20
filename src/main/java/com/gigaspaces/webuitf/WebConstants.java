@@ -141,6 +141,7 @@ public final class WebConstants {
 		public static final String gatewaysPanelToggle = "gs-tab-item-gateways-toggler-button";
 		public static final String localViewsPanelToggle = "gs-tab-item-local-views-toggler-button";
 		public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
+        public static final String clientSideCachesPanelToggle = "gs-tab-item-client-side-caches-toggler-button";
 		public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
 		public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
 		public static final String notificationsActivityPanelToggle = "gs-tab-item-notifications-activity-toggler-button";

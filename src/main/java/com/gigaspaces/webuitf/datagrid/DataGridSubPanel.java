@@ -1,12 +1,11 @@
 package com.gigaspaces.webuitf.datagrid;
 
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.datagrid.caches.CachesPanel;
 import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationPanel;
 import com.gigaspaces.webuitf.datagrid.eventcontainers.EventContainersTabPanel;
 import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
 import com.gigaspaces.webuitf.datagrid.inboundactivity.InboundActivityPanel;
-import com.gigaspaces.webuitf.datagrid.locacaches.LocalCachesPanel;
-import com.gigaspaces.webuitf.datagrid.localviews.LocalViewsContextPager;
 import com.gigaspaces.webuitf.datagrid.notificationsactivity.NotificationsActivityPanel;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
@@ -49,11 +48,6 @@ public class DataGridSubPanel {
 		return new GatewaysPanel( helper );		
 	}
 	
-	public LocalViewsContextPager switchToLocalViews() {
-		clickWhenPossible( WebConstants.ID.localViewsPanelToggle );
-		return new LocalViewsContextPager( helper );		
-	}
-	
 	public EventContainersTabPanel switchToEventContainers() {
 		clickWhenPossible( WebConstants.ID.eventContainersPanelToggle );
 		return new EventContainersTabPanel( helper );		
@@ -68,9 +62,9 @@ public class DataGridSubPanel {
 		}		
 	}
 
-	public LocalCachesPanel switchToLocalCaches() {
-		clickWhenPossible( WebConstants.ID.localCachesPanelToggle );
-		return new LocalCachesPanel( helper );
+	public CachesPanel switchToClientSideCaches() {
+		clickWhenPossible( WebConstants.ID.clientSideCachesPanelToggle );
+		return new CachesPanel( helper );
 	}
 	
 	public InboundActivityPanel switchToInboundActivity() {

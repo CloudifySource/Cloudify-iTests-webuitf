@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.datagrid.locacaches;
+package com.gigaspaces.webuitf.datagrid.caches.locacaches;
 
 /**
  * 
