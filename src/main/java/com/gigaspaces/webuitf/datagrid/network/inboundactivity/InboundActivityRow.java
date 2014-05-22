@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.datagrid.inboundactivity;
+package com.gigaspaces.webuitf.datagrid.network.inboundactivity;
 
 /**
  * 

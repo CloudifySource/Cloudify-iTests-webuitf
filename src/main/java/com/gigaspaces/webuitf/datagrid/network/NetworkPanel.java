@@ -1,8 +1,8 @@
-package com.gigaspaces.webuitf.datagrid.caches;
+package com.gigaspaces.webuitf.datagrid.network;
 
 import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.datagrid.caches.locacaches.LocalCachesPanel;
-import com.gigaspaces.webuitf.datagrid.caches.localviews.LocalViewsContextPager;
+import com.gigaspaces.webuitf.datagrid.network.inboundactivity.InboundActivityPanel;
+import com.gigaspaces.webuitf.datagrid.network.notificationsactivity.NotificationsActivityPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 
@@ -14,24 +14,24 @@ import java.util.logging.Logger;
  * @author evgenyf
  * @since 10.0
  */
-public class CachesPanel {
+public class NetworkPanel {
 
     private final AjaxUtils helper;
 
     private Logger _logger = Logger.getLogger( this.getClass().getName() );
 
-    public CachesPanel(AjaxUtils helper){
+    public NetworkPanel(AjaxUtils helper){
         this.helper = helper;
     }
 
-    public LocalViewsContextPager switchToLocalViews() {
-        clickWhenPossible(WebConstants.ID.localViewsPanelToggle);
-        return new LocalViewsContextPager( helper );
+    public NotificationsActivityPanel switchToNotificationsActivity() {
+        clickWhenPossible(WebConstants.ID.notificationsActivityPanelToggle);
+        return new NotificationsActivityPanel( helper );
     }
 
-    public LocalCachesPanel switchToLocalCaches() {
-        clickWhenPossible( WebConstants.ID.localCachesPanelToggle );
-        return new LocalCachesPanel( helper );
+    public InboundActivityPanel switchToInboundActivity() {
+        clickWhenPossible( WebConstants.ID.inboundActivityPanelToggle );
+        return new InboundActivityPanel( helper );
     }
 
     private void clickWhenPossible( String id ){

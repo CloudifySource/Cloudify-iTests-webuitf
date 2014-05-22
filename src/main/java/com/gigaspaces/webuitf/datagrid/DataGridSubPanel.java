@@ -5,8 +5,7 @@ import com.gigaspaces.webuitf.datagrid.caches.CachesPanel;
 import com.gigaspaces.webuitf.datagrid.configuration.ConfigurationPanel;
 import com.gigaspaces.webuitf.datagrid.eventcontainers.EventContainersTabPanel;
 import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
-import com.gigaspaces.webuitf.datagrid.inboundactivity.InboundActivityPanel;
-import com.gigaspaces.webuitf.datagrid.notificationsactivity.NotificationsActivityPanel;
+import com.gigaspaces.webuitf.datagrid.network.NetworkPanel;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
@@ -62,21 +61,16 @@ public class DataGridSubPanel {
 		}		
 	}
 
-	public CachesPanel switchToClientSideCaches() {
-		clickWhenPossible( WebConstants.ID.clientSideCachesPanelToggle );
-		return new CachesPanel( helper );
-	}
-	
-	public InboundActivityPanel switchToInboundActivity() {
-		clickWhenPossible( WebConstants.ID.inboundActivityPanelToggle );
-		return new InboundActivityPanel( helper );
-	}
-	
-	public NotificationsActivityPanel switchToNotificationsActivity() {
-		clickWhenPossible( WebConstants.ID.notificationsActivityPanelToggle );
-		return new NotificationsActivityPanel( helper );
-	}
+    public CachesPanel switchToClientSideCaches() {
+        clickWhenPossible( WebConstants.ID.clientSideCachesPanelToggle );
+        return new CachesPanel( helper );
+    }
 
+	public NetworkPanel switchToNetwork() {
+		clickWhenPossible( WebConstants.ID.networkPanelToggle );
+		return new NetworkPanel( helper );
+	}
+	
     public ConfigurationPanel switchToConfiguration( boolean loadBlobStoreConfiguration ) {
         clickWhenPossible( WebConstants.ID.configurationPanelToggle );
         return new ConfigurationPanel( helper, loadBlobStoreConfiguration );

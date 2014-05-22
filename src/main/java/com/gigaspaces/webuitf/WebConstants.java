@@ -139,13 +139,10 @@ public final class WebConstants {
 //		public static final String transactionsPanelToggle = "gs-tab-item-toggler-button";
 		public static final String typesPanelToggle = "gs-tab-item-types-toggler-button";
 		public static final String gatewaysPanelToggle = "gs-tab-item-gateways-toggler-button";
-		public static final String localViewsPanelToggle = "gs-tab-item-local-views-toggler-button";
-		public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
         public static final String clientSideCachesPanelToggle = "gs-tab-item-client-side-caches-toggler-button";
 		public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
-		public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
-		public static final String notificationsActivityPanelToggle = "gs-tab-item-notifications-activity-toggler-button";
         public static final String configurationPanelToggle = "gs-tab-item-configuration-toggler-button";
+        public static final String networkPanelToggle = "gs-tab-item-network-toggler-button";
 		
 		public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
 		public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";
@@ -153,8 +150,14 @@ public final class WebConstants {
 		
 		public static final String asyncPollingEventContainersTogglerButton = "gs-tab-item-asyncpolling-event-containers-toggler-button";
 		public static final String pollingEventContainersTogglerbutton = "gs-tab-item-polling-event-containers-toggler-button";
-		public static final String notifyEventContainersTogglerbutton = "gs-tab-item-notify-event-containers-toggler-button";		
-		
+		public static final String notifyEventContainersTogglerbutton = "gs-tab-item-notify-event-containers-toggler-button";
+
+        public static final String localViewsPanelToggle = "gs-tab-item-local-views-toggler-button";
+        public static final String localCachesPanelToggle = "gs-tab-item-local-caches-toggler-button";
+
+        public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
+        public static final String notificationsActivityPanelToggle = "gs-tab-item-notifications-activity-toggler-button";
+
 		public static final String healthPanel = "gs-sub-panel-health";
 		public static final String physicalPanel = "gs-tab-item-physical";
 		public static final String spaceInstancesGrid = "gs-space-instances-grid";

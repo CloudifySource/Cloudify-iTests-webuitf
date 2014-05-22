@@ -1,4 +1,4 @@
-package com.gigaspaces.webuitf.datagrid.notificationsactivity;
+package com.gigaspaces.webuitf.datagrid.network.notificationsactivity;
 
 /**
  * 
