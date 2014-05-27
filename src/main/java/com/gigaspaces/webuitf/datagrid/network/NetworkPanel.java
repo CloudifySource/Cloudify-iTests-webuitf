@@ -42,4 +42,9 @@ public class NetworkPanel {
             _logger.log( Level.SEVERE, e.toString(), e );
         }
     }
+
+    public void setRemoteActivityProbe(boolean b) {
+
+        helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id( "gs-remote-activity" ) );
+    }
 }
