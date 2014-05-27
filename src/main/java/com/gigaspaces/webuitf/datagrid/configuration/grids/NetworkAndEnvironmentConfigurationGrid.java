@@ -21,7 +21,7 @@ public class NetworkAndEnvironmentConfigurationGrid extends ConfigurationGrid{
     private final static String ID = "gs-config-network-and-environment";
 
     private final String homeDirectory;
-    private String hostName;
+    private final String hostName;
     private final int rmiRegistryPort;
 
     public NetworkAndEnvironmentConfigurationGrid( AjaxUtils helper ){
@@ -31,9 +31,10 @@ public class NetworkAndEnvironmentConfigurationGrid extends ConfigurationGrid{
         WebElement hostNameWebElement = thisGridElement.findElement(By.id(ID + "_hostName"));
         WebElement rmiRegistryPortWebElement = thisGridElement.findElement(By.id(ID + "_rmiRegistryPort"));
 
-        homeDirectory = getValue(homeDirectoryWebElement);
-        hostName = getValue(hostNameWebElement);
-        hostName = hostName.toLowerCase().equals( "n/a" ) ? null : hostName;
+        String homeDirectoryLocal = getValue(homeDirectoryWebElement);
+        homeDirectory = homeDirectoryLocal.toLowerCase().equals( "n/a" ) ? null : homeDirectoryLocal;
+        String hostNameLocal = getValue(hostNameWebElement);
+        hostName = hostNameLocal.toLowerCase().equals( "n/a" ) ? null : hostNameLocal;
         String rmiRegistryPortStr = getValue(rmiRegistryPortWebElement);
         rmiRegistryPort = rmiRegistryPortStr.toLowerCase().equals( "n/a" ) ? -1 : Integer.parseInt( rmiRegistryPortStr );
     }
