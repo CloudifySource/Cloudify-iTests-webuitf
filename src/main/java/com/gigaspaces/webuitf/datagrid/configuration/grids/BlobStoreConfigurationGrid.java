@@ -24,7 +24,7 @@ public class BlobStoreConfigurationGrid extends ConfigurationGrid {
     private final int capacity;
     private final int cacheCapacity;
     private final int cacheSize;
-    private final boolean reformat;
+    private final boolean recoverFromBlobStore;
 
     private final static String ID = "gs-config-blob-store";
 
@@ -37,7 +37,7 @@ public class BlobStoreConfigurationGrid extends ConfigurationGrid {
         WebElement cacheSizeWebElement = thisGridElement.findElement( By.id(ID + "_cacheSize") );
         WebElement volumeDirWebElement = thisGridElement.findElement( By.id(ID + "_volumeDir") );
         WebElement durabilityLevelWebElement = thisGridElement.findElement( By.id(ID + "_durabilityLevel") );
-        WebElement reformatWebElement = thisGridElement.findElement( By.id(ID + "_reformat") );
+        WebElement recoverFromBlobStoreWebElement = thisGridElement.findElement( By.id(ID + "_recover") );
 
         devices = getValue(devicesWebElement);
         String capacityVal = getValue(capacityWebElement);
@@ -48,8 +48,8 @@ public class BlobStoreConfigurationGrid extends ConfigurationGrid {
         cacheSize = Integer.parseInt( cacheSizeVal );
         volumeDir = getValue(volumeDirWebElement);
         durabilityLevel = getValue(durabilityLevelWebElement);
-        String reformatVal = getValue(reformatWebElement);
-        reformat = reformatVal.toLowerCase().equals( YES );
+        String recoverVal = getValue(recoverFromBlobStoreWebElement);
+        recoverFromBlobStore = recoverVal.toLowerCase().equals( YES );
     }
 
     public String getDevices() {
@@ -76,7 +76,7 @@ public class BlobStoreConfigurationGrid extends ConfigurationGrid {
         return cacheSize;
     }
 
-    public boolean isReformat() {
-        return reformat;
+    public boolean isRecoverFromBlobStore() {
+        return recoverFromBlobStore;
     }
 }
