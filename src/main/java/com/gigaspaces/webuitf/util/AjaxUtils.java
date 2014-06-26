@@ -6,13 +6,13 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
 
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -156,6 +156,37 @@ public class AjaxUtils {
         });
 
     }
+
+    public void clickWhenPossible(int timeout, TimeUnit timeUnit, final WebElement element ) {
+
+        FluentWait<WebElement> fluentWait = new FluentWait<WebElement>(element);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
+        fluentWait.withMessage("Could not click on " + element);
+        fluentWait.withTimeout(timeout, timeUnit);
+        fluentWait.until(new Predicate<WebElement>() {
+            public boolean apply(WebElement element) {
+                try {
+                    _logger.info("Before click");
+                    element.click();
+                    _logger.info("After click");
+                    return true;
+                } catch (NoSuchElementException ex) {
+                    _logger.info("caught a NoSuchElementException while trying to click on element");
+                    _logger.info("trying again");
+                    return false;
+                } catch (StaleElementReferenceException ex) {
+                    _logger.info("caught a StaleElementReferenceException while trying to click on element");
+                    _logger.info("trying again");
+                    return false;
+                } catch (WebDriverException e) {
+                    _logger.info("caught a WebDriverException while trying to click on element");
+                    _logger.info("trying again");
+                    return false;
+                }
+            }
+        });
+    }
+
 
     public static void repetitiveAssertTrue(String message, RepetitiveConditionProvider condition, long timeoutMilliseconds) {
         long end = System.currentTimeMillis() + timeoutMilliseconds;

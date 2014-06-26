@@ -28,8 +28,6 @@ public class ServicesTab extends MainNavigation {
 
 	/**
 	 * opens the EDG deployment menu with certain deployment parameters
-	 * @param selenium
-	 * @param driver
 	 * @param dataGridName
 	 * @param isSecured
 	 * @param userName

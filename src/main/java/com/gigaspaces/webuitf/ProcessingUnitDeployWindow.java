@@ -1,9 +1,8 @@
 package com.gigaspaces.webuitf;
 
-import org.openqa.selenium.WebDriver;
-
 import com.gigaspaces.webuitf.services.AbstractDeployWindow;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.WebDriver;
 
 public class ProcessingUnitDeployWindow extends AbstractDeployWindow {
 	
@@ -30,7 +29,9 @@ public class ProcessingUnitDeployWindow extends AbstractDeployWindow {
 		selenium.click(WebConstants.Xpath.getPathToComboSelection(puName));
 		super.sumbitDeploySpecs();
 	}
-	
-	
 
+    @Override
+    public AbstractDeployWindow prev() {
+        return this;
+    }
 }

@@ -37,6 +37,8 @@ public class DataGridDeployWindow extends AbstractDeployWindow {
 		super.sumbitDeploySpecs();
 	}
 
-
-
+    @Override
+    public AbstractDeployWindow prev() {
+        return this;
+    }
 }

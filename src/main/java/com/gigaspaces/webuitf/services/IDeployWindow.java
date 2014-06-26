@@ -23,4 +23,13 @@ public interface IDeployWindow {
 	 */
 	public void closeWindow();
 
+    /**
+     * next
+     */
+    public AdvancedDeployment next();
+
+    /**
+     * prev
+     */
+    public AbstractDeployWindow prev();
 }

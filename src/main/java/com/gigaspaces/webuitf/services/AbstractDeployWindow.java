@@ -1,11 +1,10 @@
 package com.gigaspaces.webuitf.services;
 
+import com.gigaspaces.webuitf.WebConstants;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import com.gigaspaces.webuitf.WebConstants;
-import com.thoughtworks.selenium.Selenium;
 
 /**
  * represents a generic deployment window
@@ -17,9 +16,9 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
 	protected Selenium selenium;
 	WebDriver driver;
 	
-	WebElement deployOrCloseButton;
-	
 	String clusterSchema, numberOfInst, numberOfBackups, maxInstPerVm, maxInstPerMachine, userName, password, isSecured;
+
+    protected AdvancedDeployment advancedDeployment;
 	
 	/**
 	 * constructs an instance with deployment parameters.
@@ -48,8 +47,17 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
 		}
 		selenium.click(WebConstants.Xpath.clusterSchemaCombo);
 		selenium.click(WebConstants.Xpath.getPathToComboSelectionInServicesTab(clusterSchema));
-		selenium.type(WebConstants.ID.numberOfInstInput,numberOfInst);
-		if (clusterSchema == "partitioned-sync2backup") {
+		//selenium.type(WebConstants.ID.numberOfInstInput,numberOfInst);
+        WebElement numOfInstancesElement = driver.findElement(By.id(WebConstants.ID.numberOfInstInput));
+
+        boolean selected = numOfInstancesElement.isSelected();
+        boolean displayed = numOfInstancesElement.isDisplayed();
+        boolean enabled = numOfInstancesElement.isEnabled();
+
+        numOfInstancesElement.sendKeys( numberOfInst );
+
+
+        if (clusterSchema == "partitioned-sync2backup") {
 			for (int i = 0 ; i < Integer.parseInt(numberOfBackups) ; i++) {
 				selenium.click(WebConstants.Xpath.numberOfBackupsInc);
 			}
@@ -58,15 +66,27 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
 		selenium.type(WebConstants.ID.maxInstPerMachineInput, maxInstPerMachine);
 		
 	}
-	
+
+    @Override
 	public void deploy() {
-		deployOrCloseButton = driver.findElement(By.xpath(WebConstants.Xpath.deployPUButton));
-		deployOrCloseButton.click();
+        WebElement deployButton = driver.findElement(By.id(WebConstants.ID.deployPUButton));
+		deployButton.click();
 	}
 
+    @Override
 	public void closeWindow() {
-		deployOrCloseButton = driver.findElement(By.xpath(WebConstants.Xpath.closeWindowButton));
-		deployOrCloseButton.click();	
+		WebElement cancelButton = driver.findElement(By.id(WebConstants.ID.cancelDeploymentButton));
+		cancelButton.click();
 	}
 
+    @Override
+    public AdvancedDeployment next() {
+        WebElement nextButton = driver.findElement(By.id(WebConstants.ID.nextDeploymentButton));
+        nextButton.click();
+        if( advancedDeployment == null ){
+            advancedDeployment = new AdvancedDeployment( selenium, driver );
+        }
+
+        return advancedDeployment;
+    }
 }

@@ -38,7 +38,23 @@ public final class WebConstants {
 		public static final String deployEDGOption = "deploy_edg_menu_item";
 		public static final String deployMemcachedOption = "deploy_memcached_menu_item";
 		public static final String deployProcessingUnitOption = "deploy_processing_unit_menu_item";
-		public static final String usernameLogginInput = "username-input";
+        public static final String deployPUButton = "deployButton";
+        public static final String cancelDeploymentButton = "cancelButton";
+        public static final String nextDeploymentButton = "nextButton";
+        public static final String prevDeploymentButton = "prevButton";
+
+        public static final String ADD_CONTEXT_PROPERTY_BUTTON = "add_context_property_button";
+        public static final String REMOVE_CONTEXT_PROPERTY_BUTTON = "remove_context_property_button";
+        public static final String ADD_MAX_INSTANCES_PER_ZONE_BUTTON = "add_max_instances_per_zone_button";
+        public static final String REMOVE_MAX_INSTANCES_PER_ZONE_BUTTON = "remove_max_instances_per_zone_button";
+        public static final String SELECT_SPECIFIC_ZONES_RADIO_BUTTON = "select_specific_zone_radio_button";
+        public static final String SELECT_ANY_ZONE_RADIO_RADIO_BUTTON = "select_any_radio_button";
+        public static final String MAX_INSTANCES_PER_ZONE_GRID = "max_instances_per_zone__grid";
+        public static final String SELECTED_ZONES_GRID = "selected_zones_grid";
+        public static final String CONTEXT_PROPERTIES_GRID = "context_properties_grid";
+
+        ////
+    	public static final String usernameLogginInput = "username-input";
 		public static final String passwordLogginInput = "password-input";
 		public static final String jiniGroupInput = "jini_group-input";
 		public static final String locatorsInput = "locators-input";
@@ -258,8 +274,6 @@ public final class WebConstants {
 	public static final class Xpath {
 		public static final String pathToTopologyPanel = "//div[@id='" + ID.topologyPanel + "']";
 		public static final String deployMenuButton = "//table[@id='deploy_button']/tbody/tr[2]/td[2]/em";
-		public static final String deployPUButton = "//table[@id='deployButton']/tbody/tr[2]/td[2]/em/button";
-		public static final String closeWindowButton = "//table[@id='deployButton']/tbody/tr[2]/td[2]/em/button";
 		public static final String clusterSchemaCombo = "//div[@id='cluster_schema']/img";
 		public static final String numberOfBackupsInc = "//div[@id='num_of_backups']/span/img[1]";
 		public static final String isSecuredCheckbox = "//div[@id='secured_check_box']/input";
