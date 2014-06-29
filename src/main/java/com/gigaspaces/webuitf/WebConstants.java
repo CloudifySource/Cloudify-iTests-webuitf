@@ -43,6 +43,7 @@ public final class WebConstants {
         public static final String nextDeploymentButton = "nextButton";
         public static final String prevDeploymentButton = "prevButton";
 
+        public static final String SLA_OVERRIDES_FIELD = "sla_override";
         public static final String ADD_CONTEXT_PROPERTY_BUTTON = "add_context_property_button";
         public static final String REMOVE_CONTEXT_PROPERTY_BUTTON = "remove_context_property_button";
         public static final String ADD_MAX_INSTANCES_PER_ZONE_BUTTON = "add_max_instances_per_zone_button";

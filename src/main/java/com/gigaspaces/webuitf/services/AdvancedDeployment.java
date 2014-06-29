@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -26,6 +27,14 @@ public class AdvancedDeployment {
         _helper = new AjaxUtils(driver, selenium);
     }
 
+    public void setSlaOverridesFile( File slaFile ){
+        if( slaFile.exists() ) {
+            WebElement slaOverridestextField = _driver.findElement(By.id(WebConstants.ID.SLA_OVERRIDES_FIELD));
+            String filePath = slaFile.getAbsolutePath();
+            slaOverridestextField.sendKeys(filePath);
+        }
+    }
+
     public void selectAnyZoneRB(){
         WebElement rb = _driver.findElement( By.id( WebConstants.ID.SELECT_ANY_ZONE_RADIO_RADIO_BUTTON ) );
         rb.click();
@@ -39,16 +48,16 @@ public class AdvancedDeployment {
     public void addMaxInstancesPerZone( String zone, int maxInstancesPerZone ){
         WebElement addButton = _driver.findElement( By.id( WebConstants.ID.ADD_MAX_INSTANCES_PER_ZONE_BUTTON ) );
         addButton.click();
-        setZone( zone );
-        setMaxInstances( maxInstancesPerZone );
+        setZone(zone);
+        setMaxInstances(maxInstancesPerZone);
     }
 
     private void setZone( String zone ) {
-        setMaxInstancesPerZoneCellValue( "x-grid3-col-zone_name", zone );
+        setMaxInstancesPerZoneCellValue("x-grid3-col-zone_name", zone);
     }
 
     private void setMaxInstances( int maxInstancesNum ) {
-        setMaxInstancesPerZoneCellValue( "x-grid3-col-max_instances_per_zone", String.valueOf( maxInstancesNum ) );
+        setMaxInstancesPerZoneCellValue("x-grid3-col-max_instances_per_zone", String.valueOf(maxInstancesNum));
     }
 
     private void setMaxInstancesPerZoneCellValue( String columnClassName, String cellValue ) {
