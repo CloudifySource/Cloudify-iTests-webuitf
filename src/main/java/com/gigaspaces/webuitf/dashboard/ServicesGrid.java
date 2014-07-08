@@ -1,19 +1,17 @@
 package com.gigaspaces.webuitf.dashboard;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
-import com.thoughtworks.selenium.Selenium;
-
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class ServicesGrid {
@@ -385,7 +383,7 @@ public class ServicesGrid {
 				String[] array = ops.split(" ");
 				if( array.length > 0 ){
 					String str = array[ 0 ];
-					return Double.valueOf( str.substring( 1 ) );
+					return str.length() > 1 ? Double.valueOf( str.substring( 1 ) ) : -1;
 				}
 				
 				return -1;
