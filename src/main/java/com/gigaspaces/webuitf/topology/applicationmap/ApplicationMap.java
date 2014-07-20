@@ -1,18 +1,18 @@
 package com.gigaspaces.webuitf.topology.applicationmap;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.thoughtworks.selenium.Selenium;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 public class ApplicationMap {
 	
@@ -35,7 +35,8 @@ public class ApplicationMap {
 	
 	public static final String TYPE_INDICATION_COMPONENTS_ATTR = "type-indication-components";
 	public static final String PU_NAME_ATTR = "pu-name";
-	
+
+    protected Logger logger = Logger.getLogger(this.getClass().getName());
 
 	public ApplicationMap(WebDriver driver, Selenium selenium) {
 		this.driver = driver;
@@ -109,31 +110,71 @@ public class ApplicationMap {
 		
 		return sourcesName;
 	}	
-
-	public Collection<Connector> getConnectors( String nodeName ){
+/*
+	public Collection<Connector> getConnectorsNew( String nodeName ){
 		List<WebElement> targetElements = driver.findElements( 
 				By.cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=\"" + nodeName+ "\"]" ) );
 		
 		List<WebElement> sourceElements = driver.findElements( 
-				By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + nodeName+ "\"]" ) );		
+				By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + nodeName+ "\"]" ) );
 
-		List<WebElement> allElements = new ArrayList<WebElement>(targetElements);
-		allElements.addAll(sourceElements);
-		
-		List<Connector> connectors = new ArrayList<Connector>();
-		for( WebElement pathElement : allElements ){
-			String target = pathElement.getAttribute( DATA_TARGET_ATTR );
-			String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
-			WebElement parentElement = pathElement.findElement(By.xpath("..") );
-			WebElement img = parentElement.findElement( By.tagName( "img" ).className( STATUS_CLASS ) );
-			String status = img.getAttribute( "conn-status" );
-			connectors.add( new Connector( source, target, status ) );
-		}
-		
+        List<Connector> connectors = new ArrayList<Connector>();
+
+        List<WebElement> allEdgeElements = driver.findElements( By.className( "edge" ).tagName("g") );
+        for( WebElement edgeElement : allEdgeElements ){
+            try {
+                logger.info("edgeElement tag name:" + edgeElement.getTagName());
+                WebElement pathElement = edgeElement.findElement(By.tagName("path"));
+
+                logger.info("pathElement:" + pathElement);
+                if (pathElement != null) {
+                    String targetAttrVal = pathElement.getAttribute(DATA_TARGET_ATTR);
+                    String sourceAttrVal = pathElement.getAttribute(DATA_SOURCE_ATTR);
+                    logger.info("pathElement, target=" + targetAttrVal + ", source=" + sourceAttrVal);
+                    if( ( targetAttrVal != null && targetAttrVal.equals( nodeName ) ) ||
+                         ( sourceAttrVal != null && sourceAttrVal.equals( nodeName ) ) ) {
+
+                        //WebElement parentElement = pathElement.findElement(By.xpath("..") );
+                        WebElement img = edgeElement.findElement( By.tagName( "img" ).className( STATUS_CLASS ) );
+                        String status = img == null ? "n/a" : img.getAttribute( "conn-status" );
+                        connectors.add( new Connector( sourceAttrVal, targetAttrVal, status ) );
+                    }
+                }
+            }
+            catch( Exception e ){
+                //logger.log(Level.WARNING, e.toString(), e );
+            }
+        }
+
 		return connectors;
-	}	
+	}
+*/
+    public Collection<Connector> getConnectors( String nodeName ){
 
-	public ApplicationNode getApplicationNode( String name ){
+        List<WebElement> targetElements = driver.findElements(
+                By.cssSelector( PATH_TAG + "[" + DATA_TARGET_ATTR + "=\"" + nodeName+ "\"]" ) );
+
+        List<WebElement> sourceElements = driver.findElements(
+                By.cssSelector( PATH_TAG + "[" + DATA_SOURCE_ATTR + "=\"" + nodeName+ "\"]" ) );
+
+        List<WebElement> allElements = new ArrayList<WebElement>(targetElements);
+        allElements.addAll(sourceElements);
+
+        List<Connector> connectors = new ArrayList<Connector>();
+        for( WebElement pathElement : allElements ){
+            String target = pathElement.getAttribute( DATA_TARGET_ATTR );
+            String source = pathElement.getAttribute( DATA_SOURCE_ATTR );
+            WebElement parentElement = pathElement.findElement(By.xpath("..") );
+            WebElement img = parentElement.findElement( By.tagName( "img" ).className( STATUS_CLASS ) );
+            String status = img.getAttribute( "conn-status" );
+            connectors.add( new Connector( source, target, status ) );
+        }
+
+        return connectors;
+    }
+
+
+    public ApplicationNode getApplicationNode( String name ){
 		
 		List<WebElement> elements = driver.findElements( 
 				By.tagName( G_TAG ).

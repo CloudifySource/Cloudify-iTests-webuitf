@@ -22,4 +22,13 @@ public class Connector {
 	public String getStatus() {
 		return status;
 	}
+
+    @Override
+    public String toString() {
+        return "Connector{" +
+                "source='" + source + '\'' +
+                ", target='" + target + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

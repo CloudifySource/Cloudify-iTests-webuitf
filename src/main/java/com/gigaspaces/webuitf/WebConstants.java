@@ -201,6 +201,8 @@ public final class WebConstants {
 		public static final String topologyEventsPanelToggle = "gs-tab-item-topology-events-toggler-button";
 		public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
 		public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
+
+        public static final String undeployApplicationButton = "gs-button-uninstall-app";
 		
 		public static final String metricPopupHeader = "gs-balance-dialog-panel-north";
 		public static final String metricPopupLow = "gs-balance-dialog-panel-center";

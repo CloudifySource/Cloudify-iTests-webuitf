@@ -1,13 +1,17 @@
 package com.gigaspaces.webuitf.topology;
 
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-
 import com.gigaspaces.webuitf.BaseApplicationContextPanel;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.applicationmap.ApplicationMap;
 import com.gigaspaces.webuitf.topology.sidepanel.TopologySidePanel;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class TopologyTab extends BaseApplicationContextPanel {
 
@@ -54,4 +58,25 @@ public class TopologyTab extends BaseApplicationContextPanel {
 		String maskMessage = "Loading application map...";
 		return super.isMaskedLoading(WebConstants.ID.topologyPanel, maskMessage);
 	}
+
+    public boolean isUndeployApplicationAvailable(){
+        WebElement element = helper.waitForElement(By.id(WebConstants.ID.undeployApplicationButton), 10);
+        return element != null;
+    }
+
+    public void undeploySelectedApplication(){
+        helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.id( WebConstants.ID.undeployApplicationButton ) );
+
+        List<WebElement> buttons = driver.findElements(By.className("x-btn-text").tagName("button"));
+        WebElement yesButton = null;
+        for( WebElement webElement : buttons ){
+            if( webElement.getText().equals( "Yes" ) ){
+                yesButton = webElement;
+                break;
+            }
+        }
+        if( yesButton != null ) {
+            yesButton.click();
+        }
+    }
 }
