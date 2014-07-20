@@ -60,8 +60,12 @@ public class TopologyTab extends BaseApplicationContextPanel {
 	}
 
     public boolean isUndeployApplicationAvailable(){
-        WebElement element = helper.waitForElement(By.id(WebConstants.ID.undeployApplicationButton), 10);
-        return element != null;
+        WebElement element = helper.waitForElement( TimeUnit.SECONDS, 20, By.id(WebConstants.ID.undeployApplicationButton) );
+        logger.info( "isUndeployApplicationAvailable(), element=" + element );
+        if( element != null ){
+            logger.info( "isUndeployApplicationAvailable(), is element displayed=" + element.isDisplayed() );
+        }
+        return element != null && element.isDisplayed();
     }
 
     public void undeploySelectedApplication(){
