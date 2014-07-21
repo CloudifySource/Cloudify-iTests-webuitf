@@ -1,13 +1,14 @@
 package com.gigaspaces.webuitf.datagrid;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.util.AjaxUtils;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class ContextPager {
 	
@@ -26,7 +27,18 @@ public class ContextPager {
 	}
 	
 	public void prev(String spaceName) {
-		driver.findElement(By.className("gwt-Anchor")).click();
+        List<WebElement> elements = driver.findElements( By.className( "gwt-Anchor" ) );
+        WebElement spaceElement = null;
+        for( WebElement element : elements ){
+            String dataValueAttrValue = element.getAttribute( "data-value" );
+            if( dataValueAttrValue!= null && dataValueAttrValue.equals( spaceName ) ){
+                spaceElement = element;
+                break;
+            }
+        }
+        if( spaceElement != null ) {
+            helper.clickWhenPossible( 10, TimeUnit.SECONDS, spaceElement );
+        }
 	}
 	
 	public int countSpaceContexts(String puName) {
