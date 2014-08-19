@@ -450,7 +450,8 @@ public final class WebConstants {
 		}
 		
 		public static String getPathToRowNumber(int index) {
-			return "//div[" + index + "]/table/tbody/tr[1]/td[1]/div/div";
+//			return "//div[" + index + "]/table/tbody/tr[1]/td[1]/div/div";
+            return "//*[@id=\"hosts_tree_grid\"]/div[1]/div[1]/div[2]/div/div[" + index + "]/table/tbody/tr[1]/td[1]/div/div/div/span/span";
 		}
 		
 		public static String getPathToComboSelection(String selection) {
