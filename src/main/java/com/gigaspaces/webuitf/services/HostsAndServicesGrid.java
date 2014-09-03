@@ -1,9 +1,8 @@
 package com.gigaspaces.webuitf.services;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -12,9 +11,9 @@ import org.openqa.selenium.WebElement;
 import org.openspaces.admin.gsa.GridServiceAgent;
 import org.openspaces.admin.gsc.GridServiceContainer;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.thoughtworks.selenium.Selenium;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * represents the Host and Services grid found in the web-ui under the Topology tab
@@ -31,7 +30,13 @@ public class HostsAndServicesGrid {
 	private Selenium selenium;
 	private WebDriver driver;
 	private long gsaPID;
-	
+
+    final String HOST_TREE_NODE_PREFIX = "hosts_tree_grid_host_";
+    final String HOSTS_TREE_PREFIX = "hosts_tree_grid_";
+
+    final String GSA_SUFFIX = "gsa";
+    final String GSC_SUFFIX = "gsc";
+
 	private AjaxUtils helper;
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -171,10 +176,36 @@ public class HostsAndServicesGrid {
 		String processPid = "" + gsc.getVirtualMachine().getDetails().getPid();
 		return selenium.isTextPresent(processPid);
 	}
-	
+
+    public void clickOnGSAService(){
+        clickOnGridComponentService( GSA_SUFFIX );
+    }
+
+    public void clickOnGSCService(){
+        clickOnGridComponentService( GSC_SUFFIX );
+    }
+
+    private void clickOnGridComponentService( String serviceNamePrefix ){
+
+        String realId = null;
+
+        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        for( WebElement el : elements ) {
+            String id = helper.retrieveAttribute( el, "id" );
+            System.out.println( "id=" + id  );
+            if( id != null && id.contains( HOSTS_TREE_PREFIX + serviceNamePrefix/*GSA_SUFFIX */) ) {
+                System.out.println( "iin if contains"  );
+                realId = id;
+                break;
+            }
+        }
+
+        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+    }
+
 	public void clickOnHost(String hostname) throws InterruptedException {
 		
-		clickOnHost(hostname, null);			
+		clickOnHost(hostname, null);
 	}
 	
 	/**
@@ -186,8 +217,8 @@ public class HostsAndServicesGrid {
 	 */
 	public void clickOnHost(String hostname, String hostAddress) throws InterruptedException {
 		
-		String hostsTreePrefix = "hosts_tree_grid_host_";
-		String realId = null;	
+		String hostsTreePrefix = HOST_TREE_NODE_PREFIX;
+		String realId = null;
 
 		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
 		for (WebElement el : elements) {
@@ -197,9 +228,9 @@ public class HostsAndServicesGrid {
 				realId = id;
 				break;
 			}
-		}		
-		
-		helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+		}
+
+        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
 	}
 	
 	/**
