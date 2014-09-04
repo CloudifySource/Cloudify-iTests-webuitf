@@ -69,47 +69,26 @@ public class HostsAndServicesGrid {
 	 */
 	public void startGridServiceComponent(String hostname, int component) throws InterruptedException {
 		clickOnHost(hostname);
-		String realId = null;
-        final int repeats = 3;
-        int repetition = 0;
-        logger.info("searching gsaPID '" + gsaPID + "'");
+        clickOnGSAService();
 
-        while(repetition < repeats && realId == null){
+        WebElement buttonElement = findToolsButton( String.valueOf( gsaPID ) );
+        if( buttonElement != null ) {
+            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
-            logger.info("attempt number " + (repetition + 1));
-            List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
-
-            for (int i = 0 ; i < elements.size() ; i++) {
-                String xpath = "//div[@id='hosts_tree_grid']/div/div/div[2]/div/div[" + (i+1) + "]/table/tbody/tr/td/div/div";
-                String id = helper.retrieveAttribute(By.xpath(xpath), "id", driver);
-                logger.info("found id '" + id + "'");
-                if ((id != null) && (id.contains(Long.toString(gsaPID)))) {
-                    realId = id;
+            switch (component) {
+                case 0: {
+                    helper.waitForElement(By.id(WebConstants.ID.startGSC), 3).click();
                     break;
                 }
+                case 1: {
+                    helper.waitForElement(By.id(WebConstants.ID.startGSM), 3).click();
+                    break;
+                }
+                case 2: {
+                    helper.waitForElement(By.id(WebConstants.ID.startLUS), 3).click();
+                }
             }
-
-            repetition++;
         }
-
-        if(realId == null){
-            throw new AssertionError("could not find gsa element");
-        }
-
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToGsaOption(realId)));
-		switch (component)  {
-		case 0: {
-			helper.waitForElement(By.id(WebConstants.ID.startGSC), 3).click();
-			break;
-		}
-		case 1: {
-			helper.waitForElement(By.id(WebConstants.ID.startGSM), 3).click();
-			break;
-		}
-		case 2: {
-			helper.waitForElement(By.id(WebConstants.ID.startLUS), 3).click();
-		}
-		}
 	}
 	
 	/**
@@ -161,26 +140,36 @@ public class HostsAndServicesGrid {
             }
 		}
 
+        WebElement buttonElement = findToolsButton(gscPid);
+        if( buttonElement != null ) {
+            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
+
+            helper.waitForElement(By.id(WebConstants.ID.restartComponent), 5).click();
+            driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+        }
+	}
+
+    private WebElement findToolsButton( String pid ){
+
         WebElement element = null;
+        WebElement buttonElement = null;
         //find grid all rows
-		List<WebElement> elements = driver.findElements(By.className("x-grid3-row"));;
-		for (WebElement el : elements) {
-            String className = helper.retrieveAttribute(el, "class");
-            //check if this row presents specific gsc row
-            if (className.contains(gscPid) ) {
+        List<WebElement> elements = driver.findElements( By.className( "x-grid3-row" ) );
+        for( WebElement el : elements ) {
+            String className = helper.retrieveAttribute( el, "class" );
+            //check if this row presents specific PID in row
+            if( className.contains( pid ) ){
                 element = el;
                 break;
             }
-		}
-
-        if( element != null ){
-            WebElement buttonElement = element.findElement(By.className("x-btn-text").tagName("button"));
-            buttonElement.click();
         }
 
-		helper.waitForElement(By.id(WebConstants.ID.restartComponent), 5).click();
-		driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
-	}
+        if( element != null ){
+            buttonElement = element.findElement( By.className( "x-btn-text" ).tagName( "button" ) );
+        }
+
+        return buttonElement;
+    }
 	
 	public boolean isGSCPresent(GridServiceContainer gsc) {
 		String processPid = "" + gsc.getVirtualMachine().getDetails().getPid();
