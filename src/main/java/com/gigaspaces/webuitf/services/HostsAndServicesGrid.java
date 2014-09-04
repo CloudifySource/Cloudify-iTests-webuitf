@@ -142,33 +142,43 @@ public class HostsAndServicesGrid {
 
 		
 		driver.findElement(By.xpath(WebConstants.Xpath.getPathToGscOption(realId))).click();
-		helper.waitForElement(By.id(WebConstants.ID.terminateComponent), 3000).click();
+		helper.waitForElement(By.id(WebConstants.ID.terminateComponent), 5).click();
 		driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
 	}
 	
 	public void restartGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 		clickOnHost(hostName);
+        clickOnGSAService();
 		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
 		int gscDivIndex = 2;
 		while (true) {
-			if (helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
+			if (helper.waitForTextToBeExctractable(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
 				.contains(gscPid)) break;
 			else gscDivIndex++;
+
+            if( gscDivIndex == 300 ){
+                throw new NoSuchElementException( "Any GSC tree node was not found" );
+            }
 		}
 
-		String realId = null;
-		
-		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        WebElement element = null;
+        //find grid all rows
+		List<WebElement> elements = driver.findElements(By.className("x-grid3-row"));;
 		for (WebElement el : elements) {
-			String id = helper.retrieveAttribute(el, "id");
-			if ((id != null) && (id.contains(gscPid))) {
-				realId = id;
-				break;
-			}
-		}		
-		
-		driver.findElement(By.xpath(WebConstants.Xpath.getPathToGscOption(realId))).click();
-		helper.waitForElement(By.id(WebConstants.ID.restartComponent), 3000).click();
+            String className = helper.retrieveAttribute(el, "class");
+            //check if this row presents specific gsc row
+            if (className.contains(gscPid) ) {
+                element = el;
+                break;
+            }
+		}
+
+        if( element != null ){
+            WebElement buttonElement = element.findElement(By.className("x-btn-text").tagName("button"));
+            buttonElement.click();
+        }
+
+		helper.waitForElement(By.id(WebConstants.ID.restartComponent), 5).click();
 		driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
 	}
 	

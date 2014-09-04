@@ -1,8 +1,9 @@
 package com.gigaspaces.webuitf.topology.logicalpanel;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.dashboard.ServicesGrid.Icon;
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -11,10 +12,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.dashboard.ServicesGrid.Icon;
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.thoughtworks.selenium.Selenium;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class WebUIProcessingUnitInstance {
 	
@@ -36,7 +35,7 @@ public class WebUIProcessingUnitInstance {
 
             String id = WebConstants.ID.getPuInstanceId(name);
             @SuppressWarnings("unused")
-            WebElement hostElement = helper.waitForElement(By.id(id), AjaxUtils.ajaxWaitingTime*10);
+            WebElement hostElement = helper.waitForElement(By.id(id), AjaxUtils.ajaxWaitingTime);
         }
 		catch (NoSuchElementException e) {
 		}

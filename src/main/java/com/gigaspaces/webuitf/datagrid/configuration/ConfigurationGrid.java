@@ -20,7 +20,7 @@ public class ConfigurationGrid implements ConfigurationConstants{
     protected final WebElement thisGridElement;
 
     public ConfigurationGrid(AjaxUtils helper, String configurationGridId){
-        thisGridElement = helper.waitForElement( By.id( configurationGridId ), TIMEOUT );
+        thisGridElement = helper.waitForElement( By.id( configurationGridId ), 7 );
     }
 
     protected String getValue( WebElement webElement ){
