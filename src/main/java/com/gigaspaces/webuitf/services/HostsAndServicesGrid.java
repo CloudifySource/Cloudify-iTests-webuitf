@@ -97,50 +97,19 @@ public class HostsAndServicesGrid {
 	 * @throws InterruptedException 
 	 */
 	public void terminateGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
-		clickOnHost(hostName);
-		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
-        String componentName;
-		int gscDivIndex = 2;
-		while (true) {
-            componentName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)));
-            logger.info("found component: " + componentName);
-            if (componentName.contains(gscPid)) break;
-			else gscDivIndex++;
-		}
 
-		String realId = null;
-		
-		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
-		for (WebElement el : elements) {
-			String id = el.getAttribute("id");
-			if ((id != null) && (id.contains(gscPid))) {
-				realId = id;
-				break;
-			}
-		}		
+        WebElement buttonElement = findGscToolsButton( hostName, gsc );
+        if( buttonElement != null ) {
+            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
-		
-		driver.findElement(By.xpath(WebConstants.Xpath.getPathToGscOption(realId))).click();
-		helper.waitForElement(By.id(WebConstants.ID.terminateComponent), 5).click();
-		driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+            helper.waitForElement(By.id(WebConstants.ID.terminateComponent), 5).click();
+            driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+        }
 	}
 	
 	public void restartGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
-		clickOnHost(hostName);
-        clickOnGSAService();
-		String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
-		int gscDivIndex = 2;
-		while (true) {
-			if (helper.waitForTextToBeExctractable(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
-				.contains(gscPid)) break;
-			else gscDivIndex++;
 
-            if( gscDivIndex == 300 ){
-                throw new NoSuchElementException( "Any GSC tree node was not found" );
-            }
-		}
-
-        WebElement buttonElement = findToolsButton(gscPid);
+        WebElement buttonElement = findGscToolsButton( hostName, gsc );
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -148,6 +117,24 @@ public class HostsAndServicesGrid {
             driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
         }
 	}
+
+    private WebElement findGscToolsButton( String hostName, GridServiceContainer gsc ) throws InterruptedException{
+        clickOnHost(hostName);
+        clickOnGSAService();
+        String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
+        int gscDivIndex = 2;
+        while (true) {
+            if (helper.waitForTextToBeExctractable(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
+                    .contains(gscPid)) break;
+            else gscDivIndex++;
+
+            if( gscDivIndex == 300 ){
+                throw new NoSuchElementException( "Any GSC tree node was not found" );
+            }
+        }
+
+        return findToolsButton(gscPid);
+    }
 
     private WebElement findToolsButton( String pid ){
 
