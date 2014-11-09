@@ -68,6 +68,7 @@ public final class WebConstants {
 		public static final String terminateComponent = "terminate_gsa_agent_menu_item";
 		public static final String restartComponent = "restart_gsa_agent_menu_item";
 		public static final String restartPuInstance = "restart_pu_instance_menu_item";
+        public static final String relocatePuInstance = "relocate_pu_instance_menu_item";
 		public static final String alertsGridBody = "gs-alerts-grid-body";
 		public static final String resourceDistribHosts = "resource_distrib-grid_null_hosts";
 		public static final String resourceDistribGSA = "resource_distrib-grid_null_gsa";

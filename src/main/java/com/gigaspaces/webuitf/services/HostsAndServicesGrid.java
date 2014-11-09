@@ -10,6 +10,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openspaces.admin.gsa.GridServiceAgent;
 import org.openspaces.admin.gsc.GridServiceContainer;
+import org.openspaces.admin.internal.pu.InternalProcessingUnitInstance;
+import org.openspaces.admin.pu.ProcessingUnitInstance;
+import org.openspaces.admin.vm.VirtualMachineDetails;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -71,7 +74,7 @@ public class HostsAndServicesGrid {
 		clickOnHost(hostname);
         clickOnGSAService();
 
-        WebElement buttonElement = findToolsButton( String.valueOf( gsaPID ) );
+        WebElement buttonElement = findToolsButton( String.valueOf( gsaPID ), true );
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -106,7 +109,35 @@ public class HostsAndServicesGrid {
             driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
         }
 	}
-	
+
+    public void restartProcessingUnitInstance( String hostName,
+                                            ProcessingUnitInstance processingUnitInstance)throws InterruptedException{
+
+        WebElement buttonElement = findProcessingUnitInstanceToolsButton( hostName, processingUnitInstance );
+        if( buttonElement != null ) {
+            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
+
+            helper.waitForElement(By.id(WebConstants.ID.restartPuInstance), 5).click();
+            driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+        }
+    }
+
+    public void relocateProcessingUnitInstance( String hostName, ProcessingUnitInstance processingUnitInstance,
+                                                GridServiceContainer targetGsc )throws InterruptedException{
+
+        WebElement buttonElement = findProcessingUnitInstanceToolsButton( hostName, processingUnitInstance );
+        if( buttonElement != null ) {
+            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
+
+            helper.waitForElement(By.id(WebConstants.ID.relocatePuInstance), 5).click();
+            driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+
+
+
+        }
+    }
+
+
 	public void restartGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 
         WebElement buttonElement = findGscToolsButton( hostName, gsc );
@@ -117,6 +148,42 @@ public class HostsAndServicesGrid {
             driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
         }
 	}
+
+    private WebElement findProcessingUnitInstanceToolsButton( String hostName, ProcessingUnitInstance processingUnitInstance ) throws InterruptedException{
+        clickOnHost(hostName);
+        clickOnGSAService();
+
+        GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
+        clickOnGSCService(gsc);
+
+        Thread.sleep(2*1000);
+
+        String puInstanceName = ((InternalProcessingUnitInstance)processingUnitInstance).
+                getProcessingUnitInstanceSimpleName();
+
+        System.out.println( ">>> puInstanceName=" + puInstanceName );
+
+        int puInstanceDivIndex = 3;
+        while (true) {
+            String searchedText = helper.waitForTextToBeExctractable(3,
+                    TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber( puInstanceDivIndex )));
+            System.out.println( ">>> searchedText=" + searchedText );
+            if( searchedText.contains( puInstanceName )) {
+                System.out.println( ">>> contains, break" );
+                break;
+            }
+            else {
+                puInstanceDivIndex++;
+            }
+
+            if( puInstanceDivIndex == 300 ){
+                throw new NoSuchElementException( "Any Processing Unit Instance tree node was not found" );
+            }
+        }
+
+        return findToolsButton( puInstanceName, false );
+    }
+
 
     private WebElement findGscToolsButton( String hostName, GridServiceContainer gsc ) throws InterruptedException{
         clickOnHost(hostName);
@@ -133,19 +200,23 @@ public class HostsAndServicesGrid {
             }
         }
 
-        return findToolsButton(gscPid);
+        return findToolsButton(gscPid, true);
     }
 
-    private WebElement findToolsButton( String pid ){
+    private WebElement findToolsButton( String str, boolean isGridService ){
 
         WebElement element = null;
         WebElement buttonElement = null;
         //find grid all rows
-        List<WebElement> elements = driver.findElements( By.className( "x-grid3-row" ) );
+        String rowClassName = /*isGridService ? "x-grid3-row" :*/ "gs-actions-button";
+        List<WebElement> elements = driver.findElements( By.className( rowClassName ) );
         for( WebElement el : elements ) {
             String className = helper.retrieveAttribute( el, "class" );
+            String id = helper.retrieveAttribute( el, "id" );
+            System.out.println( "Class name [" + className + "], id [" + id +
+                    "], contains [" + str + "]=" + className.contains( str ) );
             //check if this row presents specific PID in row
-            if( className.contains( pid ) ){
+            if( className.contains( str ) || id.contains( HOSTS_TREE_PREFIX + str ) ){
                 element = el;
                 break;
             }
@@ -164,22 +235,26 @@ public class HostsAndServicesGrid {
 	}
 
     public void clickOnGSAService(){
-        clickOnGridComponentService( GSA_SUFFIX );
+        clickOnGridComponentService( GSA_SUFFIX, -1 );
     }
 
-    public void clickOnGSCService(){
-        clickOnGridComponentService( GSC_SUFFIX );
+    public void clickOnGSCService( GridServiceContainer gsc ){
+        VirtualMachineDetails vmDetails = gsc.getVirtualMachine().getDetails();
+        long pid = vmDetails.getPid();
+        clickOnGridComponentService(GSC_SUFFIX, pid);
     }
 
-    private void clickOnGridComponentService( String serviceNamePrefix ){
+    private void clickOnGridComponentService( String serviceNamePrefix, long pid ){
 
         String realId = null;
 
         List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        System.out.println( "elements size=" + elements.size() );
         for( WebElement el : elements ) {
             String id = helper.retrieveAttribute( el, "id" );
             System.out.println( "id=" + id  );
-            if( id != null && id.contains( HOSTS_TREE_PREFIX + serviceNamePrefix/*GSA_SUFFIX */) ) {
+            if( id != null && id.contains( HOSTS_TREE_PREFIX + serviceNamePrefix ) &&
+                    pid < 0 || id.contains( "[" + String.valueOf( pid ) + "]" ) ) {
                 System.out.println( "iin if contains"  );
                 realId = id;
                 break;
