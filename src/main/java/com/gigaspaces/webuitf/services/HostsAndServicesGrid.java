@@ -130,10 +130,60 @@ public class HostsAndServicesGrid {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
             helper.waitForElement(By.id(WebConstants.ID.relocatePuInstance), 5).click();
-            driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+
+            WebElement relocationGridElement =
+                    helper.waitForElement( TimeUnit.SECONDS, 3, By.id( WebConstants.ID.relocationGrid ) );
 
 
+            String rowClassName = "x-grid3-row";
 
+            String targetGscPid = "" + targetGsc.getVirtualMachine().getDetails().getPid();;
+            String targetGscName = "gsc-" + targetGsc.getAgentId() + "[" + targetGscPid + "]";
+
+            System.out.println( ">>> Select target " + targetGscName );
+
+            WebElement requiredRowElement = null;
+            List<WebElement> elements = relocationGridElement.findElements(By.className(rowClassName));
+            System.out.println( "Rows, size=" + elements.size() );
+            for( WebElement rowElement : elements ){
+                if( requiredRowElement != null ){
+                    break;
+                }
+                //String className = helper.retrieveAttribute( el, "class" );
+                List<WebElement> spanElements = rowElement.findElements(By.tagName("span"));
+
+                System.out.println( "span elements count=" + spanElements.size() );
+                for( WebElement spanElement : spanElements ){
+                    System.out.println( "Span before get text..." );
+                    String text = spanElement.getText();
+                    System.out.println( "Span element text:" + text );
+                    if( text.equals( targetGscName ) ){
+                        requiredRowElement = rowElement;
+                        break;
+                    }
+                }
+            }
+
+            if( requiredRowElement != null ){
+                //select required row
+                requiredRowElement.click();
+                List<WebElement> selectButtons =
+                        helper.waitForElements(TimeUnit.SECONDS, 3, By.className("x-btn-text").tagName("button"));
+                System.out.println( "select buttons size:" + selectButtons.size() );
+
+                for( WebElement selectButton : selectButtons ) {
+                    System.out.println("Button :" + selectButton.getText());
+                    if( selectButton.getText().equals( "Select" ) ){
+                        System.out.println( "Before click on \"Select\" button" );
+                        helper.clickWhenPossible( 5, TimeUnit.SECONDS, selectButton );
+                        //selectButton.click();
+                        System.out.println( "After click on \"Select\" button" );
+                        //click on "Yes" button in confirmation dialog
+                        driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -223,7 +273,7 @@ public class HostsAndServicesGrid {
         }
 
         if( element != null ){
-            buttonElement = element.findElement( By.className( "x-btn-text" ).tagName( "button" ) );
+            buttonElement = element.findElement(By.className("x-btn-text").tagName("button"));
         }
 
         return buttonElement;
