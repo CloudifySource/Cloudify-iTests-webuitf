@@ -1,19 +1,17 @@
 package com.gigaspaces.webuitf;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.gigaspaces.webuitf.dashboard.DashboardTab;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
 import com.gigaspaces.webuitf.services.ServicesTab;
 import com.gigaspaces.webuitf.topology.TopologyTab;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class MainNavigation {
 	
@@ -39,47 +37,49 @@ public class MainNavigation {
 		Thread.sleep(1000);
 		return new LoginPage(selenium, driver);
 	}
-	
+
+
+    private void clickOnTabButton( String butttonId ) throws Exception{
+
+        WebElement buttonTableElement = helper.waitForElement(
+                TimeUnit.SECONDS, TIMEOUT_IN_SECONDS, By.id( butttonId ));
+        WebElement button = buttonTableElement.findElement(By.className("x-btn-text").tagName("button"));
+        helper.clickWhenPossible( TIMEOUT_IN_SECONDS, TimeUnit.SECONDS, button );
+    }
+
 	public ServicesTab switchToServices() {
-		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.servicesButton));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
+
+        try {
+            clickOnTabButton(WebConstants.ID.servicesButton);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+            return null;
+        }
 		return new ServicesTab(selenium, driver);
 	}
 	
 	public DashboardTab switchToDashboard() {
-		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.dashBoardButton));
-		try {
-			Thread.sleep(2000);
-			} 
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
+        try {
+            clickOnTabButton(WebConstants.ID.dashBoardButton);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+            return null;
+        }
+
 		return new DashboardTab(selenium, driver);
 	}
 	
 	public TopologyTab switchToTopology() {
-		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.topologyButton));		
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		catch (NoSuchElementException e) {
-			return null;
-		}
+        try {
+            clickOnTabButton(WebConstants.ID.topologyButton);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+            return null;
+        }
+
 		return new TopologyTab(selenium, driver);
 	}
 
@@ -88,18 +88,14 @@ public class MainNavigation {
 	}
 	
 	public DataGridTab switchToDataGrid( boolean wait ) {
-		helper.clickWhenPossible(TIMEOUT_IN_SECONDS, TimeUnit.SECONDS,
-				By.xpath(WebConstants.Xpath.consoleButton));
-		if( wait ){
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			catch (NoSuchElementException e) {
-				return null;
-			}
-		}
+        try {
+            clickOnTabButton(WebConstants.ID.consoleButton);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+            return null;
+        }
+
 		return new DataGridTab(selenium, driver);
 	}
 

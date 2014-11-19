@@ -26,6 +26,12 @@ public final class WebConstants {
 	public static final String COLUMN_CLASS_PREFIX = "x-grid3-col-";
 	
 	public static final class ID {
+
+		public static final String dashBoardButton = "gs-tab-item-dashboard-button";
+		public static final String topologyButton = "gs-tab-item-topology-button";
+		public static final String servicesButton = "gs-tab-item-services-button";
+		public static final String consoleButton = "gs-tab-item-console-button";
+
 		public static final String topologyPanel = "gs-tab-item-topology";
 		public static final String dataGridPanel = "gs-tab-item-console";
 		public static final String logOutButton = "gs-logout-button";
@@ -286,10 +292,6 @@ public final class WebConstants {
 		public static final String isSecuredCheckbox = "//div[@id='secured_check_box']/input";
 		public static final String loginButton = "//table[@id='login_button']";
 		public static final String discoveryLegend = "//legend/div";
-		public static final String dashBoardButton = "//li[@id='gs-tab-item-dashboard-button']/a[2]/em/span/span";
-		public static final String topologyButton = "//li[@id='gs-tab-item-topology-button']/a[2]/em/span/span";
-		public static final String servicesButton = "//li[@id='gs-tab-item-services-button']/a[2]/em/span/span";
-		public static final String consoleButton = "//li[@id='gs-tab-item-console-button']/a[2]/em/span/span";
 		public static final String deoployFromListRadioButton = "//div[@id='pu_list_rb']/input";
 		public static final String existingPuCombo = "//div[@id='existing_list_of_pu']/img";
 		public static final String okAlert = "//button[text()='OK']";
