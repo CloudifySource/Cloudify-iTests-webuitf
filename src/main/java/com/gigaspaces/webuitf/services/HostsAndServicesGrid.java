@@ -140,11 +140,11 @@ public class HostsAndServicesGrid {
             String targetGscPid = "" + targetGsc.getVirtualMachine().getDetails().getPid();;
             String targetGscName = "gsc-" + targetGsc.getAgentId() + "[" + targetGscPid + "]";
 
-            System.out.println( ">>> Select target " + targetGscName );
+            logger.info( ">>> Select target " + targetGscName );
 
             WebElement requiredRowElement = null;
             List<WebElement> elements = relocationGridElement.findElements(By.className(rowClassName));
-            System.out.println( "Rows, size=" + elements.size() );
+            logger.info( "Rows, size=" + elements.size() );
             for( WebElement rowElement : elements ){
                 if( requiredRowElement != null ){
                     break;
@@ -152,11 +152,11 @@ public class HostsAndServicesGrid {
                 //String className = helper.retrieveAttribute( el, "class" );
                 List<WebElement> spanElements = rowElement.findElements(By.tagName("span"));
 
-                System.out.println( "span elements count=" + spanElements.size() );
+                logger.info( "span elements count=" + spanElements.size() );
                 for( WebElement spanElement : spanElements ){
-                    System.out.println( "Span before get text..." );
+                    logger.info( "Span before get text..." );
                     String text = spanElement.getText();
-                    System.out.println( "Span element text:" + text );
+                    logger.info( "Span element text:" + text );
                     if( text.equals( targetGscName ) ){
                         requiredRowElement = rowElement;
                         break;
@@ -169,15 +169,15 @@ public class HostsAndServicesGrid {
                 requiredRowElement.click();
                 List<WebElement> selectButtons =
                         helper.waitForElements(TimeUnit.SECONDS, 3, By.className("x-btn-text").tagName("button"));
-                System.out.println( "select buttons size:" + selectButtons.size() );
+                logger.info( "select buttons size:" + selectButtons.size() );
 
                 for( WebElement selectButton : selectButtons ) {
-                    System.out.println("Button :" + selectButton.getText());
+                    logger.info("Button :" + selectButton.getText());
                     if( selectButton.getText().equals( "Select" ) ){
-                        System.out.println( "Before click on \"Select\" button" );
+                        logger.info( "Before click on \"Select\" button" );
                         helper.clickWhenPossible( 5, TimeUnit.SECONDS, selectButton );
                         //selectButton.click();
-                        System.out.println( "After click on \"Select\" button" );
+                        logger.info( "After click on \"Select\" button" );
                         //click on "Yes" button in confirmation dialog
                         driver.findElement(By.xpath(WebConstants.Xpath.acceptAlert)).click();
                         break;
@@ -211,15 +211,15 @@ public class HostsAndServicesGrid {
         String puInstanceName = ((InternalProcessingUnitInstance)processingUnitInstance).
                 getProcessingUnitInstanceSimpleName();
 
-        System.out.println( ">>> puInstanceName=" + puInstanceName );
+        logger.info( ">>> puInstanceName=" + puInstanceName );
 
         int puInstanceDivIndex = 3;
         while (true) {
             String searchedText = helper.waitForTextToBeExctractable(3,
                     TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber( puInstanceDivIndex )));
-            System.out.println( ">>> searchedText=" + searchedText );
+            logger.info( ">>> searchedText=" + searchedText );
             if( searchedText.contains( puInstanceName )) {
-                System.out.println( ">>> contains, break" );
+                logger.info( ">>> contains, break" );
                 break;
             }
             else {
@@ -263,7 +263,7 @@ public class HostsAndServicesGrid {
         for( WebElement el : elements ) {
             String className = helper.retrieveAttribute( el, "class" );
             String id = helper.retrieveAttribute( el, "id" );
-            System.out.println( "Class name [" + className + "], id [" + id +
+            logger.info( "Class name [" + className + "], id [" + id +
                     "], contains [" + str + "]=" + className.contains( str ) );
             //check if this row presents specific PID in row
             if( className.contains( str ) || id.contains( HOSTS_TREE_PREFIX + str ) ){
@@ -299,19 +299,19 @@ public class HostsAndServicesGrid {
         String realId = null;
 
         List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
-        System.out.println( "elements size=" + elements.size() );
+        logger.info( "elements size=" + elements.size() );
         for( WebElement el : elements ) {
             String id = helper.retrieveAttribute( el, "id" );
-            System.out.println( "id=" + id  );
+            logger.info( "id=" + id  );
             if( id != null && id.contains( HOSTS_TREE_PREFIX + serviceNamePrefix ) &&
                     pid < 0 || id.contains( "[" + String.valueOf( pid ) + "]" ) ) {
-                System.out.println( "iin if contains"  );
+                logger.info( "iin if contains"  );
                 realId = id;
                 break;
             }
         }
 
-        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
     }
 
 	public void clickOnHost(String hostname) throws InterruptedException {
@@ -341,7 +341,9 @@ public class HostsAndServicesGrid {
 			}
 		}
 
-        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        logger.info( ">>realId=" + realId );
+
+        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
 	}
 	
 	/**
