@@ -203,12 +203,10 @@ public final class WebConstants {
 		public static final String comparisonMetricBottom = "comparisonMetricPanelBottom";
 				
 		public static final String morePopup = "gs-popup-grid-instances";
-		public static final String dashboardeventsPanelToggle = "gs-tab-item-dashboard-events-toggler-button";
 		public static final String dashboardeventsGridToggle = "gs-tab-item-dashboard-events-grid-toggler-button";
 		public static final String dashboardAlertsPanelToggle = "gs-tab-item-alerts-toggler-button";
 		public static final String dashboardEventsGrid = "dahsboard-events-grid";
 		public static final String topologyEventsGrid = "topology-events-grid";
-		public static final String topologyEventsPanelToggle = "gs-tab-item-topology-events-toggler-button";
 		public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
 		public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
 
@@ -660,14 +658,6 @@ public final class WebConstants {
 		
 		public static final String statePanelHeader = "gs-state-panel-header";		
 		
-		public static final String timelineEventContainer = "simileAjax-bubble-contentContainer";
-		public static final String timelineEventIcon = "timeline-event-icon";
-		public static final String timelineEventTitle = "timeline-event-bubble-title";
-		public static final String timelineEventBody = "timeline-event-bubble-body";
-		public static final String timelineEventTime = "timeline-event-bubble-time";
-		public static final String timelineEventTimeStamp = "";
-		public static final String timelineEventStatus = "";
-		
 		public static final String EventsGridEventTitle = "x-grid3-td-component_name";
 		public static final String EventsGridEventMessage = "x-grid3-td-message";
 		public static final String EventsGridEventDescription = "x-grid3-td-description";
@@ -676,8 +666,7 @@ public final class WebConstants {
 		public static final String EventsGridClearFilter = "x-form-clear-trigger";
 		
 		public static final String win32OS = "gs-os-icon-Win32";
-		public static final String eventPopupCloseButton = "simileAjax-bubble-close";
-		
+
 		public static final String codeEditor = "CodeMirror";
 		
 		public static final String contextPagerDataMode = "x-grid3-col-tree_browser_model_data_name";

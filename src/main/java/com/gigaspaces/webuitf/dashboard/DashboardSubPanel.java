@@ -1,14 +1,12 @@
 package com.gigaspaces.webuitf.dashboard;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.dashboard.alerts.AlertsPanel;
 import com.gigaspaces.webuitf.dashboard.events.DashboardEventsGrid;
-import com.gigaspaces.webuitf.dashboard.events.EventsPanel;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class DashboardSubPanel {
 	
@@ -20,17 +18,6 @@ public class DashboardSubPanel {
 		this.selenium = selenium;
 	}
 
-	public EventsPanel switchToEventsPanel() {
-		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.dashboardeventsPanelToggle));
-		healthButton.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new EventsPanel(driver);
-	}
-	
 	public DashboardEventsGrid switchToEventsGrid() {
 		WebElement healthButton = driver.findElement(By.id(WebConstants.ID.dashboardeventsGridToggle));
 		healthButton.click();
