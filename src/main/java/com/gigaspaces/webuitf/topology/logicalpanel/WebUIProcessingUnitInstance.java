@@ -1,8 +1,8 @@
 package com.gigaspaces.webuitf.topology.logicalpanel;
 
 import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.dashboard.ServicesGrid.Icon;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.Icon;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

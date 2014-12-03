@@ -1,7 +1,7 @@
 package com.gigaspaces.webuitf;
 
-import com.gigaspaces.webuitf.dashboard.DashboardTab;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
+import com.gigaspaces.webuitf.monitoring.MonitoringTab;
 import com.gigaspaces.webuitf.services.ServicesTab;
 import com.gigaspaces.webuitf.topology.TopologyTab;
 import com.gigaspaces.webuitf.util.AjaxUtils;
@@ -59,16 +59,16 @@ public class MainNavigation {
 		return new ServicesTab(selenium, driver);
 	}
 	
-	public DashboardTab switchToDashboard() {
+	public MonitoringTab switchToMonitoring() {
         try {
-            clickOnTabButton(WebConstants.ID.dashBoardButton);
+            clickOnTabButton(WebConstants.ID.monitoringButton);
         }
         catch( Exception exc ){
             exc.printStackTrace();
             return null;
         }
 
-		return new DashboardTab(selenium, driver);
+		return new MonitoringTab(selenium, driver);
 	}
 	
 	public TopologyTab switchToTopology() {

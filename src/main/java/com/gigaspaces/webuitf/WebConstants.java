@@ -27,10 +27,10 @@ public final class WebConstants {
 
     public static final class ID {
 
-        public static final String dashBoardButton = "gs-tab-item-dashboard-button";
         public static final String topologyButton = "gs-tab-item-topology-button";
         public static final String servicesButton = "gs-tab-item-services-button";
         public static final String consoleButton = "gs-tab-item-console-button";
+        public static final String monitoringButton = "gs-tab-item-monitoring-button";
 
         public static final String topologyPanel = "gs-tab-item-topology";
         public static final String dataGridPanel = "gs-tab-item-console";
@@ -203,9 +203,6 @@ public final class WebConstants {
         public static final String comparisonMetricBottom = "comparisonMetricPanelBottom";
 
         public static final String morePopup = "gs-popup-grid-instances";
-        public static final String dashboardeventsGridToggle = "gs-tab-item-dashboard-events-grid-toggler-button";
-        public static final String dashboardAlertsPanelToggle = "gs-tab-item-alerts-toggler-button";
-        public static final String dashboardEventsGrid = "dahsboard-events-grid";
         public static final String topologyEventsGrid = "topology-events-grid";
         public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
         public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
@@ -228,13 +225,6 @@ public final class WebConstants {
         public static final String controllerLogs = "gs-controllers-logs";
 
         public static final String servicesDumpWindow = "gs-services-dump-window";
-
-        public static final String dashboardLastMinuteEventsButton = "dashboard-events-last-minute-time-button";
-        public static final String dashboardLastHourEventsButton = "dashboard-events-last-hour-button";
-        public static final String dashboardLastDayEventsButton = "dashboard-events-last-day-button";
-        public static final String dashboardAllEventsButton = "dashboard-events-all-button";
-        public static final String dashboardEventsFilter = "dashboard-events-filter";
-        public static final String dashboardEventsFilterInput = "dashboard-events-filter-input";
 
         public static final String topologyLastMinuteEventsButton = "topology-events-last-minute-time-button";
         public static final String topologyLastHourEventsButton = "topology-events-last-hour-button";
@@ -430,10 +420,6 @@ public final class WebConstants {
 
         public static final String getPathToMetricExtremeHighCasesRow(int rowIndex) {
             return "//div[@id='" + ID.metricPopupHigh + "']/div[2]/div/div/div/div/div/div[2]/div[" + rowIndex + "]/div/table/tbody/tr";
-        }
-
-        public static final String getPathToEventInDashboardEventsGrid(int index) {
-            return "//div[@id='" + ID.dashboardEventsGrid + "']/div/div/div[2]/div/div[" + index + "]";
         }
 
         public static String getPathToEventInTopologyEventsGrid(int index) {

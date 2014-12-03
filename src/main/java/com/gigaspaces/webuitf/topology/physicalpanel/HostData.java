@@ -3,6 +3,7 @@ package com.gigaspaces.webuitf.topology.physicalpanel;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import com.gigaspaces.webuitf.util.Icon;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -11,7 +12,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.dashboard.ServicesGrid.Icon;
 import com.gigaspaces.webuitf.topology.physicalpanel.PhysicalPanel.OS;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 
