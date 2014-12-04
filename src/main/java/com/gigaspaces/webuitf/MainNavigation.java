@@ -99,7 +99,12 @@ public class MainNavigation {
 		return new DataGridTab(selenium, driver);
 	}
 
-	public String getLookupLocators() {
+    public boolean isXap() {
+        driver.findElement(By.id("gs-about-button")).click();
+        return selenium.isTextPresent("XAP Premium");
+    }
+
+    public String getLookupLocators() {
 		
 		WebElement lookupLocatorsElement = null; 
 		try{
@@ -123,5 +128,141 @@ public class MainNavigation {
 		}
 		
 		return lookupGroupsElement == null ? null : lookupGroupsElement.getText();
-	}	
+	}
+
+    public int getHostsCount(){
+
+        int hostsCount = -1;
+        try{
+            WebElement hostsElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureHosts ), 7 );
+            String txt = hostsElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return hostsCount;
+    }
+
+    public int getGsaCount(){
+
+        int gsaCount = -1;
+        try{
+            WebElement gsaElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsa ), 7 );
+            String txt = gsaElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return gsaCount;
+    }
+
+
+    public int getGsmCount(){
+
+        int gsmCount = -1;
+        try{
+            WebElement gsmElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsm ), 7 );
+            String txt = gsmElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return gsmCount;
+    }
+
+
+    public int getGscCount(){
+
+        int gscCount = -1;
+        try{
+            WebElement gscElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsc ), 7 );
+            String txt = gscElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return gscCount;
+    }
+
+
+    public int getLusCount(){
+
+        int lusCount = -1;
+        try{
+            WebElement lusElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureLus ), 7 );
+            String txt = lusElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return lusCount;
+    }
+
+
+    public int getEsmCount(){
+
+        int esmCount = -1;
+        try{
+            WebElement esmElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureEsm ), 7 );
+            String txt = esmElement.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return esmCount;
+    }
+
+    public int getStatefulServicesCount(){
+
+        return getServicesCount( WebConstants.ID.statusBarServicesStateful );
+    }
+
+    public int getStatelessServicesCount(){
+
+        return getServicesCount( WebConstants.ID.statusBarServicesStateless );
+    }
+
+    public int getWebServicesCount(){
+
+        return getServicesCount( WebConstants.ID.statusBarServicesWeb );
+    }
+
+    public int getGatewayServicesCount(){
+
+        return getServicesCount( WebConstants.ID.statusBarServicesGateway );
+    }
+
+    public int getMirrorServicesCount(){
+
+        return getServicesCount( WebConstants.ID.statusBarServicesMirror );
+    }
+
+
+    private int getServicesCount( String id ){
+
+        int servicesCount = -1;
+        try{
+            WebElement element = helper.waitForElement( By.id( id ), 7 );
+            String txt = element.getText();
+            System.out.println( ">> txt" + txt );
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return servicesCount;
+    }
+
 }

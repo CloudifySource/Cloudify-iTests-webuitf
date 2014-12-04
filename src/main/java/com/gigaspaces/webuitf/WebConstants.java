@@ -32,6 +32,23 @@ public final class WebConstants {
         public static final String consoleButton = "gs-tab-item-console-button";
         public static final String monitoringButton = "gs-tab-item-monitoring-button";
 
+        //status bar elements
+        public static final String statusBarInfrastructureHosts = "status-bar-infra-hosts";
+        public static final String statusBarInfrastructureGsa = "status-bar-infra-gsa";
+        public static final String statusBarInfrastructureGsm = "status-bar-infra-gsm";
+        public static final String statusBarInfrastructureGsc = "status-bar-infra-gsc";
+        public static final String statusBarInfrastructureLus = "status-bar-infra-lus";
+        public static final String statusBarInfrastructureEsm = "status-bar-infra-esm";
+
+        public static final String statusBarServicesStateful = "status-bar-services-stateful";
+        public static final String statusBarServicesStateless = "status-bar-services-stateless";
+        public static final String statusBarServicesMirror = "status-bar-services-mirror";
+        public static final String statusBarServicesGateway = "status-bar-services-gateway";
+        public static final String statusBarServicesWeb = "status-bar-services-web";
+
+        public static final String statusBarServicesStatefulThroughput = statusBarServicesStateful + "-throughput";
+        public static final String statusBarServicesWebThroughput = statusBarServicesWeb + "-throughput";
+
         public static final String topologyPanel = "gs-tab-item-topology";
         public static final String dataGridPanel = "gs-tab-item-console";
         public static final String logOutButton = "gs-logout-button";
