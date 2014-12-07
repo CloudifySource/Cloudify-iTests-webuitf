@@ -131,64 +131,56 @@ public class MainNavigation {
 	}
 
     public int getHostsCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureHosts );
     }
 
     public int getGsaCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureGsa );
     }
 
-
     public int getGsmCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureGsm );
     }
 
-
     public int getGscCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureGsc );
     }
 
-
     public int getLusCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureLus );
     }
 
-
     public int getEsmCount(){
-
         return getServicesCount( WebConstants.ID.statusBarInfrastructureEsm );
     }
 
     public int getStatefulServicesCount(){
-
         return getServicesCount( WebConstants.ID.statusBarServicesStateful );
     }
 
     public int getStatelessServicesCount(){
-
         return getServicesCount( WebConstants.ID.statusBarServicesStateless );
     }
 
     public int getWebServicesCount(){
-
         return getServicesCount( WebConstants.ID.statusBarServicesWeb );
     }
 
     public int getGatewayServicesCount(){
-
         return getServicesCount( WebConstants.ID.statusBarServicesGateway );
     }
 
     public int getMirrorServicesCount(){
-
         return getServicesCount( WebConstants.ID.statusBarServicesMirror );
     }
 
+    public double getStatefulServicesThroughput(){
+        return getServicesThroughput( WebConstants.ID.statusBarServicesStatefulThroughput );
+    }
+
+    public double getWebServicesThroughput (){
+        return getServicesThroughput( WebConstants.ID.statusBarServicesWebThroughput );
+    }
 
     private int getServicesCount( String id ){
 
@@ -213,6 +205,32 @@ public class MainNavigation {
         }
 
         return servicesCount;
+    }
+
+    private double getServicesThroughput( String id ){
+
+        double servicesThroughput = -1;
+        try{
+            WebElement element = helper.waitForElement( By.id( id ), 7 );
+            if( element != null ) {
+                String txt = element.getText();
+                logger.info( ">> getServicesThroughput, id=" + id + ", txt=" + txt );
+                if( txt != null && txt.trim().length() > 0 ) {
+                    int startIndex = txt.indexOf("(");
+                    int lastIndex = txt.indexOf( " " );
+                    String numStr = txt.substring( startIndex + 1, lastIndex ).trim();
+                    if( numStr.length() > 0 ){
+                        servicesThroughput = Double.parseDouble( numStr );
+                    }
+                    logger.info( ">> servicesThroughput=" + servicesThroughput );
+                }
+            }
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return servicesThroughput;
     }
 
 }
