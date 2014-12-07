@@ -132,96 +132,36 @@ public class MainNavigation {
 
     public int getHostsCount(){
 
-        int hostsCount = -1;
-        try{
-            WebElement hostsElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureHosts ), 7 );
-            String txt = hostsElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return hostsCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureHosts );
     }
 
     public int getGsaCount(){
 
-        int gsaCount = -1;
-        try{
-            WebElement gsaElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsa ), 7 );
-            String txt = gsaElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return gsaCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureGsa );
     }
 
 
     public int getGsmCount(){
 
-        int gsmCount = -1;
-        try{
-            WebElement gsmElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsm ), 7 );
-            String txt = gsmElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return gsmCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureGsm );
     }
 
 
     public int getGscCount(){
 
-        int gscCount = -1;
-        try{
-            WebElement gscElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureGsc ), 7 );
-            String txt = gscElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return gscCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureGsc );
     }
 
 
     public int getLusCount(){
 
-        int lusCount = -1;
-        try{
-            WebElement lusElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureLus ), 7 );
-            String txt = lusElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return lusCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureLus );
     }
 
 
     public int getEsmCount(){
 
-        int esmCount = -1;
-        try{
-            WebElement esmElement = helper.waitForElement( By.id( WebConstants.ID.statusBarInfrastructureEsm ), 7 );
-            String txt = esmElement.getText();
-            System.out.println( ">> txt" + txt );
-        }
-        catch( Exception e ){
-            logger.severe( "Failed to find hosts element" + e.toString() );
-        }
-
-        return esmCount;
+        return getServicesCount( WebConstants.ID.statusBarInfrastructureEsm );
     }
 
     public int getStatefulServicesCount(){
@@ -252,11 +192,21 @@ public class MainNavigation {
 
     private int getServicesCount( String id ){
 
-        int servicesCount = -1;
+        int servicesCount = 0;
         try{
             WebElement element = helper.waitForElement( By.id( id ), 7 );
-            String txt = element.getText();
-            System.out.println( ">> txt" + txt );
+            if( element != null ) {
+                String txt = element.getText();
+                logger.info( ">> getServicesCount, id=" + id + ", txt=" + txt );
+                if( txt != null && txt.trim().length() > 0 ) {
+                    int spaceLastIndex = txt.lastIndexOf(" ");
+                    String numStr = txt.substring( spaceLastIndex, txt.length() ).trim();
+                    if( numStr.length() > 0 ){
+                        servicesCount = Integer.parseInt( numStr );
+                    }
+                    logger.info( ">> servicesCount=" + servicesCount );
+                }
+            }
         }
         catch( Exception e ){
             logger.severe( "Failed to find hosts element" + e.toString() );
