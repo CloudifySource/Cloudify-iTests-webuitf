@@ -189,6 +189,7 @@ public class MainNavigation {
                 logger.info( ">> getServicesCount, id=" + id + ", txt=" + txt );
                 if( txt != null && txt.trim().length() > 0 ) {
                     int spaceLastIndex = txt.lastIndexOf(" ");
+                    spaceLastIndex = spaceLastIndex < 0 ? 0 : spaceLastIndex;
                     String numStr = txt.substring( spaceLastIndex, txt.length() ).trim();
                     if( numStr.length() > 0 ){
                         servicesCount = Integer.parseInt( numStr );
