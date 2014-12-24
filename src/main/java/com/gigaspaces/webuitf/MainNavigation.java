@@ -104,31 +104,28 @@ public class MainNavigation {
         return selenium.isTextPresent("XAP Premium");
     }
 
-    public String getLookupLocators() {
-		
-		WebElement lookupLocatorsElement = null; 
-		try{
-			lookupLocatorsElement = helper.waitForElement( 
-						By.className( WebConstants.ClassNames.lookupLocators ), 10 );
-		}
-		catch( Exception e ){
-		}
-		
-		return lookupLocatorsElement == null ? null : lookupLocatorsElement.getText();
-	}
+    public LookupDetails getLookupDetails() {
+        driver.findElement(By.id("gs-about-button")).click();
+        WebElement lookupLocatorsElement = null;
+        WebElement lookupGroupsElement = null;
+        try{
+            lookupLocatorsElement = helper.waitForElement(
+                    By.className( WebConstants.ClassNames.lookupLocators ), 10 );
+        }
+        catch( Exception e ){
+        }
+        try{
+            lookupGroupsElement = helper.waitForElement(
+                    By.className( WebConstants.ClassNames.lookupGroups ), 10 );
+        }
+        catch( Exception e ){
+        }
 
-	public String getLookupGroups() {
-		
-		WebElement lookupGroupsElement = null;
-		try{
-			lookupGroupsElement = helper.waitForElement( 
-						By.className( WebConstants.ClassNames.lookupGroups ), 10 );
-		}
-		catch( Exception e ){
-		}
-		
-		return lookupGroupsElement == null ? null : lookupGroupsElement.getText();
-	}
+        String locators = lookupLocatorsElement == null ? null : lookupLocatorsElement.getText();
+        String groups = lookupGroupsElement == null ? null : lookupGroupsElement.getText();
+
+        return new LookupDetails(groups, locators );
+    }
 
     public int getHostsCount(){
         return getServicesCount( WebConstants.ID.statusBarInfrastructureHosts );
@@ -233,4 +230,23 @@ public class MainNavigation {
         return servicesThroughput;
     }
 
+
+    public class LookupDetails{
+
+        private final String _lookupGroups;
+        private final String _lookupLocators;
+
+        public LookupDetails( String lookupGroups, String lookupLocators ){
+            _lookupGroups = lookupGroups;
+            _lookupLocators = lookupLocators;
+        }
+
+        public String getLookupGroups() {
+            return _lookupGroups;
+        }
+
+        public String getLookupLocators() {
+            return _lookupLocators;
+        }
+    }
 }
