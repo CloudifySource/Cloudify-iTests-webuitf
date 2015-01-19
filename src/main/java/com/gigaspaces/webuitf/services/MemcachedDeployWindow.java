@@ -28,8 +28,9 @@ public class MemcachedDeployWindow extends AbstractDeployWindow {
 		selenium.type(WebConstants.ID.spaceUrlInput, spaceUrl);
 		super.sumbitDeploySpecs();
 	}
-	
-	
-	
 
+    @Override
+    public AbstractDeployWindow prev() {
+        return this;
+    }
 }

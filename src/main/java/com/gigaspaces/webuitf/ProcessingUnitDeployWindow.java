@@ -30,7 +30,9 @@ public class ProcessingUnitDeployWindow extends AbstractDeployWindow {
 		selenium.click(WebConstants.Xpath.getPathToComboSelection(puName));
 		super.sumbitDeploySpecs();
 	}
-	
-	
 
+    @Override
+    public AbstractDeployWindow prev() {
+        return this;
+    }
 }
