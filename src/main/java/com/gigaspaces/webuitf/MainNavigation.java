@@ -38,13 +38,21 @@ public class MainNavigation {
 		return new LoginPage(selenium, driver);
 	}
 
-
-    private void clickOnTabButton( String butttonId ) throws Exception{
+    private boolean clickOnTabButton( String buttonId ) throws Exception{
 
         WebElement buttonTableElement = helper.waitForElement(
-                TimeUnit.SECONDS, TIMEOUT_IN_SECONDS, By.id( butttonId ));
+                TimeUnit.SECONDS, TIMEOUT_IN_SECONDS, By.id( buttonId ));
+
+        String className = buttonTableElement.getAttribute( "class" );
+        //if style is disabled then return false since button is not clickable
+        //GS-
+        if( className.contains( "x-item-disabled" ) ){
+            return false;
+        }
+
         WebElement button = buttonTableElement.findElement(By.className("x-btn-text").tagName("button"));
         helper.clickWhenPossible( TIMEOUT_IN_SECONDS, TimeUnit.SECONDS, button );
+        return true;
     }
 
 	public ServicesTab switchToServices() {
@@ -61,7 +69,10 @@ public class MainNavigation {
 	
 	public MonitoringTab switchToMonitoring() {
         try {
-            clickOnTabButton(WebConstants.ID.monitoringButton);
+            boolean isClickable = clickOnTabButton(WebConstants.ID.monitoringButton);
+            if( !isClickable ){
+                return null;
+            }
         }
         catch( Exception exc ){
             exc.printStackTrace();
