@@ -46,10 +46,12 @@ public class AdvancedDeployment {
     }
 
     public void addMaxInstancesPerZone( String zone, int maxInstancesPerZone ){
-        WebElement addButton = _driver.findElement( By.id( WebConstants.ID.ADD_MAX_INSTANCES_PER_ZONE_BUTTON ) );
-        addButton.click();
-        setZone(zone);
-        setMaxInstances(maxInstancesPerZone);
+        WebElement addButton = _helper.waitForElement( TimeUnit.SECONDS, 5, By.id( WebConstants.ID.ADD_MAX_INSTANCES_PER_ZONE_BUTTON ) );
+        if( addButton != null ) {
+            addButton.click();
+            setZone(zone);
+            setMaxInstances(maxInstancesPerZone);
+        }
     }
 
     private void setZone( String zone ) {
@@ -63,20 +65,6 @@ public class AdvancedDeployment {
     private void setMaxInstancesPerZoneCellValue( String columnClassName, String cellValue ) {
 
         _helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.className( columnClassName ) );
-        List<WebElement> columnCellElements = _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( columnClassName ) );
-        WebElement lastColumnElement = null;
-        for( WebElement element : columnCellElements ){
-            boolean isDisplayed = element.isDisplayed();
-            System.out.println( ">>> columnClassName Elements" + columnClassName + ", isDisplayed:" + isDisplayed +
-                    ", tagName:" + element.getTagName() + ", text:" + element.getText() );
-            if( isDisplayed ) {
-                lastColumnElement = element;
-            }
-        }
-
-        if( lastColumnElement != null ){
-            _helper.clickWhenPossible( 10, TimeUnit.SECONDS, lastColumnElement );
-        }
 
         List<WebElement> valueCellEditorElements = _helper.waitForElements( TimeUnit.SECONDS, 10,
                 By.cssSelector("#" + WebConstants.ID.MAX_INSTANCES_PER_ZONE_GRID + " input.x-form-text.x-form-field" ) );
@@ -148,6 +136,12 @@ public class AdvancedDeployment {
     public void selectZones( Set<String> zones ){
         List<WebElement> checkboxElements =
                 _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-col-zoneselected" ) );
+/*
+        List<WebElement> checkboxElements2 =
+                _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-cc-zoneselected" ) );
+        List<WebElement> checkboxElements3 =
+                _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-td-zoneselected" ) );
+*/
         List<WebElement> zoneNamesElements =
                 _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-col-zonename" ) );
         int rowsCount = zoneNamesElements.size();

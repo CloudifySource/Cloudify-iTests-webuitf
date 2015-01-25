@@ -308,7 +308,7 @@ public class AjaxUtils {
 
         FluentWait<By> fluentWait = new FluentWait<By>(by);
         fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
-        fluentWait.withTimeout(10, TimeUnit.SECONDS);
+        fluentWait.withTimeout(timeout, timeUnit);
         fluentWait.until(new Predicate<By>() {
             public boolean apply(By by) {
                 try {
@@ -321,6 +321,9 @@ public class AjaxUtils {
                 } catch (NoSuchElementException ex) {
                     return false;
                 } catch (StaleElementReferenceException ex) {
+                    return false;
+                }
+                catch( Throwable t ){
                     return false;
                 }
             }
