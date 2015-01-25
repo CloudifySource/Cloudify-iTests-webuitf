@@ -46,7 +46,7 @@ public class AdvancedDeployment {
     }
 
     public void addMaxInstancesPerZone( String zone, int maxInstancesPerZone ){
-        WebElement addButton = _driver.findElement( By.id( WebConstants.ID.ADD_MAX_INSTANCES_PER_ZONE_BUTTON ) );
+        WebElement addButton = _helper.waitForElement( TimeUnit.SECONDS, 5, By.id( WebConstants.ID.ADD_MAX_INSTANCES_PER_ZONE_BUTTON ) );
         addButton.click();
         setZone(zone);
         setMaxInstances(maxInstancesPerZone);
@@ -73,10 +73,10 @@ public class AdvancedDeployment {
                 lastColumnElement = element;
             }
         }
-
+/*
         if( lastColumnElement != null ){
             _helper.clickWhenPossible( 10, TimeUnit.SECONDS, lastColumnElement );
-        }
+        }*/
 
         List<WebElement> valueCellEditorElements = _helper.waitForElements( TimeUnit.SECONDS, 10,
                 By.cssSelector("#" + WebConstants.ID.MAX_INSTANCES_PER_ZONE_GRID + " input.x-form-text.x-form-field" ) );
@@ -148,6 +148,12 @@ public class AdvancedDeployment {
     public void selectZones( Set<String> zones ){
         List<WebElement> checkboxElements =
                 _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-col-zoneselected" ) );
+/*
+        List<WebElement> checkboxElements2 =
+                _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-cc-zoneselected" ) );
+        List<WebElement> checkboxElements3 =
+                _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-td-zoneselected" ) );
+*/
         List<WebElement> zoneNamesElements =
                 _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( "x-grid3-col-zonename" ) );
         int rowsCount = zoneNamesElements.size();

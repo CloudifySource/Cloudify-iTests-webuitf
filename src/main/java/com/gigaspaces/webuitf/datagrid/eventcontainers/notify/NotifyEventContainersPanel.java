@@ -1,14 +1,13 @@
 package com.gigaspaces.webuitf.datagrid.eventcontainers.notify;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 import com.gigaspaces.webuitf.datagrid.eventcontainers.AbstractEventContainerPropertiesRow;
 import com.gigaspaces.webuitf.datagrid.eventcontainers.AbstractEventContainersPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -52,22 +51,22 @@ public class NotifyEventContainersPanel extends AbstractEventContainersPanel imp
 	@Override
 	protected void searchEventSpecificColumnsElements() {
 
-		_notifyOperationsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( NOTIFY_OPERATIONS_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );
-		_performTakeOnNotifyElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( IS_TAKE_ON_NOTIFY_COLUMN_CLASS ), By.tagName( DIV_TAG ) );
-		_isFifoElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( IS_FIFO_COLUMN_CLASS ), By.tagName( DIV_TAG ) );		
-		
-		_batchSizeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( BATCH_SIZE_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );
-		_batchTimeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( BATCH_TIME_HANDLER_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );
-		
-		_commTypeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( COMM_TYPE_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );		
-		_isPassArrayAsIsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, 
-				By.id( _gridId ), By.className( IS_PASS_ARRAY_AS_IS_COLUMN_CLASS ), By.tagName( DIV_TAG ) );		
+        _notifyOperationsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + NOTIFY_OPERATIONS_COLUMN_CLASS + " " + SPAN_TAG ) );
+        _performTakeOnNotifyElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + IS_TAKE_ON_NOTIFY_COLUMN_CLASS + " " + DIV_TAG ) );
+        _isFifoElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + IS_FIFO_COLUMN_CLASS + " " + DIV_TAG ) );
+
+        _batchSizeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + BATCH_SIZE_COLUMN_CLASS + " " + SPAN_TAG ) );
+        _batchTimeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + BATCH_TIME_HANDLER_COLUMN_CLASS + " " + SPAN_TAG ) );
+
+        _commTypeElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + COMM_TYPE_COLUMN_CLASS + " " + SPAN_TAG ) );
+        _isPassArrayAsIsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC,
+                By.cssSelector( "#" + _gridId + " ." + IS_PASS_ARRAY_AS_IS_COLUMN_CLASS + " " + DIV_TAG ) );
 	}
 	
 	private String getNotifyOperationsTagValue( int rowIndex ) {

@@ -1,15 +1,14 @@
 package com.gigaspaces.webuitf.datagrid.eventcontainers;
 
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import com.gigaspaces.webuitf.util.AjaxUtils;
 
 /**
  * 
@@ -114,16 +113,16 @@ abstract public class AbstractEventContainersPanel implements EventContainersCon
 
 	protected void searchCommonColumnsElements() {
 
-		_idElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.id( _gridId ), 
-				By.className( ID_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );
-		_transactionalElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.id( _gridId ), 
-				By.className( TRANSACTIONAL_COLUMN_CLASS ), By.tagName( DIV_TAG ) );					
-		_statusElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.id( _gridId ), 
-				By.className( STATUS_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );					
-		_failedEventsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.id( _gridId ), 
-				By.className( FAILED_EVENTS_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );					
-		_processedEventsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.id( _gridId ), 
-				By.className( PROCESSED_EVENTS_COLUMN_CLASS ), By.tagName( SPAN_TAG ) );		
+		_idElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.cssSelector( "#" + _gridId +
+                " ." + ID_COLUMN_CLASS + " " + SPAN_TAG ) );
+		_transactionalElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.cssSelector( "#" + _gridId +
+                " ." + TRANSACTIONAL_COLUMN_CLASS + " " + DIV_TAG ) );
+		_statusElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.cssSelector( "#" + _gridId +
+                " ." + STATUS_COLUMN_CLASS + " " + SPAN_TAG ) );
+		_failedEventsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.cssSelector( "#" + _gridId +
+                " ." + FAILED_EVENTS_COLUMN_CLASS + " " + SPAN_TAG ) );
+		_processedEventsElements = _helper.waitForElements( TimeUnit.SECONDS, WAITING_TIME_SEC, By.cssSelector( "#" + _gridId +
+                " ." + PROCESSED_EVENTS_COLUMN_CLASS + " " + SPAN_TAG ) );
 	}
 
 	abstract protected AbstractEventContainerPropertiesRow createRow( int rowIndex, String id,
