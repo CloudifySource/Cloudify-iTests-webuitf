@@ -63,20 +63,6 @@ public class AdvancedDeployment {
     private void setMaxInstancesPerZoneCellValue( String columnClassName, String cellValue ) {
 
         _helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.className( columnClassName ) );
-        List<WebElement> columnCellElements = _helper.waitForElements( TimeUnit.SECONDS, 10, By.className( columnClassName ) );
-        WebElement lastColumnElement = null;
-        for( WebElement element : columnCellElements ){
-            boolean isDisplayed = element.isDisplayed();
-            System.out.println( ">>> columnClassName Elements" + columnClassName + ", isDisplayed:" + isDisplayed +
-                    ", tagName:" + element.getTagName() + ", text:" + element.getText() );
-            if( isDisplayed ) {
-                lastColumnElement = element;
-            }
-        }
-/*
-        if( lastColumnElement != null ){
-            _helper.clickWhenPossible( 10, TimeUnit.SECONDS, lastColumnElement );
-        }*/
 
         List<WebElement> valueCellEditorElements = _helper.waitForElements( TimeUnit.SECONDS, 10,
                 By.cssSelector("#" + WebConstants.ID.MAX_INSTANCES_PER_ZONE_GRID + " input.x-form-text.x-form-field" ) );
