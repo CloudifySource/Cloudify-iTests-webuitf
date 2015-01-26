@@ -250,6 +250,11 @@ public final class WebConstants {
         public static final String topologyEventsFilter = "topology-events-filter";
         public static final String topologyEventsFilterInput = "topology-events-filter-input";
 
+        public static final String monitoringUnavailableNotAuthorized = "monitoring-unavailable-not-authorized";
+        public static final String monitoringUnavailableDbNotDefined = "monitoring-unavailable-db-not-defined";
+        public static final String monitoringUnavailableNotInitialized = "monitoring-unavailable-not-initialized";
+
+
         public static String getActionToolBoxId(String name) {
             return "node-tool-ACTIONS-" + name;
         }
