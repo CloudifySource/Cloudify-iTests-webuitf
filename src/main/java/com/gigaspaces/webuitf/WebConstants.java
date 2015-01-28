@@ -118,6 +118,9 @@ public final class WebConstants {
 
         public static final String logsPanel = "gs-tab-item-logs";
 
+        public static final String alertsButton = "alerts-button";
+        public static final String eventsButton = "events-button";
+
         // recipes panel
         public static final String recipesPanel = "gs-tab-item-topology-recipes";
         public static final String recipesSelectionTree = "gs-recipes-selection-tree";
@@ -221,6 +224,7 @@ public final class WebConstants {
 
         public static final String morePopup = "gs-popup-grid-instances";
         public static final String topologyEventsGrid = "topology-events-grid";
+        public static final String dashboardEventsGrid = "dahsboard-events-grid";
         public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
         public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
 
@@ -249,6 +253,14 @@ public final class WebConstants {
         public static final String topologyAllEventsButton = "topology-events-all-button";
         public static final String topologyEventsFilter = "topology-events-filter";
         public static final String topologyEventsFilterInput = "topology-events-filter-input";
+
+        public static final String dashboardLastMinuteEventsButton = "dashboard-events-last-minute-time-button";
+        public static final String dashboardLastHourEventsButton = "dashboard-events-last-hour-button";
+        public static final String dashboardLastDayEventsButton = "dashboard-events-last-day-button";
+        public static final String dashboardAllEventsButton = "dashboard-events-all-button";
+        public static final String dashboardEventsFilter = "dashboard-events-filter";
+        public static final String dashboardEventsFilterInput = "dashboard-events-filter-input";
+
 
         public static final String monitoringUnavailableNotAuthorized = "monitoring-unavailable-not-authorized";
         public static final String monitoringUnavailableDbNotDefined = "monitoring-unavailable-db-not-defined";
@@ -472,6 +484,10 @@ public final class WebConstants {
 
         public static String getPathToComboSelectionInServicesTab(String selection) {
             return "//div[text()='" + selection + "']";
+        }
+
+        public static final String getPathToHeaderEventInDashboardEventsGrid(int index) {
+            return "//div[@id='" + ID.dashboardEventsGrid + "']/div/div/div[2]/div/div[" + index + "]";
         }
 
         public static String getPathToGsaOption(String id) {

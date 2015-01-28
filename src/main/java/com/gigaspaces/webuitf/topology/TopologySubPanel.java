@@ -75,7 +75,7 @@ public class TopologySubPanel {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return new TopologyEventsGrid(driver);
+		return new TopologyEventsGrid( null, driver, helper );
 	}
 	
 	public RecipesPanel switchToRecipes() {

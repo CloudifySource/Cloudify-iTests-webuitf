@@ -1,6 +1,8 @@
 package com.gigaspaces.webuitf;
 
+import com.gigaspaces.webuitf.alerts.AlertsPanel;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
+import com.gigaspaces.webuitf.events.HeaderEventsGrid;
 import com.gigaspaces.webuitf.monitoring.MonitoringTab;
 import com.gigaspaces.webuitf.services.ServicesTab;
 import com.gigaspaces.webuitf.topology.TopologyTab;
@@ -109,6 +111,18 @@ public class MainNavigation {
 
 		return new DataGridTab(selenium, driver);
 	}
+
+    public HeaderEventsGrid showEvents(){
+        WebElement webElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id( WebConstants.ID.eventsButton ) );
+        helper.clickWhenPossible( 5, TimeUnit.SECONDS, By.id( WebConstants.ID.eventsButton ) );
+        return new HeaderEventsGrid(driver, helper );
+    }
+
+    public AlertsPanel showAlerts(){
+        WebElement webElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id( WebConstants.ID.alertsButton ) );
+        helper.clickWhenPossible( 5, TimeUnit.SECONDS, By.id( WebConstants.ID.alertsButton ) );
+        return new AlertsPanel( selenium, driver );
+    }
 
     public boolean isXap() {
         driver.findElement(By.id("gs-about-button")).click();

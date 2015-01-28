@@ -1,5 +1,6 @@
 package com.gigaspaces.webuitf.topology.events;
 
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +11,8 @@ import com.gigaspaces.webuitf.events.WebUIAdminEvent;
 
 public class TopologyEventsGrid extends AbstractEventsGrid{
 
-	public TopologyEventsGrid(WebDriver driver) {
-		super(driver);
+	public TopologyEventsGrid(WebDriver driver, AjaxUtils helper) {
+		super(driver, helper);
 	}
 	
 	@Override

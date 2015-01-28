@@ -1,28 +1,27 @@
 package com.gigaspaces.webuitf.events;
 
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
-
 public abstract class AbstractEventsGrid {
 
-	private WebDriver driver;
-	protected AjaxUtils helper;
+	private final WebDriver driver;
+	protected final AjaxUtils helper;
 	protected static final int WAIT_TIMEOUT_IN_SECONDS = 7;
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
-	public AbstractEventsGrid(WebDriver driver) {
+	public AbstractEventsGrid( WebDriver driver, AjaxUtils helper ) {
 		this.driver = driver;
-		this.helper = new AjaxUtils(driver);
+		this.helper = helper;
 	}
 	
 	public abstract WebUIAdminEvent getEvent(int index);
@@ -59,19 +58,20 @@ public abstract class AbstractEventsGrid {
 
 			public boolean getCondition() {
 				List<WebElement> events = driver.findElements(By.className(WebConstants.ClassNames.EventsGridEventTitle));
+                logger.info("Within condition, current events size:" + events.size() + ", waiting for " + numberOfEvents);
 				return events.size() >= numberOfEvents;
 			}
 		};
 		AjaxUtils.repetitiveAssertTrue("could not find " + numberOfEvents + " event after " + timeoutInMillis, condition, timeoutInMillis);
 		try {
-			Thread.sleep(3000); // wait just a few secs more for stabilization
+			Thread.sleep(1000); // wait just a few secs more for stabilization
 		} catch (InterruptedException e) {
 		}
 	}
 
 	public List<WebUIAdminEvent> getVisibleEvents() {
-		
-		List<WebElement> visibleEventsElements = 
+
+        List<WebElement> visibleEventsElements =
 				driver.findElements(By.className(WebConstants.ClassNames.EventsGridEventTitle));
 		List<WebUIAdminEvent> visibleEvents = new ArrayList<WebUIAdminEvent>();
 		
@@ -83,7 +83,7 @@ public abstract class AbstractEventsGrid {
 		for(int i = 1; i <= numOfEvents; i++){
 			visibleEvents.add(getEvent(i));
 		}
-		
+
 		return visibleEvents;
 	}
 
@@ -111,7 +111,8 @@ public abstract class AbstractEventsGrid {
 	
 	public WebUIAdminEvent getChronologicalEvent(int index){
 		int totalEvents = getVisibleEvents().size();
-		return (getEvent(totalEvents - index + 1));
+        logger.info( ">>> getChronologicalEvent(), totalEvents=" + totalEvents + ", index=" + index );
+		return getEvent(totalEvents - index + 1);
 	}
 	
 	public abstract void switchToLastMinuteEvents();
