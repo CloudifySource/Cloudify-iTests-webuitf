@@ -11,7 +11,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<gsVersion>10.1.0-SNAPSHOT</gsVersion>
-		<build.home>C:\dev\builds\gigaspaces-xap-premium-10.1.0-m8-b12588-229</build.home>
+		<build.home>${env.BUILD_HOME}</build.home>
 	</properties>
 
 	<repositories>
