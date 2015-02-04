@@ -16,12 +16,14 @@ public class SpaceInstanceContext {
 	
 	private static final String PU_INSTANCES_NAME_CLASS = "x-grid3-col-pu_instance_name";
 	private static final String SPACE_INSTANCE_NAME_CLASS = "x-grid3-td-slider_model_name";
+    private static final String PID_CLASS = "x-grid3-col-pid";
 	
 	private static final String MEMORY_CLASS = "x-grid3-td-total_memory";
 	
 	private String spaceInstanceName;
 	private String puInstanceName;
     private String uuid;
+    private long pid;
 	
 	private String id;
 	private WebDriver driver;
@@ -37,6 +39,7 @@ public class SpaceInstanceContext {
 		this.helper.setDriver(driver);
 		this.puInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_INSTANCES_NAME_CLASS));
 		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));
+        this.pid = Long.parseLong( helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PID_CLASS)) );
         WebElement instancesGridElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-slider-grid-SPACE_INSTANCES"));
         WebElement selectedRow = instancesGridElement.findElement(By.className("x-grid3-row-selected"));
         String spaceInstanceElementId = selectedRow.getAttribute("id");
@@ -51,6 +54,10 @@ public class SpaceInstanceContext {
 	public String getPuName() {
 		return puInstanceName;
 	}
+
+    public long getPid(){
+        return pid;
+    }
 
     public String getUuid() {
         return uuid;
