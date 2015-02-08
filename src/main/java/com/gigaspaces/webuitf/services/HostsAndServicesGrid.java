@@ -1,6 +1,11 @@
 package com.gigaspaces.webuitf.services;
 
 import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.services.wrappers.AbstractServiceHostWrapper;
+import com.gigaspaces.webuitf.services.wrappers.GridServiceWrapper;
+import com.gigaspaces.webuitf.services.wrappers.HostWrapper;
+import com.gigaspaces.webuitf.services.wrappers.ProcessingUnitInstanceWrapper;
+import com.gigaspaces.webuitf.services.wrappers.SpaceInstanceWrapper;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
@@ -14,6 +19,7 @@ import org.openspaces.admin.internal.pu.InternalProcessingUnitInstance;
 import org.openspaces.admin.pu.ProcessingUnitInstance;
 import org.openspaces.admin.vm.VirtualMachineDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
@@ -29,7 +35,9 @@ public class HostsAndServicesGrid {
 	public static final int GSC = 0;
 	public static final int GSM = 1;
 	public static final int LUS = 2;
-	
+
+    protected static final int WAIT_TIMEOUT_IN_SECONDS = 10;
+
 	private Selenium selenium;
 	private WebDriver driver;
 	private long gsaPID;
@@ -294,6 +302,25 @@ public class HostsAndServicesGrid {
         clickOnGridComponentService(GSC_SUFFIX, pid);
     }
 
+    public void clickOnProcessingUnitInstance( ProcessingUnitInstance puInstance ){
+        String puInstanceName = puInstance.getProcessingUnitInstanceName();
+        String realId = null;
+
+        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        logger.info( "elements size=" + elements.size() );
+        for( WebElement el : elements ) {
+            String id = helper.retrieveAttribute( el, "id" );
+            logger.info( "id=" + id  );
+            if( id != null && id.contains( HOSTS_TREE_PREFIX + puInstanceName ) ){
+                logger.info( "in if contains"  );
+                realId = id;
+                break;
+            }
+        }
+
+        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+    }
+
     private void clickOnGridComponentService( String serviceNamePrefix, long pid ){
 
         String realId = null;
@@ -373,5 +400,135 @@ public class HostsAndServicesGrid {
 			}
 		}
 		return count;
-	}	
+	}
+
+    public List<AbstractServiceHostWrapper> getHostsAndServices() {
+
+        List<WebElement> visibleElements =
+                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+
+        int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
+        List<AbstractServiceHostWrapper> visibleRows = new ArrayList<AbstractServiceHostWrapper>( numOfElements );
+
+        for(int i = 1; i <= numOfElements; i++){
+            logger.info( ">>> i=" + i );
+            visibleRows.add( getRow( i ) );
+        }
+
+        return visibleRows;
+    }
+
+    private AbstractServiceHostWrapper getRow(int index) {
+        logger.info( ">> getRow(), index=" + index );
+        WebElement rowElement = helper.waitForElement(
+                By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+
+/*
+        String text = rowElement.getText();
+        String id = rowElement.getAttribute("id");
+        String aClass = rowElement.getAttribute("class");
+        String tagName = rowElement.getTagName();
+        logger.info(">>> rowElement, index=" + index + ", text=" + text + ", id=" + id +
+            ", aclass=" + aClass + ", tagName=" + tagName );
+*/
+
+        return prepareRow(rowElement);
+    }
+
+    protected AbstractServiceHostWrapper prepareRow( WebElement rowElement ) {
+
+        WebElement nameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridNameCell));
+        String name = retrieveNameText(nameElement);
+
+        String id = nameElement.getAttribute("id");
+
+        logger.info( ">>>prepareRow, name=" + name + ", ID=" + id );
+
+        WebElement typeElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToTypeElement(id)), 5);
+        String typeElementId = typeElement.getAttribute( "id" );
+        NodeType nodeType = getNodeType(typeElementId);
+
+        AbstractServiceHostWrapper serviceHostWrapper = createWrapper( nodeType, name, rowElement );
+
+        logger.info( ">>>prepareRow, typeElementId=" + typeElementId );
+
+        return serviceHostWrapper;
+    }
+
+    private AbstractServiceHostWrapper createWrapper( NodeType nodeType, String name, WebElement rowElement ){
+
+        AbstractServiceHostWrapper retValue = null;
+        switch( nodeType ){
+            case HOST:
+                retValue = new HostWrapper( name, nodeType );
+                break;
+
+            case GRID_SERVICE:
+                WebElement zonesElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridZonesCell));
+                WebElement threadsCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridThreadCountCell));
+
+                String zones = retrieveRegularText(zonesElement);
+                String threadsCountStr = retrieveRegularText(threadsCountElement);
+                retValue = new GridServiceWrapper( name, nodeType, Integer.parseInt( threadsCountStr ), zones );
+                break;
+
+            case PROCESSING_UNIT_INSTANCE:GRID_SERVICE:
+                zonesElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridZonesCell));
+                WebElement appNameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+                WebElement puTypeElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
+                threadsCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridThreadCountCell));
+
+                String appName = retrieveRegularText(appNameElement);
+                zones = retrieveRegularText(zonesElement);
+                String puType = retrieveRegularText(puTypeElement);
+                retValue = new ProcessingUnitInstanceWrapper( name, nodeType, zones, puType, appName );
+                break;
+
+            case SPACE_INSTANCE:
+                retValue = new SpaceInstanceWrapper( name, nodeType );
+                break;
+        }
+
+        return retValue;
+    }
+
+    private NodeType getNodeType( String typeElementId ){
+
+        NodeType retValue;
+        if( typeElementId.contains( WebConstants.SERVICE_ID_PREFIX + "HostTreeNode" + WebConstants.SERVICE_ID_SUFFIX ) ){
+            retValue = NodeType.HOST;
+        }
+        else if( typeElementId.contains( WebConstants.SERVICE_ID_PREFIX + "ProcessingUnitInstanceTreeNode" + WebConstants.SERVICE_ID_SUFFIX ) ){
+            retValue = NodeType.PROCESSING_UNIT_INSTANCE;
+        }
+        else if( typeElementId.contains(  WebConstants.SERVICE_ID_PREFIX + "SpaceInstanceTreeNode" + WebConstants.SERVICE_ID_SUFFIX ) ){
+            retValue = NodeType.SPACE_INSTANCE;
+        }
+        else{
+            retValue = NodeType.GRID_SERVICE;
+        }
+
+        return retValue;
+    }
+
+    private String retrieveNameText(WebElement cellElement) {
+        return retrieveText(cellElement, WebConstants.Xpath.pathToServicesNameText);
+    }
+
+    private String retrieveRegularText(WebElement cellElement) {
+        return retrieveText( cellElement, WebConstants.Xpath.pathToServicesRegularText );
+    }
+
+    private String retrieveText( WebElement cellElement, String xPath ) {
+        WebElement webElement = null;
+        try {
+            webElement = cellElement.findElement(By.xpath(xPath));
+        }
+        catch( Exception e ){
+//            e.printStackTrace();
+        }
+//        WebElement webElement = helper.waitForElement(cellElement, TimeUnit.SECONDS, 10, By.xpath(xPath));
+        return webElement == null ? null : webElement.getText();
+    }
 }
+

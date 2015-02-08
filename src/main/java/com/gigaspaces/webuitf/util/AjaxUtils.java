@@ -92,7 +92,7 @@ public class AjaxUtils {
         final StringBuilder sb = new StringBuilder();
 
         FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
-        fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
         fluentWait.withTimeout(timeout, timeUnit);
         fluentWait.until(new Predicate<By>() {
             public boolean apply(By by) {
@@ -191,7 +191,7 @@ public class AjaxUtils {
     public static void repetitiveAssertTrue(String message, RepetitiveConditionProvider condition, long timeoutMilliseconds) {
         long end = System.currentTimeMillis() + timeoutMilliseconds;
         while (System.currentTimeMillis() < end) {
-            if (condition.getCondition() == true) {
+            if (condition.getCondition()) {
                 return;
             } else {
                 try {
@@ -200,7 +200,7 @@ public class AjaxUtils {
                 }
             }
         }
-        if (condition.getCondition() == false) {
+        if (!condition.getCondition()) {
             throw new TimeoutException(message);
         }
     }
@@ -215,7 +215,7 @@ public class AjaxUtils {
         final AtomicReference<WebElement> atEl = new AtomicReference<WebElement>();
 
         FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
-        fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
         fluentWait.withTimeout(timeout, timeUnit);
         fluentWait.until(new Predicate<By>() {
             public boolean apply(By by) {
@@ -229,6 +229,35 @@ public class AjaxUtils {
                 } catch (NoSuchElementException ex) {
                     return false;
                 } catch (StaleElementReferenceException ex) {
+                    return false;
+                }
+            }
+        });
+
+        return atEl.get();
+    }
+
+    public WebElement waitForElement( final WebElement parentElement, TimeUnit timeUnit, int timeout, final By... bys) {
+
+        final AtomicReference<WebElement> atEl = new AtomicReference<WebElement>();
+
+        FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
+        fluentWait.withTimeout(timeout, timeUnit);
+        fluentWait.until(new Predicate<By>() {
+            public boolean apply(By by) {
+                try {
+                    WebElement element = parentElement.findElement(bys[0]);
+                    for (int i = 1; i < bys.length; i++) {
+                        element = element.findElement(bys[i]);
+                    }
+                    atEl.set(element);
+                    return true;
+                } catch (NoSuchElementException ex) {
+                    return false;
+                } catch (StaleElementReferenceException ex) {
+                    return false;
+                }catch(Throwable t){
                     return false;
                 }
             }
@@ -307,7 +336,7 @@ public class AjaxUtils {
         final AtomicReference<List<WebElement>> atEl = new AtomicReference<List<WebElement>>();
 
         FluentWait<By> fluentWait = new FluentWait<By>(by);
-        fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
         fluentWait.withTimeout(timeout, timeUnit);
         fluentWait.until(new Predicate<By>() {
             public boolean apply(By by) {
@@ -336,7 +365,7 @@ public class AjaxUtils {
     public void waitForElementToDisappear(TimeUnit timeUnit, int timeout, final By... bys) {
 
         FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
-        fluentWait.pollingEvery(100, TimeUnit.MILLISECONDS);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
         fluentWait.withTimeout(timeout, timeUnit);
         fluentWait.until(new Predicate<By>() {
             public boolean apply(By by) {
@@ -411,7 +440,7 @@ public class AjaxUtils {
                 return element.getAttribute(attribute);
             } catch (StaleElementReferenceException e) {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }

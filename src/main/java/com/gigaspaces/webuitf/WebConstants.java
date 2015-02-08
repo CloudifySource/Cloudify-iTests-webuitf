@@ -25,6 +25,10 @@ public final class WebConstants {
 
     public static final String COLUMN_CLASS_PREFIX = "x-grid3-col-";
 
+
+    public static final String SERVICE_ID_PREFIX = "__";
+    public static final String SERVICE_ID_SUFFIX = "-";
+
     public static final class ID {
 
         public static final String topologyButton = "gs-tab-item-topology-button";
@@ -227,6 +231,8 @@ public final class WebConstants {
         public static final String dashboardEventsGrid = "dahsboard-events-grid";
         public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
         public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
+
+        public static final String hostsGrid = "hosts_tree_grid";
 
         public static final String undeployApplicationButton = "gs-button-uninstall-app";
 
@@ -438,6 +444,9 @@ public final class WebConstants {
 
         public static final String pathToEventText = "div/span";
 
+        public static final String pathToServicesRegularText = "div/span";
+        public static final String pathToServicesNameText = "div/div/div/span/span";
+
         public static final String relativePathToSpaceModeImage = "img";
 
         public static final String getPathToMetricHoverMenuOption(String menu) {
@@ -489,6 +498,15 @@ public final class WebConstants {
         public static final String getPathToHeaderEventInDashboardEventsGrid(int index) {
             return "//div[@id='" + ID.dashboardEventsGrid + "']/div/div/div[2]/div/div[" + index + "]";
         }
+
+        public static final String getPathToHeaderServicesGrid(int index) {
+            return "//div[@id='" + ID.hostsGrid + "']/div/div/div[2]/div/div[" + index + "]";
+        }
+
+        public static final String getPathToTypeElement( String id ) {
+            return "//td[@id='" + id + "']/div/div";
+        }
+
 
         public static String getPathToGsaOption(String id) {
             return "//div[@id='" + id + "']/div/span[3]/a/img";
@@ -688,6 +706,12 @@ public final class WebConstants {
         public static final String EventsGridEventTime = "x-grid3-td-date";
         public static final String EventsGridEventStatus = "x-grid3-td-status";
         public static final String EventsGridClearFilter = "x-form-clear-trigger";
+
+        public static final String ServicesGridNameCell = "x-grid3-td-name";
+        public static final String ServicesGridPuTypeCell = "x-grid3-td-puType";
+        public static final String ServicesGridApplicationNameCell = "x-grid3-td-applicationName";
+        public static final String ServicesGridZonesCell = "x-grid3-td-zones";
+        public static final String ServicesGridThreadCountCell = "x-grid3-td-threadCount";
 
         public static final String win32OS = "gs-os-icon-Win32";
 
