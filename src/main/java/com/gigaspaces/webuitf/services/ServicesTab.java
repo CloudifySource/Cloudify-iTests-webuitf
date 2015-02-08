@@ -1,5 +1,6 @@
 package com.gigaspaces.webuitf.services;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gigaspaces.webuitf.MainNavigation;
@@ -7,6 +8,9 @@ import com.gigaspaces.webuitf.ProcessingUnitDeployWindow;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * represents the Services tab of thw web-ui
@@ -79,4 +83,22 @@ public class ServicesTab extends MainNavigation {
 	public HostsAndServicesGrid getHostAndServicesGrid() {
 		return HostsAndServicesGrid.getInstance(selenium, driver);
 	}
+
+    public void clickOnSummaryButton(){
+        helper.clickWhenPossible(3, TimeUnit.SECONDS, By.id( WebConstants.ID.hostsSummaryButtonId ) );
+    }
+
+    public void clickOnLogsButton(){
+        helper.clickWhenPossible(3, TimeUnit.SECONDS, By.id( WebConstants.ID.hostsLogsButtonId ) );
+    }
+
+    public String getSummaryText(){
+        WebElement webElement = helper.waitForElement(TimeUnit.SECONDS, 3, By.className("gs-config-panel-header"));
+        return webElement.getText();
+    }
+
+    public String getLogsTitle(){
+        WebElement webElement = helper.waitForElement(TimeUnit.SECONDS, 3, By.className("gs-logs-service-name"));
+        return webElement.getText();
+    }
 }

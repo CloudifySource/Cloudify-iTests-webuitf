@@ -233,6 +233,8 @@ public final class WebConstants {
         public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
 
         public static final String hostsGrid = "hosts_tree_grid";
+        public static final String hostsSummaryButtonId = "gs-hosts-menu-item-summary-button";
+        public static final String hostsLogsButtonId = "gs-hosts-menu-item-logs-button";
 
         public static final String undeployApplicationButton = "gs-button-uninstall-app";
 
@@ -271,7 +273,6 @@ public final class WebConstants {
         public static final String monitoringUnavailableNotAuthorized = "monitoring-unavailable-not-authorized";
         public static final String monitoringUnavailableDbNotDefined = "monitoring-unavailable-db-not-defined";
         public static final String monitoringUnavailableNotInitialized = "monitoring-unavailable-not-initialized";
-
 
         public static String getActionToolBoxId(String name) {
             return "node-tool-ACTIONS-" + name;

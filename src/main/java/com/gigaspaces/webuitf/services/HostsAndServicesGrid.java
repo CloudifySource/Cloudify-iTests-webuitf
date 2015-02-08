@@ -402,6 +402,23 @@ public class HostsAndServicesGrid {
 		return count;
 	}
 
+    public void selectRow( int index ) {
+
+        List<WebElement> visibleElements =
+                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+
+        int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
+
+        if( index > 0 && index < numOfElements ){
+            logger.info( ">> getRow element, index=" + index );
+            WebElement rowElement = helper.waitForElement(
+                    By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+            helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)) );
+        }
+    }
+
+
+
     public List<AbstractServiceHostWrapper> getHostsAndServices() {
 
         List<WebElement> visibleElements =
@@ -422,15 +439,6 @@ public class HostsAndServicesGrid {
         logger.info( ">> getRow(), index=" + index );
         WebElement rowElement = helper.waitForElement(
                 By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
-
-/*
-        String text = rowElement.getText();
-        String id = rowElement.getAttribute("id");
-        String aClass = rowElement.getAttribute("class");
-        String tagName = rowElement.getTagName();
-        logger.info(">>> rowElement, index=" + index + ", text=" + text + ", id=" + id +
-            ", aclass=" + aClass + ", tagName=" + tagName );
-*/
 
         return prepareRow(rowElement);
     }
