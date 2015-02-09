@@ -54,17 +54,6 @@ public class ServicesTab extends MainNavigation {
 				clusterSchema, maxInstPerVM, maxInstPerMachine);
 	}
 	
-	public IDeployWindow openMemcachedDeployWindow(String spaceUrl, String isSecured,
-			String userName, String password, String numberOfInstances,
-			String numberOfBackups, String clusterSchema, String maxInstPerVM,
-			String maxInstPerMachine) {
-		selenium.click(WebConstants.Xpath.deployMenuButton);
-		selenium.click(WebConstants.ID.deployMemcachedOption);
-		return new MemcachedDeployWindow(selenium, driver, spaceUrl, isSecured, 
-				userName, password, numberOfInstances, numberOfBackups, 
-				clusterSchema, maxInstPerVM, maxInstPerMachine);
-	}
-	
 	public IDeployWindow openProcessingUnitDeployWindow(String puName, String isSecured,
 			String userName, String password, String numberOfInstances,
 			String numberOfBackups, String clusterSchema, String maxInstPerVM,
