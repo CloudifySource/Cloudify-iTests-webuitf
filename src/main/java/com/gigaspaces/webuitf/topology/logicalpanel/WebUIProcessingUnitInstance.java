@@ -123,41 +123,7 @@ public class WebUIProcessingUnitInstance {
 			return true;
 		return false;		
 	}
-	
-	public boolean showComparisonCharts() {
 
-		double seconds = 0;
-		while (seconds < AjaxUtils.ajaxWaitingTime) {
-			try {
-				String id = WebConstants.ID.getPuInstanceId(name);
-				WebElement instanceElement = driver.findElement(By.id(id));
-				WebElement chartSelection = instanceElement.findElement(By.className("x-grid3-cc-chart_selection"));
-				if (!chartSelection.isSelected()) {
-					chartSelection.click();
-					return true;
-				}
-			}
-			catch (StaleElementReferenceException e) {
-				_logger.info("caught an exception while trying to select checkbox");
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e1) {
-				}
-				_logger.info("retrying");
-			}
-			catch (WebDriverException e) {
-				_logger.info("caught an exception while trying to select checkbox");
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e1) {
-				}
-				_logger.info("retrying");
-			}
-			seconds += 0.1;
-		}
-		return false;
-	}
-	
 	public void goToLogs() {
 		
 		int seconds = 0;

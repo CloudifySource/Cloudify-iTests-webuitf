@@ -1,21 +1,18 @@
 package com.gigaspaces.webuitf.topology;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.WebConstants;
+import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebElement;
 
-import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.topology.healthpanel.MetricPopup;
-import com.gigaspaces.webuitf.util.AjaxUtils;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 public class Metric {
 	
@@ -134,28 +131,4 @@ public class Metric {
 		}
 		return 0;
 	}
-
-	public MetricPopup getPopup() {
-		WebElement balance = metric.findElement(By.cssSelector("div[data-widget='balance-gauge']"));
-		balance.click();
-		MetricPopup metricPopup = new MetricPopup(driver);
-		String title = null;
-		String averageValue = null;
-		try {
-			logger.info("waiting for popup to appear");
-			title = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupTitle), 10).getText();
-			averageValue = helper.waitForElement(By.xpath(WebConstants.Xpath.pathToMetricPopupAverageValue), 3).getText();
-		}
-		catch (WebDriverException e) {
-			logger.severe("timeout waiting for pop to appear");
-			return null;
-		}
-		String temp = averageValue.split(" ")[2];
-		
-		double val = Double.valueOf(temp.substring(0, temp.length() - 1));
-		metricPopup.setAverageValue(val);
-		metricPopup.setTitle(title);
-		return metricPopup;
-	}
-
 }

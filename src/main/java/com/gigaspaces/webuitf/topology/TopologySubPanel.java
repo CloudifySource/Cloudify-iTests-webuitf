@@ -2,7 +2,6 @@ package com.gigaspaces.webuitf.topology;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.topology.events.TopologyEventsGrid;
-import com.gigaspaces.webuitf.topology.healthpanel.HealthPanel;
 import com.gigaspaces.webuitf.topology.logicalpanel.LogicalPanel;
 import com.gigaspaces.webuitf.topology.logspanel.LogsPanel;
 import com.gigaspaces.webuitf.topology.physicalpanel.PhysicalPanel;
@@ -36,16 +35,6 @@ public class TopologySubPanel {
 			e.printStackTrace();
 		}
 		return new LogsPanel(driver, selenium);
-	}
-	
-	public HealthPanel switchToHealthPanel() {
-		helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id(WebConstants.ID.healthPanelToggle));
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return new HealthPanel(selenium, driver);
 	}
 	
 	public PhysicalPanel switchToPhysicalPanel() {

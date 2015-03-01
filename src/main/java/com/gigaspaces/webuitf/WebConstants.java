@@ -143,7 +143,6 @@ public final class WebConstants {
         public static final String naIcon = "gs-status-icon-na";
         public static final String niIcon = "gs-status-icon-not-initialized";
 
-        public static final String healthGaugePointer = "health-gauge-pointer";
         public static final String applicationsMenuPanel = "gs-applications-menu-panel";
         public static final String graphApplicationMap = "gs-graph-application-map";
         //		public static final String graphApplicationMapClearSelection = "gs-graph-application-map-clear-capturer";
@@ -176,7 +175,6 @@ public final class WebConstants {
         public static final String serviceDetails = "gs-tab-item-service-details";
 
         /* TopologyTab sub panel toggles */
-        public static final String healthPanelToggle = "gs-tab-item-health-toggler-button";
         public static final String physicalPanelToggle = "gs-tab-item-physical-toggler-button";
         public static final String logsPanelToggle = "gs-tab-item-logs-toggler-button";
         public static final String logicalPanelToggle = "gs-tab-item-logical-toggler-button";
@@ -209,7 +207,6 @@ public final class WebConstants {
         public static final String inboundActivityPanelToggle = "gs-tab-item-inbound-activity-toggler-button";
         public static final String notificationsActivityPanelToggle = "gs-tab-item-notifications-activity-toggler-button";
 
-        public static final String healthPanel = "gs-sub-panel-health";
         public static final String physicalPanel = "gs-tab-item-physical";
         public static final String spaceInstancesGrid = "gs-space-instances-grid";
         public static final String spaceConfigurationGrid = "gs-space-info-grid";
@@ -359,11 +356,6 @@ public final class WebConstants {
         public static final String pathToEDSPacketsPerSecond = "//div[@id='" + ID.edsPacketsPerSecond + "']";
         public static final String pathToEDSBytesPerSecond = "//div[@id='" + ID.edsBytesPerSecond + "']";
         public static final String pathToEDSOpPerSecond = "//div[@id='" + ID.edsOpPerSecond + "']";
-        public static final String pathToGridHealthInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div/div[2]/div/div[2]/div/span";
-
-//		public static final String pathToCpuCoresInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[1]";
-//		public static final String pathToMemoryInGridStatus = "//div[@id='" + ID.statusGrid + "']/div[2]/div/div[2]/div[2]/div/div[3]";
-//		public static final String pathToIconInResourcesPanelOfGridStatus = "/div/span";
 
         public static final String pathToNumberInResourcesPanelOfGridStatus = "/div[2]/div/table/tbody/tr[1]/td[2]";
         public static final String pathToNumberInResourceGrid = "/table/tbody/tr/td[3]";
@@ -399,9 +391,7 @@ public final class WebConstants {
         public static final String pathToApplicationMenuButtonSelection = "/div/div/div/div/table/tbody/tr/td/div/img";
         public static final String pathToGroupName = "/div[1]/div/span";
         public static final String pathToTopologySubPanelName = "//div/label";
-        public static final String pathToHealthPanelButton = "//table[@id='" + ID.healthPanelToggle + "']/tbody/tr[2]/td[2]/em/button";
         public static final String pathToPhysicalPanelButton = "//table[@id='" + ID.physicalPanelToggle + "']/tbody/tr[2]/td[2]/em/button";
-        public static final String pathToHealthPanel = "//div[@id='" + ID.healthPanel + "']";
         public static final String pathToPhysicalPanel = "//div[@id='" + ID.physicalPanel + "']";
         public static final String pathToOs = "/div/table/tbody/tr/td[2]/div/img";
         public static final String pathToHostName = "/table/tbody/tr/td[3]";
@@ -583,11 +573,6 @@ public final class WebConstants {
 
         public static String getPathToApplicationSelectionButton(String appName) {
             return "//button[text()='" + appName + "']";
-        }
-
-        public static String getPathToMetricByIndex(int i) {
-            if (i <= 3) return WebConstants.Xpath.pathToHealthPanel + "/div[2]/div/div/div[1]/div[" + i + "]";
-            return WebConstants.Xpath.pathToHealthPanel + "/div[2]/div/div/div[2]/div[" + (i - 3) + "]";
         }
 
         public static String getPathToPuInstanceButton(String name, int partition) {

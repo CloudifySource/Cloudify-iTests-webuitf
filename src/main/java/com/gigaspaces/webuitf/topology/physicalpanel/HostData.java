@@ -246,11 +246,6 @@ public class HostData {
 		return null;	
 
 	}
-	
-	public void selectComparisonCharts() {
-		String id = WebConstants.ID.getHostId(name);
-		helper.clickWhenPossible(10, TimeUnit.SECONDS, By.id(id), By.className("x-grid3-cc-chart_selection"));			
-	}	
 }
 
 
