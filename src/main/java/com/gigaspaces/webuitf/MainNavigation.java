@@ -42,17 +42,16 @@ public class MainNavigation {
 
     private boolean clickOnTabButton( String buttonId ) throws Exception{
 
-        WebElement buttonTableElement = helper.waitForElement(
+        WebElement button = helper.waitForElement(
                 TimeUnit.SECONDS, TIMEOUT_IN_SECONDS, By.id( buttonId ));
 
-        String className = buttonTableElement.getAttribute( "class" );
+        String className = button.getAttribute( "class" );
         //if style is disabled then return false since button is not clickable
         //GS-
         if( className.contains( "x-item-disabled" ) ){
             return false;
         }
 
-        WebElement button = buttonTableElement.findElement(By.className("x-btn-text").tagName("button"));
         helper.clickWhenPossible( TIMEOUT_IN_SECONDS, TimeUnit.SECONDS, button );
         return true;
     }
