@@ -223,8 +223,8 @@ public class HostsAndServicesGrid {
 
         int puInstanceDivIndex = 3;
         while (true) {
-            String searchedText = helper.waitForTextToBeExctractable(3,
-                    TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber( puInstanceDivIndex )));
+            By puInstanceXPath = By.xpath( WebConstants.Xpath.getPathToRowNumber( puInstanceDivIndex ) );
+            String searchedText = helper.waitForTextToBeExctractable( 3, TimeUnit.SECONDS, puInstanceXPath );
             logger.info( ">>> searchedText=" + searchedText );
             if( searchedText.contains( puInstanceName )) {
                 logger.info( ">>> contains, break" );
@@ -239,7 +239,9 @@ public class HostsAndServicesGrid {
             }
         }
 
-        return findToolsButton( puInstanceName, false );
+        List<WebElement> iconsElements = helper.waitForElements(TimeUnit.SECONDS, 10, By.className("icon-xap-setting"));
+
+        return puInstanceDivIndex <= iconsElements.size() ? iconsElements.get( puInstanceDivIndex - 1 ) : null;
     }
 
 
