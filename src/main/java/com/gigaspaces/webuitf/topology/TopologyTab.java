@@ -2,11 +2,9 @@ package com.gigaspaces.webuitf.topology;
 
 import com.gigaspaces.webuitf.BaseApplicationContextPanel;
 import com.gigaspaces.webuitf.WebConstants;
-import com.gigaspaces.webuitf.topology.applicationmap.ApplicationMap;
 import com.gigaspaces.webuitf.topology.sidepanel.TopologySidePanel;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -19,35 +17,12 @@ public class TopologyTab extends BaseApplicationContextPanel {
 		super(selenium, driver);
 	}
 
-	public ApplicationMap getApplicationMap() {
-		return new ApplicationMap(driver, selenium);
-	}
-	
 	public TopologySubPanel getTopologySubPanel() {
 		return new TopologySubPanel(selenium, driver);
 	}
 	
 	public TopologySidePanel getDetailsPanel() {
 		return new TopologySidePanel(driver, selenium);
-	}
-	
-	public void selectApplication(String applicationName) {
-		super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);
-	}
-	
-	public boolean containsApplication(String applicationName) {
-		
-		try{
-			super.selectApplication(applicationName, WebConstants.ID.topologyCombobox);			
-		} 
-		catch(TimeoutException toe){
-			return false;
-		}
-		return true;
-	}
-
-	public String getSelectedApplication() {
-		return super.getSelectedApplication(WebConstants.ID.topologyCombobox);
 	}
 	
 	public boolean isMaskedNoContext() {

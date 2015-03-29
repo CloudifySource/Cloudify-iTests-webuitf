@@ -86,7 +86,7 @@ public class AlertsPanel {
 				return false;
 			}
 		};
-		AjaxUtils.repetitiveAssertTrue("Could not find " + numberOfResolved + " alerts of type " + alertType + " in status " + status, condition, 120 * 1000);
+		AjaxUtils.repetitiveAssertTrue("Could not find " + numberOfResolved + " alerts of type " + alertType + " in status " + status, condition, 2 * 60 * 1000);
 	}
 	
 	/**

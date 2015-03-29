@@ -216,8 +216,6 @@ public final class WebConstants {
         public static final String goToLogsItemID = "gs-logical-navigate_to_logs";
         public static final String alertsGridDumpItem = "gs-alerts-grid-dump";
         public static final String restartPuInstanceItem = "gs-logical-restart-pu-instance";
-        public static final String topologyCombobox = "gs-application-combo-TOPOLOGY";
-        public static final String dataGridCombobox = "gs-application-combo-DATA_CONSOLE";
         public static final String logoutButton = "gs-logout-button";
         public static final String resourceDistribESM = "resource_distrib-grid_null_esm";
         public static final String comparisonMetricTop = "comparisonMetricPanelTop";

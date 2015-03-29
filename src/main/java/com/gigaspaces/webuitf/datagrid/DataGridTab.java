@@ -20,14 +20,6 @@ public class DataGridTab extends BaseApplicationContextPanel {
 		return new ContextPager(driver);
 	}
 	
-	public void selectApplication(String applicationName) {
-		super.selectApplication(applicationName, WebConstants.ID.dataGridCombobox);
-	}
-	
-	public String getSelectedApplication() {
-		return super.getSelectedApplication(WebConstants.ID.dataGridCombobox);
-	}
-
 	public boolean isMaskedNoContext() {
 		return super.isMaskedNoContext(WebConstants.ID.dataGridPanel);
 	}
