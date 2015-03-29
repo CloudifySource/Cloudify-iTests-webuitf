@@ -399,7 +399,8 @@ public class HostsAndServicesGrid {
 			}
 			catch (WebDriverException e) {
 				logger.severe("caught an exception while locating element ");
-			}
+                exception = e;
+            }
 		}
 		return count;
 	}
