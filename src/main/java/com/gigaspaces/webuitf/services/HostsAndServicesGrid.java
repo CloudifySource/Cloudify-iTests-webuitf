@@ -82,7 +82,7 @@ public class HostsAndServicesGrid {
 		clickOnHost(hostname);
         clickOnGSAService();
 
-        WebElement buttonElement = findToolsButton( String.valueOf( gsaPID ), true );
+        WebElement buttonElement = findToolsButton( 2 );
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -239,9 +239,7 @@ public class HostsAndServicesGrid {
             }
         }
 
-        List<WebElement> iconsElements = helper.waitForElements(TimeUnit.SECONDS, 10, By.className("icon-xap-setting"));
-
-        return puInstanceDivIndex <= iconsElements.size() ? iconsElements.get( puInstanceDivIndex - 1 ) : null;
+        return findToolsButton( puInstanceDivIndex );
     }
 
 
@@ -260,15 +258,24 @@ public class HostsAndServicesGrid {
             }
         }
 
-        return findToolsButton(gscPid, true);
+        return findToolsButton( gscDivIndex ); //findToolsButton(gscPid, true);
     }
 
+    private WebElement findToolsButton( int divIndex ){
+        List<WebElement> iconsElements = helper.waitForElements(TimeUnit.SECONDS, 10, By.className("icon-xap-setting"));
+
+        return divIndex <= iconsElements.size() ? iconsElements.get( divIndex - 1 ) : null;
+    }
+
+/*
     private WebElement findToolsButton( String str, boolean isGridService ){
 
         WebElement element = null;
         WebElement buttonElement = null;
         //find grid all rows
-        String rowClassName = /*isGridService ? "x-grid3-row" :*/ "gs-actions-button";
+        String rowClassName = */
+/*isGridService ? "x-grid3-row" :*//*
+ "gs-actions-button";
         List<WebElement> elements = driver.findElements( By.className( rowClassName ) );
         for( WebElement el : elements ) {
             String className = helper.retrieveAttribute( el, "class" );
@@ -288,7 +295,8 @@ public class HostsAndServicesGrid {
 
         return buttonElement;
     }
-	
+*/
+
 	public boolean isGSCPresent(GridServiceContainer gsc) {
 		String processPid = "" + gsc.getVirtualMachine().getDetails().getPid();
 		return selenium.isTextPresent(processPid);
