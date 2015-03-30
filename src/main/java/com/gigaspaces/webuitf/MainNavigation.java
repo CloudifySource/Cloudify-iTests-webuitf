@@ -48,7 +48,7 @@ public class MainNavigation {
         String className = button.getAttribute( "class" );
         //if style is disabled then return false since button is not clickable
         //GS-
-        if( className.contains( "x-item-disabled" ) ){
+        if( className.contains( "gwt-ToggleButton-up-disabled" ) ){
             return false;
         }
 
