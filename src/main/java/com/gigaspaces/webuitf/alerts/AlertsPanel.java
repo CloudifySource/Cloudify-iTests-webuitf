@@ -399,9 +399,7 @@ public class AlertsPanel {
 				try {
 					WebElement alertElement = driver.findElement(By
 							.xpath(xPath));
-					WebElement actions = alertElement.findElement(
-							By.className("gs-actions-button")).findElement(
-							By.tagName("button"));
+					WebElement actions = alertElement.findElement( By.className( "icon-xap-setting" ) );
 					actions.click();
 					WebElement generateDumpItem = driver.findElement(By
 							.id(WebConstants.ID.alertsGridDumpItem));
