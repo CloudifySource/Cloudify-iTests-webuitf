@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gsVersion>10.1.0-SNAPSHOT</gsVersion>
+		<gsVersion>10.1.1-SNAPSHOT</gsVersion>
 		<build.home>${env.BUILD_HOME}</build.home>
 	</properties>
 
