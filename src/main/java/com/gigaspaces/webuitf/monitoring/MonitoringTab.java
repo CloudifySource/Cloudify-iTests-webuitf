@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
+
 public class MonitoringTab extends BaseApplicationContextPanel {
 
     public MonitoringTab(Selenium selenium, WebDriver driver) {
@@ -16,14 +17,26 @@ public class MonitoringTab extends BaseApplicationContextPanel {
     }
 
     public boolean isNotAuthorized(){
-        WebElement labelElement =
-                helper.waitForElement(TimeUnit.SECONDS, 3, By.id( WebConstants.ID.monitoringUnavailableNotAuthorized ));
+        WebElement labelElement = null;
+        try {
+            labelElement = helper.waitForElement(TimeUnit.SECONDS, 3,
+                    By.id(WebConstants.ID.monitoringUnavailableNotAuthorized));
+        }
+        catch( org.openqa.selenium.TimeoutException e ){
+            e.printStackTrace();
+        }
         return labelElement != null;
     }
 
     public boolean isDbNotDefined(){
-        WebElement labelElement =
-                helper.waitForElement(TimeUnit.SECONDS, 3, By.id( WebConstants.ID.monitoringUnavailableDbNotDefined ));
+        WebElement labelElement = null;
+        try {
+            labelElement = helper.waitForElement(TimeUnit.SECONDS, 3,
+                    By.id(WebConstants.ID.monitoringUnavailableDbNotDefined));
+        }
+        catch( org.openqa.selenium.TimeoutException e ){
+            e.printStackTrace();
+        }
         return labelElement != null;
     }
 }
