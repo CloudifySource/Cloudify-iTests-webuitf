@@ -1,11 +1,13 @@
 package com.gigaspaces.webuitf;
 
-import com.gigaspaces.webuitf.alerts.AlertsPanel;
+import com.gigaspaces.webuitf.util.components.alerts.AlertsPanel;
 import com.gigaspaces.webuitf.datagrid.DataGridTab;
-import com.gigaspaces.webuitf.events.HeaderEventsGrid;
+import com.gigaspaces.webuitf.util.components.events.HeaderEventsGrid;
 import com.gigaspaces.webuitf.monitoring.MonitoringTab;
+import com.gigaspaces.webuitf.processingunits.ProcessingUnitsTab;
+import com.gigaspaces.webuitf.util.components.deployment.DataGridDeployWindow;
+import com.gigaspaces.webuitf.util.components.deployment.IDeployWindow;
 import com.gigaspaces.webuitf.services.ServicesTab;
-import com.gigaspaces.webuitf.topology.TopologyTab;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
@@ -83,16 +85,16 @@ public class MainNavigation {
 		return new MonitoringTab(selenium, driver);
 	}
 	
-	public TopologyTab switchToTopology() {
+	public ProcessingUnitsTab switchToProcessingUnits() {
         try {
-            clickOnTabButton(WebConstants.ID.topologyButton);
+            clickOnTabButton(WebConstants.ID.processingUnitsButton);
         }
         catch( Exception exc ){
             exc.printStackTrace();
             return null;
         }
 
-		return new TopologyTab(selenium, driver);
+		return new ProcessingUnitsTab(selenium, driver);
 	}
 
 	public DataGridTab switchToDataGrid() {
@@ -255,6 +257,41 @@ public class MainNavigation {
         return servicesThroughput;
     }
 
+
+    /**
+     * opens the EDG deployment menu with certain deployment parameters
+     * @param dataGridName
+     * @param isSecured
+     * @param userName
+     * @param password
+     * @param numberOfInstances
+     * @param numberOfBackups
+     * @param clusterSchema
+     * @param maxInstPerVM
+     * @param maxInstPerMachine
+     * @return a DeployWindow object representing a specific deployment window
+     */
+    public IDeployWindow openEDGDeployWindow(String dataGridName, String isSecured,
+                                             String userName, String password, String numberOfInstances,
+                                             String numberOfBackups, String clusterSchema, String maxInstPerVM,
+                                             String maxInstPerMachine) {
+        selenium.click(WebConstants.Xpath.deployMenuButton);
+        selenium.click(WebConstants.ID.deployEDGOption);
+        return new DataGridDeployWindow(selenium, driver, dataGridName, isSecured,
+                userName, password, numberOfInstances, numberOfBackups,
+                clusterSchema, maxInstPerVM, maxInstPerMachine);
+    }
+
+    public IDeployWindow openProcessingUnitDeployWindow(String puName, String isSecured,
+                                                        String userName, String password, String numberOfInstances,
+                                                        String numberOfBackups, String clusterSchema, String maxInstPerVM,
+                                                        String maxInstPerMachine) {
+        selenium.click(WebConstants.Xpath.deployMenuButton);
+        selenium.click(WebConstants.ID.deployProcessingUnitOption);
+        return new ProcessingUnitDeployWindow(selenium, driver, puName, isSecured,
+                userName, password, numberOfInstances, numberOfBackups,
+                clusterSchema, maxInstPerVM, maxInstPerMachine);
+    }
 
     public class LookupDetails{
 

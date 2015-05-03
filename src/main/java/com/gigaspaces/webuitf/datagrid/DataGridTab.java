@@ -1,12 +1,12 @@
 package com.gigaspaces.webuitf.datagrid;
 
-import org.openqa.selenium.WebDriver;
-
-import com.gigaspaces.webuitf.BaseApplicationContextPanel;
+import com.gigaspaces.webuitf.MainNavigation;
 import com.gigaspaces.webuitf.WebConstants;
 import com.thoughtworks.selenium.Selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-public class DataGridTab extends BaseApplicationContextPanel {
+public class DataGridTab extends MainNavigation {
 	
 	public DataGridTab(Selenium selenium, WebDriver driver) {
 		super(selenium, driver);
@@ -21,11 +21,27 @@ public class DataGridTab extends BaseApplicationContextPanel {
 	}
 	
 	public boolean isMaskedNoContext() {
-		return super.isMaskedNoContext(WebConstants.ID.dataGridPanel);
+		return isMaskedNoContext(WebConstants.ID.dataGridPanel);
 	}
 	
 	public boolean isMaskedLoading() {
 		String maskMessage = "Loading data grid information...";
-		return super.isMaskedLoading(WebConstants.ID.dataGridPanel, maskMessage);
+		return isMaskedLoading(WebConstants.ID.dataGridPanel, maskMessage);
 	}
+
+    private boolean isMaskedLoading(final String tabItemId, String maskMessage) {
+
+        return helper.isElementMaskedWithMessage(maskMessage, true,
+                By.id(tabItemId),
+                By.className(WebConstants.ClassNames.applicationContextPanel));
+    }
+
+    protected boolean isMaskedNoContext(final String tabItemId) {
+
+        String maskMessage = "No processing units are deployed";
+
+        return helper.isElementMaskedWithMessage(maskMessage, true,
+                By.id(tabItemId),
+                By.className(WebConstants.ClassNames.applicationContextPanel));
+    }
 }

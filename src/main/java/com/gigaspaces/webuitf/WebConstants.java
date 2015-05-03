@@ -31,10 +31,10 @@ public final class WebConstants {
 
     public static final class ID {
 
-        public static final String topologyButton = "gs-tab-item-topology-button";
         public static final String servicesButton = "gs-tab-item-services-button";
         public static final String consoleButton = "gs-tab-item-console-button";
         public static final String monitoringButton = "gs-tab-item-monitoring-button";
+        public static final String processingUnitsButton = "gs-tab-item-processing-unis-button";
 
         //status bar elements
         public static final String statusBarInfrastructureHosts = "status-bar-infra-hosts";
@@ -120,7 +120,8 @@ public final class WebConstants {
         public static final String moduleDatabase        = "modules-status-grid_null_database";
         public static final String moduleNoSqlDb         = "modules-status-grid_null_noSqlDb";
 
-        public static final String logsPanel = "gs-tab-item-logs";
+        //public static final String logsPanel = "gs-tab-item-logs";
+        public static final String hostsLogs = "gs-hosts-logs";
 
         public static final String alertsButton = "alerts-button";
         public static final String eventsButton = "events-button";
@@ -161,7 +162,17 @@ public final class WebConstants {
         public static final String nodeStatusBroken = "critical";
         public static final String nodeStatusWorking = "working";
 
-	    
+        public static final String puGridLocalCachesInDataGridMenuItem = "local_caches_in_data_grid_menu_item";
+        public static final String puGridLocalViewsInDataGridMenuItem = "local_views_in_data_grid_menu_item";
+        public static final String puGridRemoteSpaceInDataGridMenuItem = "remote_space_in_data_grid_menu_item";
+        public static final String puGridRemoteServicesInDataGridMenuItem = "remote_services_in_data_grid_menu_item";
+        public static final String puGridEventContainersInDataGridMenuItem = "event_containers_in_data_grid_menu_item";
+        public static final String puGridUninstallMenuItem = "gs-menu-item-uninstall";
+        public static final String puGridViewInDataGridMenuItem = "view_in_data_grid_menu_item";
+        public static final String puGridRestartPuInstanceMenuItem = "restart_pu_instance_menu_item";
+        public static final String puGridRelocatePuInstanceMenuItem = "relocate_pu_instance_menu_item";
+        public static final String puGridGenerateServicesDumpMenuItem = "genereate_dump_menu_item";
+
 		/*
             'ok': 'status-ok.png',
             'warn': 'status-alert.png',
@@ -192,6 +203,7 @@ public final class WebConstants {
         public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
         public static final String configurationPanelToggle = "gs-tab-item-configuration-toggler-button";
         public static final String networkPanelToggle = "gs-tab-item-network-toggler-button";
+
 
         public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
         public static final String gatewaysInboundTogglerButton = "gs-tab-item-inbound-toggler-button";
@@ -224,12 +236,17 @@ public final class WebConstants {
         public static final String morePopup = "gs-popup-grid-instances";
         public static final String topologyEventsGrid = "topology-events-grid";
         public static final String dashboardEventsGrid = "dahsboard-events-grid";
-        public static final String topologyEventsGridToggle = "gs-tab-item-topology-events-grid-toggler-button";
-        public static final String topologyRecipesToggle = "gs-tab-item-topology-recipes-toggler-button";
 
         public static final String hostsGrid = "hosts_tree_grid";
         public static final String hostsSummaryButtonId = "gs-hosts-menu-item-summary-button";
         public static final String hostsLogsButtonId = "gs-hosts-menu-item-logs-button";
+
+        public static final String processingUnitsGrid = "processing_units_tree_grid";
+
+        public static final String processingUnitsEventsButtonId = "gs-pus-menu-item-events-button";
+        public static final String processingUnitsHostsButtonId = "gs-pus-menu-item-hosts-button";
+        public static final String processingUnitsLogsButtonId = "gs-pus-menu-item-logs-button";
+        public static final String processingUnitsConfigButtonId = "gs-pus-menu-item-config-button";
 
         public static final String undeployApplicationButton = "gs-button-uninstall-app";
 
@@ -471,9 +488,22 @@ public final class WebConstants {
             return Xpath.pathToAlerts + "/div[" + index + "]";
         }
 
-        public static String getPathToRowNumber(int index) {
-//			return "//div[" + index + "]/table/tbody/tr[1]/td[1]/div/div";
+        public static String getPathToHostsGridRowNumber(int index) {
             return "//*[@id=\"hosts_tree_grid\"]/div[1]/div[1]/div[2]/div/div[" + index + "]/table/tbody/tr[1]/td[1]/div/div/div/span/span";
+        }
+
+        public static String getPathToProcessingUnitsRowNumber(int index) {
+            //return "//*[@id=\"processing_units_tree_grid\"]/div[1]/div[1]/div[2]/div/div[" + index + "]/table/tbody/tr[1]/td[1]/div/div/div/span/span";
+            return "//*[@id=\"processing_units_tree_grid\"]/div/div/div[2]/div/div[" + index + "]/table/tbody/tr/td/div/div/div/span[2]/span";
+        }
+
+        public static String getPathToProcessingUnitsRowToolsButton(int index) {
+            //return "//*[@id=\"processing_units_tree_grid\"]/div[1]/div[1]/div[2]/div/div[" + index + "]/table/tbody/tr[1]/td[1]/div/div/div/span/span";
+            return "//*[@id=\"processing_units_tree_grid\"]/div/div/div[2]/div/div[" + index + "]/table/tbody/tr/td[10]/div/table";///tbody/tr[2]/td[2]/em/button
+        }
+
+        public static String getPathToProcessingUnitsRowPuType(int index) {
+            return "//*[@id=\"processing_units_tree_grid\"]/div/div/div[2]/div/div[" + index + "]/table/tbody/tr/td[3]/div/span";
         }
 
         public static String getPathToComboSelection(String selection) {
@@ -492,6 +522,9 @@ public final class WebConstants {
             return "//div[@id='" + ID.hostsGrid + "']/div/div/div[2]/div/div[" + index + "]";
         }
 
+        public static final String getPathToHeaderProcessingUnitsGrid(int index) {
+            return "//div[@id='" + ID.processingUnitsGrid + "']/div/div/div[2]/div/div[" + index + "]";
+        }
         public static final String getPathToTypeElement( String id ) {
             return "//td[@id='" + id + "']/div/div";
         }
@@ -684,6 +717,8 @@ public final class WebConstants {
 
         public static final String statePanelHeader = "gs-state-panel-header";
 
+        public static final String runmodePanel = "gs-runmode-panel";
+
         public static final String EventsGridEventTitle = "x-grid3-td-component_name";
         public static final String EventsGridEventMessage = "x-grid3-td-message";
         public static final String EventsGridEventDescription = "x-grid3-td-description";
@@ -715,9 +750,18 @@ public final class WebConstants {
         public static final String lookupGroups = "gs-groups-label";
         public static final String lookupLocators = "gs-locators-label";
 
+        public static final String GS_SIDE_MENU_PROCESSING_UNITS_VIEW_LOGS = "gs-side-menu-processing-units-view-logs";
+        public static final String GS_SIDE_MENU_HOSTS_VIEW_LOGS = "gs-side-menu-hosts-view-logs";
+
         public static final String getHostClassName(String name) {
             return "gs-physical-grid-row-" + name;
         }
+
+
+        public static final String processingUnitsViewConfig = "gs-side-menu-processing-units-view-config";
+
+        public static final String dictionaryKey = "gs-dictionary-key";
+        public static final String dictionaryValue = "gs-dictionary-value";
 
         /**
          * @deprecated Use {@link #getMetricClassNameByIndex(int)} instead.

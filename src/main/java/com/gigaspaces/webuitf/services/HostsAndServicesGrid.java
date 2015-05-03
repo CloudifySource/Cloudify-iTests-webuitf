@@ -223,7 +223,7 @@ public class HostsAndServicesGrid {
 
         int puInstanceDivIndex = 3;
         while (true) {
-            By puInstanceXPath = By.xpath( WebConstants.Xpath.getPathToRowNumber( puInstanceDivIndex ) );
+            By puInstanceXPath = By.xpath( WebConstants.Xpath.getPathToHostsGridRowNumber( puInstanceDivIndex ) );
             String searchedText = helper.waitForTextToBeExctractable( 3, TimeUnit.SECONDS, puInstanceXPath );
             logger.info( ">>> searchedText=" + searchedText );
             if( searchedText.contains( puInstanceName )) {
@@ -249,7 +249,7 @@ public class HostsAndServicesGrid {
         String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
         int gscDivIndex = 2;
         while (true) {
-            if (helper.waitForTextToBeExctractable(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToRowNumber(gscDivIndex)))
+            if (helper.waitForTextToBeExctractable(3, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostsGridRowNumber(gscDivIndex)))
                     .contains(gscPid)) break;
             else gscDivIndex++;
 
@@ -395,7 +395,7 @@ public class HostsAndServicesGrid {
 		
 		while (exception == null) {
 			try {
-				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToRowNumber(i))).getText();
+				rowText = driver.findElement(By.xpath(WebConstants.Xpath.getPathToHostsGridRowNumber(i))).getText();
 				if (rowText.contains(component)) {
 					logger.info("Found " + component + "[Count=" + ++count + "]");
 				}

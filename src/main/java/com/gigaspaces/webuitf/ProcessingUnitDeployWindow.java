@@ -1,6 +1,6 @@
 package com.gigaspaces.webuitf;
 
-import com.gigaspaces.webuitf.services.AbstractDeployWindow;
+import com.gigaspaces.webuitf.util.components.deployment.AbstractDeployWindow;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.WebDriver;
 
