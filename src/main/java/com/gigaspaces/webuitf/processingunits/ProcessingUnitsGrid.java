@@ -88,6 +88,16 @@ public class ProcessingUnitsGrid {
     }
 
     public String getProcessingUnitType( String processingUnitName ) throws InterruptedException{
+        int puDivIndex = getProcessingUnitRowDivIndex( processingUnitName );
+        return getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowPuType( puDivIndex ) );
+    }
+
+    public String getProcessingUnitStatus( String processingUnitName ) throws InterruptedException{
+        int puDivIndex = getProcessingUnitRowDivIndex( processingUnitName );
+        return getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowStatus( puDivIndex ) );
+    }
+
+    public int getProcessingUnitRowDivIndex( String processingUnitName ) throws InterruptedException{
         int puDivIndex = 1;
         while (true) {
             By buttonXPath = By.xpath( WebConstants.Xpath.getPathToProcessingUnitsRowNumber( puDivIndex ) );
@@ -104,7 +114,7 @@ public class ProcessingUnitsGrid {
             }
         }
 
-        return getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowPuType( puDivIndex ) );
+        return puDivIndex;
     }
 
     private String getCellValue( String xPath ){

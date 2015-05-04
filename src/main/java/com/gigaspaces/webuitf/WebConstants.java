@@ -506,6 +506,10 @@ public final class WebConstants {
             return "//*[@id=\"processing_units_tree_grid\"]/div/div/div[2]/div/div[" + index + "]/table/tbody/tr/td[3]/div/span";
         }
 
+        public static String getPathToProcessingUnitsRowStatus(int index) {
+            return "//*[@id=\"processing_units_tree_grid\"]/div/div/div[2]/div/div[" + index + "]/table/tbody/tr/td[2]/div/span";
+        }
+
         public static String getPathToComboSelection(String selection) {
             return "//div[text()='" + selection + "']";
         }
