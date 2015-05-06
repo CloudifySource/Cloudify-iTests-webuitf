@@ -30,9 +30,8 @@ public class ConfigPanel {
         this.helper = new AjaxUtils(driver);
 	}
 
-    public int getActualInstancesNumber(){
-        Map<String, String> values = getValues();
-        return Integer.parseInt( values.get( "Running instances" ) );
+    public ProcessingUnitConfiguration getProcessingUnitConfiguration(){
+        return new ProcessingUnitConfiguration( getValues() );
     }
 
     private Map<String, String> getValues(){

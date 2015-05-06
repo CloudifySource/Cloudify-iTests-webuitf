@@ -87,14 +87,28 @@ public class ProcessingUnitsGrid {
         return buttonElement;
     }
 
-    public String getProcessingUnitType( String processingUnitName ) throws InterruptedException{
-        int puDivIndex = getProcessingUnitRowDivIndex( processingUnitName );
-        return getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowPuType( puDivIndex ) );
+    public String getProcessingUnitType( String processingUnitName ) {
+        int puDivIndex = - 1;
+        try {
+            puDivIndex = getProcessingUnitRowDivIndex(processingUnitName);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+        }
+
+        return puDivIndex < 0 ? "n/a" : getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowPuType( puDivIndex ) );
     }
 
-    public String getProcessingUnitStatus( String processingUnitName ) throws InterruptedException{
-        int puDivIndex = getProcessingUnitRowDivIndex( processingUnitName );
-        return getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowStatus( puDivIndex ) );
+    public String getProcessingUnitStatus( String processingUnitName ) {
+        int puDivIndex = - 1;
+        try {
+            puDivIndex = getProcessingUnitRowDivIndex(processingUnitName);
+        }
+        catch( Exception exc ){
+            exc.printStackTrace();
+        }
+
+        return puDivIndex < 0 ? "n/a" : getCellValue( WebConstants.Xpath.getPathToProcessingUnitsRowStatus( puDivIndex ) );
     }
 
     public int getProcessingUnitRowDivIndex( String processingUnitName ) throws InterruptedException{
@@ -237,7 +251,7 @@ public class ProcessingUnitsGrid {
 		return count;
 	}
 
-    public void clickOnRow( String serviceNamePrefix ){
+    public void expandProcessingUnitRow( String puName ){
 
         String realId = null;
 
@@ -246,7 +260,7 @@ public class ProcessingUnitsGrid {
         for( WebElement el : elements ) {
             String id = helper.retrieveAttribute( el, "id" );
             logger.info( "id=" + id  );
-            if( id != null && id.contains( PU_TREE_PREFIX + PU_NODE_PREFIX + serviceNamePrefix ) ) {
+            if( id != null && id.contains( PU_TREE_PREFIX + PU_NODE_PREFIX + puName ) ) {
                 logger.info( "in if contains"  );
                 realId = id;
                 break;
@@ -255,6 +269,30 @@ public class ProcessingUnitsGrid {
 
         helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
     }
+
+    public void selectProcessingUnitRow( String puName ){
+
+        String realId = null;
+
+        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        int listsSize = elements.size();
+        logger.info( "elements size=" + listsSize );
+        int index;
+        for( index = 0; index < listsSize; index++ ) {
+            WebElement el = elements.get( index );
+            String id = helper.retrieveAttribute( el, "id" );
+            logger.info( "id=" + id  );
+            if( id != null && id.contains( PU_TREE_PREFIX + PU_NODE_PREFIX + puName ) ) {
+                logger.info( "in if contains"  );
+                realId = id;
+                break;
+            }
+        }
+
+        //helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid( index )) );
+    }
+
 
     public void selectRow( int index ) {
 
