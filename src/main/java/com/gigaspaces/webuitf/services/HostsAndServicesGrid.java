@@ -456,6 +456,8 @@ public class HostsAndServicesGrid {
 
     protected AbstractServiceHostWrapper prepareRow( WebElement rowElement ) {
 
+        ///WebElement nameElement = helper.waitForElement( By.className(WebConstants.ClassNames.ServicesGridNameCell), 5 );
+
         WebElement nameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridNameCell));
         String name = retrieveNameText(nameElement);
 
@@ -479,7 +481,13 @@ public class HostsAndServicesGrid {
         AbstractServiceHostWrapper retValue = null;
         switch( nodeType ){
             case HOST:
-                retValue = new HostWrapper( name, nodeType );
+                WebElement gridServicesCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridGridServicesCountCell));
+                WebElement processingUnitInstanceCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridProcessingUnitInstanceCountCell));
+
+                String gridServicesCount = retrieveRegularText(gridServicesCountElement);
+                String processingUnitInstanceCount = retrieveRegularText(processingUnitInstanceCountElement);
+
+                retValue = new HostWrapper( name, nodeType, gridServicesCount, processingUnitInstanceCount );
                 break;
 
             case GRID_SERVICE:

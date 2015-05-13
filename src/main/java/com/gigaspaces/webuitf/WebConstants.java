@@ -735,6 +735,8 @@ public final class WebConstants {
         public static final String ServicesGridApplicationNameCell = "x-grid3-td-applicationName";
         public static final String ServicesGridZonesCell = "x-grid3-td-zones";
         public static final String ServicesGridThreadCountCell = "x-grid3-td-threadCount";
+        public static final String ServicesGridGridServicesCountCell = "x-grid3-td-gridServicesCounts";
+        public static final String ServicesGridProcessingUnitInstanceCountCell = "x-grid3-td-processingUnitsInstancesCounts";
 
         public static final String win32OS = "gs-os-icon-Win32";
 
