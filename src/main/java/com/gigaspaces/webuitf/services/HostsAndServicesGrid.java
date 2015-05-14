@@ -483,20 +483,29 @@ public class HostsAndServicesGrid {
             case HOST:
                 WebElement gridServicesCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridGridServicesCountCell));
                 WebElement processingUnitInstanceCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridProcessingUnitInstanceCountCell));
+                WebElement primaryBackupElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridPrimaryBackupCell));
 
                 String gridServicesCount = retrieveRegularText(gridServicesCountElement);
                 String processingUnitInstanceCount = retrieveRegularText(processingUnitInstanceCountElement);
+                String primaryBackupsCount = retrieveRegularText(primaryBackupElement);
 
-                retValue = new HostWrapper( name, nodeType, gridServicesCount, processingUnitInstanceCount );
+                retValue = new HostWrapper( name, nodeType, gridServicesCount, processingUnitInstanceCount, primaryBackupsCount );
                 break;
 
             case GRID_SERVICE:
                 WebElement zonesElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridZonesCell));
                 WebElement threadsCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridThreadCountCell));
 
+                processingUnitInstanceCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridProcessingUnitInstanceCountCell));
+                primaryBackupElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridPrimaryBackupCell));
+
+                processingUnitInstanceCount = retrieveRegularText(processingUnitInstanceCountElement);
+                primaryBackupsCount = retrieveRegularText(primaryBackupElement);
+
                 String zones = retrieveRegularText(zonesElement);
                 String threadsCountStr = retrieveRegularText(threadsCountElement);
-                retValue = new GridServiceWrapper( name, nodeType, Integer.parseInt( threadsCountStr ), zones );
+                logger.info( ">>threadsCountStr=" + threadsCountStr );
+                retValue = new GridServiceWrapper( name, nodeType, Integer.parseInt( threadsCountStr ), zones, processingUnitInstanceCount, primaryBackupsCount );
                 break;
 
             case PROCESSING_UNIT_INSTANCE:GRID_SERVICE:
