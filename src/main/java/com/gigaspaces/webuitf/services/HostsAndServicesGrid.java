@@ -416,7 +416,7 @@ public class HostsAndServicesGrid {
     public void selectRow( int index ) {
 
         List<WebElement> visibleElements =
-                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
 
         int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
 
@@ -433,7 +433,7 @@ public class HostsAndServicesGrid {
     public List<AbstractServiceHostWrapper> getHostsAndServices() {
 
         List<WebElement> visibleElements =
-                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+                driver.findElements(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
 
         int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
         List<AbstractServiceHostWrapper> visibleRows = new ArrayList<AbstractServiceHostWrapper>( numOfElements );
@@ -510,14 +510,13 @@ public class HostsAndServicesGrid {
 
             case PROCESSING_UNIT_INSTANCE:GRID_SERVICE:
                 zonesElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridZonesCell));
-                WebElement appNameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridApplicationNameCell));
+
                 WebElement puTypeElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
                 threadsCountElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridThreadCountCell));
 
-                String appName = retrieveRegularText(appNameElement);
                 zones = retrieveRegularText(zonesElement);
                 String puType = retrieveRegularText(puTypeElement);
-                retValue = new ProcessingUnitInstanceWrapper( name, nodeType, zones, puType, appName );
+                retValue = new ProcessingUnitInstanceWrapper( name, nodeType, zones, puType );
                 break;
 
             case SPACE_INSTANCE:
