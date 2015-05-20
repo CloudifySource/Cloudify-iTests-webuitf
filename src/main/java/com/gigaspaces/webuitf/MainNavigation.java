@@ -231,6 +231,42 @@ public class MainNavigation {
         return servicesCount;
     }
 
+    public int getAlertsCount(){
+
+        int alertsCount = 0;
+        try{
+            WebElement element = helper.waitForElement( By.className( WebConstants.ClassNames.alertsOnlyLabel ), 7 );
+            if( element != null ) {
+                String txt = element.getText();
+                logger.info( ">> getAlertsCount, txt=" + txt );
+                alertsCount = Integer.parseInt( txt );
+            }
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return alertsCount;
+    }
+
+    public int getEventsCount(){
+
+        int eventsCount = 0;
+        try{
+            WebElement element = helper.waitForElement( By.className( WebConstants.ClassNames.eventsOnlyLabel ), 7 );
+            if( element != null ) {
+                String txt = element.getText();
+                logger.info( ">> getEventsCount, txt=" + txt );
+                eventsCount = Integer.parseInt( txt );
+            }
+        }
+        catch( Exception e ){
+            logger.severe( "Failed to find hosts element" + e.toString() );
+        }
+
+        return eventsCount;
+    }
+
     private double getServicesThroughput( String id ){
 
         double servicesThroughput = -1;

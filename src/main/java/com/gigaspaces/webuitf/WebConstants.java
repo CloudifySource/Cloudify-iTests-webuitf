@@ -770,6 +770,10 @@ public final class WebConstants {
         public static final String dictionaryKey = "gs-dictionary-key";
         public static final String dictionaryValue = "gs-dictionary-value";
 
+        public static final String alertsAndEventsLabel = "gs-alerts-events-num-label";
+        public static final String alertsOnlyLabel = "gs-alerts-num-label";
+        public static final String eventsOnlyLabel = "gs-events-num-label";
+
         /**
          * @deprecated Use {@link #getMetricClassNameByIndex(int)} instead.
          */
