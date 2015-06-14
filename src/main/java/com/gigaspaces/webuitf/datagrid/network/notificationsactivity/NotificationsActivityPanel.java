@@ -50,6 +50,14 @@ public class NotificationsActivityPanel implements NotificationsActivityConstant
 				_gridElement.findElements( By.className( NOTIFICATION_ACTIVITY_INVOCATION_COUNT_COLUMN_CLASS_NAME ) );
 		
 		int rowsNum = gscNameColumnElements.size();
+        _logger.info( ">>> rowsNum" + rowsNum );
+        _logger.info( ">>> pidColumnElements.size=" + pidColumnElements.size() );
+        _logger.info( ">>> hostIpColumnElements.size=" + hostIpColumnElements.size() );
+        _logger.info( ">>> receivedTrafficColumnElements.size=" + receivedTrafficColumnElements.size() );
+        _logger.info( ">>> generatedTrafficColumnElements.size=" + generatedTrafficColumnElements.size() );
+        _logger.info( ">>> totalTrafficColumnElements.size=" + totalTrafficColumnElements.size() );
+        _logger.info( ">>> invocationCountColumnElements.size=" + invocationCountColumnElements.size() );
+
 		for( int rowIndex = 0; rowIndex < rowsNum; rowIndex++ ){
 			
 			String gscName = getTagValue( gscNameColumnElements, rowIndex );
