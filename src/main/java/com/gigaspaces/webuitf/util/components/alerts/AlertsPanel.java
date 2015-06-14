@@ -73,7 +73,8 @@ public class AlertsPanel {
 			public boolean getCondition() {
 				int i = 0;
 				List<WebUIAlert> webuiAlerts = getParentAlertsByType(alertType);
-				logger.info( "Before loop, compar. status=" + status );
+				logger.info( "Before loop, compar. status=" + status +
+                        ",    webuiAlerts.size()=" + webuiAlerts.size() + ", alertType=" + alertType );
 				for (WebUIAlert alert : webuiAlerts) {
 					logger.info( "Within for loop, alert=" + alert );
 					AlertStatus st = alert.getStatus();
