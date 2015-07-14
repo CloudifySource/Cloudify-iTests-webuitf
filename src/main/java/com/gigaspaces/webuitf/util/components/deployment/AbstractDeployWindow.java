@@ -54,7 +54,7 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
         boolean displayed = numOfInstancesElement.isDisplayed();
         boolean enabled = numOfInstancesElement.isEnabled();
 
-        numOfInstancesElement.sendKeys( numberOfInst );
+        numOfInstancesElement.sendKeys( numberOfInst == null ? "" : numberOfInst );
 
 
         if (clusterSchema == "partitioned-sync2backup") {
