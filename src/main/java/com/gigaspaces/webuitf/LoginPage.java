@@ -1,16 +1,15 @@
 package com.gigaspaces.webuitf;
 
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
+import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.SharedContextConstants;
+import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.gigaspaces.webuitf.util.AjaxUtils;
-import com.gigaspaces.webuitf.util.SharedContextConstants;
-import com.thoughtworks.selenium.Selenium;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * represents the login page of the web-ui
@@ -61,11 +60,15 @@ public class LoginPage {
 	 */
 	public LoginPage inputUsernameAndPassword() {
 		AjaxUtils helper = new AjaxUtils(driver, selenium);
-		
-		WebElement usernameEl = helper.waitForElement(By.id(WebConstants.ID.usernameLogginInput), TIMEOUT_IN_SECONDS );
-		usernameEl.sendKeys(username);
-		WebElement passwordEl = helper.waitForElement(By.id(WebConstants.ID.passwordLogginInput), TIMEOUT_IN_SECONDS);
-		passwordEl.sendKeys(password);
+
+		if( username != null && username.trim().length() > 0 ) {
+			WebElement usernameEl = helper.waitForElement(By.id(WebConstants.ID.usernameLogginInput), TIMEOUT_IN_SECONDS);
+			usernameEl.sendKeys(username);
+		}
+		if( password != null && password.trim().length() > 0 ) {
+			WebElement passwordEl = helper.waitForElement(By.id(WebConstants.ID.passwordLogginInput), TIMEOUT_IN_SECONDS);
+			passwordEl.sendKeys(password);
+		}
 		
 		return this;
 	}
