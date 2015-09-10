@@ -22,6 +22,7 @@ import org.openspaces.admin.vm.VirtualMachineDetails;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -334,21 +335,38 @@ public class HostsAndServicesGrid {
     private void clickOnGridComponentService( String serviceNamePrefix, long pid ){
 
         String realId = null;
+        By by = By.cssSelector( "*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']" );
+        if( pid >= 0 ) {
+            realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 5, by.cssSelector( "[id*='" + pid + "']" ) );
+        }
+        else{
+            realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 5, by );
+        }
+        if( realId != null ){
+            helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        }
 
+/*
         List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
         logger.info( "elements size=" + elements.size() );
         for( WebElement el : elements ) {
-            String id = helper.retrieveAttribute( el, "id" );
-            logger.info( "id=" + id  );
-            if( id != null && id.contains( HOSTS_TREE_PREFIX + serviceNamePrefix ) &&
-                    pid < 0 || id.contains( "[" + String.valueOf( pid ) + "]" ) ) {
-                logger.info( "iin if contains"  );
-                realId = id;
-                break;
+            try {
+                String id = helper.retrieveAttribute(el, "id");
+                logger.info("id=" + id);
+                if (id != null && id.contains(HOSTS_TREE_PREFIX + serviceNamePrefix) &&
+                        pid < 0 || id.contains("[" + String.valueOf(pid) + "]")) {
+                    logger.info("iin if contains");
+                    realId = id;
+                    break;
+                }
+            }
+            catch(   org.openqa.selenium.ElementNotVisibleException e){
+                logger.log( Level.WARNING, e.toString(), e );
             }
         }
+*/
 
-        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+//        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
     }
 
 	public void clickOnHost(String hostname) throws InterruptedException {
@@ -378,7 +396,7 @@ public class HostsAndServicesGrid {
 			}
 		}
 
-        logger.info( ">>realId=" + realId );
+        logger.info(">>realId=" + realId);
 
         helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
 	}

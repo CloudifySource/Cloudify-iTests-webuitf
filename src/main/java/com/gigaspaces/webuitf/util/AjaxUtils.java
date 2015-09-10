@@ -1,12 +1,8 @@
 package com.gigaspaces.webuitf.util;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.logging.Logger;
-
-import org.openqa.selenium.WebDriverBackedSelenium;
+import com.google.common.base.Predicate;
+import com.thoughtworks.selenium.Selenium;
+import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -18,8 +14,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 
-import com.google.common.base.Predicate;
-import com.thoughtworks.selenium.Selenium;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 public class AjaxUtils {
 
@@ -208,6 +207,34 @@ public class AjaxUtils {
     public WebElement waitForElement(final By by, int timeoutInSeconds) {
         By[] bys = {by};
         return waitForElement(TimeUnit.SECONDS, timeoutInSeconds, bys);
+    }
+
+    public String waitForElementAttribute( final String attribute, TimeUnit timeUnit, int timeout, final By... bys ){
+
+        final AtomicReference<String> atEl = new AtomicReference<String>();
+
+        FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
+        fluentWait.withTimeout(timeout, timeUnit);
+        fluentWait.until(new Predicate<By>() {
+            public boolean apply(By by) {
+                try {
+                    WebElement element = driver.findElement(bys[0]);
+                    for (int i = 1; i < bys.length; i++) {
+                        element = element.findElement(bys[i]);
+                    }
+                    String attributeVal = element.getAttribute(attribute);
+                    _logger.info( "attributeVal for attribute [" + attribute + "] is " + attributeVal );
+                    atEl.set(attributeVal);
+                    return true;
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+            }
+        });
+
+        return atEl.get();
     }
 
     public WebElement waitForElement(TimeUnit timeUnit, int timeout, final By... bys) {
