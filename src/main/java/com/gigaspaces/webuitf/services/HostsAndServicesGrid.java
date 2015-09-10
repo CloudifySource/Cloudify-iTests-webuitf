@@ -315,9 +315,13 @@ public class HostsAndServicesGrid {
 
     public void clickOnProcessingUnitInstance( ProcessingUnitInstance puInstance ){
         String puInstanceName = puInstance.getProcessingUnitInstanceName();
-        String realId = null;
+        By by = By.cssSelector( "[id*='" + HOSTS_TREE_PREFIX + puInstanceName + "']" ).className("x-tree3-node");
+        String realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 15, by );
+        if( realId != null ){
+            helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        }
 
-        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+/*        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
         logger.info( "elements size=" + elements.size() );
         for( WebElement el : elements ) {
             String id = helper.retrieveAttribute( el, "id" );
@@ -329,18 +333,18 @@ public class HostsAndServicesGrid {
             }
         }
 
-        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));*/
     }
 
     private void clickOnGridComponentService( String serviceNamePrefix, long pid ){
 
         String realId = null;
-        By by = By.cssSelector( "*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']" );
+        By by = By.cssSelector( "*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']");
         if( pid >= 0 ) {
-            realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 5, by.cssSelector( "[id*='" + pid + "']" ) );
+            realId = helper.waitForElementAttribute("id", TimeUnit.SECONDS, 15, by.cssSelector("[id*='" + pid + "']"));
         }
         else{
-            realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 5, by );
+            realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 15, by );
         }
         if( realId != null ){
             helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
@@ -382,7 +386,7 @@ public class HostsAndServicesGrid {
 	 * @throws InterruptedException
 	 */
 	public void clickOnHost(String hostname, String hostAddress) throws InterruptedException {
-		
+
 		String hostsTreePrefix = HOST_TREE_NODE_PREFIX;
 		String realId = null;
 
