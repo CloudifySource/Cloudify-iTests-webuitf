@@ -469,31 +469,28 @@ public class HostsAndServicesGrid {
     }
 
     private AbstractServiceHostWrapper getRow(int index) {
-        logger.info( ">> getRow(), index=" + index );
-        WebElement rowElement = helper.waitForElement(
-                By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+
+        WebElement rowElement = helper.waitForElement( By.xpath(
+                WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
 
         return prepareRow(rowElement);
     }
 
     protected AbstractServiceHostWrapper prepareRow( WebElement rowElement ) {
 
-        ///WebElement nameElement = helper.waitForElement( By.className(WebConstants.ClassNames.ServicesGridNameCell), 5 );
-
         WebElement nameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridNameCell));
         String name = retrieveNameText(nameElement);
 
         String id = nameElement.getAttribute("id");
 
-        logger.info( ">>>prepareRow, name=" + name + ", ID=" + id );
+        logger.info( "> prepareRow [" + name + "] [" + id  + "]" );
 
-        WebElement typeElement = helper.waitForElement(By.xpath(WebConstants.Xpath.getPathToTypeElement(id)), 5);
-        String typeElementId = typeElement.getAttribute( "id" );
+        String typeElementId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 5, By.xpath(WebConstants.Xpath.getPathToTypeElement(id)) );
         NodeType nodeType = getNodeType(typeElementId);
 
         AbstractServiceHostWrapper serviceHostWrapper = createWrapper( nodeType, name, rowElement );
 
-        logger.info( ">>>prepareRow, typeElementId=" + typeElementId );
+        //logger.info( ">>>prepareRow, typeElementId=" + typeElementId );
 
         return serviceHostWrapper;
     }
@@ -526,7 +523,6 @@ public class HostsAndServicesGrid {
 
                 String zones = retrieveRegularText(zonesElement);
                 String threadsCountStr = retrieveRegularText(threadsCountElement);
-                logger.info( ">>threadsCountStr=" + threadsCountStr );
                 retValue = new GridServiceWrapper( name, nodeType, Integer.parseInt( threadsCountStr ), zones, processingUnitInstanceCount, primaryBackupsCount );
                 break;
 
