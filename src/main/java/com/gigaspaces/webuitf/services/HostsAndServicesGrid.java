@@ -82,22 +82,23 @@ public class HostsAndServicesGrid {
 	public void startGridServiceComponent(String hostname, int component) throws InterruptedException {
 		clickOnHost(hostname);
         clickOnGSAService();
-
+        final int timeoutSec = 7;
+        logger.info( "Using timeout [" + timeoutSec + "] sec." );
         WebElement buttonElement = findToolsButton( 2 );
         if( buttonElement != null ) {
-            helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
+            helper.clickWhenPossible(timeoutSec, TimeUnit.SECONDS, buttonElement);
 
             switch (component) {
                 case 0: {
-                    helper.waitForElement(By.id(WebConstants.ID.startGSC), 3).click();
+                    helper.waitForElement(By.id(WebConstants.ID.startGSC), timeoutSec).click();
                     break;
                 }
                 case 1: {
-                    helper.waitForElement(By.id(WebConstants.ID.startGSM), 3).click();
+                    helper.waitForElement(By.id(WebConstants.ID.startGSM), timeoutSec).click();
                     break;
                 }
                 case 2: {
-                    helper.waitForElement(By.id(WebConstants.ID.startLUS), 3).click();
+                    helper.waitForElement(By.id(WebConstants.ID.startLUS), timeoutSec).click();
                 }
             }
         }
