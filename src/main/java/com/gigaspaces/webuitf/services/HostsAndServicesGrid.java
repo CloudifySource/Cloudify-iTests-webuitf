@@ -83,7 +83,7 @@ public class HostsAndServicesGrid {
 		clickOnHost(hostname);
         clickOnGSAService();
         final int timeoutSec = 7;
-        logger.info( "Using timeout [" + timeoutSec + "] sec." );
+        logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec." );
         WebElement buttonElement = findToolsButton( 2 );
         if( buttonElement != null ) {
             helper.clickWhenPossible(timeoutSec, TimeUnit.SECONDS, buttonElement);
