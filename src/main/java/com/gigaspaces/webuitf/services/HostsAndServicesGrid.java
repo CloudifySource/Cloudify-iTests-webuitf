@@ -7,6 +7,7 @@ import com.gigaspaces.webuitf.services.wrappers.HostWrapper;
 import com.gigaspaces.webuitf.services.wrappers.ProcessingUnitInstanceWrapper;
 import com.gigaspaces.webuitf.services.wrappers.SpaceInstanceWrapper;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.WebElementWrapper;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -22,7 +23,6 @@ import org.openspaces.admin.vm.VirtualMachineDetails;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -73,7 +73,7 @@ public class HostsAndServicesGrid {
 	
 	/**
 	 * starts any type of Grid Service Component. uses the gsa provided in
-	 * {@link setGsaPID(GridServiceAgent gsa)}. 
+	 * {@link setGsaPID(GridServiceAgent gsa)}.
 	 * @param hostname - must be the host name attached to the gsa
 	 * @param component - an integer value for a component. 
 	 *                    use static fields in {@link HostsAndServicesGrid}}
@@ -479,9 +479,14 @@ public class HostsAndServicesGrid {
     protected AbstractServiceHostWrapper prepareRow( WebElement rowElement ) {
 
         WebElement nameElement = rowElement.findElement(By.className(WebConstants.ClassNames.ServicesGridNameCell));
-        String name = retrieveNameText(nameElement);
-
         String id = nameElement.getAttribute("id");
+/*        WebElementWrapper webElementWrapper =
+                helper.waitForElementAttributes(rowElement, new String[]{"id"}, TimeUnit.SECONDS, 5,
+                        By.className(WebConstants.ClassNames.ServicesGridNameCell));
+        WebElement nameElement = webElementWrapper.getElement();
+        String id = webElementWrapper.getAttributesMap().get("id");*/
+
+        String name = retrieveNameText(nameElement);
 
         logger.info( "> prepareRow [" + name + "] [" + id  + "]" );
 

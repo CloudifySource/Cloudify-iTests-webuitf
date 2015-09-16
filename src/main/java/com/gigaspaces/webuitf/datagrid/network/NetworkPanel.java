@@ -5,6 +5,7 @@ import com.gigaspaces.webuitf.datagrid.network.inboundactivity.InboundActivityPa
 import com.gigaspaces.webuitf.datagrid.network.notificationsactivity.NotificationsActivityPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -46,5 +47,11 @@ public class NetworkPanel {
     public void setRemoteActivityProbe(boolean b) {
 
         helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id( "gs-remote-activity" ) );
+    }
+
+    public void getRemoteActivityProbeValue() {
+
+        WebElement webElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-remote-activity"));
+        System.out.println( "RemoteActivityProbeValue, "+ webElement );
     }
 }

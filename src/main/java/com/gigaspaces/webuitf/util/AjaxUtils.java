@@ -15,7 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.logging.Logger;
@@ -237,6 +239,39 @@ public class AjaxUtils {
         return atEl.get();
     }
 
+    public WebElementWrapper waitForElementAttributes(final WebElement rootElement, final String[] attributes,
+                                                      TimeUnit timeUnit, int timeout, final By... bys){
+
+        final AtomicReference<WebElementWrapper> atEl = new AtomicReference<WebElementWrapper>();
+
+        FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
+        fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
+        fluentWait.withTimeout(timeout, timeUnit);
+        fluentWait.until(new Predicate<By>() {
+            public boolean apply(By by) {
+                try {
+                    WebElement element = rootElement.findElement(bys[0]);
+                    for (int i = 1; i < bys.length; i++) {
+                        element = element.findElement(bys[i]);
+                    }
+                    Map<String,String> attributesMap = new HashMap<String, String>(attributes.length);
+                    for( String attribute : attributes ) {
+                        String attributeVal = element.getAttribute( attribute );
+                        _logger.info(">> attributeVal for attribute [" + attribute + "] is " + attributeVal);
+                        attributesMap.put(attribute, attributeVal);
+                    }
+                    atEl.set( new WebElementWrapper( element, attributesMap ) );
+                    return true;
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+            }
+        });
+
+        return atEl.get();
+    }
+
     public WebElement waitForElement(TimeUnit timeUnit, int timeout, final By... bys) {
 
         final AtomicReference<WebElement> atEl = new AtomicReference<WebElement>();
@@ -298,7 +333,7 @@ public class AjaxUtils {
      *
      * @param timeUnit
      * @param timeout
-     * @param bys
+     * @param by
      * @return
      */
     public List<WebElement> waitForElements(TimeUnit timeUnit, int timeout, final By by) {
