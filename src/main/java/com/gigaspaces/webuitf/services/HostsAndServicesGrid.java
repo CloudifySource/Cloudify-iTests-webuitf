@@ -7,6 +7,7 @@ import com.gigaspaces.webuitf.services.wrappers.HostWrapper;
 import com.gigaspaces.webuitf.services.wrappers.ProcessingUnitInstanceWrapper;
 import com.gigaspaces.webuitf.services.wrappers.SpaceInstanceWrapper;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import com.gigaspaces.webuitf.util.WebElementWrapper;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
@@ -17,12 +18,14 @@ import org.openqa.selenium.WebElement;
 import org.openspaces.admin.gsa.GridServiceAgent;
 import org.openspaces.admin.gsc.GridServiceContainer;
 import org.openspaces.admin.internal.pu.InternalProcessingUnitInstance;
+import org.openspaces.admin.machine.Machine;
 import org.openspaces.admin.pu.ProcessingUnitInstance;
 import org.openspaces.admin.vm.VirtualMachineDetails;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -304,6 +307,11 @@ public class HostsAndServicesGrid {
 		return selenium.isTextPresent(processPid);
 	}
 
+    public boolean isHostPresent(Machine machine) {
+        String hostName = machine.getHostName();
+        return selenium.isTextPresent( hostName );
+    }
+
     public void clickOnGSAService(){
         clickOnGridComponentService( GSA_SUFFIX, -1 );
     }
@@ -459,11 +467,28 @@ public class HostsAndServicesGrid {
                 driver.findElements(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
 
         int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
-        List<AbstractServiceHostWrapper> visibleRows = new ArrayList<AbstractServiceHostWrapper>( numOfElements );
+        final List<AbstractServiceHostWrapper> visibleRows = new ArrayList<AbstractServiceHostWrapper>( numOfElements );
 
-        for(int i = 1; i <= numOfElements; i++){
-            logger.info( ">>> i=" + i );
-            visibleRows.add( getRow( i ) );
+        for( int i = 1; i <= numOfElements; i++ ){
+            final int localIndex = i;
+            logger.info(">>> i=" + i);
+
+            RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+                @Override
+                public boolean getCondition() {
+                    try {
+                        visibleRows.add( getRow( localIndex ) );
+                        logger.info(">>> AbstractServiceHostWrapper added for row [" + localIndex + "]");
+                    }
+                    catch( Throwable t ){
+                        logger.log(Level.WARNING, t.toString(), t );
+                        return false;
+                    }
+
+                    return true;
+                }
+            };
+            AjaxUtils.repetitiveAssertTrue("Unable to retrieve row [" + i + "] details", condition, 10*1000 );
         }
 
         return visibleRows;
