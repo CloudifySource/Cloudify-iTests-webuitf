@@ -82,9 +82,26 @@ public class HostsAndServicesGrid {
 	 *                    use static fields in {@link HostsAndServicesGrid}}
 	 * @throws InterruptedException 
 	 */
-	public void startGridServiceComponent(String hostname, int component) throws InterruptedException {
-		clickOnHost(hostname);
-        clickOnGSAService();
+	public void startGridServiceComponent(final String hostname, int component) throws InterruptedException {
+
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
+                    clickOnHost(hostname);
+                    clickOnGSAService();
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("Clicking on host [" + hostname + "] and gsa in tree did not succeed", condition, 10 * 1000);
+
+
         final int timeoutSec = 7;
         logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec." );
         WebElement buttonElement = findToolsButton(2);
@@ -223,6 +240,12 @@ public class HostsAndServicesGrid {
                     clickOnGSAService();
 
                     GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
+
+                    logger.info("Going to click on gsc, instance [" + processingUnitInstance.getProcessingUnitInstanceName() +
+                            "], gsc[" +
+                            processingUnitInstance.getGridServiceContainer().getVirtualMachine().getDetails().getPid() +
+                            "] on machine [" + hostName + "]" );
+
                     clickOnGSCService(gsc);
                 }
                 catch( Throwable t ){

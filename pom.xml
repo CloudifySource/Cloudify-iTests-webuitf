@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gigaspaces.quality</groupId>
 	<artifactId>webuitf</artifactId>
-	<version>1.0.16-SNAPSHOT</version>
+	<version>1.0.17-SNAPSHOT</version>
 	<name>Webui Testing Framework</name>
 	<description>A Testing API for the webui</description>
 	<packaging>jar</packaging>
