@@ -87,7 +87,7 @@ public class HostsAndServicesGrid {
         clickOnGSAService();
         final int timeoutSec = 7;
         logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec." );
-        WebElement buttonElement = findToolsButton( 2 );
+        WebElement buttonElement = findToolsButton(2);
         if( buttonElement != null ) {
             helper.clickWhenPossible(timeoutSec, TimeUnit.SECONDS, buttonElement);
 
@@ -114,7 +114,7 @@ public class HostsAndServicesGrid {
 	 */
 	public void terminateGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 
-        WebElement buttonElement = findGscToolsButton( hostName, gsc );
+        WebElement buttonElement = findGscToolsButton(hostName, gsc);
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -126,7 +126,7 @@ public class HostsAndServicesGrid {
     public void restartProcessingUnitInstance( String hostName,
                                             ProcessingUnitInstance processingUnitInstance)throws InterruptedException{
 
-        WebElement buttonElement = findProcessingUnitInstanceToolsButton( hostName, processingUnitInstance );
+        WebElement buttonElement = findProcessingUnitInstanceToolsButton(hostName, processingUnitInstance);
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -138,7 +138,7 @@ public class HostsAndServicesGrid {
     public void relocateProcessingUnitInstance( String hostName, ProcessingUnitInstance processingUnitInstance,
                                                 GridServiceContainer targetGsc )throws InterruptedException{
 
-        WebElement buttonElement = findProcessingUnitInstanceToolsButton( hostName, processingUnitInstance );
+        WebElement buttonElement = findProcessingUnitInstanceToolsButton(hostName, processingUnitInstance);
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -203,7 +203,7 @@ public class HostsAndServicesGrid {
 
 	public void restartGSC(String hostName, GridServiceContainer gsc) throws InterruptedException {
 
-        WebElement buttonElement = findGscToolsButton( hostName, gsc );
+        WebElement buttonElement = findGscToolsButton(hostName, gsc);
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -212,12 +212,29 @@ public class HostsAndServicesGrid {
         }
 	}
 
-    private WebElement findProcessingUnitInstanceToolsButton( String hostName, ProcessingUnitInstance processingUnitInstance ) throws InterruptedException{
-        clickOnHost(hostName);
-        clickOnGSAService();
+    private WebElement findProcessingUnitInstanceToolsButton( final String hostName,
+                                final ProcessingUnitInstance processingUnitInstance ) throws InterruptedException{
 
-        GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
-        clickOnGSCService(gsc);
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
+                    clickOnHost(hostName);
+                    clickOnGSAService();
+
+                    GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
+                    clickOnGSCService(gsc);
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("Clicking on service in tree did not succeed", condition, 10 * 1000);
+
 
         Thread.sleep(5*1000);
 
@@ -248,9 +265,25 @@ public class HostsAndServicesGrid {
     }
 
 
-    private WebElement findGscToolsButton( String hostName, GridServiceContainer gsc ) throws InterruptedException{
-        clickOnHost(hostName);
-        clickOnGSAService();
+    private WebElement findGscToolsButton( final String hostName, GridServiceContainer gsc ) throws InterruptedException{
+
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
+                    clickOnHost(hostName);
+                    clickOnGSAService();
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("Clicking on both host and GSA in tree did not succeed", condition, 10 * 1000);
+
         String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
         int gscDivIndex = 2;
         while (true) {
