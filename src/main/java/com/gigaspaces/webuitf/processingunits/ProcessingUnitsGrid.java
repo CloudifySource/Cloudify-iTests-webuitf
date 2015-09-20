@@ -3,6 +3,7 @@ package com.gigaspaces.webuitf.processingunits;
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.services.NodeType;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -270,9 +272,27 @@ public class ProcessingUnitsGrid {
         helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
     }
 
-    public void selectProcessingUnitRow( String puName ){
 
-        String realId = null;
+    public void selectProcessingUnitRow( final String puName ){
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
+                    logger.info( "within condition, selectProcessingUnitRow, puName=" + puName );
+                    selectProcessingUnit(puName);
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("Unable to select processing unit row [" + puName + "]", condition, 12*1000 );
+    }
+
+    private void selectProcessingUnit( String puName ){
 
         List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
         int listsSize = elements.size();
@@ -284,13 +304,11 @@ public class ProcessingUnitsGrid {
             logger.info( "id=" + id  );
             if( id != null && id.contains( PU_TREE_PREFIX + PU_NODE_PREFIX + puName ) ) {
                 logger.info( "in if contains"  );
-                realId = id;
                 break;
             }
         }
 
-        //helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
-        helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid( index )) );
+        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid(index)));
     }
 
 
