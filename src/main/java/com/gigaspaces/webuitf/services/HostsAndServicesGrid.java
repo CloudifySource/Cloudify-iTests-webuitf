@@ -92,15 +92,15 @@ public class HostsAndServicesGrid {
             helper.clickWhenPossible(timeoutSec, TimeUnit.SECONDS, buttonElement);
 
             switch (component) {
-                case 0: {
+                case GSC: {
                     helper.waitForElement(By.id(WebConstants.ID.startGSC), timeoutSec).click();
                     break;
                 }
-                case 1: {
+                case GSM: {
                     helper.waitForElement(By.id(WebConstants.ID.startGSM), timeoutSec).click();
                     break;
                 }
-                case 2: {
+                case LUS: {
                     helper.waitForElement(By.id(WebConstants.ID.startLUS), timeoutSec).click();
                 }
             }
@@ -219,7 +219,7 @@ public class HostsAndServicesGrid {
         GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
         clickOnGSCService(gsc);
 
-        Thread.sleep(2*1000);
+        Thread.sleep(5*1000);
 
         String puInstanceName = ((InternalProcessingUnitInstance)processingUnitInstance).
                 getProcessingUnitInstanceSimpleName();
