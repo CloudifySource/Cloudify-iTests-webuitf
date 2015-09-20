@@ -45,8 +45,7 @@ public class NetworkPanel {
     }
 
     public void setRemoteActivityProbe(boolean b) {
-
-        helper.clickWhenPossible(5, TimeUnit.SECONDS, By.id( "gs-remote-activity" ) );
+        helper.clickWhenPossible( 10, TimeUnit.SECONDS, false, By.id( "gs-remote-activity" ) );
     }
 
     public void getRemoteActivityProbeValue() {

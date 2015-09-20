@@ -116,6 +116,10 @@ public class AjaxUtils {
     }
 
     public void clickWhenPossible(int timeout, TimeUnit timeUnit, final By... bys) {
+        this.clickWhenPossible( timeout, timeUnit, false, bys );
+    }
+
+    public void clickWhenPossible(int timeout, TimeUnit timeUnit, final boolean isCheckBox, final By... bys) {
 
         FluentWait<By> fluentWait = new FluentWait<By>(bys[0]);
         fluentWait.pollingEvery(50, TimeUnit.MILLISECONDS);
@@ -134,9 +138,14 @@ public class AjaxUtils {
 
                     _logger.info("After for element and before if, element=" + element);
                     if (element != null) {
-                        _logger.info("Before click");
+                        _logger.info("Before click, isCheckBox=" + isCheckBox);
                         element.click();
-                        _logger.info("After click");
+                        if(isCheckBox){
+                            element.click();
+                            element.click();
+                            _logger.info("After CB clicks, tag name=" + element.getTagName() );
+                        }
+                        _logger.info("After click, isSelected:" + element.isSelected() );
                         return true;
                     }
                     return false;
