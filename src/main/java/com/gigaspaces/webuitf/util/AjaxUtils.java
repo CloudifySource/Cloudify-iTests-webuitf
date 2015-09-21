@@ -143,9 +143,9 @@ public class AjaxUtils {
                         if(isCheckBox){
                             element.click();
                             element.click();
-                            _logger.info("After CB clicks, tag name=" + element.getTagName() );
+                            _logger.info("After CB 2 additional clicks" );
                         }
-                        _logger.info("After click, isSelected:" + element.isSelected() );
+                        _logger.info("After click" );
                         return true;
                     }
                     return false;
