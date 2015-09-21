@@ -89,6 +89,21 @@ public class HostsAndServicesGrid {
             public boolean getCondition() {
                 try {
                     clickOnHost(hostname);
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("startGridServiceComponent, clicking on host [" + hostname + "] in tree did not succeed", condition, 10 * 1000);
+
+        condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
                     clickOnGSAService();
                 }
                 catch( Throwable t ){
@@ -99,8 +114,7 @@ public class HostsAndServicesGrid {
                 return true;
             }
         };
-        AjaxUtils.repetitiveAssertTrue("Clicking on host [" + hostname + "] and gsa in tree did not succeed", condition, 10 * 1000);
-
+        AjaxUtils.repetitiveAssertTrue("startGridServiceComponent, clicking on gsa in tree did not succeed", condition, 10 * 1000);
 
         final int timeoutSec = 7;
         logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec." );
@@ -237,8 +251,38 @@ public class HostsAndServicesGrid {
             public boolean getCondition() {
                 try {
                     clickOnHost(hostName);
-                    clickOnGSAService();
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
 
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, Clicking on host in tree did not succeed", condition, 10 * 1000);
+
+
+        condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
+                    clickOnGSAService();
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, clicking on GSA in tree did not succeed", condition, 10 * 1000);
+
+        condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
                     GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
 
                     logger.info("Going to click on gsc, instance [" + processingUnitInstance.getProcessingUnitInstanceName() +
@@ -256,8 +300,7 @@ public class HostsAndServicesGrid {
                 return true;
             }
         };
-        AjaxUtils.repetitiveAssertTrue("Clicking on service in tree did not succeed", condition, 10 * 1000);
-
+        AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, clicking on GSC in tree did not succeed", condition, 10 * 1000);
 
         Thread.sleep(5*1000);
 
@@ -295,6 +338,22 @@ public class HostsAndServicesGrid {
             public boolean getCondition() {
                 try {
                     clickOnHost(hostName);
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("findGscToolsButton, clicking on host in tree did not succeed", condition, 10 * 1000);
+
+
+        condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                try {
                     clickOnGSAService();
                 }
                 catch( Throwable t ){
@@ -305,7 +364,8 @@ public class HostsAndServicesGrid {
                 return true;
             }
         };
-        AjaxUtils.repetitiveAssertTrue("Clicking on both host and GSA in tree did not succeed", condition, 10 * 1000);
+        AjaxUtils.repetitiveAssertTrue("findGscToolsButton, clicking on GSA in tree did not succeed", condition, 10 * 1000);
+
 
         String gscPid = "" + gsc.getVirtualMachine().getDetails().getPid();
         int gscDivIndex = 2;
