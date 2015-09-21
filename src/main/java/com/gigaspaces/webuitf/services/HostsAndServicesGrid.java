@@ -15,8 +15,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openspaces.admin.AgentGridComponent;
+import org.openspaces.admin.GridComponent;
 import org.openspaces.admin.gsa.GridServiceAgent;
 import org.openspaces.admin.gsc.GridServiceContainer;
+import org.openspaces.admin.gsm.GridServiceManager;
 import org.openspaces.admin.internal.pu.InternalProcessingUnitInstance;
 import org.openspaces.admin.machine.Machine;
 import org.openspaces.admin.pu.ProcessingUnitInstance;
@@ -250,6 +253,12 @@ public class HostsAndServicesGrid {
             @Override
             public boolean getCondition() {
                 try {
+                    /*GridServiceContainer gsc = processingUnitInstance.getGridServiceContainer();
+                    WebElement gsaWebElement = retrieveGridComponentElement(gsc.getGridServiceAgent());
+                    boolean isGsaElementDisplayed = gsaWebElement.isDisplayed();
+                    WebElement gscWebElement = retrieveGridComponentElement(gsc);
+                    boolean isGscElementDisplayed = gscWebElement.isDisplayed();*/
+
                     clickOnHost(hostName);
                 }
                 catch( Throwable t ){
@@ -260,7 +269,7 @@ public class HostsAndServicesGrid {
                 return true;
             }
         };
-        AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, Clicking on host in tree did not succeed", condition, 10 * 1000);
+        AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, clicking on host in tree did not succeed", condition, 10 * 1000);
 
 
         condition = new RepetitiveConditionProvider() {
@@ -309,9 +318,10 @@ public class HostsAndServicesGrid {
 
         logger.info( ">>> puInstanceName=" + puInstanceName );
 
-        int puInstanceDivIndex = 3;
+        int puInstanceDivIndex = 1;
         while (true) {
             By puInstanceXPath = By.xpath( WebConstants.Xpath.getPathToHostsGridRowNumber( puInstanceDivIndex ) );
+            logger.info( ">>> puInstanceDivIndex=" + puInstanceDivIndex + ", puInstanceXPath=" + puInstanceXPath );
             String searchedText = helper.waitForTextToBeExctractable( 3, TimeUnit.SECONDS, puInstanceXPath );
             logger.info( ">>> searchedText=" + searchedText );
             if( searchedText.contains( puInstanceName )) {
@@ -461,16 +471,42 @@ public class HostsAndServicesGrid {
         helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));*/
     }
 
+    private WebElement retrieveGridComponentElement( GridComponent gridComponent ){
+
+        String gridServiceName = "";
+
+        long pid = gridComponent.getVirtualMachine().getDetails().getPid();
+        if( gridComponent instanceof GridServiceAgent ){
+            gridServiceName = "gsa[" + pid + "]";
+        }
+        else if( gridComponent instanceof GridServiceManager){
+            int agentId = ((AgentGridComponent) gridComponent).getAgentId();
+            gridServiceName = "gsm-" + agentId + "[" + pid + "]";
+
+        }
+        else if( gridComponent instanceof GridServiceContainer ){
+            int agentId = ((AgentGridComponent) gridComponent).getAgentId();
+            gridServiceName = "gsc-" + agentId + "[" + pid + "]";
+        }
+
+        logger.info( "Within retrieveGridComponentElement, gridServiceName:" + gridServiceName );
+
+        By by = By.cssSelector( "[id^='" + HOSTS_TREE_PREFIX + gridServiceName + "']" ).className("x-tree3-node");
+        return driver.findElement( by );
+//        return helper.waitForElement(TimeUnit.SECONDS, 15, by);
+    }
+
     private void clickOnGridComponentService( String serviceNamePrefix, long pid ){
 
         String realId = null;
-        By by = By.cssSelector( "*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']");
+        By by = By.cssSelector("*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']");
         if( pid >= 0 ) {
             realId = helper.waitForElementAttribute("id", TimeUnit.SECONDS, 15, by.cssSelector("[id*='" + pid + "']"));
         }
         else{
             realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 15, by );
         }
+        logger.info( ">>>clickOnGridComponentService, BEFORE clicking realId=" + realId  + ", pid=" + pid );
         if( realId != null ){
             helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
         }
@@ -569,9 +605,30 @@ public class HostsAndServicesGrid {
 
         if( index > 0 && index < numOfElements ){
             logger.info( ">> getRow element, index=" + index );
+/*
             WebElement rowElement = helper.waitForElement(
                     By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+*/
             helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)) );
+        }
+    }
+
+    public void selectRowStartingWithText( String txt ) {
+
+        List<WebElement> visibleElements = driver.findElements(By.className(WebConstants.ClassNames.ServicesGridPuTypeCell));
+
+        int numOfElements = visibleElements.size() - 1; // subtracting the irrelevant "component-name" headline
+        for( int index = 1 ; index <= numOfElements; index++ ){
+            logger.info( ">> getRow element, index=" + index );
+            WebElement rowElement = helper.waitForElement(
+                    By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+            String rowText = rowElement.getText();
+            logger.info( "selectRowContainsText, within for, before if, rowText=" + rowText + ", index=" + index );
+            if( rowText.startsWith(txt) ) {
+                helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderServicesGrid(index)));
+                logger.info( "selectRowContainsText, within for, before break" );
+                break;
+            }
         }
     }
 
