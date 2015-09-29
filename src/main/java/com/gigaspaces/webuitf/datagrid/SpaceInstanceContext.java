@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.datagrid;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class SpaceInstanceContext {
@@ -39,14 +41,31 @@ public class SpaceInstanceContext {
 		this.helper.setDriver(driver);
 		this.puInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_INSTANCES_NAME_CLASS));
 		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));
-        this.pid = Long.parseLong( helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PID_CLASS)) );
-        WebElement instancesGridElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-slider-grid-SPACE_INSTANCES"));
-        WebElement selectedRow = instancesGridElement.findElement(By.className("x-grid3-row-selected"));
-        String spaceInstanceElementId = selectedRow.getAttribute("id");
-        if( spaceInstanceElementId.startsWith(CLASS_PREFIX) ){
-            uuid = spaceInstanceElementId.substring( CLASS_PREFIX.length() );
-        }
-    }
+        this.pid = Long.parseLong(helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id), By.className(PID_CLASS)));
+
+		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+			public boolean getCondition() {
+
+				try {
+					WebElement instancesGridElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-slider-grid-SPACE_INSTANCES"));
+					WebElement selectedRow = instancesGridElement.findElement(By.className("x-grid3-row-selected"));
+					String spaceInstanceElementId = selectedRow.getAttribute("id");
+					if( spaceInstanceElementId.startsWith( CLASS_PREFIX ) ) {
+						uuid = spaceInstanceElementId.substring(CLASS_PREFIX.length());
+					}
+				}
+				catch( Exception exc ){
+					logger.log(Level.WARNING, exc.toString(), exc );
+					return false;
+				}
+
+				return true;
+			}
+		};
+		AjaxUtils.repetitiveAssertTrue( "Unable to initialize all elements while creating SpaceInstanceContext instance " +
+				"for space instance [" + id + "]", condition, 10*1000 );
+	}
+
 	public String getSpaceInstanceName() {
 		return spaceInstanceName;
 	}
