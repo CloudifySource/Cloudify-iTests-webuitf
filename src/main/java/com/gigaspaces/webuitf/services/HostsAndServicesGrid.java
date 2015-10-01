@@ -55,6 +55,8 @@ public class HostsAndServicesGrid {
     final String GSA_SUFFIX = "gsa";
     final String GSC_SUFFIX = "gsc";
 
+    private int hostRowIndex;
+
 	private AjaxUtils helper;
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -91,7 +93,7 @@ public class HostsAndServicesGrid {
             @Override
             public boolean getCondition() {
                 try {
-                    clickOnHost(hostname);
+                    hostRowIndex = clickOnHost(hostname);
                 }
                 catch( Throwable t ){
                     logger.log(Level.WARNING, t.toString(), t );
@@ -120,8 +122,8 @@ public class HostsAndServicesGrid {
         AjaxUtils.repetitiveAssertTrue("startGridServiceComponent, clicking on gsa in tree did not succeed", condition, 10 * 1000);
 
         final int timeoutSec = 7;
-        logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec." );
-        WebElement buttonElement = findToolsButton(2);
+        logger.info( "startGridServiceComponent, using timeout [" + timeoutSec + "] sec., hostRowIndex=" + hostRowIndex );
+        WebElement buttonElement = findToolsButton( hostRowIndex + 2 );
         if( buttonElement != null ) {
             helper.clickWhenPossible(timeoutSec, TimeUnit.SECONDS, buttonElement);
 
@@ -534,9 +536,9 @@ public class HostsAndServicesGrid {
 //        helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
     }
 
-	public void clickOnHost(String hostname) throws InterruptedException {
+	public int clickOnHost(String hostname) throws InterruptedException {
 		
-		clickOnHost(hostname, null);
+		return clickOnHost(hostname, null);
 	}
 	
 	/**
@@ -546,13 +548,16 @@ public class HostsAndServicesGrid {
 	 * @param hostAddress
 	 * @throws InterruptedException
 	 */
-	public void clickOnHost(String hostname, String hostAddress) throws InterruptedException {
+	public int clickOnHost(String hostname, String hostAddress) throws InterruptedException {
 
 		String hostsTreePrefix = HOST_TREE_NODE_PREFIX;
 		String realId = null;
 
 		List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
-		for (WebElement el : elements) {
+        int elementsSize = elements.size();
+        int index;
+		for( index =0; index < elementsSize; index++ ) {
+            WebElement el = elements.get( index );
 			String id = helper.retrieveAttribute(el, "id");
 			
 			if ((id != null) && ((id.contains(hostsTreePrefix + hostname)) || ((hostAddress != null) && (id.contains(hostsTreePrefix + hostAddress))))) {
@@ -564,6 +569,8 @@ public class HostsAndServicesGrid {
         logger.info(">>realId=" + realId);
 
         helper.clickWhenPossible(20, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHostnameOptions(realId)));
+
+        return index;
 	}
 	
 	/**

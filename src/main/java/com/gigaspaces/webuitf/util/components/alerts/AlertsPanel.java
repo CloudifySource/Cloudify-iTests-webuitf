@@ -83,7 +83,8 @@ public class AlertsPanel {
 						i++;
 					}
 				}
-				if (i == numberOfResolved) return true;
+				logger.info( "Total amount of found [" + alertType + "] alerts with status [" + status + "] is:" + i );
+				if (i >= numberOfResolved) return true;
 				return false;
 			}
 		};
