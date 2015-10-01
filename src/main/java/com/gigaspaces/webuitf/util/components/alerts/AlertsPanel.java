@@ -16,6 +16,7 @@ import org.openspaces.admin.alert.AlertStatus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -318,6 +319,7 @@ public class AlertsPanel {
 				xPath = WebConstants.Xpath.getPathToAlertByIndex(i);
 				alert = driver.findElement(By.xpath(xPath));
 				WebUIAlert webUIAlert = new WebUIAlert(xPath);
+				logger.info("found alert before if: " + webUIAlert);
 				if (webUIAlert.getName().equals(type)) {
 					logger.info("found alert : " + webUIAlert);
 					alerts.add(webUIAlert);
@@ -327,6 +329,7 @@ public class AlertsPanel {
 			}
 			catch (Exception e) {
 				exception = e;
+				logger.log(Level.WARNING, e.toString(), e );
 			}
 		}
 		return alerts;

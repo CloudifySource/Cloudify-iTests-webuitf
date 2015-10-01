@@ -34,19 +34,19 @@ public class SpaceInstanceContext {
     private final static String CLASS_PREFIX = "gs-slider-grid-SPACE_INSTANCES_";
 	protected Logger logger = Logger.getLogger(this.getClass().getName());
 
-	public SpaceInstanceContext(String id, WebDriver driver) {
+	public SpaceInstanceContext(final String id, WebDriver driver) {
 		this.id = id;
 		this.driver = driver;
 		this.helper = new AjaxUtils(driver);
 		this.helper.setDriver(driver);
 		this.puInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(PU_INSTANCES_NAME_CLASS));
-		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id),By.className(SPACE_INSTANCE_NAME_CLASS));
-        this.pid = Long.parseLong(helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id), By.className(PID_CLASS)));
+		this.spaceInstanceName = helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id), By.className(SPACE_INSTANCE_NAME_CLASS));
 
 		RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
 			public boolean getCondition() {
 
 				try {
+					pid = Long.parseLong(helper.waitForTextToBeExctractable(5, TimeUnit.SECONDS, By.id(id), By.className(PID_CLASS)));
 					WebElement instancesGridElement = helper.waitForElement(TimeUnit.SECONDS, 5, By.id("gs-slider-grid-SPACE_INSTANCES"));
 					WebElement selectedRow = instancesGridElement.findElement(By.className("x-grid3-row-selected"));
 					String spaceInstanceElementId = selectedRow.getAttribute("id");

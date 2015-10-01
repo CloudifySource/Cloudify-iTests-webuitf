@@ -294,21 +294,14 @@ public class ProcessingUnitsGrid {
 
     private void selectProcessingUnit( String puName ){
 
-        List<WebElement> elements = driver.findElements(By.className("x-tree3-node"));
+        List<WebElement> elements = driver.findElements(
+                By.className("x-tree3-node").cssSelector("*[id^='" + PU_TREE_PREFIX + PU_NODE_PREFIX + puName + "']"));
         int listsSize = elements.size();
         logger.info( "elements size=" + listsSize );
-        int index;
-        for( index = 0; index < listsSize; index++ ) {
-            WebElement el = elements.get( index );
-            String id = helper.retrieveAttribute( el, "id" );
-            logger.info( "id=" + id  );
-            if( id != null && id.contains( PU_TREE_PREFIX + PU_NODE_PREFIX + puName ) ) {
-                logger.info( "in if contains"  );
-                break;
-            }
-        }
 
-        helper.clickWhenPossible(10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid(index)));
+        if( !elements.isEmpty() ) {
+            helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath( WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid( 1 ) ) );
+        }
     }
 
 
