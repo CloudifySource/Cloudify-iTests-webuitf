@@ -45,7 +45,10 @@ public class NetworkPanel {
     }
 
     public void setRemoteActivityProbe(boolean b) {
-        helper.clickWhenPossible( 10, TimeUnit.SECONDS, false, By.id( "gs-remote-activity" ) );
+        WebElement divElement = helper.waitForElement(TimeUnit.SECONDS, 10, By.id("gs-remote-activity"));
+        //retrieve check box element that located under already retrieved div
+        WebElement checkBoxElement = divElement.findElement( By.className( "x-form-checkbox" ) );
+        helper.clickWhenPossible( 10, TimeUnit.SECONDS, checkBoxElement );
     }
 
     public void getRemoteActivityProbeValue() {
