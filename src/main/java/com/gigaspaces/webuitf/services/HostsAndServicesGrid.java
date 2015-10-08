@@ -503,7 +503,9 @@ public class HostsAndServicesGrid {
         String realId = null;
         By by = By.cssSelector("*[id^='" + HOSTS_TREE_PREFIX + serviceNamePrefix + "']");
         if( pid >= 0 ) {
-            realId = helper.waitForElementAttribute("id", TimeUnit.SECONDS, 15, by.cssSelector("[id*='[" + pid + "]']"));
+            String cssSelectorToId = "[id*='[" + pid + "]']";
+            logger.info( "Before waitForElementAttribute " + cssSelectorToId );
+            realId = helper.waitForElementAttribute("id", TimeUnit.SECONDS, 15, by.cssSelector( cssSelectorToId ));
         }
         else{
             realId = helper.waitForElementAttribute( "id", TimeUnit.SECONDS, 15, by );
