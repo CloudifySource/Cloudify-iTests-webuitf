@@ -2,6 +2,7 @@ package com.gigaspaces.webuitf.processingunits.details;
 
 import com.gigaspaces.webuitf.WebConstants;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import com.gigaspaces.webuitf.util.RepetitiveConditionProvider;
 import com.thoughtworks.selenium.Selenium;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class is a mapping of the Physical Tabular tab in the topology tab
@@ -23,6 +26,8 @@ public class ConfigPanel {
     private final Selenium selenium;
     private final WebDriver driver;
     private final AjaxUtils helper;
+    private Map<String, String> values;
+    static public Logger logger = Logger.getLogger(ConfigPanel.class.getName());
 
 	public ConfigPanel(Selenium selenium, WebDriver driver) {
         this.selenium = selenium;
@@ -31,7 +36,24 @@ public class ConfigPanel {
 	}
 
     public ProcessingUnitConfiguration getProcessingUnitConfiguration(){
-        return new ProcessingUnitConfiguration( getValues() );
+
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            public boolean getCondition() {
+
+                try {
+                    values = getValues();
+                }
+                catch( Exception exc ){
+                    logger.log(Level.WARNING, exc.toString(), exc);
+                    return false;
+                }
+
+                return true;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue( "Failed to retrieve values for ProcessingUnitConfiguration", condition, 15*1000 );
+
+        return new ProcessingUnitConfiguration( values );
     }
 
     private Map<String, String> getValues(){
