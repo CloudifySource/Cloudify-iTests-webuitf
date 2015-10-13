@@ -50,9 +50,11 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
 		//selenium.type(WebConstants.ID.numberOfInstInput,numberOfInst);
         WebElement numOfInstancesElement = driver.findElement(By.id(WebConstants.ID.numberOfInstInput));
 
+/*
         boolean selected = numOfInstancesElement.isSelected();
         boolean displayed = numOfInstancesElement.isDisplayed();
         boolean enabled = numOfInstancesElement.isEnabled();
+*/
 
         numOfInstancesElement.sendKeys( numberOfInst == null ? "" : numberOfInst );
 
