@@ -8,6 +8,7 @@ import com.gigaspaces.webuitf.datagrid.gateways.GatewaysPanel;
 import com.gigaspaces.webuitf.datagrid.network.NetworkPanel;
 import com.gigaspaces.webuitf.datagrid.queriespanel.QueriesPanel;
 import com.gigaspaces.webuitf.datagrid.statisticspanel.StatisticsPanel;
+import com.gigaspaces.webuitf.datagrid.transactionspanel.TransactionsPanel;
 import com.gigaspaces.webuitf.datagrid.typespanel.TypesPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
 import org.openqa.selenium.By;
@@ -75,4 +76,9 @@ public class DataGridSubPanel {
         clickWhenPossible( WebConstants.ID.configurationPanelToggle );
         return new ConfigurationPanel( helper, loadBlobStoreConfiguration );
     }
+
+	public TransactionsPanel switchToTransactions() {
+		clickWhenPossible( WebConstants.ID.transactionsPanelToggle );
+		return new TransactionsPanel( helper );
+	}
 }

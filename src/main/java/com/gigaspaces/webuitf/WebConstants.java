@@ -196,13 +196,13 @@ public final class WebConstants {
         public static final String queriesPanelToggle = "gs-tab-item-queries-toggler-button";
         public static final String statisticsPanelToggle = "gs-tab-item-statistics-toggler-button";
         //		public static final String templatesPanelToggle = "gs-tab-item-toggler-button";
-//		public static final String transactionsPanelToggle = "gs-tab-item-toggler-button";
         public static final String typesPanelToggle = "gs-tab-item-types-toggler-button";
         public static final String gatewaysPanelToggle = "gs-tab-item-gateways-toggler-button";
         public static final String clientSideCachesPanelToggle = "gs-tab-item-client-side-caches-toggler-button";
         public static final String eventContainersPanelToggle = "gs-tab-item-event-containers-toggler-button";
         public static final String configurationPanelToggle = "gs-tab-item-configuration-toggler-button";
         public static final String networkPanelToggle = "gs-tab-item-network-toggler-button";
+        public static final String transactionsPanelToggle = "gs-tab-item-transactions-toggler-button";
 
 
         public static final String gatewaysOutboundTogglerButton = "gs-tab-item-outbound-toggler-button";
@@ -223,7 +223,7 @@ public final class WebConstants {
         public static final String spaceInstancesGrid = "gs-space-instances-grid";
         public static final String spaceConfigurationGrid = "gs-space-info-grid";
         public static final String spaceTypesGrid = "gs-space-types-grid";
-        public static final String spaceTransactionsGrid = "gs-space-transactions-grid";
+        public static final String spaceTransactionsGrid = "gs-space-transactionspanel-grid";
         public static final String sidePanelSpacesTree = "gs-side-panel-space-tree";
         public static final String goToLogsItemID = "gs-logical-navigate_to_logs";
         public static final String alertsGridDumpItem = "gs-alerts-grid-dump";
