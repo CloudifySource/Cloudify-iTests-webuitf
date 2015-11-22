@@ -2,32 +2,63 @@ package com.gigaspaces.webuitf.datagrid.transactionspanel;
 
 import com.gigaspaces.webuitf.datagrid.DataGridSubPanel;
 import com.gigaspaces.webuitf.util.AjaxUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class TransactionsPanel extends DataGridSubPanel {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-	private static final String TYPE_ID_PREFIX = "gs-slider-grid-TRANSACTIONS_LIST_";
-	private static final String TYPES_GRID_ID = "gs-slider-grid-TRANSACTION_LOCKED_OBJECTS_LIST";
+public class TransactionsPanel extends DataGridSubPanel implements SpaceTransactionsConstants {
 
-	private static final int WAIT_TIMEOUT_IN_MS = 5000;
+	private Logger _logger = Logger.getLogger( this.getClass().getName() );
 
-	private final static String CLASS_NAME_PREFIX = "x-grid3-td-";
-
-	private static final String TRANSACTION_ID = "transaction_id";
-	private static final String TRANSACTION_TYPE = "transaction_type";
-	private static final String TRANSACTION_START_TIME = "transaction_start_time";
-	private static final String TRANSACTION_END_TIME = "transaction_end_time";
-	private static final String TRANSACTION_STATUS = "transaction_status";
-	private static final String TRANSACTION_NUM_OF_LOCKED_OBJECTS = "transaction_num_of_locked_objects";
-
-	private static final String TRANSACTION_ID_CLASS = CLASS_NAME_PREFIX + TRANSACTION_ID;
-	private static final String TRANSACTION_TYPE_CLASS = CLASS_NAME_PREFIX + TRANSACTION_TYPE;
-	private static final String TRANSACTION_START_TIME_CLASS = CLASS_NAME_PREFIX + TRANSACTION_START_TIME;
-	private static final String TRANSACTION_END_TIME_CLASS = CLASS_NAME_PREFIX + TRANSACTION_END_TIME;
-	private static final String TRANSACTION_STATUS_CLASS = CLASS_NAME_PREFIX + TRANSACTION_STATUS;
-	private static final String TRANSACTION_NUM_OF_LOCKED_OBJECTS_CLASS = CLASS_NAME_PREFIX + TRANSACTION_NUM_OF_LOCKED_OBJECTS;
+	private WebElement _gridElement;
 
 	public TransactionsPanel(AjaxUtils helper) {
 		super(helper);
+
+		_gridElement = helper.waitForElement( TimeUnit.SECONDS, 2, By.id( TRANSACTIONS_GRID ) );
+	}
+
+	public TransactionRow[] getTransactions(){
+
+		List<TransactionRow> list = new ArrayList<TransactionRow>();
+
+		List<WebElement> idColumnElements = _gridElement.findElements( By.className( COL_TRANSACTION_ID_CLASS ) );
+		List<WebElement> statusColumnElements = _gridElement.findElements( By.className( COL_TRANSACTION_STATUS_CLASS ) );
+		List<WebElement> typeColumnElements = _gridElement.findElements( By.className( COL_TRANSACTION_TYPE_CLASS ) );
+		List<WebElement> numOfLockedObjectsColumnElements = _gridElement.findElements( By.className( COL_TRANSACTION_NUM_OF_LOCKED_OBJECTS_CLASS ) );
+
+		int rowsNum = idColumnElements.size();
+		for( int rowIndex = 0; rowIndex < rowsNum; rowIndex++ ){
+			String id = getTagValue( idColumnElements, rowIndex );
+			String status = getTagValue( statusColumnElements, rowIndex );
+			String type = getTagValue( typeColumnElements, rowIndex );
+			String numOfLockedObjects = getTagValue( numOfLockedObjectsColumnElements, rowIndex );
+
+			list.add( new TransactionRow( id, status, type, Integer.parseInt( numOfLockedObjects ) ) );
+		}
+
+		return list.toArray( new TransactionRow[ list.size() ] );
+	}
+
+	private String getTagValue( List<WebElement> elementsList, int index ){
+		String value = null;
+		if( elementsList != null && elementsList.size() > index ){
+			try{
+				WebElement webElement = elementsList.get( index );
+				WebElement spanCellElement = webElement.findElement( By.tagName( "span" ) );
+				value = spanCellElement.getText();
+			}
+			catch( Exception e ){
+				_logger.log( Level.SEVERE, e.toString(), e );
+			}
+		}
+
+		return value;
 	}
 
 }
