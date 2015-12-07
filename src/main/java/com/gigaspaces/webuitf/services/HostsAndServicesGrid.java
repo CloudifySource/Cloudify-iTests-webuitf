@@ -313,7 +313,7 @@ public class HostsAndServicesGrid {
         };
         AjaxUtils.repetitiveAssertTrue("findProcessingUnitInstanceToolsButton, clicking on GSC in tree did not succeed", condition, 10 * 1000);
 
-        Thread.sleep(5*1000);
+        Thread.sleep(20*1000);
 
         String puInstanceName = ((InternalProcessingUnitInstance)processingUnitInstance).
                 getProcessingUnitInstanceSimpleName();
