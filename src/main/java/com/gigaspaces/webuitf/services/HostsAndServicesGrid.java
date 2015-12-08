@@ -171,10 +171,31 @@ public class HostsAndServicesGrid {
         }
     }
 
-    public void relocateProcessingUnitInstance( String hostName, ProcessingUnitInstance processingUnitInstance,
+    private WebElement buttonElement;
+    public void relocateProcessingUnitInstance( final String hostName, final ProcessingUnitInstance processingUnitInstance,
                                                 GridServiceContainer targetGsc )throws InterruptedException{
 
-        WebElement buttonElement = findProcessingUnitInstanceToolsButton(hostName, processingUnitInstance);
+
+        RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+            @Override
+            public boolean getCondition() {
+                buttonElement = null;
+                try {
+                    logger.info( "Within condition of RepetitiveConditionProvider---" );
+                    buttonElement = findProcessingUnitInstanceToolsButton(hostName, processingUnitInstance);
+                }
+                catch( Throwable t ){
+                    logger.log(Level.WARNING, t.toString(), t );
+                    return false;
+                }
+
+                return buttonElement != null;
+            }
+        };
+        AjaxUtils.repetitiveAssertTrue("Unable to locate tools button for processing unit instance [" +
+                processingUnitInstance.getProcessingUnitInstanceName() + "]", condition, 15 * 1000);
+
+//        WebElement buttonElement = findProcessingUnitInstanceToolsButton(hostName, processingUnitInstance);
         if( buttonElement != null ) {
             helper.clickWhenPossible(5, TimeUnit.SECONDS, buttonElement);
 
@@ -334,7 +355,7 @@ public class HostsAndServicesGrid {
                 puInstanceDivIndex++;
             }
 
-            if( puInstanceDivIndex == 300 ){
+            if( puInstanceDivIndex == 100 ){
                 throw new NoSuchElementException( "Any Processing Unit Instance tree node was not found" );
             }
         }
