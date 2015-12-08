@@ -316,6 +316,7 @@ public class ProcessingUnitsGrid {
             logger.info( ">> getRow element, index=" + index );
             WebElement rowElement = helper.waitForElement(
                     By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid(index)), WAIT_TIMEOUT_IN_SECONDS);
+            logger.info( ">> row element text=" + rowElement.getText() );
             helper.clickWhenPossible( 10, TimeUnit.SECONDS, By.xpath(WebConstants.Xpath.getPathToHeaderProcessingUnitsGrid(index)) );
         }
     }
