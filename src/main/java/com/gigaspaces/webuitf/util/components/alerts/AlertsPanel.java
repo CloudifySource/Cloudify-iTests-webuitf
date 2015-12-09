@@ -468,10 +468,27 @@ public class AlertsPanel {
 		 * @return 
 		 */
 		public boolean equals(Alert alert) {
-			if (!alert.getComponentDescription().equals(this.getLocation())) return false;
-			if (!alert.getName().equals(this.getName())) return false;
-			if (!alert.getSeverity().equals(this.getSeverity())) return false;
-			if (!alert.getStatus().equals(this.getStatus())) return false;
+			logger.info( "Alert equals" );
+			if (!alert.getComponentDescription().equals(this.getLocation())){
+				logger.info( "Alert equals, before return false, ComponentDescription, alert.getComponentDescription()=" +
+						alert.getComponentDescription() + ", this.getLocation()=" + this.getLocation() );
+				return false;
+			}
+			if (!alert.getName().equals(this.getName())){
+				logger.info( "Alert equals, before return false, name, alert.getName()=" +
+						alert.getName() + ", this.getName()=" + this.getName() );
+				return false;
+			}
+			if (!alert.getSeverity().equals(this.getSeverity())) {
+				logger.info( "Alert equals, before return false, severity, alert.getSeverity()=" +
+						alert.getSeverity() + ", this.getSeverity()=" + this.getSeverity() );
+				return false;
+			}
+			if (!alert.getStatus().equals(this.getStatus())) {
+				logger.info( "Alert equals, before return false, status, alert.getStatus()=" +
+						alert.getStatus() + ", this.getStatus()=" + this.getStatus());
+				return false;
+			}
 			return true;		
 		}
 		
