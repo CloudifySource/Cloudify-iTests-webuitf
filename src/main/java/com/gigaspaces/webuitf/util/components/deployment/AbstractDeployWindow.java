@@ -59,7 +59,7 @@ public abstract class AbstractDeployWindow implements IDeployWindow {
         numOfInstancesElement.sendKeys( numberOfInst == null ? "" : numberOfInst );
 
 
-        if (clusterSchema == "partitioned-sync2backup") {
+        if (clusterSchema == "partitioned") {
 			for (int i = 0 ; i < Integer.parseInt(numberOfBackups) ; i++) {
 				selenium.click(WebConstants.Xpath.numberOfBackupsInc);
 			}
