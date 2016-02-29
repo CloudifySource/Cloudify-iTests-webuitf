@@ -398,7 +398,6 @@ public class AlertsPanel {
             //always maximize window in order to make tools butt visible
             driver.manage().window().maximize();
 
-			boolean succeed = false;
 			int seconds = 0;
 			while (seconds < AjaxUtils.ajaxWaitingTime) {
 				try {
@@ -421,7 +420,7 @@ public class AlertsPanel {
 				}
 			}
 
-			WebElement dumpWindow = helper.waitForElement(
+			final WebElement dumpWindow = helper.waitForElement(
 					By.id(WebConstants.ID.servicesDumpWindow),
 					AjaxUtils.ajaxWaitingTime);
 			if (dumpWindow != null) {
@@ -429,36 +428,25 @@ public class AlertsPanel {
 				WebElement generateDumpButton = dumpWindow.findElement(By
 						.className(WebConstants.ClassNames.buttonGenerate));
 				generateDumpButton.click();
-				
-				int resultSeconds = 0;
-				while (resultSeconds/10 < AjaxUtils.ajaxWaitingTime) {
-					WebElement progressMessageText = dumpWindow.findElement(By.className("x-progress-text"));
-					String resultMessage = progressMessageText.getText();
-					
-					_logger.info("resultMessage=" + resultMessage);
-					
-					if (resultMessage.toLowerCase().contains("dump file generated successfully")) {
-						succeed = true;
-						break;
-					} else {
-						_logger.info("Failed to retrieve progress bar text, retyring...");
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-						resultSeconds++;
+
+				RepetitiveConditionProvider condition = new RepetitiveConditionProvider() {
+					@Override
+					public boolean getCondition() {
+						WebElement progressMessageText = dumpWindow.findElement(By.className("x-progress-text"));
+						String resultMessage = progressMessageText.getText();
+						_logger.info("Within repetitive condition, resultMessage=" + resultMessage);
+						return resultMessage.toLowerCase().contains("dump file generated successfully");
 					}
-				}
+				};
+				AjaxUtils.repetitiveAssertTrue("Failed to retrieve progress bar text", condition, 25 * 1000);
 			}
 			
-			return succeed;
+			return true;
 		}
 
 		@Override
 		public String toString() {
 			return "WebUIAlert: " + status + " | " + severity.toString() + " | " + name + " | " + description + " | " + location + " | " + lastUpdated;
-			
 		}
 		
 		/**
