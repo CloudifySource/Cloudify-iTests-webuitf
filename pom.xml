@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gigaspaces.quality</groupId>
 	<artifactId>webuitf</artifactId>
-	<version>1.0.30-SNAPSHOT</version>
+	<version>1.0.31-SNAPSHOT</version>
 	<name>Webui Testing Framework</name>
 	<description>A Testing API for the webui</description>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gsVersion>11.0.0-SNAPSHOT</gsVersion>
+		<gsVersion>12.0.0-SNAPSHOT</gsVersion>
 		<build.home>${env.BUILD_HOME}</build.home>
 	</properties>
 
